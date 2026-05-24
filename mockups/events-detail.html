@@ -51,12 +51,40 @@
 
     /* ── Status badges ───────────────────────────────────── */
     .status-badge { display: inline-block; font-size: .72rem; font-weight: 600; padding: .2rem .55rem; border-radius: 99px; }
-    .status-confirmed  { background: #dcfce7; color: #15803d; }
-    .status-invited    { background: #dbeafe; color: #1d4ed8; }
-    .status-declined   { background: #fee2e2; color: #b91c1c; }
-    .status-no-response{ background: #fef3c7; color: #92400e; }
-    .status-no-show    { background: #f3f4f6; color: #374151; }
-    .status-completed  { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .status-confirmed   { background: #dcfce7; color: #15803d; }
+    .status-invited     { background: #dbeafe; color: #1d4ed8; }
+    .status-declined    { background: #fee2e2; color: #b91c1c; }
+    .status-no-response { background: #fef3c7; color: #92400e; }
+    .status-no-show     { background: #f3f4f6; color: #374151; border: 1px solid #e2e8f0; }
+    .status-attended    { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .status-rescheduled { background: #fef9c3; color: #854d0e; }
+
+    /* ── Additional stat card colors ─────────────────────── */
+    .stat-card.attended   .num { color: #166534; }
+    .stat-card.no-show    .num { color: #374151; }
+    .stat-card.rescheduled .num { color: #854d0e; }
+    .stat-card { cursor: pointer; }
+    .stat-card:hover { background: #f8fafc; }
+
+    /* ── Association tag badges ──────────────────────────── */
+    .assoc-tags-row { margin-top: .85rem; padding-top: .85rem; border-top: 1px solid #d4dce9; }
+    .assoc-tag-badge {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .73rem; font-weight: 600; padding: .2rem .6rem; border-radius: 99px;
+    }
+    .assoc-tag-badge.invite     { background: #dbeafe; color: #1d4ed8; }
+    .assoc-tag-badge.attended   { background: #dcfce7; color: #166534; }
+    .assoc-tag-badge.noshow     { background: #f3f4f6; color: #374151; border: 1px solid #e2e8f0; }
+    .assoc-tag-badge.reschedule { background: #fef9c3; color: #854d0e; }
+    .assoc-tag-badge.unset      { background: #f8fafc; color: #94a3b8; border: 1px dashed #cbd5e1; font-style: italic; }
+
+    /* ── Inline description editor ───────────────────────── */
+    .rte-toolbar { display:flex; align-items:center; gap:2px; padding:.3rem .4rem; border-bottom:1px solid #e2e8f0; background:#f8fafc; border-radius:var(--radius) var(--radius) 0 0; }
+    .rte-toolbar button { background:none; border:1px solid transparent; border-radius:.2rem; padding:.15rem .45rem; font-size:.82rem; cursor:pointer; color:#374151; }
+    .rte-toolbar button:hover { background:#e2e8f0; }
+    .rte-sep { width:1px; height:18px; background:#e2e8f0; margin:0 4px; }
+    .rte-body { padding:.5rem .75rem; min-height:60px; outline:none; font-size:.85rem; color:#1e293b; line-height:1.6; }
+    .rte-wrap { border:1px solid #dee2e6; border-radius:var(--radius); background:#fff; }
 
     /* ── Roster table ────────────────────────────────────── */
     .roster-table { font-size: .82rem; }
@@ -137,10 +165,10 @@
         <option>All statuses</option>
         <option>Invited</option>
         <option>Confirmed</option>
-        <option>Declined</option>
-        <option>No Response</option>
+        <option>Attended</option>
         <option>No-Show</option>
-        <option>Completed</option>
+        <option>Rescheduled</option>
+        <option>Declined</option>
       </select>
       <select class="form-select form-select-sm" style="max-width:170px;">
         <option>All tags</option>
@@ -176,50 +204,88 @@
 
       <!-- Event hero -->
       <div class="event-hero">
-        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-          <div>
-            <h2 class="mb-1">Physical Agility Test</h2>
-            <div class="event-meta">
-              <span><i class="bi bi-calendar3"></i> Fri, May 1, 2026 · 9:00 AM – 12:00 PM</span>
-              <span><i class="bi bi-geo-alt"></i> 123 Main Street, Springfield, OH 44122</span>
-              <span><i class="bi bi-person-video3"></i> In-Person</span>
-              <span><i class="bi bi-tag"></i> UTM Sources › PAT 04-25-2026</span>
-              <span class="template-tag"><i class="bi bi-layout-text-window-reverse"></i> Template: PAT — Springfield Site</span>
+        <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+          <h2 class="mb-0">Physical Agility Test</h2>
+          <a href="events-add.html" class="btn btn-sm btn-outline-secondary py-0" style="font-size:.73rem;">
+            <i class="bi bi-pencil me-1"></i>Edit Event
+          </a>
+        </div>
+
+        <div class="event-meta mb-3">
+          <span><i class="bi bi-calendar3"></i> Sun, May 24, 2026 · 9:00 AM – 12:00 PM</span>
+          <span><i class="bi bi-geo-alt"></i> 123 Main Street, Springfield, OH 44122</span>
+          <span><i class="bi bi-person-video3"></i> In-Person</span>
+          <span class="template-tag"><i class="bi bi-layout-text-window-reverse"></i> Template: PAT — Springfield Site</span>
+        </div>
+
+        <!-- Description (inline editable) -->
+        <div id="desc-view" style="font-size:.85rem;color:#374151;line-height:1.6;margin-bottom:.75rem;">
+          Complete a series of physical fitness assessments including a 1.5-mile run, push-ups, sit-ups, and a 300m sprint. Wear athletic clothing and bring a photo ID. Parking at rear entrance.
+          <a href="#" onclick="startEditDesc();return false;" style="font-size:.73rem;color:var(--leftnav-bg);margin-left:.5rem;white-space:nowrap;"><i class="bi bi-pencil me-1"></i>Edit description</a>
+        </div>
+        <div id="desc-edit" style="display:none;margin-bottom:.75rem;">
+          <div class="rte-wrap">
+            <div class="rte-toolbar">
+              <button onclick="document.getElementById('rte-desc').focus();document.execCommand('bold')"><b>B</b></button>
+              <button onclick="document.getElementById('rte-desc').focus();document.execCommand('italic')"><i>I</i></button>
+              <div class="rte-sep"></div>
+              <button onclick="document.getElementById('rte-desc').focus();document.execCommand('insertUnorderedList')"><i class="bi bi-list-ul"></i> List</button>
+              <div class="rte-sep"></div>
+              <button onclick="var u=prompt('URL:','https://');if(u){document.getElementById('rte-desc').focus();document.execCommand('createLink',false,u);}"><i class="bi bi-link-45deg"></i> Link</button>
             </div>
+            <div class="rte-body" contenteditable="true" id="rte-desc">
+              Complete a series of physical fitness assessments including a 1.5-mile run, push-ups, sit-ups, and a 300m sprint. Wear athletic clothing and bring a photo ID. Parking at rear entrance.
+            </div>
+          </div>
+          <div class="d-flex gap-2 mt-2">
+            <button class="btn btn-sm btn-primary" onclick="saveDesc()">Save</button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="cancelDesc()">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Association Tags -->
+        <div class="assoc-tags-row">
+          <div class="small fw-bold text-uppercase mb-2" style="color:#6b7280;letter-spacing:.06em;font-size:.68rem;">Association Tags</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="assoc-tag-badge invite"><i class="bi bi-person-plus"></i> Invite: PAT — April 2026</span>
+            <span class="assoc-tag-badge attended"><i class="bi bi-check-circle"></i> Attended: PAT-Attended-Apr26</span>
+            <span class="assoc-tag-badge noshow"><i class="bi bi-x-circle"></i> No-Show: PAT-NoShow-Apr26</span>
+            <span class="assoc-tag-badge unset"><i class="bi bi-arrow-repeat"></i> Reschedule: not set</span>
           </div>
         </div>
       </div>
 
-      <!-- Stat cards -->
+      <!-- Stat cards — click to filter roster -->
       <div class="stat-cards">
-        <div class="stat-card">
+        <div class="stat-card" title="Show all">
           <div class="num">247</div>
-          <div class="lbl">Total Invited</div>
+          <div class="lbl">Invited</div>
         </div>
-        <div class="stat-card confirmed">
+        <div class="stat-card confirmed" title="Filter: Confirmed">
           <div class="num">186</div>
           <div class="lbl">Confirmed</div>
         </div>
-        <div class="stat-card declined">
-          <div class="num">22</div>
-          <div class="lbl">Declined</div>
+        <div class="stat-card attended" title="Filter: Attended">
+          <div class="num">143</div>
+          <div class="lbl">Attended</div>
         </div>
-        <div class="stat-card no-response">
-          <div class="num">39</div>
-          <div class="lbl">No Response</div>
+        <div class="stat-card no-show" title="Filter: No-Show">
+          <div class="num">31</div>
+          <div class="lbl">No-Show</div>
         </div>
-        <div class="stat-card">
-          <div class="num">312</div>
-          <div class="lbl">Reminders Sent</div>
+        <div class="stat-card rescheduled" title="Filter: Rescheduled">
+          <div class="num">12</div>
+          <div class="lbl">Rescheduled</div>
         </div>
       </div>
 
       <!-- Bulk action bar (visible = some rows checked) -->
       <div class="bulk-bar">
         <span class="count">3 of 247 selected</span>
-        <button class="btn btn-sm btn-outline-primary">Send Reminder</button>
-        <button class="btn btn-sm btn-outline-success">Mark Confirmed</button>
+        <button class="btn btn-sm btn-outline-success">Mark Attended</button>
         <button class="btn btn-sm btn-outline-secondary">Mark No-Show</button>
+        <button class="btn btn-sm" style="border-color:#ca8a04;color:#854d0e;">Mark Rescheduled</button>
+        <button class="btn btn-sm btn-outline-primary">Send Reminder</button>
         <button class="btn btn-sm btn-outline-secondary">Export Selected</button>
         <button class="btn btn-sm btn-outline-danger">Remove from Event</button>
         <span class="clear">Clear selection</span>
@@ -247,10 +313,10 @@
                   <div class="name">John Smith</div>
                   <div class="sub">johnsmith@gmail.com · (444) 422-2222</div>
                 </td>
-                <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                <td><span class="status-badge status-attended">Attended</span></td>
                 <td>2h ago</td>
                 <td>2</td>
-                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT — April 2026</span></td>
                 <td>
                   <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
                   <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
@@ -404,7 +470,7 @@
           <li>Full page route — not a side panel. Route: <code>/calendar/event/{id}</code></li>
           <li>Server-side pagination + filtering. Must stay snappy at 5,000+ invitees.</li>
           <li>Bulk bar appears only when ≥1 row is checked; "Select all on page" + "Select all 247" both needed.</li>
-          <li>Status lifecycle: Invited → Confirmed / Declined / No-Response → (post-event) No-Show / Completed.</li>
+          <li>Status lifecycle: Invited → Confirmed / Declined → (post-event) Attended / No-Show / Rescheduled. Marking a status applies the corresponding Association Tag to that candidate, which triggers any workflows listening for that tag.</li>
           <li>Stat cards are clickable — clicking "No Response" filters the roster to that status.</li>
           <li>Template badge links back to template management page.</li>
         </ul>
@@ -415,6 +481,24 @@
 
 </div>
 
+<script>
+  function startEditDesc() {
+    document.getElementById('desc-view').style.display = 'none';
+    document.getElementById('desc-edit').style.display = 'block';
+    document.getElementById('rte-desc').focus();
+  }
+  function saveDesc() {
+    var html = document.getElementById('rte-desc').innerHTML;
+    var view = document.getElementById('desc-view');
+    view.innerHTML = html + ' <a href="#" onclick="startEditDesc();return false;" style="font-size:.73rem;color:var(--leftnav-bg);margin-left:.5rem;white-space:nowrap;"><i class="bi bi-pencil me-1"></i>Edit description</a>';
+    document.getElementById('desc-edit').style.display = 'none';
+    view.style.display = 'block';
+  }
+  function cancelDesc() {
+    document.getElementById('desc-edit').style.display = 'none';
+    document.getElementById('desc-view').style.display = 'block';
+  }
+</script>
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>

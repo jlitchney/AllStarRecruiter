@@ -127,6 +127,24 @@
     .rte-body ul { padding-left: 1.4rem; margin: .25rem 0; }
     .rte-body a { color: var(--leftnav-bg); }
 
+    /* Association tag fields */
+    .assoc-tag-field {
+      border: 1px solid #e2e8f0; border-radius: var(--radius);
+      padding: .75rem; height: 100%;
+    }
+    .assoc-tag-field-header { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: .6rem; }
+    .atf-icon {
+      width: 32px; height: 32px; border-radius: .25rem; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .atf-icon.invite     { background: #dbeafe; color: #1d4ed8; }
+    .atf-icon.attended   { background: #dcfce7; color: #166534; }
+    .atf-icon.noshow     { background: #f3f4f6; color: #374151; }
+    .atf-icon.reschedule { background: #fef9c3; color: #854d0e; }
+    .atf-title { font-weight: 700; font-size: .85rem; color: #111827; line-height: 1.2; }
+    .atf-desc  { font-size: .73rem; color: #6b7280; margin-top: .1rem; }
+    .atf-live  { font-size: .78rem; font-weight: 600; color: var(--leftnav-bg); margin-top: .4rem; }
+
     /* Before/After table */
     .impact-before { background: #fef2f2; border-left: 3px solid #b91c1c; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
     .impact-after  { background: #f0fdf4; border-left: 3px solid #15803d; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
@@ -255,58 +273,20 @@
               <!-- INDIVIDUAL scope: candidate search + chips -->
               <div id="scope-individual">
                 <label class="form-label fw-semibold">Candidate(s) <span class="text-muted fw-normal small">(who is this event for?)</span></label>
-                <input type="text" class="form-control mb-2" placeholder="Search by name or ID…" value="">
+                <input type="text" class="form-control mb-2" placeholder="Search by name or ID…">
                 <div class="d-flex flex-wrap gap-2 mb-1">
                   <span class="candidate-chip"><i class="bi bi-person-fill"></i> John Smith <button>×</button></span>
                 </div>
-                <div class="form-text">You can add more than one candidate for back-to-back sessions or panel interviews.</div>
+                <div class="form-text">The Invite Association Tag below will be applied to each candidate when they are added.</div>
               </div>
 
-              <!-- GROUP scope: tag-based invitation (hidden initially) -->
+              <!-- GROUP scope: enrollment note -->
               <div id="scope-group" style="display:none;">
-                <label class="form-label fw-semibold">Invite via Candidate Tag <span class="text-muted fw-normal small">(optional)</span></label>
-                <div class="row g-2">
-                  <div class="col-md-6">
-                    <select class="form-select">
-                      <option>— No tag filter (anyone can be added manually) —</option>
-                      <option selected>PAT — April 2026</option>
-                      <option>MHS Candidates</option>
-                      <option>Written Exam Pool</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6 d-flex align-items-center">
-                    <div class="invite-panel w-100">
-                      <div class="invite-panel-label">Candidates with this tag</div>
-                      <div class="live-count fs-5 fw-bold"><i class="bi bi-people-fill me-1"></i>47</div>
-                      <div class="form-text mt-0">All candidates tagged <strong>PAT — April 2026</strong> will be added to this event's roster.</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-text mt-1">
-                  <i class="bi bi-info-circle me-1"></i>
-                  Tags drive candidate enrollment through your workflow automations.
-                  When a candidate receives this tag, they are automatically added to this event's roster.
-                </div>
-
-                <!-- Create new tag inline -->
-                <div class="mt-3 pt-3 border-top">
-                  <div class="small fw-semibold text-muted text-uppercase mb-2" style="letter-spacing:.05em; font-size:.7rem;">Or create a new tag for this event</div>
-                  <div class="row g-2">
-                    <div class="col-md-4">
-                      <select class="form-select form-select-sm">
-                        <option>Select group…</option>
-                        <option>Interview Pools</option>
-                        <option selected>PAT / Testing</option>
-                        <option>UTM Sources</option>
-                      </select>
-                    </div>
-                    <div class="col-md-5">
-                      <input type="text" class="form-control form-select-sm" placeholder="New tag name, e.g. PAT — May 2026">
-                    </div>
-                    <div class="col-md-3">
-                      <button class="btn btn-outline-secondary btn-sm w-100">Create Tag</button>
-                    </div>
-                  </div>
+                <div class="p-3 rounded" style="background:#eff6ff;border:1px solid #bfdbfe;font-size:.85rem;">
+                  <i class="bi bi-info-circle me-1 text-primary"></i>
+                  For group events, the <strong>Invite Association Tag</strong> below drives enrollment —
+                  all candidates who receive that tag are automatically added to this event's roster.
+                  You can also add candidates manually from the event detail page after saving.
                 </div>
               </div>
 
@@ -330,6 +310,113 @@
                 </div>
                 <div class="rte-body" contenteditable="true" id="rte-description">
                   45-min structured interview. Bring license + 2 references. Parking validated at front desk.
+                </div>
+              </div>
+            </div>
+
+            <!-- NEW: Association Tags -->
+            <div class="col-12">
+              <div class="field-new">
+                <label class="form-label fw-semibold">Association Tags</label>
+                <p class="form-text mb-3">
+                  <i class="bi bi-diagram-3 me-1"></i>
+                  Tags applied to candidates automatically as their status changes.
+                  These are the bridge to your <strong>workflow automations</strong> —
+                  build email sequences, reminders, or next-step triggers based on each outcome.
+                </p>
+                <div class="row g-3">
+
+                  <!-- Invite Tag -->
+                  <div class="col-md-6">
+                    <div class="assoc-tag-field">
+                      <div class="assoc-tag-field-header">
+                        <span class="atf-icon invite"><i class="bi bi-person-plus"></i></span>
+                        <div>
+                          <div class="atf-title">Invite Tag</div>
+                          <div class="atf-desc" id="invite-desc-ind">Applied when this candidate is added to the event</div>
+                          <div class="atf-desc" id="invite-desc-grp" style="display:none;">Candidates with this tag are <strong>automatically added</strong> to this event's roster</div>
+                        </div>
+                      </div>
+                      <select class="form-select form-select-sm">
+                        <option>— None —</option>
+                        <option selected>PAT — April 2026</option>
+                        <option>MHS Candidates</option>
+                        <option>Written Exam Pool</option>
+                      </select>
+                      <div class="atf-live mt-1" id="invite-live" style="display:none;"><i class="bi bi-people-fill me-1"></i>47 candidates will be added to this event</div>
+                    </div>
+                  </div>
+
+                  <!-- Attended Tag -->
+                  <div class="col-md-6">
+                    <div class="assoc-tag-field">
+                      <div class="assoc-tag-field-header">
+                        <span class="atf-icon attended"><i class="bi bi-check-circle"></i></span>
+                        <div>
+                          <div class="atf-title">Attended Tag</div>
+                          <div class="atf-desc">Applied when marked <strong>Attended</strong></div>
+                        </div>
+                      </div>
+                      <select class="form-select form-select-sm">
+                        <option>— None —</option>
+                        <option selected>PAT-Attended-Apr26</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- No-Show Tag -->
+                  <div class="col-md-6">
+                    <div class="assoc-tag-field">
+                      <div class="assoc-tag-field-header">
+                        <span class="atf-icon noshow"><i class="bi bi-x-circle"></i></span>
+                        <div>
+                          <div class="atf-title">No-Show Tag</div>
+                          <div class="atf-desc">Applied when marked <strong>No-Show</strong></div>
+                        </div>
+                      </div>
+                      <select class="form-select form-select-sm">
+                        <option>— None —</option>
+                        <option selected>PAT-NoShow-Apr26</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Reschedule Tag -->
+                  <div class="col-md-6">
+                    <div class="assoc-tag-field">
+                      <div class="assoc-tag-field-header">
+                        <span class="atf-icon reschedule"><i class="bi bi-arrow-repeat"></i></span>
+                        <div>
+                          <div class="atf-title">Reschedule Tag</div>
+                          <div class="atf-desc">Applied when marked <strong>Rescheduled</strong></div>
+                        </div>
+                      </div>
+                      <select class="form-select form-select-sm">
+                        <option selected>— None —</option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Create tag helper -->
+                <div class="mt-3 pt-3 border-top">
+                  <div class="small fw-semibold text-muted text-uppercase mb-2" style="letter-spacing:.05em;font-size:.7rem;">Need a new tag? Create one here to use above</div>
+                  <div class="row g-2">
+                    <div class="col-md-4">
+                      <select class="form-select form-select-sm">
+                        <option>Select group…</option>
+                        <option>Interview Pools</option>
+                        <option selected>PAT / Testing</option>
+                      </select>
+                    </div>
+                    <div class="col-md-5">
+                      <input type="text" class="form-control form-control-sm" placeholder="e.g., PAT-Attended-May26">
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-outline-secondary btn-sm w-100">Create &amp; Add</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -493,6 +580,10 @@
     document.getElementById('btn-group').classList.toggle('active', scope === 'group');
     document.getElementById('scope-individual').style.display = scope === 'individual' ? 'block' : 'none';
     document.getElementById('scope-group').style.display = scope === 'group' ? 'block' : 'none';
+    // Invite tag: show live count + group description when in group mode
+    document.getElementById('invite-desc-ind').style.display = scope === 'individual' ? 'block' : 'none';
+    document.getElementById('invite-desc-grp').style.display = scope === 'group' ? 'block' : 'none';
+    document.getElementById('invite-live').style.display = scope === 'group' ? 'block' : 'none';
   }
 
   document.getElementById('saveTemplate').addEventListener('change', function() {
