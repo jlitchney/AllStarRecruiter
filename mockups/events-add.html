@@ -274,14 +274,14 @@
             <!-- ── Invite panel — changes based on scope ─────────────── -->
             <div class="col-12" id="invite-section">
 
-              <!-- INDIVIDUAL scope: candidate search + chips -->
+              <!-- INDIVIDUAL scope: single candidate search -->
               <div id="scope-individual">
-                <label class="form-label fw-semibold">Candidate(s) <span class="text-muted fw-normal small">(who is this event for?)</span></label>
-                <input type="text" class="form-control mb-2" placeholder="Search by name or ID…">
-                <div class="d-flex flex-wrap gap-2 mb-1">
+                <label class="form-label fw-semibold">Candidate <span class="text-muted fw-normal small">(who is this event for?)</span></label>
+                <div class="d-flex gap-2 align-items-center">
                   <span class="candidate-chip"><i class="bi bi-person-fill"></i> John Smith <button>×</button></span>
+                  <input type="text" class="form-control" placeholder="Search by name or ID…" style="max-width:260px; display:none;" id="candidate-search">
                 </div>
-                <div class="form-text">The Invite Association Tag below will be applied to each candidate when they are added.</div>
+                <div class="form-text mt-1">One candidate per individual event. The Invite Association Tag below is applied when they are added.</div>
               </div>
 
               <!-- GROUP scope: enrollment note -->
@@ -325,7 +325,7 @@
                   <span class="candidate-chip"><i class="bi bi-person-fill"></i> Jason L. <button>×</button></span>
                 </div>
                 <div class="d-flex gap-2 align-items-center">
-                  <input type="text" class="form-control" placeholder="Add recruiter by name…" style="max-width:260px;">
+                  <input type="text" class="form-control" placeholder="Add user by name…" style="max-width:260px;">
                   <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-person-plus me-1"></i>Add</button>
                 </div>
                 <div class="form-text">Staff assigned here can manage the roster and record outcomes. The event creator is added automatically.</div>
