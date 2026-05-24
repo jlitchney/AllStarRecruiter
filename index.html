@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AllStar Recruiter — Mockups</title>
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/mockup.css">
+
+  <style>
+    body { background: var(--leftnav-bg); min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1rem; }
+    .index-card { background: #fff; border-radius: .4rem; max-width: 760px; width: 100%; padding: 2.5rem; }
+    .mockup-link { display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-radius: .3rem; text-decoration: none; color: #1e293b; border: 1px solid #e2e8f0; transition: .15s; }
+    .mockup-link:hover { background: #f0f4ff; border-color: var(--leftnav-bg); color: var(--leftnav-bg); }
+    .mockup-link .badge-new { font-size: .65rem; background: var(--accent); color: #000; padding: 2px 8px; border-radius: 99px; font-weight: 700; }
+    .mockup-link .meta { font-size: .78rem; color: #64748b; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="index-card">
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <div style="width:44px;height:44px;background:var(--leftnav-bg);border-radius:.3rem;display:flex;align-items:center;justify-content:center;">
+      <i class="bi bi-layers text-white fs-5"></i>
+    </div>
+    <div>
+      <h1 class="h5 mb-0 fw-bold">AllStar Recruiter</h1>
+      <p class="text-muted small mb-0">Feature mockups &amp; wireframes for developer handoff</p>
+    </div>
+  </div>
+
+  <hr class="mb-4">
+
+  <p class="text-muted small mb-3">
+    Each mockup below is a standalone HTML file demonstrating a proposed feature.
+    Open any file in a browser — no build step needed. Share the link or file directly with developers.
+  </p>
+
+  <!-- Mockup list — add entries here as new mockups are created -->
+  <div class="d-flex flex-column gap-2" id="mockup-list">
+
+    <p class="text-muted small fst-italic">No mockups yet — first one coming soon.</p>
+
+  </div>
+
+  <hr class="mt-4 mb-3">
+  <p class="text-muted" style="font-size:.72rem;">
+    <i class="bi bi-info-circle me-1"></i>
+    Base template: <code>_template.html</code> &mdash;
+    copy it into <code>mockups/</code> to start a new feature.
+    CSS lives in <code>assets/css/site.css</code>.
+  </p>
+</div>
+
+</body>
+</html>

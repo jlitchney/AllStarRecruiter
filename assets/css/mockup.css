@@ -1,0 +1,56 @@
+/* Mockup-specific overrides — keeps placeholder content looking realistic */
+
+.mockup-placeholder {
+  background: #f0f2f5;
+  border: 2px dashed #d1d5db;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: .85rem;
+}
+
+.mockup-annotation {
+  position: relative;
+}
+.mockup-annotation::after {
+  content: attr(data-note);
+  position: absolute;
+  top: -24px;
+  left: 0;
+  background: #fbbf24;
+  color: #78350f;
+  font-size: .7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Avatar initials */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--leftnav-bg);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.avatar-sm {
+  width: 28px;
+  height: 28px;
+  font-size: .65rem;
+}
+.avatar-lg {
+  width: 52px;
+  height: 52px;
+  font-size: 1rem;
+}
