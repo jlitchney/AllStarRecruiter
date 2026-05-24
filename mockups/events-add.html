@@ -328,6 +328,49 @@
               </div>
             </div>
 
+            <!-- Registration Page — group events only -->
+            <div class="col-12" id="reg-page-section" style="display:none;">
+              <div class="field-new">
+                <label class="form-label fw-semibold">Registration Page</label>
+                <p class="form-text mb-3">
+                  <i class="bi bi-globe me-1"></i>
+                  Publish a public page candidates can visit or scan to self-register.
+                  Registrations sync back to this event's roster automatically and the Invite Association Tag is applied.
+                </p>
+                <div class="form-check form-switch mb-3">
+                  <input class="form-check-input" type="checkbox" id="enableRegPage" onchange="toggleRegPage(this.checked)" checked>
+                  <label class="form-check-label fw-semibold" for="enableRegPage">Enable public registration page</label>
+                </div>
+
+                <div id="reg-page-details">
+                  <div class="d-flex gap-3 flex-wrap align-items-start">
+                    <!-- QR code -->
+                    <div class="text-center flex-shrink-0">
+                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://events-six-orpin.vercel.app/register/pat-may-2026&color=245194"
+                           alt="Registration QR Code"
+                           style="width:120px;height:120px;border:1px solid #e2e8f0;border-radius:.25rem;display:block;">
+                      <a href="#" class="d-block mt-1" style="font-size:.72rem;color:var(--leftnav-bg);"><i class="bi bi-download me-1"></i>Download QR</a>
+                    </div>
+                    <!-- URL + preview -->
+                    <div class="flex-grow-1 min-w-0">
+                      <label class="form-label fw-semibold mb-1" style="font-size:.8rem;">Registration URL</label>
+                      <div class="d-flex gap-2 mb-2">
+                        <input type="text" class="form-control form-control-sm" value="events-six-orpin.vercel.app/register/pat-may-2026" readonly style="background:#f8fafc;font-size:.8rem;">
+                        <button class="btn btn-outline-secondary btn-sm flex-shrink-0"><i class="bi bi-copy me-1"></i>Copy</button>
+                      </div>
+                      <a href="https://events-six-orpin.vercel.app/" target="_blank" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>Preview registration page
+                      </a>
+                      <div class="form-text mt-2">
+                        Share this link or print the QR code for career fairs, flyers, or your website.
+                        The URL is generated when the event is saved.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- NEW: Association Tags -->
             <div class="col-12">
               <div class="field-new">
@@ -565,6 +608,7 @@
           <li><strong>New Tag Name</strong> is NOT stored in templates to prevent duplicate tags on every use.</li>
           <li><strong>"Save as Template" checkbox</strong> reveals template name input via JS toggle.</li>
           <li>When the form is submitted, if a Candidate Association Tag is selected, the back-end should query all candidates with that tag and add them to the event's roster immediately (not lazily).</li>
+          <li><strong>Registration Page</strong> (group events only) — URL slug auto-generated on save (<code>event-name-yyyy-mm-dd</code>). QR code generated server-side. Self-registrations POST to the event roster endpoint with Invited status and apply the Invite Association Tag. Toggle hides/shows the URL + QR block without removing the DB record; disabling after launch should show a confirm dialog. Public registration page served by the All-Star Events web app (<a href="https://events-six-orpin.vercel.app/" target="_blank">events-six-orpin.vercel.app</a>).</li>
         </ul>
       </div>
 
@@ -598,6 +642,12 @@
     document.getElementById('invite-desc-ind').style.display = scope === 'individual' ? 'block' : 'none';
     document.getElementById('invite-desc-grp').style.display = scope === 'group' ? 'block' : 'none';
     document.getElementById('invite-live').style.display = scope === 'group' ? 'block' : 'none';
+    // Registration page is group-only
+    document.getElementById('reg-page-section').style.display = scope === 'group' ? 'block' : 'none';
+  }
+
+  function toggleRegPage(enabled) {
+    document.getElementById('reg-page-details').style.display = enabled ? 'block' : 'none';
   }
 
   document.getElementById('saveTemplate').addEventListener('change', function() {
