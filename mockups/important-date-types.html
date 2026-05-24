@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Important Date Types — AllStar Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+  <style>
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .82rem;
+      font-weight: 600;
+    }
+    .type-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    .color-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: .25rem;
+      border: 1px solid rgba(0,0,0,.12);
+      cursor: pointer;
+      display: inline-block;
+    }
+    .color-palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: .5rem;
+    }
+    .color-palette span {
+      width: 28px;
+      height: 28px;
+      border-radius: .2rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: .12s;
+    }
+    .color-palette span:hover,
+    .color-palette span.selected { border-color: #1e293b; }
+    .table > tbody > tr > td { vertical-align: middle; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="brand">
+      <a class="logo-wrap" href="../index.html" aria-label="Home">
+        <span style="color:#fff;font-weight:800;font-size:.95rem;line-height:1.2;text-align:center;">AllStar<br>Recruiter</span>
+      </a>
+    </div>
+    <nav class="mt-1">
+      <a href="#" class="nav-link"><i class="bi bi-people"></i><span class="nav-label">Candidates</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-building"></i><span class="nav-label">Employers</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-briefcase"></i><span class="nav-label">Jobs</span></a>
+      <a href="#" class="nav-link active"><i class="bi bi-calendar3"></i><span class="nav-label">Calendar</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-broadcast"></i><span class="nav-label">Message Center</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-bar-chart-line"></i><span class="nav-label">Reports</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-gear"></i><span class="nav-label">Settings</span></a>
+    </nav>
+    <div class="mt-auto p-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar avatar-sm">JL</div>
+        <span class="nav-label small" style="color:rgba(255,255,255,.55)">Jason L.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
+    <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
+    <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+      <nav aria-label="breadcrumb" class="d-none d-sm-block">
+        <ol class="breadcrumb mb-0" style="font-size:.8rem;">
+          <li class="breadcrumb-item"><a href="#" style="color:rgba(255,255,255,.7);text-decoration:none;">Settings</a></li>
+          <li class="breadcrumb-item active" style="color:#fff;">Important Date Types</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+      <button class="btn btn-sm" style="color:#fff;"><i class="bi bi-bell"></i></button>
+      <div class="avatar avatar-sm">JL</div>
+    </div>
+  </header>
+
+  <div style="grid-area:quick;"></div>
+
+  <!-- ── Main content ────────────────────────────────────────────────────── -->
+  <main class="content">
+    <div class="page" style="max-width: 900px;">
+
+      <div class="d-flex align-items-center gap-2 mb-4">
+        <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Back</a>
+        <h4 class="mb-0 fw-bold">Important Date Types — <span style="color:var(--leftnav-bg);">ACME Police Dept</span></h4>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- ── Left: Add / Edit form ──────────────────────────────────────── -->
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-header" style="background:var(--leftnav-bg);color:#fff;">
+              <h6 class="mb-0 fw-bold"><i class="bi bi-plus-circle me-2"></i>Add Important Date Type</h6>
+            </div>
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Important Date Name</label>
+                <input type="text" class="form-control" placeholder="e.g., Background Check">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Color</label>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <span class="color-swatch" style="background:#245194;" title="Selected color"></span>
+                  <span class="text-muted small">#245194</span>
+                </div>
+                <div class="color-palette">
+                  <span style="background:#245194;" class="selected" title="#245194"></span>
+                  <span style="background:#1e7e34;" title="#1e7e34"></span>
+                  <span style="background:#0d6efd;" title="#0d6efd"></span>
+                  <span style="background:#6f42c1;" title="#6f42c1"></span>
+                  <span style="background:#e4aa35;" title="#e4aa35"></span>
+                  <span style="background:#fd7e14;" title="#fd7e14"></span>
+                  <span style="background:#dc3545;" title="#dc3545"></span>
+                  <span style="background:#20c997;" title="#20c997"></span>
+                  <span style="background:#0dcaf0;" title="#0dcaf0"></span>
+                  <span style="background:#6c757d;" title="#6c757d"></span>
+                  <span style="background:#343a40;" title="#343a40"></span>
+                  <span style="background:#c05c7e;" title="#c05c7e"></span>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="activeToggle" checked>
+                  <label class="form-check-label fw-semibold" for="activeToggle">Active</label>
+                </div>
+                <div class="form-text">Inactive types are hidden from the Add Important Date form.</div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary"><i class="bi bi-check-lg me-1"></i>Save Important Date Type</button>
+                <button class="btn btn-outline-secondary">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Right: Existing types table ───────────────────────────────── -->
+        <div class="col-md-8">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-light d-flex align-items-center justify-content-between">
+              <h6 class="mb-0 fw-bold">Important Date Types</h6>
+              <span class="badge bg-secondary">3 active</span>
+            </div>
+            <div class="card-body p-0">
+              <table class="table mb-0 table-hover" style="font-size:.875rem;">
+                <thead>
+                  <tr style="background:#f8fafc;">
+                    <th class="ps-4" style="font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;padding:.75rem 1rem;">Name</th>
+                    <th style="font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;padding:.75rem 1rem;">Status</th>
+                    <th style="font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;padding:.75rem 1rem;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="ps-4">
+                      <span class="type-badge">
+                        <span class="type-dot" style="background:#0d6efd;"></span>
+                        In-Person
+                      </span>
+                    </td>
+                    <td><span class="badge" style="background:#dcfce7;color:#15803d;font-weight:600;">Active</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-4">
+                      <span class="type-badge">
+                        <span class="type-dot" style="background:#20c997;"></span>
+                        Interview
+                      </span>
+                    </td>
+                    <td><span class="badge" style="background:#dcfce7;color:#15803d;font-weight:600;">Active</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-4">
+                      <span class="type-badge">
+                        <span class="type-dot" style="background:#0dcaf0;"></span>
+                        Virtual
+                      </span>
+                    </td>
+                    <td><span class="badge" style="background:#dcfce7;color:#15803d;font-weight:600;">Active</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-4">
+                      <span class="type-badge">
+                        <span class="type-dot" style="background:#6c757d;"></span>
+                        Background Check
+                      </span>
+                    </td>
+                    <td><span class="badge" style="background:#fef9c3;color:#854d0e;font-weight:600;">Inactive</span></td>
+                    <td>
+                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                      <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Usage note -->
+          <div class="mt-3 p-3 rounded" style="background:#eff6ff;border:1px solid #bfdbfe;font-size:.78rem;">
+            <strong style="color:#1e40af;"><i class="bi bi-info-circle me-1"></i>How Types Are Used</strong>
+            <p class="mb-0 mt-1" style="color:#374151;">
+              Types appear in the <strong>Important Date Type</strong> dropdown when adding or editing an important date.
+              The color you assign here is used as a visual tag on calendar views and the candidate timeline.
+              Inactive types are hidden from that dropdown but historical records are preserved.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dev notes -->
+      <div class="mt-4 p-3 rounded" style="background:#fffbeb;border:1px solid #fcd34d;font-size:.78rem;">
+        <strong style="color:#92400e;">📋 Dev Notes:</strong>
+        <ul class="mb-0 mt-1" style="color:#374151;padding-left:1.2rem;">
+          <li>Types are per-department (scoped to the logged-in org) — different clients have different type lists.</li>
+          <li>Deleting a type should be blocked (or soft-delete only) if any existing Important Date records reference it — show an error explaining why.</li>
+          <li>Color is stored as a hex string. The color dot appears in the Add Important Date form next to each type option and on calendar/timeline views.</li>
+          <li>The "Inactive" state hides the type from new-entry dropdowns while preserving all historical records that used it.</li>
+          <li>Clicking "Edit" should populate the left form with that row's values and change the Save button label to "Update Important Date Type".</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
