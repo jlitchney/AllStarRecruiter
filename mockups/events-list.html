@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — AllStar Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+  <style>
+    .event-row { cursor: pointer; transition: background .1s; }
+    .event-row:hover { background: #f0f4ff !important; }
+
+    .type-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+    .status-pill {
+      display: inline-block; font-size: .7rem; font-weight: 700;
+      padding: .15rem .55rem; border-radius: 99px; text-transform: uppercase; letter-spacing: .04em;
+    }
+    .pill-upcoming  { background: #dbeafe; color: #1d4ed8; }
+    .pill-today     { background: #fef9c3; color: #854d0e; }
+    .pill-past      { background: #f3f4f6; color: #6b7280; }
+
+    .confirmed-bar {
+      height: 6px; border-radius: 99px; background: #e2e8f0; overflow: hidden; min-width: 60px;
+    }
+    .confirmed-bar-fill { height: 100%; border-radius: 99px; background: #15803d; }
+
+    .section-divider {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: #94a3b8; padding: .5rem 1rem;
+      background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
+    }
+
+    .empty-state { text-align: center; padding: 3rem 1rem; color: #94a3b8; }
+    .empty-state i { font-size: 2.5rem; display: block; margin-bottom: .75rem; }
+
+    .filter-row { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; padding:.6rem 1rem; background:#f8f9fa; border-bottom:1px solid #dee2e6; }
+    .filter-row .form-control, .filter-row .form-select { font-size: .82rem; }
+
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+    }
+    .summary-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: var(--radius);
+      padding: .75rem 1rem; display: flex; align-items: center; gap: .75rem;
+    }
+    .summary-card .icon {
+      width: 36px; height: 36px; border-radius: .25rem;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .summary-card .num { font-size: 1.35rem; font-weight: 800; line-height: 1; color: var(--leftnav-bg); }
+    .summary-card .lbl { font-size: .72rem; color: #6b7280; }
+
+    @media (max-width: 768px) {
+      .summary-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="brand">
+      <a class="logo-wrap" href="../index.html" aria-label="Home">
+        <span style="color:#fff;font-weight:800;font-size:.95rem;line-height:1.2;text-align:center;">AllStar<br>Recruiter</span>
+      </a>
+    </div>
+    <nav class="mt-1">
+      <a href="#" class="nav-link"><i class="bi bi-people"></i><span class="nav-label">Candidates</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-building"></i><span class="nav-label">Employers</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-briefcase"></i><span class="nav-label">Jobs</span></a>
+      <a href="events-list.html" class="nav-link active"><i class="bi bi-calendar3"></i><span class="nav-label">Events</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-broadcast"></i><span class="nav-label">Message Center</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-bar-chart-line"></i><span class="nav-label">Reports</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-gear"></i><span class="nav-label">Settings</span></a>
+    </nav>
+    <div class="mt-auto p-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar avatar-sm">JL</div>
+        <span class="nav-label small" style="color:rgba(255,255,255,.55)">Jason L.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
+    <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
+    <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+      <h1 class="h6 mb-0 text-white fw-bold">Events</h1>
+      <span style="color:rgba(255,255,255,.5);font-size:.8rem;">ACME Police Dept</span>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+      <a href="events-add.html" class="btn btn-sm" style="background:var(--accent);color:#000;font-weight:700;">
+        <i class="bi bi-plus-lg me-1"></i>Add Event
+      </a>
+      <button class="btn btn-sm" style="color:#fff;"><i class="bi bi-bell"></i></button>
+      <div class="avatar avatar-sm">JL</div>
+    </div>
+  </header>
+
+  <!-- ── Filter / quick bar ──────────────────────────────────────────────── -->
+  <div class="quick-bar" style="grid-area:quick;">
+    <div class="filter-row">
+      <input type="search" class="form-control form-control-sm" style="max-width:240px;" placeholder="Search events…">
+      <select class="form-select form-select-sm" style="max-width:150px;">
+        <option>All types</option>
+        <option>In-Person</option>
+        <option>Interview</option>
+        <option>Virtual</option>
+      </select>
+      <select class="form-select form-select-sm" style="max-width:160px;">
+        <option>All time</option>
+        <option>Upcoming</option>
+        <option>This week</option>
+        <option>This month</option>
+        <option>Past</option>
+      </select>
+      <div class="ms-auto d-flex gap-2">
+        <a href="event-types.html" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-tags me-1"></i>Manage Event Types
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main content ────────────────────────────────────────────────────── -->
+  <main class="content">
+    <div class="page">
+
+      <!-- Summary strip -->
+      <div class="summary-strip">
+        <div class="summary-card">
+          <div class="icon" style="background:#eff6ff;color:#1d4ed8;"><i class="bi bi-calendar-event"></i></div>
+          <div>
+            <div class="num">4</div>
+            <div class="lbl">Upcoming Events</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="icon" style="background:#fef9c3;color:#854d0e;"><i class="bi bi-calendar-check"></i></div>
+          <div>
+            <div class="num">1</div>
+            <div class="lbl">Today</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="icon" style="background:#dcfce7;color:#15803d;"><i class="bi bi-people"></i></div>
+          <div>
+            <div class="num">431</div>
+            <div class="lbl">Total Invited</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="icon" style="background:#f0fdf4;color:#15803d;"><i class="bi bi-check-circle"></i></div>
+          <div>
+            <div class="num">287</div>
+            <div class="lbl">Confirmed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events table -->
+      <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0" style="font-size:.84rem;">
+            <thead>
+              <tr style="background:#f8fafc;">
+                <th style="padding:.75rem 1rem;font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;">Event</th>
+                <th style="padding:.75rem 1rem;font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;">Date &amp; Time</th>
+                <th style="padding:.75rem 1rem;font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;">Type</th>
+                <th style="padding:.75rem 1rem;font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;">Invited</th>
+                <th style="padding:.75rem 1rem;font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;">Confirmed</th>
+                <th style="padding:.75rem 1rem;font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;font-weight:600;">Status</th>
+                <th style="padding:.75rem 1rem;width:80px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- TODAY -->
+              <tr><td colspan="7" class="section-divider">Today — May 24, 2026</td></tr>
+
+              <tr class="event-row" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem;">
+                  <div class="fw-semibold" style="color:#111827;">Physical Agility Test</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>123 Main Street, Springfield</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  May 24, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">9:00 AM – 12:00 PM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#0d6efd;"></span> In-Person
+                  </span>
+                </td>
+                <td style="padding:.7rem 1rem;">247</td>
+                <td style="padding:.7rem 1rem;">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="confirmed-bar" style="width:64px;">
+                      <div class="confirmed-bar-fill" style="width:75%;"></div>
+                    </div>
+                    <span>186 <span style="color:#6b7280;font-size:.75rem;">(75%)</span></span>
+                  </div>
+                </td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-today">Today</span></td>
+                <td style="padding:.7rem 1rem;">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+              <!-- UPCOMING -->
+              <tr><td colspan="7" class="section-divider">Upcoming</td></tr>
+
+              <tr class="event-row" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem;">
+                  <div class="fw-semibold" style="color:#111827;">MHS Interview — John Smith</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-person me-1"></i>Individual · 1 candidate</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  May 26, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">2:00 PM – 2:45 PM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#20c997;"></span> Interview
+                  </span>
+                </td>
+                <td style="padding:.7rem 1rem;">1</td>
+                <td style="padding:.7rem 1rem;">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="confirmed-bar" style="width:64px;">
+                      <div class="confirmed-bar-fill" style="width:100%;"></div>
+                    </div>
+                    <span>1 <span style="color:#6b7280;font-size:.75rem;">(100%)</span></span>
+                  </div>
+                </td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-upcoming">Upcoming</span></td>
+                <td style="padding:.7rem 1rem;">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+              <tr class="event-row" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem;">
+                  <div class="fw-semibold" style="color:#111827;">Written Exam — City Hall</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>City Hall, Room 204</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  Jun 2, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">8:00 AM – 11:00 AM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#0d6efd;"></span> In-Person
+                  </span>
+                </td>
+                <td style="padding:.7rem 1rem;">84</td>
+                <td style="padding:.7rem 1rem;">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="confirmed-bar" style="width:64px;">
+                      <div class="confirmed-bar-fill" style="width:38%;"></div>
+                    </div>
+                    <span>32 <span style="color:#6b7280;font-size:.75rem;">(38%)</span></span>
+                  </div>
+                </td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-upcoming">Upcoming</span></td>
+                <td style="padding:.7rem 1rem;">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+              <tr class="event-row" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem;">
+                  <div class="fw-semibold" style="color:#111827;">Virtual Recruitment Day — Summer 2026</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-camera-video me-1"></i>Zoom · Link in description</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  Jun 10, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">10:00 AM – 2:00 PM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#0dcaf0;"></span> Virtual
+                  </span>
+                </td>
+                <td style="padding:.7rem 1rem;color:#94a3b8;font-style:italic;">0</td>
+                <td style="padding:.7rem 1rem;color:#94a3b8;font-style:italic;">—</td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-upcoming">Upcoming</span></td>
+                <td style="padding:.7rem 1rem;">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+              <!-- PAST -->
+              <tr><td colspan="7" class="section-divider">Past</td></tr>
+
+              <tr class="event-row" style="opacity:.7;" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem;">
+                  <div class="fw-semibold" style="color:#111827;">Physical Agility Test — April</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>Springfield Athletic Center</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  Apr 5, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">9:00 AM – 12:00 PM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#0d6efd;"></span> In-Person
+                  </span>
+                </td>
+                <td style="padding:.7rem 1rem;">99</td>
+                <td style="padding:.7rem 1rem;">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="confirmed-bar" style="width:64px;">
+                      <div class="confirmed-bar-fill" style="width:69%;background:#6b7280;"></div>
+                    </div>
+                    <span>68 <span style="color:#6b7280;font-size:.75rem;">(69%)</span></span>
+                  </div>
+                </td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-past">Past</span></td>
+                <td style="padding:.7rem 1rem;">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-secondary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+              <tr class="event-row" style="opacity:.7;" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem;">
+                  <div class="fw-semibold" style="color:#111827;">Background Check Orientation</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-camera-video me-1"></i>Virtual</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  Mar 18, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">1:00 PM – 2:00 PM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#0dcaf0;"></span> Virtual
+                  </span>
+                </td>
+                <td style="padding:.7rem 1rem;">22</td>
+                <td style="padding:.7rem 1rem;">
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="confirmed-bar" style="width:64px;">
+                      <div class="confirmed-bar-fill" style="width:100%;background:#6b7280;"></div>
+                    </div>
+                    <span>22 <span style="color:#6b7280;font-size:.75rem;">(100%)</span></span>
+                  </div>
+                </td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-past">Past</span></td>
+                <td style="padding:.7rem 1rem;">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-secondary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
