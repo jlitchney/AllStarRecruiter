@@ -90,10 +90,12 @@
     .cal-date { font-size:.75rem; font-weight:600; color:#374151; text-align:right; margin-bottom:.25rem; }
     .cal-event { display:block; font-size:.68rem; font-weight:600; padding:.15rem .4rem; border-radius:.2rem; margin-bottom:.15rem; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-decoration:none; line-height:1.4; }
     .cal-event:hover { opacity:.82; }
-    .cal-event.ev-inperson  { background:#dbeafe; color:#1d4ed8; }
-    .cal-event.ev-interview { background:#d1fae5; color:#065f46; }
-    .cal-event.ev-virtual   { background:#e0f2fe; color:#0369a1; }
-    .cal-event.ev-past      { background:#f3f4f6; color:#6b7280; }
+    .cal-event.ev-inperson   { background:#dbeafe; color:#1d4ed8; }   /* Physical Agility Test */
+    .cal-event.ev-written    { background:#ede9fe; color:#5b21b6; }   /* Written Exam */
+    .cal-event.ev-virtual    { background:#e0f2fe; color:#0369a1; }   /* Virtual Recruitment Event */
+    .cal-event.ev-bginterview{ background:#d1fae5; color:#065f46; }   /* Background Interview */
+    .cal-event.ev-interview  { background:#dcfce7; color:#15803d; }   /* Interview */
+    .cal-event.ev-past       { background:#f3f4f6; color:#6b7280; }
     .view-toggle .btn { font-size:.8rem; }
     .view-toggle .btn.active { background:var(--leftnav-bg); color:#fff; border-color:var(--leftnav-bg); }
   </style>
@@ -147,9 +149,11 @@
       <input type="search" class="form-control form-control-sm" style="max-width:240px;" placeholder="Search events…">
       <select class="form-select form-select-sm" style="max-width:150px;">
         <option>All types</option>
-        <option>In-Person</option>
+        <option>Physical Agility Test</option>
+        <option>Written Exam</option>
+        <option>Virtual Recruitment Event</option>
+        <option>Background Interview</option>
         <option>Interview</option>
-        <option>Virtual</option>
       </select>
       <select class="form-select form-select-sm" style="max-width:160px;">
         <option>All time</option>
@@ -244,7 +248,7 @@
                 </td>
                 <td style="padding:.7rem 1rem;">
                   <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#0d6efd;"></span> In-Person
+                    <span class="type-dot" style="background:#0d6efd;"></span> Physical Agility Test
                   </span>
                 </td>
                 <td style="padding:.7rem 1rem;">247</td>
@@ -325,7 +329,7 @@
                 </td>
                 <td style="padding:.7rem 1rem;">
                   <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#0d6efd;"></span> In-Person
+                    <span class="type-dot" style="background:#0d6efd;"></span> Physical Agility Test
                   </span>
                 </td>
                 <td style="padding:.7rem 1rem;">84</td>
@@ -357,7 +361,7 @@
                 </td>
                 <td style="padding:.7rem 1rem;">
                   <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#0dcaf0;"></span> Virtual
+                    <span class="type-dot" style="background:#0dcaf0;"></span> Virtual Recruitment Event
                   </span>
                 </td>
                 <td style="padding:.7rem 1rem;color:#94a3b8;font-style:italic;">0</td>
@@ -382,7 +386,7 @@
                 </td>
                 <td style="padding:.7rem 1rem;">
                   <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#0d6efd;"></span> In-Person
+                    <span class="type-dot" style="background:#0d6efd;"></span> Physical Agility Test
                   </span>
                 </td>
                 <td style="padding:.7rem 1rem;">99</td>
@@ -405,8 +409,8 @@
 
               <tr class="event-row" style="opacity:.7;" onclick="window.location='events-detail.html'">
                 <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Background Check Orientation</div>
-                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-camera-video me-1"></i>Virtual</div>
+                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Background Interview Orientation</div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-camera-video me-1"></i>Zoom · Link in description</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
                   Mar 18, 2026<br>
@@ -414,7 +418,7 @@
                 </td>
                 <td style="padding:.7rem 1rem;">
                   <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#0dcaf0;"></span> Virtual
+                    <span class="type-dot" style="background:#20c997;"></span> Background Interview
                   </span>
                 </td>
                 <td style="padding:.7rem 1rem;">22</td>
@@ -537,7 +541,7 @@
             <div class="cal-day other-month"><div class="cal-date">1</div></div>
             <div class="cal-day other-month">
               <div class="cal-date">2</div>
-              <a href="events-detail.html" class="cal-event ev-inperson"><i class="bi bi-pencil me-1"></i>Written Exam</a>
+              <a href="events-detail.html" class="cal-event ev-written"><i class="bi bi-pencil me-1"></i>Written Exam</a>
             </div>
             <div class="cal-day other-month"><div class="cal-date">3</div></div>
             <div class="cal-day other-month"><div class="cal-date">4</div></div>
@@ -560,7 +564,7 @@
             <div class="cal-day"><div class="cal-date">1</div></div>
             <div class="cal-day">
               <div class="cal-date">2</div>
-              <a href="events-detail.html" class="cal-event ev-inperson"><i class="bi bi-pencil me-1"></i>Written Exam — City Hall</a>
+              <a href="events-detail.html" class="cal-event ev-written"><i class="bi bi-pencil me-1"></i>Written Exam — City Hall</a>
             </div>
             <div class="cal-day"><div class="cal-date">3</div></div>
             <div class="cal-day"><div class="cal-date">4</div></div>
