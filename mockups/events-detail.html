@@ -77,6 +77,13 @@
     .assoc-tag-badge.noshow     { background: #f3f4f6; color: #374151; border: 1px solid #e2e8f0; }
     .assoc-tag-badge.reschedule { background: #fef9c3; color: #854d0e; }
     .assoc-tag-badge.unset      { background: #f8fafc; color: #94a3b8; border: 1px dashed #cbd5e1; font-style: italic; }
+    .assoc-tag-badge.utm        { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-family: monospace; font-size: .72rem; }
+    .utm-line { display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.5rem; }
+    .utm-chip { font-size:.72rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:.2rem; padding:.1rem .45rem; color:#374151; font-family:monospace; }
+    .utm-chip .utm-label { color:#94a3b8; margin-right:.25rem; }
+    .atf-edit-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+    .atf-edit-grid .atf-field label { font-size:.75rem; font-weight:600; color:#374151; margin-bottom:.2rem; display:block; }
+    @media(max-width:600px){ .atf-edit-grid { grid-template-columns:1fr; } }
 
     /* ── Inline description editor ───────────────────────── */
     .rte-toolbar { display:flex; align-items:center; gap:2px; padding:.3rem .4rem; border-bottom:1px solid #e2e8f0; background:#f8fafc; border-radius:var(--radius) var(--radius) 0 0; }
@@ -206,12 +213,82 @@
 
         <!-- Association Tags -->
         <div class="assoc-tags-row">
-          <div class="small fw-bold text-uppercase mb-2" style="color:#6b7280;letter-spacing:.06em;font-size:.68rem;">Association Tags</div>
-          <div class="d-flex flex-wrap gap-2">
-            <span class="assoc-tag-badge invite"><i class="bi bi-person-plus"></i> Invite: PAT — April 2026</span>
-            <span class="assoc-tag-badge attended"><i class="bi bi-check-circle"></i> Attended: PAT-Attended-Apr26</span>
-            <span class="assoc-tag-badge noshow"><i class="bi bi-x-circle"></i> No-Show: PAT-NoShow-Apr26</span>
-            <span class="assoc-tag-badge unset"><i class="bi bi-arrow-repeat"></i> Reschedule: not set</span>
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <div class="small fw-bold text-uppercase" style="color:#6b7280;letter-spacing:.06em;font-size:.68rem;">Association Tags</div>
+            <a href="#" id="assoc-edit-link" onclick="startEditTags();return false;" style="font-size:.73rem;color:var(--leftnav-bg);white-space:nowrap;"><i class="bi bi-pencil me-1"></i>Edit</a>
+          </div>
+
+          <!-- View state -->
+          <div id="assoc-tags-view">
+            <div class="d-flex flex-wrap gap-2">
+              <span class="assoc-tag-badge invite"><i class="bi bi-person-plus"></i> Invite: PAT — April 2026</span>
+              <span class="assoc-tag-badge attended"><i class="bi bi-check-circle"></i> Attended: PAT-Attended-Apr26</span>
+              <span class="assoc-tag-badge noshow"><i class="bi bi-x-circle"></i> No-Show: PAT-NoShow-Apr26</span>
+              <span class="assoc-tag-badge unset"><i class="bi bi-arrow-repeat"></i> Reschedule: not set</span>
+            </div>
+            <div class="utm-line">
+              <span class="utm-chip"><span class="utm-label">utm_source</span>career-fair</span>
+              <span class="utm-chip"><span class="utm-label">utm_medium</span>qr-code</span>
+              <span class="utm-chip"><span class="utm-label">utm_campaign</span>pat-spring-2026</span>
+            </div>
+          </div>
+
+          <!-- Edit state -->
+          <div id="assoc-tags-edit" style="display:none;">
+            <div class="atf-edit-grid mb-3">
+              <div class="atf-field">
+                <label><i class="bi bi-person-plus me-1" style="color:#1d4ed8;"></i>Invite Tag</label>
+                <select class="form-select form-select-sm">
+                  <option>— None —</option>
+                  <option selected>PAT — April 2026</option>
+                  <option>MHS Candidates</option>
+                </select>
+              </div>
+              <div class="atf-field">
+                <label><i class="bi bi-check-circle me-1" style="color:#166534;"></i>Attended Tag</label>
+                <select class="form-select form-select-sm">
+                  <option>— None —</option>
+                  <option selected>PAT-Attended-Apr26</option>
+                </select>
+              </div>
+              <div class="atf-field">
+                <label><i class="bi bi-x-circle me-1" style="color:#374151;"></i>No-Show Tag</label>
+                <select class="form-select form-select-sm">
+                  <option>— None —</option>
+                  <option selected>PAT-NoShow-Apr26</option>
+                </select>
+              </div>
+              <div class="atf-field">
+                <label><i class="bi bi-arrow-repeat me-1" style="color:#854d0e;"></i>Reschedule Tag</label>
+                <select class="form-select form-select-sm">
+                  <option selected>— None —</option>
+                </select>
+              </div>
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-md-4">
+                <div class="atf-field">
+                  <label style="font-size:.75rem;font-weight:600;color:#374151;display:block;margin-bottom:.2rem;font-family:monospace;">utm_source</label>
+                  <input type="text" class="form-control form-control-sm" value="career-fair" placeholder="e.g. career-fair">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="atf-field">
+                  <label style="font-size:.75rem;font-weight:600;color:#374151;display:block;margin-bottom:.2rem;font-family:monospace;">utm_medium</label>
+                  <input type="text" class="form-control form-control-sm" value="qr-code" placeholder="e.g. qr-code">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="atf-field">
+                  <label style="font-size:.75rem;font-weight:600;color:#374151;display:block;margin-bottom:.2rem;font-family:monospace;">utm_campaign</label>
+                  <input type="text" class="form-control form-control-sm" value="pat-spring-2026" placeholder="e.g. pat-spring-2026">
+                </div>
+              </div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-primary" onclick="saveTagsEdit()">Save</button>
+              <button class="btn btn-sm btn-outline-secondary" onclick="cancelTagsEdit()">Cancel</button>
+            </div>
           </div>
         </div>
 
@@ -513,6 +590,22 @@
   function cancelDesc() {
     document.getElementById('desc-edit').style.display = 'none';
     document.getElementById('desc-view').style.display = 'block';
+  }
+
+  function startEditTags() {
+    document.getElementById('assoc-tags-view').style.display = 'none';
+    document.getElementById('assoc-edit-link').style.display = 'none';
+    document.getElementById('assoc-tags-edit').style.display = 'block';
+  }
+  function saveTagsEdit() {
+    document.getElementById('assoc-tags-edit').style.display = 'none';
+    document.getElementById('assoc-tags-view').style.display = 'block';
+    document.getElementById('assoc-edit-link').style.display = '';
+  }
+  function cancelTagsEdit() {
+    document.getElementById('assoc-tags-edit').style.display = 'none';
+    document.getElementById('assoc-tags-view').style.display = 'block';
+    document.getElementById('assoc-edit-link').style.display = '';
   }
 </script>
 <script src="../assets/js/jquery.min.js"></script>
