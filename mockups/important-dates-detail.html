@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Detail — Important Dates — AllStar Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+  <style>
+    /* ── Stat cards ──────────────────────────────────────── */
+    .stat-cards { display: grid; grid-template-columns: repeat(5,1fr); gap: .75rem; margin-bottom: 1.25rem; }
+    .stat-card {
+      background: #fff; border: 1px solid #dee2e6; border-radius: var(--radius);
+      padding: .9rem 1rem; text-align: center;
+    }
+    .stat-card .num { font-size: 1.9rem; font-weight: 800; color: var(--leftnav-bg); line-height: 1; }
+    .stat-card .lbl { font-size: .72rem; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; margin-top: .3rem; }
+    .stat-card.confirmed .num { color: #15803d; }
+    .stat-card.declined   .num { color: #b91c1c; }
+    .stat-card.no-response .num { color: #92400e; }
+
+    /* ── Event hero ──────────────────────────────────────── */
+    .event-hero {
+      background: #f0f4fb;
+      border: 1px solid #d4dce9;
+      border-left: 4px solid var(--leftnav-bg);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .event-hero h2 { font-size: 1.25rem; font-weight: 700; color: var(--leftnav-bg); margin-bottom: .4rem; }
+    .event-meta { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; font-size: .82rem; color: #374151; }
+    .event-meta span { display: inline-flex; align-items: center; gap: .35rem; }
+    .event-meta .template-tag { color: #6b7280; }
+
+    /* ── Bulk bar ────────────────────────────────────────── */
+    .bulk-bar {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: var(--radius);
+      padding: .5rem .75rem;
+      display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+      margin-bottom: .75rem;
+      font-size: .82rem;
+    }
+    .bulk-bar .count { font-weight: 700; color: #92400e; margin-right: .25rem; }
+    .bulk-bar .clear { color: #6b7280; cursor: pointer; margin-left: auto; text-decoration: underline; }
+
+    /* ── Status badges ───────────────────────────────────── */
+    .status-badge { display: inline-block; font-size: .72rem; font-weight: 600; padding: .2rem .55rem; border-radius: 99px; }
+    .status-confirmed  { background: #dcfce7; color: #15803d; }
+    .status-invited    { background: #dbeafe; color: #1d4ed8; }
+    .status-declined   { background: #fee2e2; color: #b91c1c; }
+    .status-no-response{ background: #fef3c7; color: #92400e; }
+    .status-no-show    { background: #f3f4f6; color: #374151; }
+    .status-completed  { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+
+    /* ── Roster table ────────────────────────────────────── */
+    .roster-table { font-size: .82rem; }
+    .roster-table td, .roster-table th { vertical-align: middle; padding: .55rem .65rem; }
+    .roster-table .name { font-weight: 600; color: #111827; }
+    .roster-table .sub  { font-size: .73rem; color: #6b7280; }
+    .row-selected { background: #eff6ff !important; }
+
+    /* ── Add menu ────────────────────────────────────────── */
+    .add-menu {
+      background: #fffbeb; border: 2px dashed var(--accent);
+      border-radius: var(--radius); padding: 1rem 1.25rem; margin-top: 1rem;
+    }
+    .add-menu h6 { font-weight: 700; color: #92400e; margin-bottom: .75rem; }
+    .add-opt { margin-bottom: .5rem; }
+    .add-opt .t { font-weight: 600; font-size: .82rem; color: var(--leftnav-bg); }
+    .add-opt .d { font-size: .78rem; color: #6b7280; }
+
+    /* ── Filter bar (quick-bar style) ───────────────────── */
+    .filter-row { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; padding:.6rem 1rem; background:#f8f9fa; border-bottom:1px solid #dee2e6; }
+    .filter-row .form-control, .filter-row .form-select { font-size: .82rem; max-width: 180px; }
+    .filter-row .form-control.search { max-width: 260px; }
+
+    @media (max-width: 768px) {
+      .stat-cards { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── Sidebar ───────────────────────────────────────────────────────── -->
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="brand">
+      <a class="logo-wrap" href="../index.html" aria-label="Home">
+        <span style="color:#fff;font-weight:800;font-size:.95rem;line-height:1.2;text-align:center;">AllStar<br>Recruiter</span>
+      </a>
+    </div>
+    <nav class="mt-1">
+      <a href="#" class="nav-link"><i class="bi bi-people"></i><span class="nav-label">Candidates</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-building"></i><span class="nav-label">Employers</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-briefcase"></i><span class="nav-label">Jobs</span></a>
+      <a href="#" class="nav-link active"><i class="bi bi-calendar3"></i><span class="nav-label">Calendar</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-broadcast"></i><span class="nav-label">Message Center</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-bar-chart-line"></i><span class="nav-label">Reports</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-gear"></i><span class="nav-label">Settings</span></a>
+    </nav>
+    <div class="mt-auto p-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar avatar-sm">JL</div>
+        <span class="nav-label small" style="color:rgba(255,255,255,.55)">Jason L.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ────────────────────────────────────────────────────────── -->
+  <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
+    <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
+    <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+      <nav aria-label="breadcrumb" class="d-none d-sm-block">
+        <ol class="breadcrumb mb-0" style="font-size:.8rem;">
+          <li class="breadcrumb-item"><a href="#" style="color:rgba(255,255,255,.7);text-decoration:none;">Calendar</a></li>
+          <li class="breadcrumb-item active" style="color:#fff;">Physical Agility Test</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+      <button class="btn btn-sm" style="color:#fff;" title="Notifications"><i class="bi bi-bell"></i></button>
+      <div class="avatar avatar-sm">JL</div>
+    </div>
+  </header>
+
+  <!-- ── Quick / filter bar ────────────────────────────────────────────── -->
+  <div class="quick-bar" style="grid-area:quick;">
+    <div class="filter-row">
+      <input type="search" class="form-control form-control-sm search" placeholder="Search name, email, phone…">
+      <select class="form-select form-select-sm" style="max-width:150px;">
+        <option>All statuses</option>
+        <option>Invited</option>
+        <option>Confirmed</option>
+        <option>Declined</option>
+        <option>No Response</option>
+        <option>No-Show</option>
+        <option>Completed</option>
+      </select>
+      <select class="form-select form-select-sm" style="max-width:170px;">
+        <option>All tags</option>
+        <option>PAT 04-25-2026</option>
+        <option>MHS Candidates</option>
+      </select>
+      <select class="form-select form-select-sm" style="max-width:170px;">
+        <option>Last contact: any</option>
+        <option>Never contacted</option>
+        <option>&gt; 7 days ago</option>
+        <option>&lt; 24 hours ago</option>
+      </select>
+      <div class="ms-auto d-flex gap-2">
+        <button class="btn btn-sm btn-outline-secondary">Edit Event</button>
+        <div class="dropdown">
+          <button class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="bi bi-person-plus me-1"></i>Add Candidates
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#"><i class="bi bi-tag me-2"></i>By Tag</a></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-search me-2"></i>By Search / Multi-select</a></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-upload me-2"></i>CSV Upload</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-send me-1"></i>Send Reminder to All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Main content ──────────────────────────────────────────────────── -->
+  <main class="content">
+    <div class="page">
+
+      <!-- Event hero -->
+      <div class="event-hero">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <div>
+            <h2 class="mb-1">Physical Agility Test</h2>
+            <div class="event-meta">
+              <span><i class="bi bi-calendar3"></i> Fri, May 1, 2026 · 9:00 AM – 12:00 PM</span>
+              <span><i class="bi bi-geo-alt"></i> 123 Main Street, Springfield, OH 44122</span>
+              <span><i class="bi bi-person-video3"></i> In-Person</span>
+              <span><i class="bi bi-tag"></i> UTM Sources › PAT 04-25-2026</span>
+              <span class="template-tag"><i class="bi bi-layout-text-window-reverse"></i> Template: PAT — Springfield Site</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="num">247</div>
+          <div class="lbl">Total Invited</div>
+        </div>
+        <div class="stat-card confirmed">
+          <div class="num">186</div>
+          <div class="lbl">Confirmed</div>
+        </div>
+        <div class="stat-card declined">
+          <div class="num">22</div>
+          <div class="lbl">Declined</div>
+        </div>
+        <div class="stat-card no-response">
+          <div class="num">39</div>
+          <div class="lbl">No Response</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">312</div>
+          <div class="lbl">Reminders Sent</div>
+        </div>
+      </div>
+
+      <!-- Bulk action bar (visible = some rows checked) -->
+      <div class="bulk-bar">
+        <span class="count">3 of 247 selected</span>
+        <button class="btn btn-sm btn-outline-primary">Send Reminder</button>
+        <button class="btn btn-sm btn-outline-success">Mark Confirmed</button>
+        <button class="btn btn-sm btn-outline-secondary">Mark No-Show</button>
+        <button class="btn btn-sm btn-outline-secondary">Export Selected</button>
+        <button class="btn btn-sm btn-outline-danger">Remove from Event</button>
+        <span class="clear">Clear selection</span>
+      </div>
+
+      <!-- Roster table -->
+      <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+          <table class="table table-hover roster-table mb-0">
+            <thead class="table-light">
+              <tr>
+                <th style="width:36px;"><input type="checkbox" class="form-check-input"></th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Last Contact</th>
+                <th>Reminders</th>
+                <th>Source Tag</th>
+                <th style="width:120px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-selected">
+                <td><input type="checkbox" class="form-check-input" checked></td>
+                <td>
+                  <div class="name">John Smith</div>
+                  <div class="sub">johnsmith@gmail.com · (444) 422-2222</div>
+                </td>
+                <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                <td>2h ago</td>
+                <td>2</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+              <tr class="row-selected">
+                <td><input type="checkbox" class="form-check-input" checked></td>
+                <td>
+                  <div class="name">Keisuke Kuroiwa</div>
+                  <div class="sub">k.kuroiwa@example.com · (555) 123-4567</div>
+                </td>
+                <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                <td>Yesterday</td>
+                <td>1</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+              <tr class="row-selected">
+                <td><input type="checkbox" class="form-check-input" checked></td>
+                <td>
+                  <div class="name">Maria Gonzalez</div>
+                  <div class="sub">m.gonzalez@example.com · (555) 845-1010</div>
+                </td>
+                <td><span class="status-badge status-invited">Invited</span></td>
+                <td>4 days ago</td>
+                <td>2</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="form-check-input"></td>
+                <td>
+                  <div class="name">David Chen</div>
+                  <div class="sub">d.chen@example.com · (555) 290-3312</div>
+                </td>
+                <td><span class="status-badge status-no-response">No Response</span></td>
+                <td>Never</td>
+                <td>0</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="form-check-input"></td>
+                <td>
+                  <div class="name">Priya Patel</div>
+                  <div class="sub">p.patel@example.com · (555) 667-0091</div>
+                </td>
+                <td><span class="status-badge status-declined">Declined</span></td>
+                <td>3 days ago</td>
+                <td>1</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="form-check-input"></td>
+                <td>
+                  <div class="name">Marcus Williams</div>
+                  <div class="sub">m.williams@example.com</div>
+                </td>
+                <td><span class="status-badge status-invited">Invited</span></td>
+                <td>2 days ago</td>
+                <td>1</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026 <span style="color:#6b7280;">(added 4/26)</span></span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="form-check-input"></td>
+                <td>
+                  <div class="name">Sarah Thompson</div>
+                  <div class="sub">s.thompson@example.com · (555) 441-8823</div>
+                </td>
+                <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                <td>Yesterday</td>
+                <td>2</td>
+                <td><span class="badge-tag badge rounded-pill bg-light text-dark border">PAT 04-25-2026</span></td>
+                <td>
+                  <a href="#" class="text-primary text-decoration-none me-2" style="font-size:.78rem;">Open</a>
+                  <a href="#" class="text-primary text-decoration-none" style="font-size:.78rem;">Message</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex align-items-center justify-content-between px-3 py-2 border-top bg-light" style="font-size:.8rem;">
+          <span class="text-muted">Showing 1–50 of 247 invitees</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled"><a class="page-link" href="#">‹</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item"><a class="page-link" href="#">›</a></li>
+            </ul>
+          </nav>
+          <select class="form-select form-select-sm" style="width:auto;">
+            <option>50 / page</option>
+            <option>100 / page</option>
+            <option>250 / page</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Add Candidates expanded menu (shown for mockup) -->
+      <div class="add-menu">
+        <h6><i class="bi bi-person-plus me-2"></i>Add Candidates to this Event</h6>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="add-opt">
+              <div class="t"><i class="bi bi-tag me-1"></i> By Tag</div>
+              <div class="d">Pull in everyone with a given tag (e.g., "MHS Candidates"). Live count preview before saving.</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add-opt">
+              <div class="t"><i class="bi bi-search me-1"></i> By Search / Multi-select</div>
+              <div class="d">Type-ahead search across all candidates. Add one or batch-select from results.</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="add-opt">
+              <div class="t"><i class="bi bi-upload me-1"></i> CSV Upload</div>
+              <div class="d">Match by email or phone — for events sourced outside the CRM (job fairs, referrals).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dev notes -->
+      <div class="mt-4 p-3 rounded" style="background:#fffbeb;border:1px solid #fcd34d;font-size:.78rem;">
+        <strong style="color:#92400e;">📋 Dev Notes:</strong>
+        <ul class="mb-0 mt-1" style="color:#374151;padding-left:1.2rem;">
+          <li>Full page route — not a side panel. Route: <code>/calendar/event/{id}</code></li>
+          <li>Server-side pagination + filtering. Must stay snappy at 5,000+ invitees.</li>
+          <li>Bulk bar appears only when ≥1 row is checked; "Select all on page" + "Select all 247" both needed.</li>
+          <li>Status lifecycle: Invited → Confirmed / Declined / No-Response → (post-event) No-Show / Completed.</li>
+          <li>Stat cards are clickable — clicking "No Response" filters the roster to that status.</li>
+          <li>Template badge links back to template management page.</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

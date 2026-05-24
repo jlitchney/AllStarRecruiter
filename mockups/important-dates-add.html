@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Important Date — AllStar Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+  <style>
+    /* NEW field highlight */
+    .field-new {
+      background: #fffbeb;
+      border: 2px dashed #e4aa35;
+      border-radius: var(--radius);
+      padding: .75rem;
+    }
+    .field-new .form-label::before {
+      content: "NEW ";
+      background: var(--accent);
+      color: #000;
+      font-size: .65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-right: .35rem;
+      letter-spacing: .04em;
+    }
+    .live-count { color: var(--leftnav-bg); font-weight: 600; }
+    .conditional-reveal {
+      background: #fff8e6;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: .65rem .85rem;
+      margin-top: .5rem;
+    }
+
+    /* Before/After table */
+    .compare-table th { background: #f0f4fb; color: var(--leftnav-bg); font-weight: 700; }
+    .compare-table .before-col { color: #b91c1c; }
+    .compare-table .after-col  { color: #15803d; }
+    .impact-before { background: #fef2f2; border-left: 3px solid #b91c1c; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
+    .impact-after  { background: #f0fdf4; border-left: 3px solid #15803d; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── Sidebar ───────────────────────────────────────────────────────── -->
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="brand">
+      <a class="logo-wrap" href="../index.html" aria-label="Home">
+        <span style="color:#fff;font-weight:800;font-size:.95rem;line-height:1.2;text-align:center;">AllStar<br>Recruiter</span>
+      </a>
+    </div>
+    <nav class="mt-1">
+      <a href="#" class="nav-link"><i class="bi bi-people"></i><span class="nav-label">Candidates</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-building"></i><span class="nav-label">Employers</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-briefcase"></i><span class="nav-label">Jobs</span></a>
+      <a href="#" class="nav-link active"><i class="bi bi-calendar3"></i><span class="nav-label">Calendar</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-broadcast"></i><span class="nav-label">Message Center</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-bar-chart-line"></i><span class="nav-label">Reports</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-gear"></i><span class="nav-label">Settings</span></a>
+    </nav>
+    <div class="mt-auto p-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar avatar-sm">JL</div>
+        <span class="nav-label small" style="color:rgba(255,255,255,.55)">Jason L.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ────────────────────────────────────────────────────────── -->
+  <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
+    <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
+    <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+      <nav aria-label="breadcrumb" class="d-none d-sm-block">
+        <ol class="breadcrumb mb-0" style="font-size:.8rem;">
+          <li class="breadcrumb-item"><a href="#" style="color:rgba(255,255,255,.7);text-decoration:none;">Calendar</a></li>
+          <li class="breadcrumb-item active" style="color:#fff;">Add Important Date</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+      <button class="btn btn-sm" style="color:#fff;"><i class="bi bi-bell"></i></button>
+      <div class="avatar avatar-sm">JL</div>
+    </div>
+  </header>
+
+  <!-- ── No quick bar on this page ─────────────────────────────────────── -->
+  <div style="grid-area:quick;"></div>
+
+  <!-- ── Main content ──────────────────────────────────────────────────── -->
+  <main class="content">
+    <div class="page" style="max-width: 860px;">
+
+      <!-- ── Screen 1: Add Important Date Form ─────────────────────────── -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header" style="background:var(--leftnav-bg);color:#fff;">
+          <h5 class="mb-0 fw-bold"><i class="bi bi-calendar-plus me-2"></i>Add Important Date</h5>
+          <div class="small mt-1" style="opacity:.8;">ACME Police Dept — 1 candidate pre-selected: John Smith</div>
+        </div>
+        <div class="card-body p-4">
+
+          <!-- NEW: Template selector -->
+          <div class="field-new mb-4">
+            <label class="form-label fw-semibold">Use Template</label>
+            <select class="form-select">
+              <option>— Start blank —</option>
+              <option selected>Interview: Mental Health Specialist</option>
+              <option>Interview: Registered Nurse</option>
+              <option>Interview: Generic 1:1</option>
+              <option>PAT — Springfield Site</option>
+              <option>Written Exam — City Hall</option>
+            </select>
+            <div class="form-text">Selecting a template pre-fills every field below except date &amp; time.</div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Important Date Type</label>
+              <select class="form-select"><option>In-Person</option><option>Virtual</option><option>Phone</option></select>
+            </div>
+            <div class="col-md-8">
+              <label class="form-label fw-semibold">Event Name</label>
+              <input type="text" class="form-control" value="Mental Health Specialist Interview">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Start Date / Time</label>
+              <input type="text" class="form-control" value="04/29/2026, 2:00 PM" placeholder="mm/dd/yyyy, h:mm AM/PM">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">End Date / Time</label>
+              <input type="text" class="form-control" value="04/29/2026, 2:45 PM" placeholder="mm/dd/yyyy, h:mm AM/PM">
+              <div class="form-text">Duration auto-fills from template when available.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Candidate Association Tag <span class="text-muted fw-normal">(optional)</span></label>
+              <select class="form-select">
+                <option>— none —</option>
+                <option selected>MHS Candidates</option>
+                <option>PAT 04-25-2026</option>
+                <option>Written Exam Pool</option>
+              </select>
+              <div class="form-text"><span class="live-count"><i class="bi bi-people-fill me-1"></i>12 candidates will be invited</span></div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label fw-semibold">Or Create Tag In Group</label>
+              <select class="form-select"><option>Select group…</option><option>UTM Sources</option><option>Interview Pools</option></select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label fw-semibold">New Tag Name</label>
+              <input type="text" class="form-control" placeholder="e.g., MHS-May">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Location</label>
+              <input type="text" class="form-control" value="450 W Main St, Conference Rm B">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Notes</label>
+              <textarea class="form-control" rows="3">45-min structured interview. Bring license + 2 references. Parking validated at front desk.</textarea>
+            </div>
+
+            <!-- NEW: Save as Template -->
+            <div class="col-12">
+              <div class="field-new">
+                <label class="form-label fw-semibold">Save as Template</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="saveTemplate">
+                  <label class="form-check-label" for="saveTemplate">
+                    Save the values above as a reusable template (date &amp; time are not saved)
+                  </label>
+                </div>
+                <div class="conditional-reveal mt-2" id="templateNameRow" style="display:none;">
+                  <label class="form-label fw-semibold mb-1">Template Name</label>
+                  <input type="text" class="form-control" placeholder="e.g., Interview: Mental Health Specialist">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-4">
+            <button class="btn btn-primary"><i class="bi bi-calendar-check me-1"></i>Add Important Date</button>
+            <button class="btn btn-outline-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Screen 2: Before / After ──────────────────────────────────── -->
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light">
+          <h6 class="mb-0 fw-bold text-muted text-uppercase" style="font-size:.75rem;letter-spacing:.06em;">
+            <i class="bi bi-arrow-left-right me-1"></i>Before / After — 100 MHS Interviews in a Month
+          </h6>
+        </div>
+        <div class="card-body p-4">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="fw-bold mb-2" style="color:#b91c1c;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;">Today (without templates)</div>
+              <ol class="mb-0" style="font-size:.85rem;padding-left:1.2rem;color:#374151;line-height:2;">
+                <li>Open Add Important Date</li>
+                <li>Pick Important Date Type (In-Person)</li>
+                <li>Type Name: "Mental Health Specialist Interview"</li>
+                <li>Pick Association Tag (MHS Candidates)</li>
+                <li>Type Location: "450 W Main St…"</li>
+                <li>Type Notes (45-min, license, references…)</li>
+                <li>Set Start Date/Time</li>
+                <li>Set End Date/Time</li>
+                <li>Save</li>
+              </ol>
+              <div class="impact-before mt-3">
+                <strong>~9 interactions × 100 interviews = 900 actions/month.</strong><br>
+                Plus typo risk on every Notes and Location field.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="fw-bold mb-2" style="color:#15803d;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;">With Templates</div>
+              <ol class="mb-0" style="font-size:.85rem;padding-left:1.2rem;color:#374151;line-height:2;">
+                <li>Open Add Important Date</li>
+                <li>Pick template "Interview: Mental Health Specialist"</li>
+                <li>Set Start Date/Time</li>
+                <li><em style="color:#6b7280;">(End time auto-fills from template duration)</em></li>
+                <li>Save</li>
+              </ol>
+              <div class="impact-after mt-3">
+                <strong>~4 interactions × 100 interviews = 400 actions/month.</strong><br>
+                Notes and location identical every time. Coordinator focuses on scheduling, not data entry.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dev notes -->
+      <div class="p-3 rounded mb-4" style="background:#fffbeb;border:1px solid #fcd34d;font-size:.78rem;">
+        <strong style="color:#92400e;">📋 Dev Notes:</strong>
+        <ul class="mb-0 mt-1" style="color:#374151;padding-left:1.2rem;">
+          <li>Template dropdown sits at top — selecting one fires a GET to pre-fill all fields via JS (no full page reload).</li>
+          <li>Date/time fields are intentionally NOT stored in templates.</li>
+          <li>New Tag Name should NOT be stored in templates to prevent duplicate tags on every use.</li>
+          <li>Live count ("12 candidates will be invited") updates when the Association Tag dropdown changes.</li>
+          <li>"Save as Template" checkbox reveals the template name input via JS toggle.</li>
+          <li>When candidates were pre-selected from the list before opening this form, they appear in addition to any tag-based invitees (deduped).</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Toggle template name field
+  document.getElementById('saveTemplate').addEventListener('change', function() {
+    document.getElementById('templateNameRow').style.display = this.checked ? 'block' : 'none';
+  });
+</script>
+</body>
+</html>
