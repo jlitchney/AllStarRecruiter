@@ -148,6 +148,8 @@
     /* Before/After table */
     .impact-before { background: #fef2f2; border-left: 3px solid #b91c1c; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
     .impact-after  { background: #f0fdf4; border-left: 3px solid #15803d; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
+    .form-section { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #e2e8f0; }
+    .form-section-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #6b7280; margin-bottom: .85rem; }
   </style>
 </head>
 <body>
@@ -300,18 +302,6 @@
             </div>
 
             <div class="col-12">
-              <label class="form-label fw-semibold">Assigned Staff</label>
-              <div class="d-flex flex-wrap gap-2 mb-2" id="staff-chips">
-                <span class="candidate-chip"><i class="bi bi-person-fill"></i> Jason L. <button>×</button></span>
-              </div>
-              <div class="d-flex gap-2 align-items-center">
-                <input type="text" class="form-control" placeholder="Add recruiter by name…" style="max-width:260px;">
-                <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-person-plus me-1"></i>Add</button>
-              </div>
-              <div class="form-text">Staff assigned here can manage the roster and record outcomes. The event creator is added automatically.</div>
-            </div>
-
-            <div class="col-12">
               <label class="form-label fw-semibold">Description</label>
               <div class="rte-wrap">
                 <div class="rte-toolbar">
@@ -328,12 +318,25 @@
               </div>
             </div>
 
+            <div class="col-12">
+              <div class="form-section">
+                <div class="form-section-title"><i class="bi bi-people me-1"></i>Assigned Staff</div>
+                <div class="d-flex flex-wrap gap-2 mb-2" id="staff-chips">
+                  <span class="candidate-chip"><i class="bi bi-person-fill"></i> Jason L. <button>×</button></span>
+                </div>
+                <div class="d-flex gap-2 align-items-center">
+                  <input type="text" class="form-control" placeholder="Add recruiter by name…" style="max-width:260px;">
+                  <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-person-plus me-1"></i>Add</button>
+                </div>
+                <div class="form-text">Staff assigned here can manage the roster and record outcomes. The event creator is added automatically.</div>
+              </div>
+            </div>
+
             <!-- Registration Page — group events only -->
             <div class="col-12" id="reg-page-section" style="display:none;">
-              <div class="field-new">
-                <label class="form-label fw-semibold">Registration Page</label>
+              <div class="form-section">
+                <div class="form-section-title"><i class="bi bi-globe me-1"></i>Registration Page</div>
                 <p class="form-text mb-3">
-                  <i class="bi bi-globe me-1"></i>
                   Publish a public page candidates can visit or scan to self-register.
                   Registrations sync back to this event's roster automatically and the Invite Association Tag is applied.
                 </p>
@@ -371,12 +374,11 @@
               </div>
             </div>
 
-            <!-- NEW: Association Tags -->
+            <!-- Association Tags -->
             <div class="col-12">
-              <div class="field-new">
-                <label class="form-label fw-semibold">Association Tags</label>
+              <div class="form-section">
+                <div class="form-section-title"><i class="bi bi-diagram-3 me-1"></i>Association Tags</div>
                 <p class="form-text mb-3">
-                  <i class="bi bi-diagram-3 me-1"></i>
                   Tags applied to candidates automatically as their status changes.
                   These are the bridge to your <strong>workflow automations</strong> —
                   build email sequences, reminders, or next-step triggers based on each outcome.
@@ -498,10 +500,10 @@
               </div>
             </div>
 
-            <!-- NEW: Save as Template -->
+            <!-- Save as Template -->
             <div class="col-12">
-              <div class="field-new">
-                <label class="form-label fw-semibold">Save as Template</label>
+              <div class="form-section">
+                <div class="form-section-title"><i class="bi bi-layout-text-window-reverse me-1"></i>Save as Template</div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="saveTemplate">
                   <label class="form-check-label" for="saveTemplate">
@@ -588,7 +590,7 @@
                 <li>Type Name: "Mental Health Specialist Interview"</li>
                 <li>Search and select candidate</li>
                 <li>Type Location: "450 W Main St…"</li>
-                <li>Type Notes (45-min, license, references…)</li>
+                <li>Type Description (45-min, license, references…)</li>
                 <li>Set Start Date/Time</li>
                 <li>Set End Date/Time</li>
                 <li>Save</li>
