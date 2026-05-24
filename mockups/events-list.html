@@ -61,6 +61,20 @@
       .summary-strip { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ── Individual event rows ─────────────────────────────────── */
+    .event-row-individual { border-left: 3px solid var(--leftnav-bg); }
+    .event-row-individual:hover { background: #f0f4ff !important; }
+    .ind-candidate { display:flex; align-items:center; gap:.55rem; }
+    .ind-avatar { width:28px; height:28px; border-radius:50%; background:var(--leftnav-bg); color:#fff; font-size:.65rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .ind-status { display:inline-block; font-size:.68rem; font-weight:600; padding:.1rem .4rem; border-radius:99px; margin-top:.15rem; }
+    .ind-confirmed   { background:#dbeafe; color:#1d4ed8; }
+    .ind-attended    { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; }
+    .ind-noshow      { background:#f3f4f6; color:#374151; }
+    .ind-rescheduled { background:#fef9c3; color:#854d0e; }
+    .ind-cancelled   { background:#fee2e2; color:#b91c1c; }
+    .scope-icon-grp  { color:#94a3b8; font-size:.75rem; margin-right:.25rem; }
+    .scope-icon-ind  { color:var(--leftnav-bg); font-size:.75rem; margin-right:.25rem; }
+
     /* ── Calendar view ─────────────────────────────────────────── */
     .cal-wrap { background:#fff; border-radius:var(--radius); border:1px solid #e2e8f0; overflow:hidden; }
     .cal-nav { display:flex; align-items:center; justify-content:space-between; padding:.65rem 1rem; border-bottom:1px solid #e2e8f0; background:#f8fafc; }
@@ -221,7 +235,7 @@
 
               <tr class="event-row" onclick="window.location='events-detail.html'">
                 <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;">Physical Agility Test</div>
+                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Physical Agility Test</div>
                   <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>123 Main Street, Springfield</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
@@ -254,10 +268,12 @@
               <!-- UPCOMING -->
               <tr><td colspan="7" class="section-divider">Upcoming</td></tr>
 
-              <tr class="event-row" onclick="window.location='events-detail.html'">
-                <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;">MHS Interview — John Smith</div>
-                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-person me-1"></i>Individual · 1 candidate</div>
+              <tr class="event-row event-row-individual" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem .7rem .85rem;">
+                  <div class="fw-semibold" style="color:#111827;">
+                    <i class="bi bi-person-fill scope-icon-ind"></i>MHS Interview
+                  </div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>450 W Main St, Conf Rm B</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
                   May 26, 2026<br>
@@ -268,27 +284,39 @@
                     <span class="type-dot" style="background:#20c997;"></span> Interview
                   </span>
                 </td>
-                <td style="padding:.7rem 1rem;">1</td>
-                <td style="padding:.7rem 1rem;">
-                  <div class="d-flex align-items-center gap-2">
-                    <div class="confirmed-bar" style="width:64px;">
-                      <div class="confirmed-bar-fill" style="width:100%;background:#1d4ed8;"></div>
-                    </div>
+                <!-- Candidate cell spans Invited + Confirmed/Attended columns -->
+                <td colspan="2" style="padding:.7rem 1rem;">
+                  <div class="ind-candidate">
+                    <div class="ind-avatar">JS</div>
                     <div>
-                      <div>1 <span style="color:#6b7280;font-size:.75rem;">(100%)</span></div>
-                      <div style="font-size:.7rem;color:#1d4ed8;font-weight:600;">confirmed</div>
+                      <div style="font-weight:600;font-size:.83rem;color:#111827;">John Smith</div>
+                      <span class="ind-status ind-confirmed">Confirmed</span>
                     </div>
                   </div>
                 </td>
                 <td style="padding:.7rem 1rem;"><span class="status-pill pill-upcoming">Upcoming</span></td>
-                <td style="padding:.7rem 1rem;">
-                  <a href="events-detail.html" class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation()">Open</a>
+                <td style="padding:.7rem 1rem;" onclick="event.stopPropagation()">
+                  <div class="d-flex gap-1 align-items-center">
+                    <div class="dropdown">
+                      <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" style="font-size:.75rem;padding:.2rem .5rem;white-space:nowrap;">
+                        Record
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end" style="font-size:.82rem;">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle text-success me-2"></i>Mark Attended</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-x-circle text-secondary me-2"></i>Mark No-Show</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-repeat me-2" style="color:#854d0e;"></i>Mark Rescheduled</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-slash-circle me-2"></i>Cancel Event</a></li>
+                      </ul>
+                    </div>
+                    <a href="events-detail.html" class="btn btn-sm btn-outline-primary" style="font-size:.75rem;padding:.2rem .5rem;">Open</a>
+                  </div>
                 </td>
               </tr>
 
               <tr class="event-row" onclick="window.location='events-detail.html'">
                 <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;">Written Exam — City Hall</div>
+                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Written Exam — City Hall</div>
                   <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>City Hall, Room 204</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
@@ -320,7 +348,7 @@
 
               <tr class="event-row" onclick="window.location='events-detail.html'">
                 <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;">Virtual Recruitment Day — Summer 2026</div>
+                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Virtual Recruitment Day — Summer 2026</div>
                   <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-camera-video me-1"></i>Zoom · Link in description</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
@@ -345,7 +373,7 @@
 
               <tr class="event-row" style="opacity:.7;" onclick="window.location='events-detail.html'">
                 <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;">Physical Agility Test — April</div>
+                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Physical Agility Test — April</div>
                   <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>Springfield Athletic Center</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
@@ -377,7 +405,7 @@
 
               <tr class="event-row" style="opacity:.7;" onclick="window.location='events-detail.html'">
                 <td style="padding:.7rem 1rem;">
-                  <div class="fw-semibold" style="color:#111827;">Background Check Orientation</div>
+                  <div class="fw-semibold" style="color:#111827;"><i class="bi bi-people-fill scope-icon-grp"></i>Background Check Orientation</div>
                   <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-camera-video me-1"></i>Virtual</div>
                 </td>
                 <td style="padding:.7rem 1rem;white-space:nowrap;">
@@ -404,6 +432,38 @@
                 <td style="padding:.7rem 1rem;"><span class="status-pill pill-past">Past</span></td>
                 <td style="padding:.7rem 1rem;">
                   <a href="events-detail.html" class="btn btn-sm btn-outline-secondary" onclick="event.stopPropagation()">Open</a>
+                </td>
+              </tr>
+
+              <!-- Past individual event — shows attended outcome -->
+              <tr class="event-row event-row-individual" style="opacity:.7;" onclick="window.location='events-detail.html'">
+                <td style="padding:.7rem 1rem .7rem .85rem;">
+                  <div class="fw-semibold" style="color:#111827;">
+                    <i class="bi bi-person-fill scope-icon-ind"></i>RN Candidate Interview
+                  </div>
+                  <div style="font-size:.73rem;color:#6b7280;"><i class="bi bi-geo-alt me-1"></i>450 W Main St, Conf Rm B</div>
+                </td>
+                <td style="padding:.7rem 1rem;white-space:nowrap;">
+                  Apr 18, 2026<br>
+                  <span style="color:#6b7280;font-size:.78rem;">10:00 AM – 10:45 AM</span>
+                </td>
+                <td style="padding:.7rem 1rem;">
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#20c997;"></span> Interview
+                  </span>
+                </td>
+                <td colspan="2" style="padding:.7rem 1rem;">
+                  <div class="ind-candidate">
+                    <div class="ind-avatar">MG</div>
+                    <div>
+                      <div style="font-weight:600;font-size:.83rem;color:#111827;">Maria Gonzalez</div>
+                      <span class="ind-status ind-attended">Attended</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding:.7rem 1rem;"><span class="status-pill pill-past">Past</span></td>
+                <td style="padding:.7rem 1rem;" onclick="event.stopPropagation()">
+                  <a href="events-detail.html" class="btn btn-sm btn-outline-secondary" style="font-size:.75rem;padding:.2rem .5rem;">Open</a>
                 </td>
               </tr>
 
@@ -466,7 +526,7 @@
             <div class="cal-day"><div class="cal-date">25</div></div>
             <div class="cal-day">
               <div class="cal-date">26</div>
-              <a href="events-detail.html" class="cal-event ev-interview"><i class="bi bi-person me-1"></i>MHS Interview — J. Smith</a>
+              <a href="events-detail.html" class="cal-event ev-interview"><i class="bi bi-person-fill me-1"></i>MHS Interview — J. Smith</a>
             </div>
             <div class="cal-day"><div class="cal-date">27</div></div>
             <div class="cal-day"><div class="cal-date">28</div></div>
