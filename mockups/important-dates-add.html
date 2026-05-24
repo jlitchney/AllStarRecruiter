@@ -91,6 +91,42 @@
       margin-bottom: .5rem;
     }
 
+    /* Rich text editor */
+    .rte-wrap { border: 1px solid #dee2e6; border-radius: var(--radius); background: #fff; }
+    .rte-wrap:focus-within { border-color: #86b7fe; box-shadow: 0 0 0 .25rem rgba(13,110,253,.25); }
+    .rte-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: .3rem .4rem;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .rte-toolbar button {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: .2rem;
+      padding: .15rem .45rem;
+      font-size: .82rem;
+      cursor: pointer;
+      color: #374151;
+      line-height: 1.4;
+    }
+    .rte-toolbar button:hover { background: #e2e8f0; border-color: #cbd5e1; }
+    .rte-toolbar button.active { background: #245194; color: #fff; border-color: #245194; }
+    .rte-toolbar .rte-sep { width: 1px; height: 18px; background: #e2e8f0; margin: 0 4px; }
+    .rte-body {
+      padding: .5rem .75rem;
+      min-height: 90px;
+      outline: none;
+      font-size: .9rem;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    .rte-body ul { padding-left: 1.4rem; margin: .25rem 0; }
+    .rte-body a { color: var(--leftnav-bg); }
+
     /* Before/After table */
     .impact-before { background: #fef2f2; border-left: 3px solid #b91c1c; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
     .impact-after  { background: #f0fdf4; border-left: 3px solid #15803d; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
@@ -282,8 +318,20 @@
             </div>
 
             <div class="col-12">
-              <label class="form-label fw-semibold">Notes</label>
-              <textarea class="form-control" rows="3">45-min structured interview. Bring license + 2 references. Parking validated at front desk.</textarea>
+              <label class="form-label fw-semibold">Description</label>
+              <div class="rte-wrap">
+                <div class="rte-toolbar">
+                  <button onclick="fmt('bold')" title="Bold"><b>B</b></button>
+                  <button onclick="fmt('italic')" title="Italic"><i>I</i></button>
+                  <div class="rte-sep"></div>
+                  <button onclick="fmt('insertUnorderedList')" title="Bullet list"><i class="bi bi-list-ul"></i> List</button>
+                  <div class="rte-sep"></div>
+                  <button onclick="addLink()" title="Insert hyperlink"><i class="bi bi-link-45deg"></i> Link</button>
+                </div>
+                <div class="rte-body" contenteditable="true" id="rte-description">
+                  45-min structured interview. Bring license + 2 references. Parking validated at front desk.
+                </div>
+              </div>
             </div>
 
             <!-- NEW: Save as Template -->
@@ -427,6 +475,19 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
+  function fmt(cmd) {
+    document.getElementById('rte-description').focus();
+    document.execCommand(cmd, false, null);
+  }
+
+  function addLink() {
+    var url = prompt('Enter URL:', 'https://');
+    if (url) {
+      document.getElementById('rte-description').focus();
+      document.execCommand('createLink', false, url);
+    }
+  }
+
   function setScope(scope) {
     document.getElementById('btn-individual').classList.toggle('active', scope === 'individual');
     document.getElementById('btn-group').classList.toggle('active', scope === 'group');
