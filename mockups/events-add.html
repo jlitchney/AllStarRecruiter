@@ -144,6 +144,7 @@
     .atf-title { font-weight: 700; font-size: .85rem; color: #111827; line-height: 1.2; }
     .atf-desc  { font-size: .73rem; color: #6b7280; margin-top: .1rem; }
     .atf-live  { font-size: .78rem; font-weight: 600; color: var(--leftnav-bg); margin-top: .4rem; }
+    .new-tag-panel { margin-top: .5rem; padding: .65rem .75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .25rem; }
 
     /* Before/After table */
     .impact-before { background: #fef2f2; border-left: 3px solid #b91c1c; padding: .6rem .85rem; border-radius: 0 var(--radius) var(--radius) 0; font-size: .82rem; }
@@ -396,13 +397,34 @@
                           <div class="atf-desc" id="invite-desc-grp" style="display:none;">Candidates with this tag are <strong>automatically added</strong> to this event's roster</div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm">
+                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-invite')">
                         <option>— None —</option>
                         <option selected>PAT — April 2026</option>
                         <option>MHS Candidates</option>
                         <option>Written Exam Pool</option>
+                        <option value="__new__">＋ Create new tag…</option>
                       </select>
                       <div class="atf-live mt-1" id="invite-live" style="display:none;"><i class="bi bi-people-fill me-1"></i>47 candidates will be added to this event</div>
+                      <div class="new-tag-panel" id="new-tag-invite" style="display:none;">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                        <div class="row g-2">
+                          <div class="col-5">
+                            <select class="form-select form-select-sm">
+                              <option>Select group…</option>
+                              <option selected>PAT / Testing</option>
+                              <option>Interview Pools</option>
+                              <option>Written Exam</option>
+                              <option>General</option>
+                            </select>
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control form-control-sm" placeholder="Tag name…">
+                          </div>
+                          <div class="col-2">
+                            <button class="btn btn-primary btn-sm w-100">Create</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -416,10 +438,31 @@
                           <div class="atf-desc">Applied when marked <strong>Attended</strong></div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm">
+                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-attended')">
                         <option>— None —</option>
                         <option selected>PAT-Attended-Apr26</option>
+                        <option value="__new__">＋ Create new tag…</option>
                       </select>
+                      <div class="new-tag-panel" id="new-tag-attended" style="display:none;">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                        <div class="row g-2">
+                          <div class="col-5">
+                            <select class="form-select form-select-sm">
+                              <option>Select group…</option>
+                              <option selected>PAT / Testing</option>
+                              <option>Interview Pools</option>
+                              <option>Written Exam</option>
+                              <option>General</option>
+                            </select>
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control form-control-sm" placeholder="Tag name…">
+                          </div>
+                          <div class="col-2">
+                            <button class="btn btn-primary btn-sm w-100">Create</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -433,10 +476,31 @@
                           <div class="atf-desc">Applied when marked <strong>No-Show</strong></div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm">
+                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-noshow')">
                         <option>— None —</option>
                         <option selected>PAT-NoShow-Apr26</option>
+                        <option value="__new__">＋ Create new tag…</option>
                       </select>
+                      <div class="new-tag-panel" id="new-tag-noshow" style="display:none;">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                        <div class="row g-2">
+                          <div class="col-5">
+                            <select class="form-select form-select-sm">
+                              <option>Select group…</option>
+                              <option selected>PAT / Testing</option>
+                              <option>Interview Pools</option>
+                              <option>Written Exam</option>
+                              <option>General</option>
+                            </select>
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control form-control-sm" placeholder="Tag name…">
+                          </div>
+                          <div class="col-2">
+                            <button class="btn btn-primary btn-sm w-100">Create</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -450,9 +514,30 @@
                           <div class="atf-desc">Applied when marked <strong>Rescheduled</strong></div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm">
+                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-reschedule')">
                         <option selected>— None —</option>
+                        <option value="__new__">＋ Create new tag…</option>
                       </select>
+                      <div class="new-tag-panel" id="new-tag-reschedule" style="display:none;">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                        <div class="row g-2">
+                          <div class="col-5">
+                            <select class="form-select form-select-sm">
+                              <option>Select group…</option>
+                              <option selected>PAT / Testing</option>
+                              <option>Interview Pools</option>
+                              <option>Written Exam</option>
+                              <option>General</option>
+                            </select>
+                          </div>
+                          <div class="col-5">
+                            <input type="text" class="form-control form-control-sm" placeholder="Tag name…">
+                          </div>
+                          <div class="col-2">
+                            <button class="btn btn-primary btn-sm w-100">Create</button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -478,25 +563,6 @@
                   <div class="form-text mt-1">These values are appended to the registration page URL so you can track which campaign or channel each candidate came from.</div>
                 </div>
 
-                <!-- Create tag helper -->
-                <div class="mt-3 pt-3 border-top">
-                  <div class="small fw-semibold text-muted text-uppercase mb-2" style="letter-spacing:.05em;font-size:.7rem;">Need a new tag? Create one here to use above</div>
-                  <div class="row g-2">
-                    <div class="col-md-4">
-                      <select class="form-select form-select-sm">
-                        <option>Select group…</option>
-                        <option>Interview Pools</option>
-                        <option selected>PAT / Testing</option>
-                      </select>
-                    </div>
-                    <div class="col-md-5">
-                      <input type="text" class="form-control form-control-sm" placeholder="e.g., PAT-Attended-May26">
-                    </div>
-                    <div class="col-md-3">
-                      <button class="btn btn-outline-secondary btn-sm w-100">Create &amp; Add</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -653,6 +719,10 @@
       document.getElementById('rte-description').focus();
       document.execCommand('createLink', false, url);
     }
+  }
+
+  function toggleNewTag(sel, panelId) {
+    document.getElementById(panelId).style.display = sel.value === '__new__' ? 'block' : 'none';
   }
 
   function setScope(scope) {
