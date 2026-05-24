@@ -157,46 +157,7 @@
     </div>
   </header>
 
-  <!-- ── Quick / filter bar ────────────────────────────────────────────── -->
-  <div class="quick-bar" style="grid-area:quick;">
-    <div class="filter-row">
-      <input type="search" class="form-control form-control-sm search" placeholder="Search name, email, phone…">
-      <select class="form-select form-select-sm" style="max-width:150px;">
-        <option>All statuses</option>
-        <option>Invited</option>
-        <option>Confirmed</option>
-        <option>Attended</option>
-        <option>No-Show</option>
-        <option>Rescheduled</option>
-        <option>Declined</option>
-      </select>
-      <select class="form-select form-select-sm" style="max-width:170px;">
-        <option>All tags</option>
-        <option>PAT 04-25-2026</option>
-        <option>MHS Candidates</option>
-      </select>
-      <select class="form-select form-select-sm" style="max-width:170px;">
-        <option>Last contact: any</option>
-        <option>Never contacted</option>
-        <option>&gt; 7 days ago</option>
-        <option>&lt; 24 hours ago</option>
-      </select>
-      <div class="ms-auto d-flex gap-2">
-        <a href="events-add.html" class="btn btn-sm btn-outline-secondary">Edit Event</a>
-        <div class="dropdown">
-          <button class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="bi bi-person-plus me-1"></i>Add Candidates
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-tag me-2"></i>By Tag</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-search me-2"></i>By Search / Multi-select</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-upload me-2"></i>CSV Upload</a></li>
-          </ul>
-        </div>
-        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-send me-1"></i>Send Reminder to All</button>
-      </div>
-    </div>
-  </div>
+  <div style="grid-area:quick;"></div>
 
   <!-- ── Main content ──────────────────────────────────────────────────── -->
   <main class="content">
@@ -339,6 +300,33 @@
         <button class="btn btn-sm btn-outline-secondary">Export Selected</button>
         <button class="btn btn-sm btn-outline-danger">Remove from Event</button>
         <span class="clear">Clear selection</span>
+      </div>
+
+      <!-- Roster toolbar -->
+      <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+        <input type="search" class="form-control form-control-sm" style="max-width:240px;" placeholder="Search name, email, phone…">
+        <select class="form-select form-select-sm" style="max-width:150px;">
+          <option>All statuses</option>
+          <option>Invited</option>
+          <option>Confirmed</option>
+          <option>Attended</option>
+          <option>No-Show</option>
+          <option>Rescheduled</option>
+          <option>Declined</option>
+        </select>
+        <div class="ms-auto d-flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+              <i class="bi bi-person-plus me-1"></i>Add Candidates
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#"><i class="bi bi-tag me-2"></i>By Tag</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-search me-2"></i>By Search / Multi-select</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-upload me-2"></i>CSV Upload</a></li>
+            </ul>
+          </div>
+          <button class="btn btn-sm btn-outline-primary"><i class="bi bi-send me-1"></i>Send Reminder to All</button>
+        </div>
       </div>
 
       <!-- Roster table -->
