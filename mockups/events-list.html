@@ -60,6 +60,28 @@
     @media (max-width: 768px) {
       .summary-strip { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ── Calendar view ─────────────────────────────────────────── */
+    .cal-wrap { background:#fff; border-radius:var(--radius); border:1px solid #e2e8f0; overflow:hidden; }
+    .cal-nav { display:flex; align-items:center; justify-content:space-between; padding:.65rem 1rem; border-bottom:1px solid #e2e8f0; background:#f8fafc; }
+    .cal-month-label { font-weight:700; font-size:1rem; color:#111827; }
+    .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); }
+    .cal-dow { text-align:center; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#94a3b8; padding:.45rem 0; border-bottom:1px solid #e2e8f0; }
+    .cal-day { min-height:88px; border-right:1px solid #f1f5f9; border-bottom:1px solid #f1f5f9; padding:.3rem .4rem; }
+    .cal-day:nth-child(7n) { border-right:none; }
+    .cal-day.other-month { background:#fafafa; }
+    .cal-day.other-month .cal-date { color:#d1d5db; }
+    .cal-day.today { background:#eff6ff; }
+    .cal-day.today .cal-date { background:var(--leftnav-bg); color:#fff; border-radius:99px; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-weight:800; margin-left:auto; }
+    .cal-date { font-size:.75rem; font-weight:600; color:#374151; text-align:right; margin-bottom:.25rem; }
+    .cal-event { display:block; font-size:.68rem; font-weight:600; padding:.15rem .4rem; border-radius:.2rem; margin-bottom:.15rem; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-decoration:none; line-height:1.4; }
+    .cal-event:hover { opacity:.82; }
+    .cal-event.ev-inperson  { background:#dbeafe; color:#1d4ed8; }
+    .cal-event.ev-interview { background:#d1fae5; color:#065f46; }
+    .cal-event.ev-virtual   { background:#e0f2fe; color:#0369a1; }
+    .cal-event.ev-past      { background:#f3f4f6; color:#6b7280; }
+    .view-toggle .btn { font-size:.8rem; }
+    .view-toggle .btn.active { background:var(--leftnav-bg); color:#fff; border-color:var(--leftnav-bg); }
   </style>
 </head>
 <body>
@@ -122,7 +144,15 @@
         <option>This month</option>
         <option>Past</option>
       </select>
-      <div class="ms-auto d-flex gap-2">
+      <div class="ms-auto d-flex gap-2 align-items-center">
+        <div class="btn-group btn-group-sm view-toggle" role="group">
+          <button type="button" class="btn btn-outline-secondary active" id="btn-list" onclick="setView('list')">
+            <i class="bi bi-list-ul me-1"></i>List
+          </button>
+          <button type="button" class="btn btn-outline-secondary" id="btn-cal" onclick="setView('cal')">
+            <i class="bi bi-calendar3 me-1"></i>Calendar
+          </button>
+        </div>
         <a href="event-types.html" class="btn btn-sm btn-outline-secondary">
           <i class="bi bi-tags me-1"></i>Manage Event Types
         </a>
@@ -133,6 +163,9 @@
   <!-- ── Main content ────────────────────────────────────────────────────── -->
   <main class="content">
     <div class="page">
+
+      <!-- ── List view ──────────────────────────────────────────────── -->
+      <div id="view-list">
 
       <!-- Summary strip -->
       <div class="summary-strip">
@@ -379,11 +412,261 @@
         </div>
       </div>
 
+      </div><!-- /#view-list -->
+
+      <!-- ── Calendar view (hidden by default) ─────────────────────── -->
+      <div id="view-cal" style="display:none;">
+
+        <!-- May 2026 -->
+        <div id="cal-may" class="cal-wrap">
+          <div class="cal-nav">
+            <button class="btn btn-sm btn-outline-secondary" onclick="setMonth('apr')"><i class="bi bi-chevron-left"></i></button>
+            <span class="cal-month-label">May 2026</span>
+            <button class="btn btn-sm btn-outline-secondary" onclick="setMonth('jun')"><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <!-- Apr 26–30 (prev month) + May 1–2 -->
+            <div class="cal-day other-month"><div class="cal-date">26</div></div>
+            <div class="cal-day other-month"><div class="cal-date">27</div></div>
+            <div class="cal-day other-month"><div class="cal-date">28</div></div>
+            <div class="cal-day other-month"><div class="cal-date">29</div></div>
+            <div class="cal-day other-month"><div class="cal-date">30</div></div>
+            <div class="cal-day"><div class="cal-date">1</div></div>
+            <div class="cal-day"><div class="cal-date">2</div></div>
+            <!-- May 3–9 -->
+            <div class="cal-day"><div class="cal-date">3</div></div>
+            <div class="cal-day"><div class="cal-date">4</div></div>
+            <div class="cal-day"><div class="cal-date">5</div></div>
+            <div class="cal-day"><div class="cal-date">6</div></div>
+            <div class="cal-day"><div class="cal-date">7</div></div>
+            <div class="cal-day"><div class="cal-date">8</div></div>
+            <div class="cal-day"><div class="cal-date">9</div></div>
+            <!-- May 10–16 -->
+            <div class="cal-day"><div class="cal-date">10</div></div>
+            <div class="cal-day"><div class="cal-date">11</div></div>
+            <div class="cal-day"><div class="cal-date">12</div></div>
+            <div class="cal-day"><div class="cal-date">13</div></div>
+            <div class="cal-day"><div class="cal-date">14</div></div>
+            <div class="cal-day"><div class="cal-date">15</div></div>
+            <div class="cal-day"><div class="cal-date">16</div></div>
+            <!-- May 17–23 -->
+            <div class="cal-day"><div class="cal-date">17</div></div>
+            <div class="cal-day"><div class="cal-date">18</div></div>
+            <div class="cal-day"><div class="cal-date">19</div></div>
+            <div class="cal-day"><div class="cal-date">20</div></div>
+            <div class="cal-day"><div class="cal-date">21</div></div>
+            <div class="cal-day"><div class="cal-date">22</div></div>
+            <div class="cal-day"><div class="cal-date">23</div></div>
+            <!-- May 24–30 -->
+            <div class="cal-day today">
+              <div class="cal-date">24</div>
+              <a href="events-detail.html" class="cal-event ev-inperson"><i class="bi bi-people-fill me-1"></i>Physical Agility Test</a>
+            </div>
+            <div class="cal-day"><div class="cal-date">25</div></div>
+            <div class="cal-day">
+              <div class="cal-date">26</div>
+              <a href="events-detail.html" class="cal-event ev-interview"><i class="bi bi-person me-1"></i>MHS Interview — J. Smith</a>
+            </div>
+            <div class="cal-day"><div class="cal-date">27</div></div>
+            <div class="cal-day"><div class="cal-date">28</div></div>
+            <div class="cal-day"><div class="cal-date">29</div></div>
+            <div class="cal-day"><div class="cal-date">30</div></div>
+            <!-- May 31 + Jun 1–6 (next month) -->
+            <div class="cal-day"><div class="cal-date">31</div></div>
+            <div class="cal-day other-month"><div class="cal-date">1</div></div>
+            <div class="cal-day other-month">
+              <div class="cal-date">2</div>
+              <a href="events-detail.html" class="cal-event ev-inperson"><i class="bi bi-pencil me-1"></i>Written Exam</a>
+            </div>
+            <div class="cal-day other-month"><div class="cal-date">3</div></div>
+            <div class="cal-day other-month"><div class="cal-date">4</div></div>
+            <div class="cal-day other-month"><div class="cal-date">5</div></div>
+            <div class="cal-day other-month"><div class="cal-date">6</div></div>
+          </div>
+        </div>
+
+        <!-- June 2026 (hidden initially) -->
+        <div id="cal-jun" class="cal-wrap" style="display:none;">
+          <div class="cal-nav">
+            <button class="btn btn-sm btn-outline-secondary" onclick="setMonth('may')"><i class="bi bi-chevron-left"></i></button>
+            <span class="cal-month-label">June 2026</span>
+            <button class="btn btn-sm btn-outline-secondary" onclick="setMonth('jul')"><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <!-- May 31 (prev month) + Jun 1–6 -->
+            <div class="cal-day other-month"><div class="cal-date">31</div></div>
+            <div class="cal-day"><div class="cal-date">1</div></div>
+            <div class="cal-day">
+              <div class="cal-date">2</div>
+              <a href="events-detail.html" class="cal-event ev-inperson"><i class="bi bi-pencil me-1"></i>Written Exam — City Hall</a>
+            </div>
+            <div class="cal-day"><div class="cal-date">3</div></div>
+            <div class="cal-day"><div class="cal-date">4</div></div>
+            <div class="cal-day"><div class="cal-date">5</div></div>
+            <div class="cal-day"><div class="cal-date">6</div></div>
+            <!-- Jun 7–13 -->
+            <div class="cal-day"><div class="cal-date">7</div></div>
+            <div class="cal-day"><div class="cal-date">8</div></div>
+            <div class="cal-day"><div class="cal-date">9</div></div>
+            <div class="cal-day">
+              <div class="cal-date">10</div>
+              <a href="events-detail.html" class="cal-event ev-virtual"><i class="bi bi-camera-video me-1"></i>Virtual Recruitment Day</a>
+            </div>
+            <div class="cal-day"><div class="cal-date">11</div></div>
+            <div class="cal-day"><div class="cal-date">12</div></div>
+            <div class="cal-day"><div class="cal-date">13</div></div>
+            <!-- Jun 14–20 -->
+            <div class="cal-day"><div class="cal-date">14</div></div>
+            <div class="cal-day"><div class="cal-date">15</div></div>
+            <div class="cal-day"><div class="cal-date">16</div></div>
+            <div class="cal-day"><div class="cal-date">17</div></div>
+            <div class="cal-day"><div class="cal-date">18</div></div>
+            <div class="cal-day"><div class="cal-date">19</div></div>
+            <div class="cal-day"><div class="cal-date">20</div></div>
+            <!-- Jun 21–27 -->
+            <div class="cal-day"><div class="cal-date">21</div></div>
+            <div class="cal-day"><div class="cal-date">22</div></div>
+            <div class="cal-day"><div class="cal-date">23</div></div>
+            <div class="cal-day"><div class="cal-date">24</div></div>
+            <div class="cal-day"><div class="cal-date">25</div></div>
+            <div class="cal-day"><div class="cal-date">26</div></div>
+            <div class="cal-day"><div class="cal-date">27</div></div>
+            <!-- Jun 28–30 + Jul 1–4 (next month) -->
+            <div class="cal-day"><div class="cal-date">28</div></div>
+            <div class="cal-day"><div class="cal-date">29</div></div>
+            <div class="cal-day"><div class="cal-date">30</div></div>
+            <div class="cal-day other-month"><div class="cal-date">1</div></div>
+            <div class="cal-day other-month"><div class="cal-date">2</div></div>
+            <div class="cal-day other-month"><div class="cal-date">3</div></div>
+            <div class="cal-day other-month"><div class="cal-date">4</div></div>
+          </div>
+        </div>
+
+        <!-- April 2026 (hidden initially) -->
+        <div id="cal-apr" class="cal-wrap" style="display:none;">
+          <div class="cal-nav">
+            <button class="btn btn-sm btn-outline-secondary" disabled><i class="bi bi-chevron-left"></i></button>
+            <span class="cal-month-label">April 2026</span>
+            <button class="btn btn-sm btn-outline-secondary" onclick="setMonth('may')"><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <!-- Mar 29–31 (prev month) + Apr 1–4 -->
+            <div class="cal-day other-month"><div class="cal-date">29</div></div>
+            <div class="cal-day other-month"><div class="cal-date">30</div></div>
+            <div class="cal-day other-month"><div class="cal-date">31</div></div>
+            <div class="cal-day"><div class="cal-date">1</div></div>
+            <div class="cal-day"><div class="cal-date">2</div></div>
+            <div class="cal-day"><div class="cal-date">3</div></div>
+            <div class="cal-day"><div class="cal-date">4</div></div>
+            <!-- Apr 5–11 -->
+            <div class="cal-day">
+              <div class="cal-date">5</div>
+              <a href="events-detail.html" class="cal-event ev-past"><i class="bi bi-people-fill me-1"></i>PAT — April</a>
+            </div>
+            <div class="cal-day"><div class="cal-date">6</div></div>
+            <div class="cal-day"><div class="cal-date">7</div></div>
+            <div class="cal-day"><div class="cal-date">8</div></div>
+            <div class="cal-day"><div class="cal-date">9</div></div>
+            <div class="cal-day"><div class="cal-date">10</div></div>
+            <div class="cal-day"><div class="cal-date">11</div></div>
+            <!-- Apr 12–18 -->
+            <div class="cal-day"><div class="cal-date">12</div></div>
+            <div class="cal-day"><div class="cal-date">13</div></div>
+            <div class="cal-day"><div class="cal-date">14</div></div>
+            <div class="cal-day"><div class="cal-date">15</div></div>
+            <div class="cal-day"><div class="cal-date">16</div></div>
+            <div class="cal-day"><div class="cal-date">17</div></div>
+            <div class="cal-day"><div class="cal-date">18</div></div>
+            <!-- Apr 19–25 -->
+            <div class="cal-day"><div class="cal-date">19</div></div>
+            <div class="cal-day"><div class="cal-date">20</div></div>
+            <div class="cal-day"><div class="cal-date">21</div></div>
+            <div class="cal-day"><div class="cal-date">22</div></div>
+            <div class="cal-day"><div class="cal-date">23</div></div>
+            <div class="cal-day"><div class="cal-date">24</div></div>
+            <div class="cal-day"><div class="cal-date">25</div></div>
+            <!-- Apr 26–30 + May 1–2 (next month) -->
+            <div class="cal-day"><div class="cal-date">26</div></div>
+            <div class="cal-day"><div class="cal-date">27</div></div>
+            <div class="cal-day"><div class="cal-date">28</div></div>
+            <div class="cal-day"><div class="cal-date">29</div></div>
+            <div class="cal-day"><div class="cal-date">30</div></div>
+            <div class="cal-day other-month"><div class="cal-date">1</div></div>
+            <div class="cal-day other-month"><div class="cal-date">2</div></div>
+          </div>
+        </div>
+
+        <!-- Jul 2026 (hidden, placeholder) -->
+        <div id="cal-jul" class="cal-wrap" style="display:none;">
+          <div class="cal-nav">
+            <button class="btn btn-sm btn-outline-secondary" onclick="setMonth('jun')"><i class="bi bi-chevron-left"></i></button>
+            <span class="cal-month-label">July 2026</span>
+            <button class="btn btn-sm btn-outline-secondary" disabled><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+            <div class="cal-day"><div class="cal-date">1</div></div>
+            <div class="cal-day"><div class="cal-date">2</div></div>
+            <div class="cal-day"><div class="cal-date">3</div></div>
+            <div class="cal-day"><div class="cal-date">4</div></div>
+            <div class="cal-day"><div class="cal-date">5</div></div>
+            <div class="cal-day"><div class="cal-date">6</div></div>
+            <div class="cal-day"><div class="cal-date">7</div></div>
+            <div class="cal-day"><div class="cal-date">8</div></div>
+            <div class="cal-day"><div class="cal-date">9</div></div>
+            <div class="cal-day"><div class="cal-date">10</div></div>
+            <div class="cal-day"><div class="cal-date">11</div></div>
+            <div class="cal-day"><div class="cal-date">12</div></div>
+            <div class="cal-day"><div class="cal-date">13</div></div>
+            <div class="cal-day"><div class="cal-date">14</div></div>
+            <div class="cal-day"><div class="cal-date">15</div></div>
+            <div class="cal-day"><div class="cal-date">16</div></div>
+            <div class="cal-day"><div class="cal-date">17</div></div>
+            <div class="cal-day"><div class="cal-date">18</div></div>
+            <div class="cal-day"><div class="cal-date">19</div></div>
+            <div class="cal-day"><div class="cal-date">20</div></div>
+            <div class="cal-day"><div class="cal-date">21</div></div>
+            <div class="cal-day"><div class="cal-date">22</div></div>
+            <div class="cal-day"><div class="cal-date">23</div></div>
+            <div class="cal-day"><div class="cal-date">24</div></div>
+            <div class="cal-day"><div class="cal-date">25</div></div>
+            <div class="cal-day"><div class="cal-date">26</div></div>
+            <div class="cal-day"><div class="cal-date">27</div></div>
+            <div class="cal-day"><div class="cal-date">28</div></div>
+            <div class="cal-day"><div class="cal-date">29</div></div>
+            <div class="cal-day"><div class="cal-date">30</div></div>
+            <div class="cal-day"><div class="cal-date">31</div></div>
+            <div class="cal-day other-month"><div class="cal-date">1</div></div>
+            <div class="cal-day other-month"><div class="cal-date">2</div></div>
+            <div class="cal-day other-month"><div class="cal-date">3</div></div>
+          </div>
+        </div>
+
+      </div><!-- /#view-cal -->
+
     </div>
   </main>
 
 </div>
 
+<script>
+  function setView(v) {
+    document.getElementById('view-list').style.display = v === 'list' ? 'block' : 'none';
+    document.getElementById('view-cal').style.display  = v === 'cal'  ? 'block' : 'none';
+    document.getElementById('btn-list').classList.toggle('active', v === 'list');
+    document.getElementById('btn-cal').classList.toggle('active',  v === 'cal');
+  }
+
+  var months = ['apr','may','jun','jul'];
+  function setMonth(m) {
+    months.forEach(function(id) {
+      document.getElementById('cal-' + id).style.display = (id === m) ? 'block' : 'none';
+    });
+  }
+</script>
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
