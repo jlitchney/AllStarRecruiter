@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events Module — Developer Spec · AllStar Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+  <style>
+    body { background: var(--leftnav-bg); min-height: 100vh; padding: 2.5rem 1rem; }
+    .spec-wrap { max-width: 960px; margin: 0 auto; }
+    .spec-card { background:#fff; border-radius:.4rem; padding:2rem 2.5rem; margin-bottom:1.5rem; }
+    .spec-card + .spec-card { }
+    h2.section-title {
+      font-size: 1rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--leftnav-bg);
+      border-bottom: 2px solid var(--leftnav-bg); padding-bottom:.5rem; margin-bottom:1.25rem;
+    }
+    h3.page-title {
+      font-size: .95rem; font-weight: 700; color: #111827; margin-bottom: .25rem;
+    }
+    .page-route { font-size: .78rem; color: #64748b; font-family: monospace; margin-bottom: 1rem; }
+    .page-route a { color: var(--leftnav-bg); text-decoration: none; }
+    .page-route a:hover { text-decoration: underline; }
+    .spec-table { font-size: .82rem; width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    .spec-table th { background: #f1f5f9; color: #374151; font-weight: 700; font-size: .73rem;
+      text-transform: uppercase; letter-spacing: .05em; padding: .5rem .75rem; border: 1px solid #e2e8f0; }
+    .spec-table td { padding: .5rem .75rem; border: 1px solid #e2e8f0; vertical-align: top; color: #374151; }
+    .spec-table td:first-child { font-weight: 600; white-space: nowrap; color: #1e293b; }
+    .spec-table td code { background: #f1f5f9; padding: 1px 5px; border-radius: 3px; font-size: .78rem; color: #0f172a; }
+    .rule-list { font-size: .83rem; color: #374151; padding-left: 1.2rem; margin-bottom: 0; line-height: 1.9; }
+    .rule-list li { margin-bottom: .15rem; }
+    .rule-list code { background: #f1f5f9; padding: 1px 5px; border-radius: 3px; font-size: .78rem; }
+    .label-pill {
+      display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 8px;
+      border-radius: 99px; margin-right: 4px; vertical-align: middle;
+    }
+    .pill-get    { background: #dcfce7; color: #15803d; }
+    .pill-post   { background: #dbeafe; color: #1d4ed8; }
+    .pill-put    { background: #fef9c3; color: #854d0e; }
+    .pill-delete { background: #fee2e2; color: #b91c1c; }
+    .pill-patch  { background: #ede9fe; color: #6d28d9; }
+    .endpoint-row { display: flex; align-items: flex-start; gap: .6rem; font-size: .82rem;
+      padding: .4rem 0; border-bottom: 1px solid #f1f5f9; }
+    .endpoint-row:last-child { border-bottom: none; }
+    .endpoint-path { font-family: monospace; color: #1e293b; }
+    .endpoint-desc { color: #64748b; font-size: .78rem; margin-top: 1px; }
+    .flow-step { display: flex; gap: .75rem; align-items: flex-start; font-size: .83rem; padding: .35rem 0; }
+    .flow-num { width: 22px; height: 22px; border-radius: 50%; background: var(--leftnav-bg); color: #fff;
+      font-size: .7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .flow-text { color: #374151; }
+    .flow-text strong { color: #111827; }
+    .status-badge { display: inline-block; font-size: .7rem; font-weight: 700; padding: 2px 9px;
+      border-radius: 99px; margin: 1px; }
+    .s-invited   { background: #dbeafe; color: #1d4ed8; }
+    .s-confirmed { background: #dcfce7; color: #15803d; }
+    .s-declined  { background: #fee2e2; color: #b91c1c; }
+    .s-attended  { background: #d1fae5; color: #065f46; }
+    .s-noshow    { background: #fef3c7; color: #92400e; }
+    .s-reschedule{ background: #ede9fe; color: #6d28d9; }
+    .callout { background: #fffbeb; border: 1px solid #fcd34d; border-radius: .3rem;
+      padding: .75rem 1rem; font-size: .8rem; color: #374151; margin-top: .75rem; }
+    .callout strong { color: #92400e; }
+    .info-callout { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: .3rem;
+      padding: .75rem 1rem; font-size: .8rem; color: #374151; margin-top: .75rem; }
+    .info-callout strong { color: #1e40af; }
+    .divider { border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
+    .page-badge { display:inline-block; background:var(--leftnav-bg); color:#fff; font-size:.65rem;
+      font-weight:700; padding:2px 8px; border-radius:3px; vertical-align:middle; margin-right:.4rem; }
+    .toc-link { display: flex; align-items: center; gap: .6rem; padding: .4rem .6rem;
+      border-radius: .25rem; text-decoration: none; color: #1e293b; font-size: .85rem; transition: .12s; }
+    .toc-link:hover { background: #f0f4ff; color: var(--leftnav-bg); }
+    .toc-link i { color: var(--leftnav-bg); width: 18px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="spec-wrap">
+
+  <!-- Header -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <div style="width:48px;height:48px;background:#fff;border-radius:.35rem;display:flex;align-items:center;justify-content:center;">
+      <i class="bi bi-calendar3 fs-4" style="color:var(--leftnav-bg);"></i>
+    </div>
+    <div>
+      <h1 class="h4 mb-0 fw-bold text-white">Events Module — Developer Spec</h1>
+      <p class="mb-0" style="color:rgba(255,255,255,.6);font-size:.82rem;">AllStar Recruiter · Covers 4 pages + shared data model · Last updated May 2026</p>
+    </div>
+    <a href="../index.html" class="btn btn-sm btn-outline-light ms-auto">← Index</a>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="spec-card mb-4">
+    <h2 class="section-title">Pages in This Module</h2>
+    <div class="row g-2">
+      <div class="col-md-6">
+        <a href="events-list.html" target="_blank" class="toc-link">
+          <i class="bi bi-calendar3"></i>
+          <div><div class="fw-semibold">Events List</div><div style="font-size:.75rem;color:#64748b;">Calendar landing page — all upcoming &amp; past events</div></div>
+        </a>
+        <a href="events-add.html" target="_blank" class="toc-link">
+          <i class="bi bi-calendar-plus"></i>
+          <div><div class="fw-semibold">Add / Edit Event</div><div style="font-size:.75rem;color:#64748b;">Scope toggle, templates, tags, registration page</div></div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="events-detail.html" target="_blank" class="toc-link">
+          <i class="bi bi-people"></i>
+          <div><div class="fw-semibold">Event Detail &amp; Roster</div><div style="font-size:.75rem;color:#64748b;">Stat cards, bulk actions, paginated roster</div></div>
+        </a>
+        <a href="event-types.html" target="_blank" class="toc-link">
+          <i class="bi bi-tags"></i>
+          <div><div class="fw-semibold">Event Types (Settings)</div><div style="font-size:.75rem;color:#64748b;">Manage custom types with colors per department</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SHARED DATA MODEL
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="spec-card">
+    <h2 class="section-title"><i class="bi bi-database me-2"></i>Shared Data Model</h2>
+
+    <h3 class="page-title">Event</h3>
+    <table class="spec-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td><code>uuid</code></td><td>Primary key</td></tr>
+        <tr><td>org_id</td><td><code>uuid</code></td><td>Scoped to department/client — events are never cross-org</td></tr>
+        <tr><td>scope</td><td><code>enum</code></td><td><code>individual</code> | <code>group</code></td></tr>
+        <tr><td>event_type_id</td><td><code>uuid</code></td><td>FK → EventType. Null if the type was soft-deleted after record creation</td></tr>
+        <tr><td>name</td><td><code>string</code></td><td>Free-text event name</td></tr>
+        <tr><td>starts_at</td><td><code>datetime</code></td><td>UTC. Required</td></tr>
+        <tr><td>ends_at</td><td><code>datetime</code></td><td>UTC. Optional — some events are open-ended</td></tr>
+        <tr><td>location</td><td><code>string</code></td><td>Free-text address or "Virtual"</td></tr>
+        <tr><td>description</td><td><code>text/html</code></td><td>Rich text. Sanitize on save and render</td></tr>
+        <tr><td>template_id</td><td><code>uuid|null</code></td><td>FK → EventTemplate if created from one</td></tr>
+        <tr><td>reg_page_enabled</td><td><code>boolean</code></td><td>Group events only. Defaults false</td></tr>
+        <tr><td>reg_page_source</td><td><code>enum|null</code></td><td><code>web_builder</code> | <code>custom_url</code></td></tr>
+        <tr><td>reg_page_ref</td><td><code>string|null</code></td><td>Web-builder page ID or raw URL depending on source</td></tr>
+        <tr><td>reg_page_url</td><td><code>string|null</code></td><td>Resolved public URL — generated on save</td></tr>
+        <tr><td>reg_page_qr_url</td><td><code>string|null</code></td><td>Generated server-side after reg_page_url is set</td></tr>
+        <tr><td>tag_invite_id</td><td><code>uuid|null</code></td><td>Association tag applied on roster add</td></tr>
+        <tr><td>tag_attended_id</td><td><code>uuid|null</code></td><td>Association tag applied when status → Attended</td></tr>
+        <tr><td>tag_noshow_id</td><td><code>uuid|null</code></td><td>Association tag applied when status → No-Show</td></tr>
+        <tr><td>tag_reschedule_id</td><td><code>uuid|null</code></td><td>Association tag applied when status → Rescheduled</td></tr>
+        <tr><td>utm_source</td><td><code>string|null</code></td><td>UTM tracking for the registration page</td></tr>
+        <tr><td>utm_medium</td><td><code>string|null</code></td><td></td></tr>
+        <tr><td>utm_campaign</td><td><code>string|null</code></td><td></td></tr>
+        <tr><td>created_by</td><td><code>uuid</code></td><td>FK → User. Auto-set. Creator is Organizer role in EventStaff</td></tr>
+        <tr><td>created_at / updated_at</td><td><code>datetime</code></td><td>Timestamps</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="page-title mt-3">EventRoster</h3>
+    <p style="font-size:.82rem;color:#64748b;">Join table — one row per candidate per event.</p>
+    <table class="spec-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td><code>uuid</code></td><td></td></tr>
+        <tr><td>event_id</td><td><code>uuid</code></td><td>FK → Event</td></tr>
+        <tr><td>candidate_id</td><td><code>uuid</code></td><td>FK → Candidate</td></tr>
+        <tr><td>status</td><td><code>enum</code></td><td>See Status Lifecycle below</td></tr>
+        <tr><td>source</td><td><code>enum</code></td><td><code>manual</code> | <code>tag</code> | <code>self_registered</code></td></tr>
+        <tr><td>added_at</td><td><code>datetime</code></td><td></td></tr>
+        <tr><td>updated_at</td><td><code>datetime</code></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="page-title mt-3">EventStaff</h3>
+    <p style="font-size:.82rem;color:#64748b;">Many-to-many between events and CRM users.</p>
+    <table class="spec-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>event_id</td><td><code>uuid</code></td><td></td></tr>
+        <tr><td>user_id</td><td><code>uuid</code></td><td></td></tr>
+        <tr><td>role</td><td><code>enum</code></td><td><code>organizer</code> | <code>staff</code>. Creator is auto-set to organizer</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="page-title mt-3">EventType</h3>
+    <table class="spec-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td><code>uuid</code></td><td></td></tr>
+        <tr><td>org_id</td><td><code>uuid</code></td><td>Types are per-department — not shared across orgs</td></tr>
+        <tr><td>name</td><td><code>string</code></td><td>e.g. "Physical Agility Test"</td></tr>
+        <tr><td>color</td><td><code>string</code></td><td>Hex string e.g. <code>#6f42c1</code>. Used as dot color in dropdowns and calendar</td></tr>
+        <tr><td>is_active</td><td><code>boolean</code></td><td>Inactive types hidden from new-event dropdown; historical records preserved</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="page-title mt-3">EventTemplate</h3>
+    <table class="spec-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td><code>uuid</code></td><td></td></tr>
+        <tr><td>org_id</td><td><code>uuid</code></td><td></td></tr>
+        <tr><td>name</td><td><code>string</code></td><td>Display name in template selector dropdown</td></tr>
+        <tr><td>scope</td><td><code>enum</code></td><td><code>individual</code> | <code>group</code></td></tr>
+        <tr><td>event_type_id</td><td><code>uuid|null</code></td><td></td></tr>
+        <tr><td>event_name</td><td><code>string</code></td><td></td></tr>
+        <tr><td>location</td><td><code>string|null</code></td><td></td></tr>
+        <tr><td>description</td><td><code>text|null</code></td><td></td></tr>
+        <tr><td>tag_invite_id / tag_attended_id / tag_noshow_id / tag_reschedule_id</td><td><code>uuid|null</code></td><td>Association tags stored in template. Tag <em>names</em> are not stored — only IDs</td></tr>
+        <tr><td>utm_source / utm_medium / utm_campaign</td><td><code>string|null</code></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="callout"><strong>Note:</strong> Date/time, candidate, and the Registration Page URL are intentionally excluded from templates — they must be set fresh each time the template is used.</div>
+
+    <hr class="divider">
+
+    <h3 class="page-title">Roster Status Lifecycle</h3>
+    <p style="font-size:.82rem;color:#374151;margin-bottom:.75rem;">Statuses flow in one direction (no going back to Invited once an outcome is recorded). Each transition applies the corresponding Association Tag to the candidate.</p>
+    <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+      <span class="status-badge s-invited">Invited</span>
+      <i class="bi bi-arrow-right text-muted" style="font-size:.75rem;"></i>
+      <span class="status-badge s-confirmed">Confirmed</span>
+      <span class="text-muted" style="font-size:.75rem;">or</span>
+      <span class="status-badge s-declined">Declined</span>
+      <i class="bi bi-arrow-right text-muted" style="font-size:.75rem;"></i>
+      <span class="status-badge s-attended">Attended</span>
+      <span class="text-muted" style="font-size:.75rem;">or</span>
+      <span class="status-badge s-noshow">No-Show</span>
+      <span class="text-muted" style="font-size:.75rem;">or</span>
+      <span class="status-badge s-reschedule">Rescheduled</span>
+    </div>
+    <ul class="rule-list">
+      <li>When a candidate is added to the roster, they receive <strong>Invited</strong> status and the <code>tag_invite_id</code> tag is applied (if set).</li>
+      <li>Self-registrations via the public registration page also start as <strong>Invited</strong>.</li>
+      <li>Post-event outcomes (Attended / No-Show / Rescheduled) apply the corresponding tag, which fires any workflow automations listening for that tag.</li>
+      <li>Bulk status updates must apply tags to all affected candidates atomically — either all succeed or roll back.</li>
+    </ul>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE 1 — EVENTS LIST
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="spec-card">
+    <h2 class="section-title"><i class="bi bi-calendar3 me-2"></i>Page 1 — Events List</h2>
+    <h3 class="page-title">Events List — Calendar Landing Page</h3>
+    <div class="page-route">Route: <code>/calendar</code> &nbsp;·&nbsp; <a href="events-list.html" target="_blank">Open mockup →</a></div>
+
+    <h6 class="fw-bold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Purpose</h6>
+    <p style="font-size:.83rem;color:#374151;">The main entry point for the Events module. Shows all events in a scrollable list grouped by timing (Today, Upcoming, Past), with a mini calendar for month navigation. Staff can filter by their own events or all events and jump to Add Event.</p>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Key UI Elements</h6>
+    <table class="spec-table">
+      <thead><tr><th>Element</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td>Event list rows</td><td>Show event type dot + name, date/time, location, and assigned staff avatars. Group events show a people icon; individual events show a person icon. Clicking a row opens Event Detail.</td></tr>
+        <tr><td>Section dividers</td><td>Today / Upcoming / Past — replace any "Status" column. Determined server-side by comparing <code>starts_at</code> to now (UTC).</td></tr>
+        <tr><td>My events / All staff filter</td><td>Filters list to events where the logged-in user appears in EventStaff. Default: All staff.</td></tr>
+        <tr><td>Event Type filter</td><td>Dropdown of active EventTypes for the org. Filters list server-side.</td></tr>
+        <tr><td>Mini calendar</td><td>Read-only month view. Days with events show colored dots (by event type color). Clicking a date scrolls the list to that day.</td></tr>
+        <tr><td>Manage Event Types link</td><td>Links to <code>/settings/event-types</code>.</td></tr>
+        <tr><td>+ Add Event button</td><td>Links to <code>/calendar/new</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">API Endpoints</h6>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/events?org_id=&amp;staff=me|all&amp;type_id=&amp;month=</div><div class="endpoint-desc">Returns paginated event list with staff, roster count, and type info. Sort: starts_at ASC for Upcoming, DESC for Past.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/event-types?org_id=&amp;active=true</div><div class="endpoint-desc">Returns active event types for the filter dropdown and calendar dots.</div></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE 2 — ADD / EDIT EVENT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="spec-card">
+    <h2 class="section-title"><i class="bi bi-calendar-plus me-2"></i>Page 2 — Add / Edit Event</h2>
+    <h3 class="page-title">Add / Edit Event Form</h3>
+    <div class="page-route">Route: <code>/calendar/new</code> &nbsp;·&nbsp; <code>/calendar/event/{id}/edit</code> &nbsp;·&nbsp; <a href="events-add.html" target="_blank">Open mockup →</a></div>
+
+    <h6 class="fw-bold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Scope Toggle</h6>
+    <table class="spec-table">
+      <thead><tr><th>Scope</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td>Individual</td><td>Shows a candidate search field (search by name, email, or phone). One candidate chip. Association Tags still available. Registration Page section hidden. Default when opened from global + button.</td></tr>
+        <tr><td>Group</td><td>Shows enrollment note field instead of candidate search. Registration Page section shown. Default when opened from candidate profile is still Individual (with candidate pre-filled).</td></tr>
+      </tbody>
+    </table>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Template Selector</h6>
+    <ul class="rule-list">
+      <li>Templates are fetched via <code>GET /api/event-templates?org_id=</code> and shown in a dropdown.</li>
+      <li>Selecting a template fires a <code>GET /api/event-templates/{id}</code> and JS pre-fills all form fields. No page reload.</li>
+      <li>Date/time and Candidate fields are <strong>never</strong> stored in or loaded from templates.</li>
+      <li>"Save as Template" checkbox reveals a template name input. On submit, POSTs current form values (minus date/time and candidate) to <code>POST /api/event-templates</code>.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Form Fields</h6>
+    <table class="spec-table">
+      <thead><tr><th>Field</th><th>Required</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Event Type</td><td>Yes</td><td>Dropdown of active types for the org. Color dot shown next to each option.</td></tr>
+        <tr><td>Event Name</td><td>Yes</td><td>Free text.</td></tr>
+        <tr><td>Start Date &amp; Time</td><td>Yes</td><td>UTC stored. Show in user's local timezone.</td></tr>
+        <tr><td>End Date &amp; Time</td><td>No</td><td>Optional.</td></tr>
+        <tr><td>Candidate (Individual)</td><td>Yes for Individual</td><td>Autocomplete: search by name, email, or phone. One candidate per individual event. Displayed as a chip. Removing the chip clears the field.</td></tr>
+        <tr><td>Enrollment Note (Group)</td><td>No</td><td>Internal note about how candidates are recruited for this event.</td></tr>
+        <tr><td>Location</td><td>No</td><td>Free text or "Virtual".</td></tr>
+        <tr><td>Description</td><td>No</td><td>Rich text editor. Sanitize HTML on save.</td></tr>
+        <tr><td>Assigned Staff</td><td>No</td><td>Search CRM users by name. Multiple chips allowed. Creator is auto-added as Organizer and does not need to be manually added.</td></tr>
+        <tr><td>Registration Page</td><td>No</td><td>Group scope only. See Registration Page section below.</td></tr>
+        <tr><td>Association Tags</td><td>No</td><td>See Association Tags section below.</td></tr>
+      </tbody>
+    </table>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Registration Page (Group Events Only)</h6>
+    <ul class="rule-list">
+      <li>Toggle to enable/disable a public-facing registration page.</li>
+      <li>Two source modes:
+        <ul>
+          <li><strong>Web-builder page</strong> — Dropdown of pages already created in the web-builder. Stores the web-builder page ID in <code>reg_page_ref</code>.</li>
+          <li><strong>Custom URL</strong> — Free-text URL input. Stores raw URL in <code>reg_page_ref</code>.</li>
+        </ul>
+      </li>
+      <li>The resolved public URL (<code>reg_page_url</code>) and QR code (<code>reg_page_qr_url</code>) are <strong>generated server-side on save</strong> — not available on the create form.</li>
+      <li>After save, the URL and QR code are shown on the Event Detail page with Copy and Download actions.</li>
+      <li>Disabling the registration page after it has been published should show a confirm dialog warning that the public URL will stop accepting registrations.</li>
+      <li>Self-registrations via the public page POST to the event roster with <code>source: self_registered</code> and status <code>Invited</code>, and apply <code>tag_invite_id</code> if set.</li>
+      <li>The public registration page is served by the All-Star Events web app (<code>events-six-orpin.vercel.app</code>).</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Association Tags</h6>
+    <p style="font-size:.82rem;color:#374151;margin-bottom:.5rem;">Four tag slots, one per roster outcome. Each shows a dropdown of existing tags plus an always-visible inline form to create a new tag.</p>
+    <table class="spec-table">
+      <thead><tr><th>Tag Slot</th><th>When Applied</th></tr></thead>
+      <tbody>
+        <tr><td>Invite Tag</td><td>When a candidate is added to the roster (manually, by tag, or via self-registration)</td></tr>
+        <tr><td>Attended Tag</td><td>When roster status is set to Attended</td></tr>
+        <tr><td>No-Show Tag</td><td>When roster status is set to No-Show</td></tr>
+        <tr><td>Reschedule Tag</td><td>When roster status is set to Rescheduled</td></tr>
+      </tbody>
+    </table>
+    <ul class="rule-list mt-2">
+      <li>Create-new tag inline form: <strong>Group selector</strong> (existing tag groups for the org) + <strong>Tag name</strong> input + Create button. Always visible — no hidden panel.</li>
+      <li>On "Create", POST the new tag, then immediately select it in the dropdown above.</li>
+      <li>Tags trigger workflow automations. These connections are configured outside this form (in the workflow builder).</li>
+      <li>Group scope Invite Tag: a live candidate count should show below the dropdown once a tag is selected (e.g. "47 candidates will be added to this event").</li>
+      <li>On form submit, if a group Invite Tag is set, the back-end queries all candidates with that tag and bulk-inserts them into EventRoster immediately — not lazily.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">UTM Tracking</h6>
+    <ul class="rule-list">
+      <li>Three fields: <code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>. Free text, stored on the Event record.</li>
+      <li>These values should be appended as query parameters to the registration page URL when generating <code>reg_page_url</code>.</li>
+      <li>Visible and editable in Association Tags view on the Event Detail page.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">API Endpoints</h6>
+    <div class="endpoint-row">
+      <span class="label-pill pill-post">POST</span>
+      <div><div class="endpoint-path">/api/events</div><div class="endpoint-desc">Create event. Returns created event with ID. Triggers roster population if Invite Tag set.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-put">PUT</span>
+      <div><div class="endpoint-path">/api/events/{id}</div><div class="endpoint-desc">Update event fields.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/event-templates?org_id=</div><div class="endpoint-desc">Template list for dropdown.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/event-templates/{id}</div><div class="endpoint-desc">Load template fields to pre-fill form.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-post">POST</span>
+      <div><div class="endpoint-path">/api/event-templates</div><div class="endpoint-desc">Save current form as new template.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/candidates/search?q=&amp;org_id=</div><div class="endpoint-desc">Autocomplete: search by name, email, or phone. Returns id, name, photo, status.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/tags?org_id=&amp;include_groups=true</div><div class="endpoint-desc">Tags and groups for Association Tag dropdowns.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-post">POST</span>
+      <div><div class="endpoint-path">/api/tags</div><div class="endpoint-desc">Create new tag inline from Association Tag form.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/tags/{id}/candidate-count?org_id=</div><div class="endpoint-desc">Live count of candidates with the Invite Tag (shown below dropdown for group scope).</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/web-builder/pages?org_id=</div><div class="endpoint-desc">Returns published web-builder pages for the Registration Page dropdown.</div></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE 3 — EVENT DETAIL & ROSTER
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="spec-card">
+    <h2 class="section-title"><i class="bi bi-people me-2"></i>Page 3 — Event Detail &amp; Roster</h2>
+    <h3 class="page-title">Event Detail &amp; Roster Management</h3>
+    <div class="page-route">Route: <code>/calendar/event/{id}</code> &nbsp;·&nbsp; <a href="events-detail.html" target="_blank">Open mockup →</a></div>
+
+    <h6 class="fw-bold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Event Hero (Top Section)</h6>
+    <table class="spec-table">
+      <thead><tr><th>Element</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Event name + type badge</td><td>Type badge shows event type color dot and name.</td></tr>
+        <tr><td>Date / time / location</td><td>Rendered in user's local timezone.</td></tr>
+        <tr><td>Description</td><td>Inline editable. Pencil link → rich text editor appears. Save / Cancel buttons. Organizer-only.</td></tr>
+        <tr><td>Association Tags</td><td>View state: colored badge per tag slot + UTM chips. Edit state: dropdowns + UTM text inputs + inline create-new form + Save/Cancel. Organizer-only.</td></tr>
+        <tr><td>Assigned Staff</td><td>Avatar + name list. First person is Organizer. Edit via the event edit page.</td></tr>
+        <tr><td>Registration Page</td><td>Group events only (when enabled). Shows public URL with Copy button, QR code image with Download button, and Preview link. Organizer can disable from here.</td></tr>
+      </tbody>
+    </table>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Stat Cards</h6>
+    <ul class="rule-list">
+      <li>Cards show: <strong>Total Invited, Confirmed, Attended, No-Show, No Response</strong>.</li>
+      <li>Clicking a stat card filters the roster to that status instantly (client-side if data is loaded, otherwise re-queries).</li>
+      <li>Counts update in real-time as statuses change.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Roster Table</h6>
+    <table class="spec-table">
+      <thead><tr><th>Column</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Checkbox</td><td>Row-level select. Header checkbox selects all on current page. "Select all {N}" link selects every matching record across pages.</td></tr>
+        <tr><td>Name</td><td>Links to candidate profile. Shows avatar initials.</td></tr>
+        <tr><td>Status</td><td>Inline status badge. Clicking opens a status-change dropdown for that row.</td></tr>
+        <tr><td>Actions</td><td>Per-row action menu (view profile, change status, remove from event).</td></tr>
+      </tbody>
+    </table>
+    <ul class="rule-list mt-1">
+      <li>Server-side pagination. Must stay performant at 5,000+ roster rows.</li>
+      <li>Toolbar (directly above table): search by name/email/phone, status filter dropdown, and "Send Reminder to All" button (right-aligned).</li>
+      <li>Bulk action bar appears when ≥1 checkbox is checked: "Update Status", "Send Message", "Remove from Event".</li>
+      <li>Bulk status updates apply the corresponding Association Tag to all affected candidates atomically.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Permissions</h6>
+    <ul class="rule-list">
+      <li><strong>Organizer</strong> (creator): full edit access — event fields, description, tags, staff, delete event.</li>
+      <li><strong>Staff</strong>: can view roster and record outcomes (change statuses), but cannot edit event metadata or delete the event.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">API Endpoints</h6>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/events/{id}</div><div class="endpoint-desc">Full event record including staff, association tags, reg page info.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-put">PUT</span>
+      <div><div class="endpoint-path">/api/events/{id}</div><div class="endpoint-desc">Inline saves (description, association tags, UTM fields).</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/events/{id}/roster?status=&amp;q=&amp;page=&amp;per_page=</div><div class="endpoint-desc">Paginated, filtered roster. Returns rows + total counts per status for stat cards.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-patch">PATCH</span>
+      <div><div class="endpoint-path">/api/events/{id}/roster/{roster_id}</div><div class="endpoint-desc">Update single roster row status. Applies corresponding tag server-side.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-post">POST</span>
+      <div><div class="endpoint-path">/api/events/{id}/roster/bulk-status</div><div class="endpoint-desc">Bulk status update for selected roster rows. Body: <code>{ ids: [], status: "" }</code>. Applies tags atomically.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-delete">DELETE</span>
+      <div><div class="endpoint-path">/api/events/{id}/roster/bulk</div><div class="endpoint-desc">Bulk remove from roster. Body: <code>{ ids: [] }</code>.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-post">POST</span>
+      <div><div class="endpoint-path">/api/events/{id}/reminders</div><div class="endpoint-desc">Trigger reminder send to all roster members (or filtered subset). Returns job ID.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-delete">DELETE</span>
+      <div><div class="endpoint-path">/api/events/{id}</div><div class="endpoint-desc">Delete event. Organizer only. Soft-delete recommended — preserve roster history.</div></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE 4 — EVENT TYPES SETTINGS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="spec-card">
+    <h2 class="section-title"><i class="bi bi-tags me-2"></i>Page 4 — Event Types (Settings)</h2>
+    <h3 class="page-title">Event Types — Settings Page</h3>
+    <div class="page-route">Route: <code>/settings/event-types</code> &nbsp;·&nbsp; <a href="event-types.html" target="_blank">Open mockup →</a></div>
+
+    <h6 class="fw-bold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Purpose</h6>
+    <p style="font-size:.83rem;color:#374151;">Admins manage the custom event types available for their department. Types drive the color coding on calendars, list views, and candidate timelines.</p>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Add / Edit Form (Left Panel)</h6>
+    <ul class="rule-list">
+      <li>Fields: <strong>Event Name</strong>, <strong>Color</strong> (palette picker, stored as hex), <strong>Active</strong> toggle.</li>
+      <li>Clicking "Edit" on a table row populates the left form with that row's values and changes the Save button label to "Update Event Type".</li>
+      <li>"Clear" resets the form to blank / default state.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Type Table (Right Panel)</h6>
+    <ul class="rule-list">
+      <li>Columns: Name (with color dot), Status (Active/Inactive badge), Actions (Edit / Delete).</li>
+      <li>Header badge shows count of active types.</li>
+      <li><strong>Delete</strong> must be blocked if any Event record currently references that type. Show an error: "This type is used by N event(s) and cannot be deleted. Set it to Inactive to hide it from new events."</li>
+      <li><strong>Inactive</strong> types are hidden from the Event Type dropdown on the Add Event form but all historical event records referencing them are preserved.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Scoping</h6>
+    <p style="font-size:.83rem;color:#374151;">Types are scoped to <code>org_id</code>. Different departments have entirely separate type lists. This page only shows and manages types for the logged-in organization.</p>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">API Endpoints</h6>
+    <div class="endpoint-row">
+      <span class="label-pill pill-get">GET</span>
+      <div><div class="endpoint-path">/api/event-types?org_id=</div><div class="endpoint-desc">All types (active + inactive) for this org.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-post">POST</span>
+      <div><div class="endpoint-path">/api/event-types</div><div class="endpoint-desc">Create new type. Body: <code>{ org_id, name, color, is_active }</code>.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-put">PUT</span>
+      <div><div class="endpoint-path">/api/event-types/{id}</div><div class="endpoint-desc">Update name, color, or active state.</div></div>
+    </div>
+    <div class="endpoint-row">
+      <span class="label-pill pill-delete">DELETE</span>
+      <div><div class="endpoint-path">/api/event-types/{id}</div><div class="endpoint-desc">Returns 409 Conflict if any Event references this type — include count in error body so UI can surface it.</div></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CROSS-CUTTING CONCERNS
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="spec-card">
+    <h2 class="section-title"><i class="bi bi-diagram-2 me-2"></i>Cross-Cutting Concerns</h2>
+
+    <h6 class="fw-bold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Multi-Tenancy</h6>
+    <ul class="rule-list">
+      <li>All records (events, types, templates, roster rows) are scoped to <code>org_id</code>. Never query across orgs.</li>
+      <li>All API routes must validate that the requesting user belongs to the org_id in the request.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Timezones</h6>
+    <ul class="rule-list">
+      <li>All datetimes stored as UTC. Display in the logged-in user's local timezone.</li>
+      <li>Date groupings (Today / Upcoming / Past) computed server-side in UTC — no client-side date math for grouping.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Workflow / Tag Integration</h6>
+    <ul class="rule-list">
+      <li>Applying a tag to a candidate (via any roster status change) must fire the tag-applied event in the workflow engine. This is the primary automation trigger — keep it synchronous enough to be reliable but don't block the UI response.</li>
+      <li>The four Association Tags (Invite, Attended, No-Show, Reschedule) are the only event-to-tag bridge. No other implicit tags are applied by this module.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Public Registration App</h6>
+    <ul class="rule-list">
+      <li>Served separately at <code>events-six-orpin.vercel.app</code> (All-Star Events web app).</li>
+      <li>Self-registrations POST to <code>/api/events/{id}/roster</code> with <code>source: self_registered</code>. The CRM back-end handles tag application identically to manual adds.</li>
+      <li>UTM parameters from the event record are appended to the public URL at generation time.</li>
+    </ul>
+
+    <h6 class="fw-bold mb-2 mt-3" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#64748b;">Rich Text</h6>
+    <ul class="rule-list">
+      <li>Description field uses a rich text editor (e.g. Tiptap or Quill). Store and render as sanitized HTML.</li>
+      <li>Inline edit on Event Detail page uses <code>contenteditable</code> — apply the same sanitization on save.</li>
+    </ul>
+
+    <div class="info-callout mt-3">
+      <strong><i class="bi bi-info-circle me-1"></i>Design Tokens</strong><br>
+      Primary navy: <code>#245194</code> (<code>--leftnav-bg</code>) &nbsp;·&nbsp;
+      Accent gold: <code>#e4aa35</code> (<code>--accent</code>) &nbsp;·&nbsp;
+      CSS lives in <code>assets/css/site.css</code>. Copy <code>_template.html</code> to start a new page.
+    </div>
+  </div>
+
+  <p class="text-center mb-5" style="color:rgba(255,255,255,.4);font-size:.75rem;">
+    AllStar Recruiter · Events Module Spec · Generated May 2026
+  </p>
+
+</div>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
