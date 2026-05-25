@@ -397,16 +397,15 @@
                           <div class="atf-desc" id="invite-desc-grp" style="display:none;">Candidates with this tag are <strong>automatically added</strong> to this event's roster</div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-invite')">
+                      <select class="form-select form-select-sm">
                         <option>— None —</option>
                         <option selected>PAT — April 2026</option>
                         <option>MHS Candidates</option>
                         <option>Written Exam Pool</option>
-                        <option value="__new__">＋ Create new tag…</option>
                       </select>
                       <div class="atf-live mt-1" id="invite-live" style="display:none;"><i class="bi bi-people-fill me-1"></i>47 candidates will be added to this event</div>
-                      <div class="new-tag-panel" id="new-tag-invite" style="display:none;">
-                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                      <div class="new-tag-panel" id="new-tag-invite">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
                         <div class="row g-2">
                           <div class="col-5">
                             <select class="form-select form-select-sm">
@@ -438,13 +437,12 @@
                           <div class="atf-desc">Applied when marked <strong>Attended</strong></div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-attended')">
+                      <select class="form-select form-select-sm">
                         <option>— None —</option>
                         <option selected>PAT-Attended-Apr26</option>
-                        <option value="__new__">＋ Create new tag…</option>
                       </select>
-                      <div class="new-tag-panel" id="new-tag-attended" style="display:none;">
-                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                      <div class="new-tag-panel" id="new-tag-attended">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
                         <div class="row g-2">
                           <div class="col-5">
                             <select class="form-select form-select-sm">
@@ -476,13 +474,12 @@
                           <div class="atf-desc">Applied when marked <strong>No-Show</strong></div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-noshow')">
+                      <select class="form-select form-select-sm">
                         <option>— None —</option>
                         <option selected>PAT-NoShow-Apr26</option>
-                        <option value="__new__">＋ Create new tag…</option>
                       </select>
-                      <div class="new-tag-panel" id="new-tag-noshow" style="display:none;">
-                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                      <div class="new-tag-panel" id="new-tag-noshow">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
                         <div class="row g-2">
                           <div class="col-5">
                             <select class="form-select form-select-sm">
@@ -514,12 +511,11 @@
                           <div class="atf-desc">Applied when marked <strong>Rescheduled</strong></div>
                         </div>
                       </div>
-                      <select class="form-select form-select-sm" onchange="toggleNewTag(this,'new-tag-reschedule')">
+                      <select class="form-select form-select-sm">
                         <option selected>— None —</option>
-                        <option value="__new__">＋ Create new tag…</option>
                       </select>
-                      <div class="new-tag-panel" id="new-tag-reschedule" style="display:none;">
-                        <div class="small fw-semibold mb-2" style="color:#374151;">New tag</div>
+                      <div class="new-tag-panel" id="new-tag-reschedule">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
                         <div class="row g-2">
                           <div class="col-5">
                             <select class="form-select form-select-sm">
@@ -719,10 +715,6 @@
       document.getElementById('rte-description').focus();
       document.execCommand('createLink', false, url);
     }
-  }
-
-  function toggleNewTag(sel, panelId) {
-    document.getElementById(panelId).style.display = sel.value === '__new__' ? 'block' : 'none';
   }
 
   function setScope(scope) {
