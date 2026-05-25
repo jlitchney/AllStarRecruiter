@@ -278,11 +278,11 @@
               <!-- INDIVIDUAL scope: single candidate search -->
               <div id="scope-individual">
                 <label class="form-label fw-semibold">Candidate <span class="text-muted fw-normal small">(who is this event for?)</span></label>
-                <div class="d-flex gap-2 align-items-center">
+                <input type="text" class="form-control mb-2" placeholder="Search by name or ID…" style="max-width:360px;">
+                <div id="candidate-chip-wrap" class="d-flex flex-wrap gap-2 mb-1">
                   <span class="candidate-chip"><i class="bi bi-person-fill"></i> John Smith <button>×</button></span>
-                  <input type="text" class="form-control" placeholder="Search by name or ID…" style="max-width:260px; display:none;" id="candidate-search">
                 </div>
-                <div class="form-text mt-1">One candidate per individual event. The Invite Association Tag below is applied when they are added.</div>
+                <div class="form-text">Search for a candidate above, then select from results. One candidate per individual event.</div>
               </div>
 
               <!-- GROUP scope: enrollment note -->
