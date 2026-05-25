@@ -347,9 +347,34 @@
                 </div>
 
                 <div id="reg-page-details">
-                  <div class="p-3 rounded d-flex align-items-start gap-2" style="background:#f8fafc;border:1px solid #e2e8f0;font-size:.82rem;color:#64748b;">
-                    <i class="bi bi-info-circle mt-1 flex-shrink-0"></i>
-                    <span>The registration URL and QR code will be generated automatically when you save the event. You'll be able to copy the link and download the QR code from the event detail page.</span>
+                  <!-- Source toggle -->
+                  <div class="d-flex gap-2 mb-3">
+                    <button type="button" class="btn btn-sm btn-primary" id="reg-src-builder" onclick="setRegSource('builder')">
+                      <i class="bi bi-layout-text-window me-1"></i>Use a web-builder page
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="reg-src-custom" onclick="setRegSource('custom')">
+                      <i class="bi bi-link-45deg me-1"></i>Enter a custom URL
+                    </button>
+                  </div>
+
+                  <!-- Web-builder picker -->
+                  <div id="reg-source-builder">
+                    <label class="form-label fw-semibold mb-1" style="font-size:.8rem;">Select page from web-builder</label>
+                    <select class="form-select form-select-sm mb-2">
+                      <option value="">— Choose a page —</option>
+                      <option selected>PAT Spring 2026 Registration</option>
+                      <option>Written Exam — May 2026</option>
+                      <option>Virtual Recruitment Day</option>
+                      <option>General Application Landing Page</option>
+                    </select>
+                    <div class="form-text">The QR code and shareable link will be generated from this page's URL when you save.</div>
+                  </div>
+
+                  <!-- Custom URL entry -->
+                  <div id="reg-source-custom" style="display:none;">
+                    <label class="form-label fw-semibold mb-1" style="font-size:.8rem;">Registration URL</label>
+                    <input type="text" class="form-control form-control-sm mb-1" placeholder="https://…">
+                    <div class="form-text">The QR code will be generated from this URL when you save.</div>
                   </div>
                 </div>
               </div>
@@ -680,6 +705,13 @@
 
   function toggleRegPage(enabled) {
     document.getElementById('reg-page-details').style.display = enabled ? 'block' : 'none';
+  }
+
+  function setRegSource(source) {
+    document.getElementById('reg-source-builder').style.display = source === 'builder' ? 'block' : 'none';
+    document.getElementById('reg-source-custom').style.display  = source === 'custom'  ? 'block' : 'none';
+    document.getElementById('reg-src-builder').className = 'btn btn-sm ' + (source === 'builder' ? 'btn-primary' : 'btn-outline-secondary');
+    document.getElementById('reg-src-custom').className  = 'btn btn-sm ' + (source === 'custom'  ? 'btn-primary' : 'btn-outline-secondary');
   }
 
   document.getElementById('saveTemplate').addEventListener('change', function() {
