@@ -80,6 +80,15 @@
     .dl-normal { color: #374151; }
     .dl-none   { color: #94a3b8; }
 
+    /* ── Page indicator pills ────────────────────────────── */
+    .page-pill {
+      display: inline-flex; align-items: center; gap: .25rem;
+      font-size: .68rem; font-weight: 700; padding: .18rem .5rem;
+      border-radius: 99px; white-space: nowrap;
+    }
+    .page-pill-branded { background: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; }
+    .page-pill-agency  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
     /* ── Candidate count link ────────────────────────────── */
     .applicant-link { color: var(--leftnav-bg); text-decoration: none; font-weight: 600; }
     .applicant-link:hover { text-decoration: underline; }
@@ -225,16 +234,18 @@
                 <th>Salary</th>
                 <th>Deadline</th>
                 <th>Candidates</th>
+                <th>Pages</th>
                 <th>Status</th>
-                <th style="width:130px;"></th>
+                <th style="width:150px;"></th>
               </tr>
             </thead>
             <tbody>
 
-              <!-- Row 1 — Active -->
+              <!-- Row 1 — Active · branded job page + agency page -->
               <tr>
                 <td>
                   <div class="job-title">Police Officer — Entry Level</div>
+                  <div style="font-size:.72rem;color:#94a3b8;margin-top:.15rem;">/AustinPD/police-officer-2026</div>
                 </td>
                 <td>
                   <span class="d-inline-flex align-items-center gap-1">
@@ -246,17 +257,21 @@
                 <td><span class="salary-val">$62,400–$78,000</span></td>
                 <td><span class="dl-normal">Jun 30, 2026</span></td>
                 <td><a href="#" class="applicant-link">47</a></td>
+                <td>
+                  <span class="page-pill page-pill-branded" title="Has a branded job page"><i class="bi bi-window-fullscreen"></i> Job Page</span><br>
+                  <span class="page-pill page-pill-agency mt-1" title="Agency has a department page"><i class="bi bi-building"></i> Dept Page</span>
+                </td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default">Edit</a>
+                  <a href="jobs-post.html" class="act-default">Edit</a>
                   <span class="sep">·</span>
-                  <a href="#" class="act-default" target="_blank">View</a>
+                  <a href="jb-detail-branded.html" class="act-default" target="_blank">View</a>
                   <span class="sep">·</span>
                   <a href="#" class="act-danger">Close</a>
                 </td>
               </tr>
 
-              <!-- Row 2 — Active -->
+              <!-- Row 2 — Active · agency page only, no branded job page -->
               <tr>
                 <td>
                   <div class="job-title">Deputy Sheriff</div>
@@ -271,160 +286,111 @@
                 <td><span class="salary-val">$58,000–$72,500</span></td>
                 <td><span class="dl-amber">Jun 15, 2026</span></td>
                 <td><a href="#" class="applicant-link">23</a></td>
+                <td>
+                  <span class="page-pill page-pill-agency" title="Agency has a department page"><i class="bi bi-building"></i> Dept Page</span>
+                </td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
                   <a href="#" class="act-default">Edit</a>
                   <span class="sep">·</span>
-                  <a href="#" class="act-default" target="_blank">View</a>
+                  <a href="jb-detail.html" class="act-default" target="_blank">View</a>
                   <span class="sep">·</span>
                   <a href="#" class="act-danger">Close</a>
                 </td>
               </tr>
 
-              <!-- Row 3 — Active -->
+              <!-- Rows 3–8 — no pages attached -->
               <tr>
-                <td>
-                  <div class="job-title">Firefighter / EMT</div>
-                </td>
-                <td>
-                  <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#dc2626;"></span>
-                    Fire Services
-                  </span>
-                </td>
+                <td><div class="job-title">Firefighter / EMT</div></td>
+                <td><span class="d-inline-flex align-items-center gap-1"><span class="type-dot" style="background:#dc2626;"></span>Fire Services</span></td>
                 <td style="white-space:nowrap;">Houston, TX</td>
                 <td><span class="salary-val">$58,656–$74,880</span></td>
                 <td><span class="dl-normal">Jul 31, 2026</span></td>
                 <td><a href="#" class="applicant-link">31</a></td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default">Edit</a>
-                  <span class="sep">·</span>
-                  <a href="#" class="act-default" target="_blank">View</a>
-                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Edit</a><span class="sep">·</span>
+                  <a href="jb-detail.html" class="act-default" target="_blank">View</a><span class="sep">·</span>
                   <a href="#" class="act-danger">Close</a>
                 </td>
               </tr>
 
-              <!-- Row 4 — Active -->
               <tr>
-                <td>
-                  <div class="job-title">Emergency Dispatcher</div>
-                </td>
-                <td>
-                  <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#7c3aed;"></span>
-                    Emergency Dispatch
-                  </span>
-                </td>
+                <td><div class="job-title">Emergency Dispatcher</div></td>
+                <td><span class="d-inline-flex align-items-center gap-1"><span class="type-dot" style="background:#7c3aed;"></span>Emergency Dispatch</span></td>
                 <td style="white-space:nowrap;">Dallas, TX</td>
                 <td><span class="salary-val">$38,000–$50,000</span></td>
                 <td><span class="dl-normal">Jun 30, 2026</span></td>
                 <td><a href="#" class="applicant-link">19</a></td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default">Edit</a>
-                  <span class="sep">·</span>
-                  <a href="#" class="act-default" target="_blank">View</a>
-                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Edit</a><span class="sep">·</span>
+                  <a href="jb-detail.html" class="act-default" target="_blank">View</a><span class="sep">·</span>
                   <a href="#" class="act-danger">Close</a>
                 </td>
               </tr>
 
-              <!-- Row 5 — Active -->
               <tr>
-                <td>
-                  <div class="job-title">Corrections Officer I</div>
-                </td>
-                <td>
-                  <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#d97706;"></span>
-                    Corrections
-                  </span>
-                </td>
+                <td><div class="job-title">Corrections Officer I</div></td>
+                <td><span class="d-inline-flex align-items-center gap-1"><span class="type-dot" style="background:#d97706;"></span>Corrections</span></td>
                 <td style="white-space:nowrap;">Multiple Locations</td>
                 <td><span class="salary-val">$42,000–$55,000</span></td>
                 <td><span class="dl-normal">Jul 15, 2026</span></td>
                 <td><a href="#" class="applicant-link">12</a></td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default">Edit</a>
-                  <span class="sep">·</span>
-                  <a href="#" class="act-default" target="_blank">View</a>
-                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Edit</a><span class="sep">·</span>
+                  <a href="jb-detail.html" class="act-default" target="_blank">View</a><span class="sep">·</span>
                   <a href="#" class="act-danger">Close</a>
                 </td>
               </tr>
 
-              <!-- Row 6 — Draft -->
               <tr>
-                <td>
-                  <div class="job-title">Police Officer — Lateral Transfer</div>
-                </td>
-                <td>
-                  <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#1d4ed8;"></span>
-                    Law Enforcement
-                  </span>
-                </td>
+                <td><div class="job-title">Police Officer — Lateral Transfer</div></td>
+                <td><span class="d-inline-flex align-items-center gap-1"><span class="type-dot" style="background:#1d4ed8;"></span>Law Enforcement</span></td>
                 <td style="white-space:nowrap;">San Antonio, TX</td>
                 <td><span class="salary-val">$72,000–$88,000</span></td>
                 <td><span class="dl-none">—</span></td>
                 <td><span class="applicant-zero">8</span></td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-draft">Draft</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default">Edit</a>
-                  <span class="sep">·</span>
-                  <a href="#" class="act-default">Publish</a>
-                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Edit</a><span class="sep">·</span>
+                  <a href="#" class="act-default">Publish</a><span class="sep">·</span>
                   <a href="#" class="act-danger">Delete</a>
                 </td>
               </tr>
 
-              <!-- Row 7 — Draft -->
               <tr>
-                <td>
-                  <div class="job-title">Paramedic / Firefighter</div>
-                </td>
-                <td>
-                  <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#16a34a;"></span>
-                    EMS
-                  </span>
-                </td>
+                <td><div class="job-title">Paramedic / Firefighter</div></td>
+                <td><span class="d-inline-flex align-items-center gap-1"><span class="type-dot" style="background:#16a34a;"></span>EMS</span></td>
                 <td style="white-space:nowrap;">San Antonio, TX</td>
                 <td><span class="salary-val">$61,200–$77,400</span></td>
                 <td><span class="dl-none">—</span></td>
                 <td><span class="applicant-zero">0</span></td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-draft">Draft</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default">Edit</a>
-                  <span class="sep">·</span>
-                  <a href="#" class="act-default">Publish</a>
-                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Edit</a><span class="sep">·</span>
+                  <a href="#" class="act-default">Publish</a><span class="sep">·</span>
                   <a href="#" class="act-danger">Delete</a>
                 </td>
               </tr>
 
-              <!-- Row 8 — Closed (faded, title struck through) -->
               <tr class="closed-row">
-                <td>
-                  <div class="job-title">State Trooper</div>
-                </td>
-                <td>
-                  <span class="d-inline-flex align-items-center gap-1">
-                    <span class="type-dot" style="background:#1d4ed8;"></span>
-                    Law Enforcement
-                  </span>
-                </td>
+                <td><div class="job-title">State Trooper</div></td>
+                <td><span class="d-inline-flex align-items-center gap-1"><span class="type-dot" style="background:#1d4ed8;"></span>Law Enforcement</span></td>
                 <td style="white-space:nowrap;">Statewide</td>
                 <td><span class="salary-val">$65,000–$85,000</span></td>
                 <td><span class="dl-expired">Apr 30, 2026</span></td>
                 <td><a href="#" class="applicant-link">64</a></td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-closed">Closed</span></td>
                 <td class="action-links">
-                  <a href="#" class="act-default" target="_blank">View</a>
-                  <span class="sep">·</span>
+                  <a href="jb-detail.html" class="act-default" target="_blank">View</a><span class="sep">·</span>
                   <a href="#" class="act-default">Reopen</a>
                 </td>
               </tr>
@@ -447,6 +413,7 @@
           <li>Jobs scoped to <code>org_id</code> — agencies only see their own postings.</li>
           <li>"View" opens the public-facing job detail page in a new tab (<code>/jobs/{slug}</code>).</li>
           <li>"Candidates" count links to a job candidates view (not yet mocked up) — <code>GET /jobs/{id}/candidates</code>.</li>
+          <li><strong>Pages column:</strong> "Job Page" pill (purple) = this job has a branded web-builder page attached (<code>listing_page_type = "branded"</code>). "Dept Page" pill (blue) = the posting agency has a department-level web-builder page set in their org settings. Both can be present. The "View" action link resolves to the branded page URL when a job page exists, or to the standard <code>jb-detail</code> view otherwise.</li>
           <li>Job categories are <strong>global platform-level</strong> picklist values managed by platform admins only — individual agencies cannot add or modify categories. This keeps the public-facing job board filter consistent across all agencies.</li>
           <li>Closing a job sets <code>status = closed</code> and <code>closedAt = now()</code>. The public listing immediately returns 404 or "Applications Closed" state.</li>
           <li>"Reopen" sets <code>status = active</code>, resets <code>closedAt</code>, optionally prompts for new deadline.</li>

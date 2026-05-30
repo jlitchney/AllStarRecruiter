@@ -378,6 +378,40 @@
       border: 1px solid #e2e8f0;
     }
 
+    /* ── Agency avatar (logo stand-in) ──────────────────────────── */
+    .agency-avatar {
+      width: 38px; height: 38px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 800; letter-spacing: .02em;
+      color: #fff; background: var(--navy);
+    }
+
+    /* ── Branded job page indicator ─────────────────────────────── */
+    .branded-pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: #ede9fe; color: #5b21b6;
+      border: 1px solid #ddd6fe;
+      font-size: .67rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; padding: .18rem .55rem; border-radius: 99px;
+    }
+
+    /* ── Agency page link ────────────────────────────────────────── */
+    .agency-page-link {
+      font-size: .75rem; font-weight: 600;
+      color: var(--navy); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .25rem;
+      opacity: .75; transition: opacity .15s;
+    }
+    .agency-page-link:hover { opacity: 1; text-decoration: underline; color: var(--navy); }
+
+    /* ── Branded card accent ─────────────────────────────────────── */
+    .job-card.has-branded-page {
+      border-left: 3px solid #7c3aed;
+    }
+    .job-card.has-agency-page {
+      border-left: 3px solid var(--navy);
+    }
+
     /* ── Pagination ─────────────────────────────────────────────── */
     .pagination .page-link {
       color: var(--navy);
@@ -713,41 +747,72 @@
       </div>
 
       <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 1: Police Officer — Entry Level               -->
+      <!-- JOB CARD 1: Branded job page + agency page             -->
+      <!-- Agency has built a dept page AND a specific job page   -->
+      <!-- "View Job" → branded job detail page                   -->
       <!-- ─────────────────────────────────────────────────────── -->
-      <div class="job-card">
+      <div class="job-card has-branded-page">
         <div class="job-card-top">
           <span class="cat-badge badge-law">Law Enforcement</span>
-          <span class="posted-date">Posted 2 days ago</span>
+          <div class="d-flex align-items-center gap-2">
+            <span class="branded-pill"><i class="bi bi-window-fullscreen"></i> Branded Page</span>
+            <span class="posted-date">Posted 2 days ago</span>
+          </div>
         </div>
-        <div class="job-title">Police Officer — Entry Level</div>
-        <div class="job-meta">
-          <span><i class="bi bi-building"></i> Austin Police Department</span>
-          <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
-          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $62,400 – $78,000 / yr</span>
+        <div class="d-flex align-items-start gap-2 mb-1">
+          <div class="agency-avatar" title="Austin Police Department">APD</div>
+          <div>
+            <div class="job-title">Police Officer — Entry Level</div>
+            <div class="job-meta" style="margin-bottom:.3rem;">
+              <span>
+                <i class="bi bi-building"></i>
+                Austin Police Department
+                <a href="for-agencies.html" class="agency-page-link ms-1" title="View agency page">
+                  <i class="bi bi-box-arrow-up-right"></i> Agency Page
+                </a>
+              </span>
+              <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
+              <span class="job-salary"><i class="bi bi-currency-dollar"></i> $62,400 – $78,000 / yr</span>
+            </div>
+          </div>
         </div>
         <div class="job-card-bottom">
           <span class="type-badge">Full-Time</span>
           <div class="ms-auto">
-            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <a href="jb-detail-branded.html" class="btn btn-sm btn-view-job" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">
+              <i class="bi bi-window-fullscreen me-1" style="font-size:.75rem;"></i>View Job →
+            </a>
             <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
           </div>
         </div>
       </div>
 
       <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 2: Deputy Sheriff                             -->
+      <!-- JOB CARD 2: Agency page only, no branded job page      -->
+      <!-- Agency has a dept page but this job uses standard view -->
+      <!-- "View Job" → standard jb-detail.html                   -->
       <!-- ─────────────────────────────────────────────────────── -->
-      <div class="job-card">
+      <div class="job-card has-agency-page">
         <div class="job-card-top">
           <span class="cat-badge badge-law">Law Enforcement</span>
           <span class="posted-date">Posted 4 days ago</span>
         </div>
-        <div class="job-title">Deputy Sheriff</div>
-        <div class="job-meta">
-          <span><i class="bi bi-building"></i> Travis County Sheriff's Office</span>
-          <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
-          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $58,000 – $72,500 / yr</span>
+        <div class="d-flex align-items-start gap-2 mb-1">
+          <div class="agency-avatar" style="background:#1e40af;" title="Travis County Sheriff's Office">TCSO</div>
+          <div>
+            <div class="job-title">Deputy Sheriff</div>
+            <div class="job-meta" style="margin-bottom:.3rem;">
+              <span>
+                <i class="bi bi-building"></i>
+                Travis County Sheriff's Office
+                <a href="#" class="agency-page-link ms-1" title="View agency page">
+                  <i class="bi bi-box-arrow-up-right"></i> Agency Page
+                </a>
+              </span>
+              <span><i class="bi bi-geo-alt"></i> Travis County, TX</span>
+              <span class="job-salary"><i class="bi bi-currency-dollar"></i> $58,000 – $72,500 / yr</span>
+            </div>
+          </div>
         </div>
         <div class="job-card-bottom">
           <span class="type-badge">Full-Time</span>
@@ -759,7 +824,7 @@
       </div>
 
       <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 3: Firefighter / EMT                          -->
+      <!-- JOB CARD 3–6: Standard — no agency or job pages        -->
       <!-- ─────────────────────────────────────────────────────── -->
       <div class="job-card">
         <div class="job-card-top">
@@ -781,9 +846,6 @@
         </div>
       </div>
 
-      <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 4: State Trooper — Lateral Transfer           -->
-      <!-- ─────────────────────────────────────────────────────── -->
       <div class="job-card">
         <div class="job-card-top">
           <span class="cat-badge badge-law">Law Enforcement</span>
@@ -804,9 +866,6 @@
         </div>
       </div>
 
-      <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 5: Paramedic / Firefighter                    -->
-      <!-- ─────────────────────────────────────────────────────── -->
       <div class="job-card">
         <div class="job-card-top">
           <span class="cat-badge badge-ems">EMS / Paramedic</span>
@@ -827,9 +886,6 @@
         </div>
       </div>
 
-      <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 6: Corrections Officer I                      -->
-      <!-- ─────────────────────────────────────────────────────── -->
       <div class="job-card">
         <div class="job-card-top">
           <span class="cat-badge badge-corr">Corrections</span>
@@ -885,7 +941,10 @@
       <li><strong>Hosting:</strong> Co-hosted on the same Azure server as the AllStar Recruiter CRM. The job board is a public-facing section of the same application — served under a subdomain (e.g. <code>jobs.allstarrecruiter.com</code>) or a path prefix (e.g. <code>/jobs</code>). No separate deployment needed.</li>
       <li>The job board uses <strong>no CRM app shell</strong> (no sidebar, no topbar) — it has its own public-facing navbar and footer while sharing the same backend, database, and Azure blob storage.</li>
       <li>Job data is served from the same CRM database via <strong>public read-only routes</strong> — no auth required to browse. These routes are flagged as public in the API middleware and bypass the CRM auth guard.</li>
-      <li>Each job card links to <code>/jobs/{id}</code> (the job detail page) for the full description and apply flow.</li>
+      <li>Each job card links to <code>/jobs/{id}</code>. The router checks <code>job.listing_page_type</code>: if <code>"branded"</code>, redirect to the attached web-builder page URL (<code>/OrgSlug/PageSlug</code>); if <code>"standard"</code>, render the default job detail view.</li>
+      <li><strong>Agency page:</strong> If the posting agency has a <code>agency_page_url</code> set in their org settings, the job card shows their logo avatar and an "Agency Page →" link. The logo is pulled from <code>org.logoUrl</code> (falls back to initials avatar).</li>
+      <li><strong>Branded job page:</strong> Jobs with <code>listing_page_type = "branded"</code> show the purple "Branded Page" pill and the "View Job →" button uses the purple style. These route to the web-builder page, not <code>jb-detail</code>.</li>
+      <li><strong>Standard job (no pages):</strong> No logo, no pill, navy "View Job →" button, routes to standard <code>jb-detail</code>.</li>
       <li>"Save Jobs" requires a candidate account — the login/register flow is not yet built. Clicking the link or bookmark icon should prompt sign-up/login.</li>
       <li>Filters are reflected as <strong>URL query params</strong> (e.g. <code>?category=law-enforcement&amp;location=austin&amp;salary=50k</code>) for shareable/bookmarkable URLs.</li>
       <li>"Post a Job" in the navbar links to the AllStar Recruiter CRM at <code>/jobs/new</code> (agency login required) — same server, no external redirect needed.</li>
