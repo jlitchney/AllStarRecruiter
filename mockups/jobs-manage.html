@@ -80,7 +80,7 @@
     .dl-normal { color: #374151; }
     .dl-none   { color: #94a3b8; }
 
-    /* ── Applicant count link ────────────────────────────── */
+    /* ── Candidate count link ────────────────────────────── */
     .applicant-link { color: var(--leftnav-bg); text-decoration: none; font-weight: 600; }
     .applicant-link:hover { text-decoration: underline; }
     .applicant-zero { color: #94a3b8; }
@@ -136,8 +136,8 @@
       <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
         <h4 class="fw-bold mb-0">Job Postings</h4>
         <div class="d-flex align-items-center gap-2">
-          <a href="#" class="text-muted small text-decoration-none">
-            <i class="bi bi-tags me-1"></i>Manage Job Categories
+          <a href="#" class="text-muted small text-decoration-none" title="Global admin setting — managed at the platform level">
+            <i class="bi bi-tags me-1"></i>Job Categories <i class="bi bi-lock ms-1" style="font-size:.65rem;"></i>
           </a>
           <a href="jobs-post.html" class="btn btn-sm" style="background:var(--leftnav-bg);color:#fff;font-weight:600;">
             <i class="bi bi-plus-lg me-1"></i>Post New Job
@@ -158,7 +158,7 @@
           <div class="icon" style="background:#eff6ff;color:#1d4ed8;"><i class="bi bi-people-fill"></i></div>
           <div>
             <div class="num" style="color:var(--leftnav-bg);">147</div>
-            <div class="lbl">Total Applicants</div>
+            <div class="lbl">Total Candidates</div>
           </div>
         </div>
         <div class="summary-card">
@@ -224,7 +224,7 @@
                 <th>Location</th>
                 <th>Salary</th>
                 <th>Deadline</th>
-                <th>Applicants</th>
+                <th>Candidates</th>
                 <th>Status</th>
                 <th style="width:130px;"></th>
               </tr>
@@ -446,7 +446,8 @@
           <li>Route: <code>GET /jobs</code> (CRM, authenticated)</li>
           <li>Jobs scoped to <code>org_id</code> — agencies only see their own postings.</li>
           <li>"View" opens the public-facing job detail page in a new tab (<code>/jobs/{slug}</code>).</li>
-          <li>"Applicants" count links to a job applicants view (not yet mocked up) — <code>GET /jobs/{id}/applicants</code>.</li>
+          <li>"Candidates" count links to a job candidates view (not yet mocked up) — <code>GET /jobs/{id}/candidates</code>.</li>
+          <li>Job categories are <strong>global platform-level</strong> picklist values managed by platform admins only — individual agencies cannot add or modify categories. This keeps the public-facing job board filter consistent across all agencies.</li>
           <li>Closing a job sets <code>status = closed</code> and <code>closedAt = now()</code>. The public listing immediately returns 404 or "Applications Closed" state.</li>
           <li>"Reopen" sets <code>status = active</code>, resets <code>closedAt</code>, optionally prompts for new deadline.</li>
           <li>Draft jobs are invisible on the public board until explicitly published.</li>

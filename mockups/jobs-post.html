@@ -801,81 +801,116 @@
             </div>
           </div>
 
-          <!-- ─── Section 7: Association Tags ──────────────────────────── -->
+          <!-- ─── Section 7: Position Tag ───────────────────────────────── -->
           <div class="card border-0 shadow-sm mb-3">
             <div class="card-body p-4">
               <div class="form-section-title" style="margin-top:0;padding-top:0;border-top:none;">
-                <i class="bi bi-diagram-3 me-1"></i>Association Tags
+                <i class="bi bi-tag me-1"></i>Position Tag
               </div>
               <p class="form-text mb-3">
-                Tags applied to candidates automatically based on their application status.
-                These connect job applicants to your <strong>CRM workflows</strong>.
+                When a candidate submits an application for this position, they are
+                <strong>automatically tagged</strong> with the selected tag. Use this to
+                trigger <strong>CRM workflow automations</strong> — routing candidates into
+                pipelines, sending follow-up sequences, or populating exam pools.
               </p>
 
-              <div class="row g-3">
-
-                <!-- Applied Tag -->
-                <div class="col-md-6">
-                  <div class="assoc-tag-field">
-                    <div class="assoc-tag-field-header">
-                      <span class="atf-icon applied"><i class="bi bi-send"></i></span>
-                      <div>
-                        <div class="atf-title">Applied Tag</div>
-                        <div class="atf-desc">Applied when a candidate submits an application</div>
-                      </div>
-                    </div>
-                    <select class="form-select form-select-sm">
-                      <option>— None —</option>
-                      <option selected>Job Applicants 2026</option>
-                      <option>Police Applicants</option>
-                      <option>Written Exam Pool</option>
-                    </select>
-                    <div class="new-tag-panel mt-2">
-                      <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
-                      <select class="form-select form-select-sm mb-2">
-                        <option>Select group…</option>
-                        <option selected>Law Enforcement</option>
-                        <option>Applicant Pools</option>
-                        <option>Testing / Exam</option>
-                        <option>General</option>
-                      </select>
-                      <input type="text" class="form-control form-control-sm mb-2" placeholder="Tag name…">
-                      <button class="btn btn-primary btn-sm w-100">Create</button>
-                    </div>
+              <!-- Primary Position Tag — full width, prominent -->
+              <div class="assoc-tag-field" style="border-color:#245194;border-width:2px;background:#f5f8ff;">
+                <div class="assoc-tag-field-header">
+                  <span class="atf-icon applied"><i class="bi bi-tag-fill"></i></span>
+                  <div>
+                    <div class="atf-title">Position Tag <span style="font-size:.7rem;font-weight:400;color:#6b7280;margin-left:.4rem;">applied on application submit</span></div>
+                    <div class="atf-desc">Select an existing tag or create a new one specifically for this position.</div>
                   </div>
                 </div>
-
-                <!-- Hired Tag -->
-                <div class="col-md-6">
-                  <div class="assoc-tag-field">
-                    <div class="assoc-tag-field-header">
-                      <span class="atf-icon hired"><i class="bi bi-check-circle"></i></span>
-                      <div>
-                        <div class="atf-title">Hired Tag</div>
-                        <div class="atf-desc">Applied when a candidate is marked as Hired</div>
-                      </div>
-                    </div>
-                    <select class="form-select form-select-sm">
-                      <option selected>— None —</option>
-                      <option>APD Hired 2026</option>
-                      <option>New Hires</option>
-                    </select>
-                    <div class="new-tag-panel mt-2">
-                      <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
-                      <select class="form-select form-select-sm mb-2">
-                        <option>Select group…</option>
-                        <option selected>Law Enforcement</option>
-                        <option>Applicant Pools</option>
-                        <option>Testing / Exam</option>
-                        <option>General</option>
-                      </select>
-                      <input type="text" class="form-control form-control-sm mb-2" placeholder="Tag name…">
-                      <button class="btn btn-primary btn-sm w-100">Create</button>
-                    </div>
-                  </div>
+                <select class="form-select form-select-sm">
+                  <option>— No tag —</option>
+                  <option selected>Police Officer Applicants 2026</option>
+                  <option>APD Applicant Pool</option>
+                  <option>Written Exam Pool</option>
+                  <option>Law Enforcement — Open</option>
+                </select>
+                <div class="new-tag-panel mt-2">
+                  <div class="small fw-semibold mb-2" style="color:#374151;">Or create new tag:</div>
+                  <select class="form-select form-select-sm mb-2">
+                    <option>Select group…</option>
+                    <option selected>Law Enforcement</option>
+                    <option>Applicant Pools</option>
+                    <option>Testing / Exam</option>
+                    <option>General</option>
+                  </select>
+                  <input type="text" class="form-control form-control-sm mb-2" placeholder="Tag name…">
+                  <button class="btn btn-primary btn-sm w-100">Create &amp; Select</button>
                 </div>
-
               </div>
+
+              <!-- Optional Status Tags ─────────────────────────────────── -->
+              <div class="mt-4">
+                <div class="small fw-bold text-uppercase mb-2" style="color:#6b7280;letter-spacing:.05em;">Optional Status Tags</div>
+                <div class="row g-3">
+
+                  <!-- Hired Tag -->
+                  <div class="col-md-6">
+                    <div class="assoc-tag-field">
+                      <div class="assoc-tag-field-header">
+                        <span class="atf-icon hired"><i class="bi bi-check-circle"></i></span>
+                        <div>
+                          <div class="atf-title">Hired Tag</div>
+                          <div class="atf-desc">Applied when a candidate is marked as Hired</div>
+                        </div>
+                      </div>
+                      <select class="form-select form-select-sm">
+                        <option selected>— None —</option>
+                        <option>APD Hired 2026</option>
+                        <option>New Hires</option>
+                      </select>
+                      <div class="new-tag-panel mt-2">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
+                        <select class="form-select form-select-sm mb-2">
+                          <option>Select group…</option>
+                          <option>Law Enforcement</option>
+                          <option>Applicant Pools</option>
+                          <option>General</option>
+                        </select>
+                        <input type="text" class="form-control form-control-sm mb-2" placeholder="Tag name…">
+                        <button class="btn btn-primary btn-sm w-100">Create</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Disqualified Tag -->
+                  <div class="col-md-6">
+                    <div class="assoc-tag-field">
+                      <div class="assoc-tag-field-header">
+                        <span class="atf-icon" style="background:#fee2e2;color:#b91c1c;"><i class="bi bi-x-circle"></i></span>
+                        <div>
+                          <div class="atf-title">Disqualified Tag</div>
+                          <div class="atf-desc">Applied when a candidate is marked as Disqualified</div>
+                        </div>
+                      </div>
+                      <select class="form-select form-select-sm">
+                        <option selected>— None —</option>
+                        <option>DQ — Background</option>
+                        <option>DQ — Written Exam</option>
+                        <option>No Longer Interested</option>
+                      </select>
+                      <div class="new-tag-panel mt-2">
+                        <div class="small fw-semibold mb-2" style="color:#374151;">Or create new:</div>
+                        <select class="form-select form-select-sm mb-2">
+                          <option>Select group…</option>
+                          <option>Law Enforcement</option>
+                          <option>Applicant Pools</option>
+                          <option>General</option>
+                        </select>
+                        <input type="text" class="form-control form-control-sm mb-2" placeholder="Tag name…">
+                        <button class="btn btn-primary btn-sm w-100">Create</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
           </div>
 
