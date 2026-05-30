@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jobs — AllStar Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+  <style>
+    /* ── Stat cards ──────────────────────────────────────── */
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+    }
+    .summary-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: var(--radius);
+      padding: .75rem 1rem; display: flex; align-items: center; gap: .75rem;
+    }
+    .summary-card .icon {
+      width: 36px; height: 36px; border-radius: .25rem;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .summary-card .num { font-size: 1.35rem; font-weight: 800; line-height: 1; }
+    .summary-card .lbl { font-size: .72rem; color: #6b7280; }
+
+    @media (max-width: 768px) {
+      .summary-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── Category dot ────────────────────────────────────── */
+    .type-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      display: inline-block; flex-shrink: 0;
+    }
+
+    /* ── Status badges ───────────────────────────────────── */
+    .job-badge {
+      display: inline-block; font-size: .7rem; font-weight: 700;
+      padding: .15rem .55rem; border-radius: 99px;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .badge-active  { background: #dcfce7; color: #166534; }
+    .badge-draft   { background: #f3f4f6; color: #6b7280; }
+    .badge-closed  { background: #f1f5f9; color: #94a3b8; }
+
+    /* ── Table tweaks ────────────────────────────────────── */
+    .jobs-table { font-size: .84rem; }
+    .jobs-table th {
+      padding: .75rem 1rem; font-size: .72rem; color: #64748b;
+      text-transform: uppercase; letter-spacing: .05em; font-weight: 600;
+      background: #f8fafc;
+    }
+    .jobs-table td { padding: .7rem 1rem; vertical-align: middle; }
+    .jobs-table .job-title { font-weight: 600; color: #111827; }
+    .jobs-table .salary-val { font-size: .78rem; color: #6b7280; }
+    .jobs-table .closed-row { opacity: .65; }
+    .jobs-table .closed-row .job-title { text-decoration: line-through; color: #6b7280; }
+
+    /* ── Action links ────────────────────────────────────── */
+    .action-links a {
+      font-size: .78rem; text-decoration: none; white-space: nowrap;
+    }
+    .action-links .sep {
+      font-size: .78rem; color: #cbd5e1; margin: 0 .2rem;
+    }
+    .act-default { color: var(--leftnav-bg); }
+    .act-default:hover { color: var(--leftnav-bg); text-decoration: underline; }
+    .act-danger  { color: #6b7280; }
+    .act-danger:hover  { color: #b91c1c !important; text-decoration: underline; }
+
+    /* ── Deadline colors ─────────────────────────────────── */
+    .dl-red    { color: #b91c1c; font-weight: 600; }
+    .dl-amber  { color: #92400e; font-weight: 600; }
+    .dl-expired { color: #b91c1c; font-weight: 600; text-decoration: line-through; }
+    .dl-normal { color: #374151; }
+    .dl-none   { color: #94a3b8; }
+
+    /* ── Applicant count link ────────────────────────────── */
+    .applicant-link { color: var(--leftnav-bg); text-decoration: none; font-weight: 600; }
+    .applicant-link:hover { text-decoration: underline; }
+    .applicant-zero { color: #94a3b8; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="brand">
+      <a class="logo-wrap" href="../index.html" aria-label="Home">
+        <span style="color:#fff;font-weight:800;font-size:.95rem;line-height:1.2;text-align:center;">AllStar<br>Recruiter</span>
+      </a>
+    </div>
+    <nav class="mt-1">
+      <a href="#" class="nav-link"><i class="bi bi-people"></i><span class="nav-label">Candidates</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-building"></i><span class="nav-label">Employers</span></a>
+      <a href="jobs-manage.html" class="nav-link active"><i class="bi bi-briefcase"></i><span class="nav-label">Jobs</span></a>
+      <a href="events-list.html" class="nav-link"><i class="bi bi-calendar3"></i><span class="nav-label">Events</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-broadcast"></i><span class="nav-label">Message Center</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-bar-chart-line"></i><span class="nav-label">Reports</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-gear"></i><span class="nav-label">Settings</span></a>
+    </nav>
+    <div class="mt-auto p-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar avatar-sm">JL</div>
+        <span class="nav-label small" style="color:rgba(255,255,255,.55)">Jason L.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ──────────────────────────────────────────────────────────── -->
+  <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
+    <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
+    <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+      <h1 class="h6 mb-0 text-white fw-bold">Jobs</h1>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+      <button class="btn btn-sm" style="color:#fff;" title="Notifications"><i class="bi bi-bell"></i></button>
+      <div class="avatar avatar-sm">JL</div>
+    </div>
+  </header>
+
+  <!-- ── Quick bar (empty) ───────────────────────────────────────────────── -->
+  <div class="quick-bar" style="grid-area:quick;"></div>
+
+  <!-- ── Main content ────────────────────────────────────────────────────── -->
+  <main class="content">
+    <div class="page">
+
+      <!-- Page header -->
+      <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+        <h4 class="fw-bold mb-0">Job Postings</h4>
+        <div class="d-flex align-items-center gap-2">
+          <a href="#" class="text-muted small text-decoration-none">
+            <i class="bi bi-tags me-1"></i>Manage Job Categories
+          </a>
+          <a href="jobs-post.html" class="btn btn-sm" style="background:var(--leftnav-bg);color:#fff;font-weight:600;">
+            <i class="bi bi-plus-lg me-1"></i>Post New Job
+          </a>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="summary-strip">
+        <div class="summary-card">
+          <div class="icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-briefcase-fill"></i></div>
+          <div>
+            <div class="num" style="color:#166534;">8</div>
+            <div class="lbl">Active Postings</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="icon" style="background:#eff6ff;color:#1d4ed8;"><i class="bi bi-people-fill"></i></div>
+          <div>
+            <div class="num" style="color:var(--leftnav-bg);">147</div>
+            <div class="lbl">Total Applicants</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="icon" style="background:#f3f4f6;color:#6b7280;"><i class="bi bi-clock-history"></i></div>
+          <div>
+            <div class="num" style="color:#6b7280;">34 <span style="font-size:.85rem;font-weight:500;">days</span></div>
+            <div class="lbl">Avg. Time to Fill</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-calendar-x"></i></div>
+          <div>
+            <div class="num" style="color:#92400e;">3</div>
+            <div class="lbl">Closing This Month</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter / search bar -->
+      <div class="card border-0 mb-3" style="background:#f8f9fa;">
+        <div class="card-body py-2 px-3">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-4">
+              <input type="search" class="form-control form-control-sm" placeholder="Search job titles…">
+            </div>
+            <div class="col-md-3">
+              <select class="form-select form-select-sm">
+                <option>All Statuses</option>
+                <option>Active</option>
+                <option>Draft</option>
+                <option>Closed</option>
+                <option>Expired</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select class="form-select form-select-sm">
+                <option>All Categories</option>
+                <option>Law Enforcement</option>
+                <option>Fire Services</option>
+                <option>EMS</option>
+                <option>Corrections</option>
+                <option>Emergency Dispatch</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-select form-select-sm">
+                <option>All staff</option>
+                <option selected>My postings</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs table -->
+      <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+          <table class="table table-hover jobs-table mb-0">
+            <thead>
+              <tr>
+                <th>Job Title</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Salary</th>
+                <th>Deadline</th>
+                <th>Applicants</th>
+                <th>Status</th>
+                <th style="width:130px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Row 1 — Active -->
+              <tr>
+                <td>
+                  <div class="job-title">Police Officer — Entry Level</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#1d4ed8;"></span>
+                    Law Enforcement
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">Austin, TX</td>
+                <td><span class="salary-val">$62,400–$78,000</span></td>
+                <td><span class="dl-normal">Jun 30, 2026</span></td>
+                <td><a href="#" class="applicant-link">47</a></td>
+                <td><span class="job-badge badge-active">Active</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default" target="_blank">View</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Close</a>
+                </td>
+              </tr>
+
+              <!-- Row 2 — Active -->
+              <tr>
+                <td>
+                  <div class="job-title">Deputy Sheriff</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#1d4ed8;"></span>
+                    Law Enforcement
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">Travis County, TX</td>
+                <td><span class="salary-val">$58,000–$72,500</span></td>
+                <td><span class="dl-amber">Jun 15, 2026</span></td>
+                <td><a href="#" class="applicant-link">23</a></td>
+                <td><span class="job-badge badge-active">Active</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default" target="_blank">View</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Close</a>
+                </td>
+              </tr>
+
+              <!-- Row 3 — Active -->
+              <tr>
+                <td>
+                  <div class="job-title">Firefighter / EMT</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#dc2626;"></span>
+                    Fire Services
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">Houston, TX</td>
+                <td><span class="salary-val">$58,656–$74,880</span></td>
+                <td><span class="dl-normal">Jul 31, 2026</span></td>
+                <td><a href="#" class="applicant-link">31</a></td>
+                <td><span class="job-badge badge-active">Active</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default" target="_blank">View</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Close</a>
+                </td>
+              </tr>
+
+              <!-- Row 4 — Active -->
+              <tr>
+                <td>
+                  <div class="job-title">Emergency Dispatcher</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#7c3aed;"></span>
+                    Emergency Dispatch
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">Dallas, TX</td>
+                <td><span class="salary-val">$38,000–$50,000</span></td>
+                <td><span class="dl-normal">Jun 30, 2026</span></td>
+                <td><a href="#" class="applicant-link">19</a></td>
+                <td><span class="job-badge badge-active">Active</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default" target="_blank">View</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Close</a>
+                </td>
+              </tr>
+
+              <!-- Row 5 — Active -->
+              <tr>
+                <td>
+                  <div class="job-title">Corrections Officer I</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#d97706;"></span>
+                    Corrections
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">Multiple Locations</td>
+                <td><span class="salary-val">$42,000–$55,000</span></td>
+                <td><span class="dl-normal">Jul 15, 2026</span></td>
+                <td><a href="#" class="applicant-link">12</a></td>
+                <td><span class="job-badge badge-active">Active</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default" target="_blank">View</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Close</a>
+                </td>
+              </tr>
+
+              <!-- Row 6 — Draft -->
+              <tr>
+                <td>
+                  <div class="job-title">Police Officer — Lateral Transfer</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#1d4ed8;"></span>
+                    Law Enforcement
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">San Antonio, TX</td>
+                <td><span class="salary-val">$72,000–$88,000</span></td>
+                <td><span class="dl-none">—</span></td>
+                <td><span class="applicant-zero">8</span></td>
+                <td><span class="job-badge badge-draft">Draft</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Publish</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Delete</a>
+                </td>
+              </tr>
+
+              <!-- Row 7 — Draft -->
+              <tr>
+                <td>
+                  <div class="job-title">Paramedic / Firefighter</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#16a34a;"></span>
+                    EMS
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">San Antonio, TX</td>
+                <td><span class="salary-val">$61,200–$77,400</span></td>
+                <td><span class="dl-none">—</span></td>
+                <td><span class="applicant-zero">0</span></td>
+                <td><span class="job-badge badge-draft">Draft</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default">Edit</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Publish</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-danger">Delete</a>
+                </td>
+              </tr>
+
+              <!-- Row 8 — Closed (faded, title struck through) -->
+              <tr class="closed-row">
+                <td>
+                  <div class="job-title">State Trooper</div>
+                </td>
+                <td>
+                  <span class="d-inline-flex align-items-center gap-1">
+                    <span class="type-dot" style="background:#1d4ed8;"></span>
+                    Law Enforcement
+                  </span>
+                </td>
+                <td style="white-space:nowrap;">Statewide</td>
+                <td><span class="salary-val">$65,000–$85,000</span></td>
+                <td><span class="dl-expired">Apr 30, 2026</span></td>
+                <td><a href="#" class="applicant-link">64</a></td>
+                <td><span class="job-badge badge-closed">Closed</span></td>
+                <td class="action-links">
+                  <a href="#" class="act-default" target="_blank">View</a>
+                  <span class="sep">·</span>
+                  <a href="#" class="act-default">Reopen</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination row -->
+        <div class="d-flex align-items-center justify-content-between px-3 py-2 border-top bg-light" style="font-size:.8rem;">
+          <span class="text-muted">Showing 1–8 of 8 postings</span>
+        </div>
+      </div>
+
+      <!-- Dev notes -->
+      <div class="mt-4 p-3 rounded" style="background:#fffbeb;border:1px solid #fcd34d;font-size:.78rem;">
+        <strong style="color:#92400e;">Dev Notes:</strong>
+        <ul class="mb-0 mt-1" style="color:#374151;padding-left:1.2rem;">
+          <li>Route: <code>GET /jobs</code> (CRM, authenticated)</li>
+          <li>Jobs scoped to <code>org_id</code> — agencies only see their own postings.</li>
+          <li>"View" opens the public-facing job detail page in a new tab (<code>/jobs/{slug}</code>).</li>
+          <li>"Applicants" count links to a job applicants view (not yet mocked up) — <code>GET /jobs/{id}/applicants</code>.</li>
+          <li>Closing a job sets <code>status = closed</code> and <code>closedAt = now()</code>. The public listing immediately returns 404 or "Applications Closed" state.</li>
+          <li>"Reopen" sets <code>status = active</code>, resets <code>closedAt</code>, optionally prompts for new deadline.</li>
+          <li>Draft jobs are invisible on the public board until explicitly published.</li>
+          <li>Expired jobs (past deadline with no manual close) should auto-set to <code>status = expired</code> via a scheduled job.</li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
