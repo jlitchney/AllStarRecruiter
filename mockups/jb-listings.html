@@ -784,15 +784,16 @@
       <!-- Thumbnail preview of the branded page shown in card    -->
       <!-- "View Job" → branded job detail page                   -->
       <!-- ─────────────────────────────────────────────────────── -->
-      <div class="job-card has-branded-page" style="padding-right:1rem;">
-        <div class="d-flex gap-3 align-items-start">
+      <div class="job-card has-branded-page">
+        <!-- Top row: category + date -->
+        <div class="job-card-top" style="margin-bottom:.4rem;">
+          <span class="cat-badge badge-law">Law Enforcement</span>
+          <span class="posted-date">Posted 2 days ago</span>
+        </div>
 
-          <!-- Main content -->
+        <!-- Middle: text left, thumbnail right -->
+        <div class="d-flex gap-3 align-items-start mb-2">
           <div class="flex-grow-1 min-w-0">
-            <div class="job-card-top" style="margin-bottom:.4rem;">
-              <span class="cat-badge badge-law">Law Enforcement</span>
-              <span class="posted-date">Posted 2 days ago</span>
-            </div>
             <div class="d-flex align-items-center gap-2 mb-1">
               <div class="agency-avatar" title="Austin Police Department">APD</div>
               <div class="job-title" style="margin-bottom:0;">Police Officer — Entry Level</div>
@@ -808,21 +809,20 @@
               <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
               <span class="job-salary"><i class="bi bi-currency-dollar"></i> $62,400 – $78,000 / yr</span>
             </div>
-            <div class="job-card-bottom">
-              <span class="type-badge">Full-Time</span>
-              <div class="ms-auto">
-                <a href="jb-detail-branded.html" class="btn btn-sm btn-view-job" style="background:var(--navy);color:#fff;border-color:var(--navy);">View Job →</a>
-                <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
-              </div>
-            </div>
           </div>
-
-          <!-- Page thumbnail -->
-          <a href="jb-detail-branded.html" class="page-thumb-wrap d-none d-md-block" title="Preview this listing">
+          <a href="jb-detail-branded.html" class="page-thumb-wrap d-none d-md-block" title="View job">
             <iframe src="jb-detail-branded.html" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
-            <div class="thumb-hover-overlay"><span>View Full Listing</span></div>
+            <div class="thumb-hover-overlay"><span>View Job</span></div>
           </a>
+        </div>
 
+        <!-- Bottom: full-width, button on the right -->
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail-branded.html" class="btn btn-sm btn-view-job" style="background:var(--navy);color:#fff;border-color:var(--navy);">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
         </div>
       </div>
 
