@@ -695,14 +695,15 @@
 
         <!-- Location -->
         <div class="filter-section-label">Location</div>
+        <input type="text" class="form-control form-control-sm mb-2"
+               placeholder="City or zip code…" value="Austin, TX"
+               style="border-radius:6px;">
         <select class="form-select form-select-sm">
-          <option>All of Texas</option>
-          <option>Houston</option>
-          <option>Dallas</option>
-          <option>San Antonio</option>
-          <option selected>Austin</option>
-          <option>Fort Worth</option>
-          <option>El Paso</option>
+          <option>Within 10 miles</option>
+          <option>Within 25 miles</option>
+          <option selected>Within 50 miles</option>
+          <option>Within 100 miles</option>
+          <option>Anywhere in Texas</option>
         </select>
 
         <!-- Salary Range -->
@@ -772,7 +773,7 @@
           Law Enforcement <span class="remove">×</span>
         </span>
         <span class="filter-chip">
-          Austin <span class="remove">×</span>
+          Within 50 mi of Austin, TX <span class="remove">×</span>
         </span>
         <span class="filter-chip">
           $50k+ <span class="remove">×</span>
@@ -985,7 +986,7 @@
       <li><strong>Branded job page:</strong> Jobs with <code>listing_page_type = "branded"</code> show the purple "Branded Page" pill and the "View Job →" button uses the purple style. These route to the web-builder page, not <code>jb-detail</code>.</li>
       <li><strong>Standard job (no pages):</strong> No logo, no pill, navy "View Job →" button, routes to standard <code>jb-detail</code>.</li>
       <li>"Save Jobs" requires a candidate account — the login/register flow is not yet built. Clicking the link or bookmark icon should prompt sign-up/login.</li>
-      <li>Filters are reflected as <strong>URL query params</strong> (e.g. <code>?category=law-enforcement&amp;location=austin&amp;salary=50k</code>) for shareable/bookmarkable URLs.</li>
+      <li>Filters are reflected as <strong>URL query params</strong> (e.g. <code>?category=law-enforcement&amp;location=austin,tx&amp;radius=50&amp;salary=50k</code>) for shareable/bookmarkable URLs. Location accepts a city name or zip code; the backend geocodes it and filters by <code>distance &lt;= radius</code> miles from the resolved coordinates.</li>
       <li>"Post a Job" in the navbar links to the AllStar Recruiter CRM at <code>/jobs/new</code> (agency login required) — same server, no external redirect needed.</li>
       <li>Category badge colors: Law Enforcement = blue, Fire Services = red, EMS = green, Corrections = amber, Dispatch = purple, Emergency Mgmt = sky.</li>
       <li>Pagination assumes ~20 results per page; 247 results = 13 pages (show 12 as last for demo).</li>
