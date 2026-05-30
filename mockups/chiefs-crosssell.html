@@ -51,7 +51,8 @@
     }
     .hero h1 { font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 1rem; }
     .hero h1 span { color: var(--gold); }
-    .hero .lede { color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.65; max-width: 520px; margin-bottom: 2rem; }
+    .hero .lede { color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.65; max-width: 520px; margin-bottom: .75rem; }
+    .hero .pitch-line { color: rgba(255,255,255,.45); font-size: .88rem; line-height: 1.55; max-width: 510px; margin-bottom: 2rem; font-style: italic; }
     .hero-cta-group { display: flex; gap: .75rem; flex-wrap: wrap; }
     .btn-hero-primary {
       background: var(--gold); color: #fff; border: 2px solid var(--gold);
@@ -98,6 +99,16 @@
     .section-title { font-size: 1.85rem; font-weight: 900; color: #0f172a; letter-spacing: -.01em; line-height: 1.2; }
     .section-title span { color: var(--navy-mid); }
     .section-sub { color: #64748b; font-size: 1rem; line-height: 1.65; max-width: 540px; margin: .75rem 0 0; }
+
+    /* ── Association benefits section ──────────────────────── */
+    .assoc-section { background: #fff; padding: 5rem 0; }
+    .assoc-card {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.5rem; height: 100%;
+    }
+    .assoc-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 1rem; flex-shrink: 0; }
+    .assoc-card h4 { font-size: .97rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .assoc-card p { font-size: .85rem; color: #64748b; line-height: 1.6; margin: 0; }
 
     /* ── Free tier section ──────────────────────────────────── */
     .free-section { background: #f8fafc; padding: 5rem 0; }
@@ -184,39 +195,68 @@
     .int-conn-track.return::after { content:'◀'; position:absolute; top:-5px; font-size:7px; color:#34d399; animation:travel-back 2.2s ease-in-out infinite 1.1s; }
     .int-auto-badge { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 99px; padding: .28rem .7rem; font-size: .62rem; font-weight: 700; color: rgba(255,255,255,.45); white-space: nowrap; }
 
-    /* ── Optional upgrades section ──────────────────────────── */
-    .upgrade-section { padding: 4.5rem 0; background: #fff; }
-    .upgrade-pill {
-      display: flex; align-items: center; gap: .75rem;
-      border: 1px solid #e2e8f0; border-radius: 10px; padding: .85rem 1.1rem;
-      font-size: .88rem; font-weight: 600; color: #374151;
-      background: #fff; transition: border-color .15s;
+    /* ── Differentiator section ─────────────────────────────── */
+    .diff-section { background: #fff; padding: 5rem 0; }
+    .diff-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.75rem; height: 100%;
+      border-left: 3px solid var(--navy-mid);
     }
-    .upgrade-pill:hover { border-color: var(--navy-mid); }
-    .upgrade-pill i { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
-    .upgrade-pill span { font-size: .78rem; color: #64748b; font-weight: 400; display: block; margin-top: .1rem; }
+    .diff-num { font-size: 2rem; font-weight: 900; color: #e2e8f0; line-height: 1; margin-bottom: .5rem; }
+    .diff-card h3 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: .5rem; }
+    .diff-card p { font-size: .88rem; color: #64748b; line-height: 1.65; margin: 0; }
+
+    /* ── Services section ───────────────────────────────────── */
+    .services-section { background: #f8fafc; padding: 5rem 0; }
+    .service-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 1.25rem; display: flex; gap: .85rem; align-items: flex-start; height: 100%;
+    }
+    .service-icon { width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0; }
+    .service-card h4 { font-size: .9rem; font-weight: 800; color: #0f172a; margin-bottom: .25rem; }
+    .service-card p { font-size: .82rem; color: #64748b; line-height: 1.55; margin: 0; }
+
+    /* ── Rollout section ─────────────────────────────────────── */
+    .rollout-section { background: var(--navy); padding: 5rem 0; }
+    .rollout-step {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      padding: 1.5rem; background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08); border-radius: 12px;
+      transition: background .15s;
+    }
+    .rollout-step:hover { background: rgba(255,255,255,.07); }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(228,170,53,.2); border: 2px solid rgba(228,170,53,.4);
+      color: var(--gold); font-size: .88rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rollout-step h4 { font-size: .97rem; font-weight: 800; color: #fff; margin-bottom: .35rem; }
+    .rollout-step p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; margin: 0; }
+
+    /* ── Free-to-paid ladder ────────────────────────────────── */
+    .ladder-section { background: #fff; padding: 5rem 0; }
+    .ladder-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem; border-radius: 10px;
+      border: 1px solid #e2e8f0; margin-bottom: .5rem;
+      transition: border-color .15s, background .15s;
+    }
+    .ladder-row:hover { border-color: var(--navy-mid); background: #f8fafc; }
+    .ladder-row:last-child { margin-bottom: 0; }
+    .ladder-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+    .ladder-title { font-size: .92rem; font-weight: 700; color: #0f172a; line-height: 1.3; }
+    .ladder-desc { font-size: .8rem; color: #64748b; margin-top: .15rem; }
+    .ladder-tag { font-size: .68rem; font-weight: 800; padding: .2rem .6rem; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
+    .ladder-tag.free { background: #dcfce7; color: #166534; }
+    .ladder-tag.pro { background: #ede9fe; color: #5b21b6; }
+    .ladder-tag.service { background: #fef3c7; color: #92400e; }
 
     /* ── CTA / Briefing request ─────────────────────────────── */
     .cta-section { background: linear-gradient(135deg, #0f2147 0%, var(--navy) 60%, #1e4d8c 100%); padding: 5rem 0; text-align: center; }
     .cta-section h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: .75rem; letter-spacing: -.01em; }
     .cta-section h2 span { color: var(--gold); }
     .cta-section .lede { color: rgba(255,255,255,.65); font-size: .97rem; max-width: 540px; margin: 0 auto 2.25rem; line-height: 1.6; }
-    .cta-form-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 2rem; max-width: 620px; margin: 0 auto; text-align: left; }
-    .cta-form-card .form-label { font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.8); margin-bottom: .3rem; display: block; }
-    .cta-form-card .form-control,
-    .cta-form-card .form-select { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; color: #fff; font-size: .9rem; padding: .6rem .85rem; width: 100%; outline: none; transition: border-color .15s, box-shadow .15s; }
-    .cta-form-card .form-control::placeholder { color: rgba(255,255,255,.3); }
-    .cta-form-card .form-control:focus,
-    .cta-form-card .form-select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(228,170,53,.15); background: rgba(255,255,255,.1); }
-    .cta-form-card .form-select option { background: #1a3a6e; color: #fff; }
-    .cta-form-card textarea.form-control { resize: vertical; min-height: 80px; }
-    .btn-cta-submit { background: var(--gold); color: #fff; border: none; font-weight: 700; font-size: 1rem; padding: .85rem; border-radius: 8px; cursor: pointer; transition: background .15s; width: 100%; }
-    .btn-cta-submit:hover { background: var(--gold-hover); }
-    .cta-fine { font-size: .73rem; color: rgba(255,255,255,.35); margin-top: 1rem; text-align: center; }
-    .cta-confirm { display: none; text-align: center; padding: 2rem 1rem; }
-    .cta-confirm-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,.15); color: #4ade80; font-size: 1.75rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
-    .cta-confirm h3 { color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: .5rem; }
-    .cta-confirm p { color: rgba(255,255,255,.6); font-size: .9rem; line-height: 1.65; }
 
     /* ── Footer ─────────────────────────────────────────────── */
     footer { background: #0a1628; padding: 2rem 0; text-align: center; }
@@ -244,15 +284,18 @@
           <i class="bi bi-award"></i>
           For Police Chiefs' Associations
         </div>
-        <h1>One platform.<br><span>Free for every member agency.</span></h1>
+        <h1>Give Every Member Agency<br><span>a Free Recruiting Platform</span></h1>
         <p class="lede">
-          All-Star Recruiter gives Police Chiefs' Associations a cloud-based recruiting platform to offer their member agencies at no cost — a statewide job board, digital agency branding, and modern candidate communication, all in one place.
+          Your association can offer a statewide law enforcement job board to every member agency — at no cost to the association, with no procurement process and no IT burden.
+        </p>
+        <p class="pitch-line">
+          All-Star gives your association a statewide law enforcement job board and gives every member agency a free recruiting CRM.
         </p>
         <div class="hero-cta-group">
           <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-hero-primary">
-            <i class="bi bi-calendar-check me-2"></i>Schedule a Briefing
+            <i class="bi bi-handshake me-2"></i>Explore the Association Partnership
           </a>
-          <a href="#whats-included" class="btn-hero-outline">See What's Included</a>
+          <a href="#job-board" class="btn-hero-outline">See How the Job Board Works</a>
         </div>
       </div>
       <div class="col-lg-6 d-none d-lg-block">
@@ -308,7 +351,7 @@
         <div class="stat-item"><div class="num">$0</div><div class="lbl">No cost, no budget approval</div></div>
       </div>
       <div class="col-6 col-md-3">
-        <div class="stat-item"><div class="num">5 min</div><div class="lbl">Setup time per agency</div></div>
+        <div class="stat-item"><div class="num">5 min</div><div class="lbl">Agency setup time</div></div>
       </div>
       <div class="col-6 col-md-3">
         <div class="stat-item"><div class="num">100%</div><div class="lbl">Built for law enforcement</div></div>
@@ -317,10 +360,71 @@
   </div>
 </div>
 
+<!-- WHAT YOUR ASSOCIATION GETS -->
+<section class="assoc-section" id="association-value">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">For Association Leadership</div>
+        <div class="section-title">What your association gets</div>
+        <p class="section-sub mx-auto text-center">
+          The platform serves your member agencies — but the benefits to your association are real. Here is what this partnership means at the association level.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="assoc-card">
+          <div class="assoc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-briefcase"></i></div>
+          <h4>A Statewide Job Board</h4>
+          <p>Your association hosts a dedicated law enforcement job board where every member agency can post openings, attract candidates, and build their employer brand — all under one destination for your state's LE community.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="assoc-card">
+          <div class="assoc-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-gift"></i></div>
+          <h4>Free Tools for Every Member</h4>
+          <p>The core platform is free for member agencies — no budget approval, no per-agency contract to manage, no IT department required. Each agency claims their own account and is self-serve from day one.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="assoc-card">
+          <div class="assoc-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-shield-check"></i></div>
+          <h4>No Procurement Burden</h4>
+          <p>Your association introduces the platform and steps back. There are no contracts for your team to negotiate, renew, or manage. Agencies own their own relationship with All-Star.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="assoc-card">
+          <div class="assoc-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-bar-chart"></i></div>
+          <h4>Aggregate Recruiting Visibility</h4>
+          <p>As adoption grows across member agencies, your association gains a view into statewide recruiting activity — open positions, candidate pipeline, and hiring trends — without managing any of it directly.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="assoc-card">
+          <div class="assoc-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-currency-dollar"></i></div>
+          <h4>Optional Revenue-Share</h4>
+          <p>Associations interested in a deeper partnership can participate in a revenue-sharing arrangement as member agencies adopt paid features. Ask about this structure during your briefing.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="assoc-card" style="display:flex;flex-direction:column;justify-content:center;">
+          <div style="background:linear-gradient(135deg,#0f2147 0%,var(--navy) 100%);border-radius:10px;padding:1.5rem;border-left:4px solid var(--gold);">
+            <p style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.7;margin:0;font-style:italic;">"All-Star gives your association a statewide law enforcement job board and gives every member agency a free recruiting CRM."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- PHOTO STRIP -->
 <div style="background:#0d1e40;padding:3rem 0;">
   <div class="container">
-    <p style="text-align:center;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1.5rem;">Trusted by law enforcement agencies nationwide</p>
+    <p style="text-align:center;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1.5rem;">Built from real law enforcement recruiting campaigns</p>
     <div class="row g-3">
       <div class="col-md-4">
         <div style="border-radius:12px;overflow:hidden;height:220px;">
@@ -342,14 +446,14 @@
 </div>
 
 <!-- FREE TIER — WHAT'S INCLUDED -->
-<section class="free-section" id="whats-included">
+<section class="free-section" id="job-board">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-8 text-center">
         <div class="free-badge"><i class="bi bi-gift me-1"></i>Free for all member agencies</div>
         <div class="section-title">A statewide recruiting platform<br><span>your members can use tomorrow.</span></div>
         <p class="section-sub mx-auto text-center">
-          This cloud-based platform serves as the primary recruitment gateway for your state's law enforcement agencies — giving every member free access to post job opportunities, establish a digital brand, and modernize how they communicate with candidates.
+          This platform creates a central recruiting destination for member agencies — giving every member free access to post job opportunities, establish a digital brand, and modernize how they communicate with candidates.
         </p>
       </div>
     </div>
@@ -371,7 +475,6 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <!-- Mini job board preview -->
           <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:1.25rem;">
             <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#059669;margin-bottom:.85rem;">Your State's Job Board — Live Listings</div>
             <div style="display:flex;flex-direction:column;gap:.6rem;">
@@ -397,7 +500,7 @@
                 <span style="font-size:.72rem;font-weight:700;background:#fef9c3;color:#92400e;padding:.2rem .65rem;border-radius:99px;">3 applicants</span>
               </div>
             </div>
-            <div style="text-align:center;margin-top:.85rem;font-size:.73rem;color:#059669;font-weight:700;">+ 47 more openings across your state</div>
+            <div style="text-align:center;margin-top:.85rem;font-size:.73rem;color:#059669;font-weight:700;">+ more openings across your state</div>
           </div>
         </div>
       </div>
@@ -405,23 +508,20 @@
 
     <!-- 3 supporting cards -->
     <div class="row g-4 mb-5">
-
       <div class="col-md-4">
         <div class="feature-card">
-          <div class="feature-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-window-fullscreen"></i></div>
+          <div class="feature-icon" style="background:#dcfce7;color:#166634;"><i class="bi bi-window-fullscreen"></i></div>
           <h3>Agency Digital Brand</h3>
-          <p>Every member department gets a dedicated recruiting page that establishes their identity and gives candidates somewhere to go. Agencies control their own photos, mission statement, benefits, and open positions — no IT team required. Post a link on a city website or social media and it's live.</p>
+          <p>Every member department gets a dedicated recruiting page that establishes their identity and gives candidates somewhere to go. Agencies control their own photos, mission statement, benefits, and open positions — no IT team required.</p>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="feature-card">
           <div class="feature-icon" style="background:#eff6ff;color:#1d4ed8;"><i class="bi bi-envelope-arrow-up"></i></div>
           <h3>2-Way Email</h3>
-          <p>Recruiters send and receive candidate emails directly inside All-Star Recruiter. Every reply is logged to the candidate record automatically — no more digging through inboxes or forwarding chains. A modern first impression for every agency, regardless of budget.</p>
+          <p>Recruiters send and receive candidate emails directly inside All-Star Recruiter. Every reply is logged to the candidate record automatically — no more digging through inboxes or forwarding chains.</p>
         </div>
       </div>
-
       <div class="col-md-4">
         <div class="feature-card">
           <div class="feature-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-tags"></i></div>
@@ -429,7 +529,6 @@
           <p>Every applicant is stored, tagged, and tracked from first contact through hiring. Recruiters can filter by stage, position, or any custom label — giving them a clear view of their pipeline without a spreadsheet in sight.</p>
         </div>
       </div>
-
     </div>
 
     <!-- Job Board flow callout -->
@@ -473,10 +572,125 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-hero-primary" style="font-size:.9rem;padding:.65rem 1.5rem;">Schedule a Briefing →</a>
+        <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-hero-primary" style="font-size:.9rem;padding:.65rem 1.5rem;">Launch a Member Job Board →</a>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- MORE THAN ANOTHER JOB BOARD -->
+<section class="diff-section" id="differentiation">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">Why not just use Indeed or GovernmentJobs?</div>
+        <div class="section-title">More than another job board</div>
+        <p class="section-sub mx-auto text-center">
+          Job boards get listings in front of candidates. All-Star builds a recruiting operation behind each listing.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="diff-card">
+          <div class="diff-num">01</div>
+          <h3>Agencies own their brand — not just a listing</h3>
+          <p>Every member agency gets a dedicated recruiting page that looks like a destination, not a classified ad. Department photos, mission statement, benefits, and open positions — all under their name, not buried on a third-party platform.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="diff-card">
+          <div class="diff-num">02</div>
+          <h3>Candidates are captured, not just counted</h3>
+          <p>Every applicant lands in a CRM — not a shared inbox or a pile of PDFs. Recruiters see who applied, when, for what role, and what happened next. That data belongs to the agency, not a job board vendor.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="diff-card">
+          <div class="diff-num">03</div>
+          <h3>Recruiters get a pipeline, not a pile of responses</h3>
+          <p>Applications move through stages. Candidates are tagged, contacted, and tracked. The department knows exactly where every candidate stands at every step — without a spreadsheet in sight.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES: DRIVING CANDIDATES TO THE BOARD -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">Optional add-on services</div>
+        <div class="section-title">Need help driving candidates<br><span>to the board?</span></div>
+        <p class="section-sub mx-auto text-center">
+          The platform gives the infrastructure. Services generate demand. These are available to individual agencies or as a coordinated statewide initiative.
+        </p>
+      </div>
+    </div>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-clipboard-data"></i></div>
+          <div>
+            <h4>Campaign Strategy</h4>
+            <p>A recruiting campaign plan tailored to your state's hiring needs — message, channels, timing, and target candidate profiles.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-pencil"></i></div>
+          <div>
+            <h4>Content Creation</h4>
+            <p>Copy, visuals, and agency profile content written and designed for law enforcement recruiting — built from real campaigns, not generic templates.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-megaphone"></i></div>
+          <div>
+            <h4>Digital Advertising</h4>
+            <p>Paid social and search campaigns that drive qualified candidates to your state's job board. We manage the spend and report the results.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-calendar-event"></i></div>
+          <div>
+            <h4>Hiring Event Promotion</h4>
+            <p>Promotion, registration, and follow-up for in-person and virtual hiring events — built into the platform and supported by our team.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-chat-dots"></i></div>
+          <div>
+            <h4>Candidate Follow-Up</h4>
+            <p>We manage the candidate communication sequence so agencies never lose a qualified applicant to slow responses or radio silence.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#fef9c3;color:#a16207;"><i class="bi bi-person-badge"></i></div>
+          <div>
+            <h4>Managed Recruiting</h4>
+            <p>Full-service support for agencies that need more than software. We run the recruiting operation — agencies focus on the mission.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:700px;margin:0 auto;text-align:center;">
+      <p style="font-size:.88rem;color:#64748b;line-height:1.65;">
+        Services are available to individual agencies or as a coordinated statewide initiative. Talk to us about what makes sense for your state.
+        <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" style="color:var(--navy-mid);font-weight:700;text-decoration:none;"> Ask about services during your briefing →</a>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -493,64 +707,151 @@
   </div>
 </div>
 
-<!-- OPTIONAL UPGRADES — LIGHT TOUCH -->
-<section class="upgrade-section" id="upgrades">
+<!-- HOW ROLLOUT WORKS -->
+<section class="rollout-section" id="rollout">
   <div class="container">
-    <div class="row justify-content-center mb-4">
-      <div class="col-lg-7 text-center">
-        <div class="section-eyebrow">For agencies that want more</div>
-        <div class="section-title">The free platform covers the essentials.<br><span>Pro goes further.</span></div>
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow" style="color:rgba(228,170,53,.8);">Low lift for your team</div>
+        <div class="section-title" style="color:#fff;">How rollout works</div>
+        <p class="section-sub mx-auto text-center" style="color:rgba(255,255,255,.55);">
+          Getting a statewide job board live for your members is simpler than it sounds. Here is the typical path from first conversation to launch.
+        </p>
+      </div>
+    </div>
+    <div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:.75rem;">
+      <div class="rollout-step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Intro Briefing</h4>
+          <p>We walk your team through the platform, show examples of active job boards in other states, and answer questions. Thirty minutes. No commitment required.</p>
+        </div>
+      </div>
+      <div class="rollout-step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Job Board Setup</h4>
+          <p>We configure a branded law enforcement job board for your state. No technical work required from your side — we handle the setup and send you a link to review before it goes live.</p>
+        </div>
+      </div>
+      <div class="rollout-step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Member Agency Onboarding</h4>
+          <p>Member agencies are invited to claim their free account, set up their profile, and post their first open position. Each agency is self-serve from day one — no IT support required.</p>
+        </div>
+      </div>
+      <div class="rollout-step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>Launch</h4>
+          <p>The job board goes live. Candidates can start searching and applying immediately. Your association announces it to members however you normally communicate — email, newsletter, conference.</p>
+        </div>
+      </div>
+      <div class="rollout-step">
+        <div class="step-num">5</div>
+        <div>
+          <h4>Ongoing Adoption</h4>
+          <p>We work with you to onboard additional agencies over time. No pressure, no deadlines. As more agencies participate, the job board becomes more valuable for candidates and more useful for your association.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-hero-primary" style="font-size:.95rem;padding:.75rem 2rem;">
+        <i class="bi bi-calendar-check me-2"></i>Start with a Briefing →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FREE-TO-PAID LADDER -->
+<section class="ladder-section" id="growth">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">The full picture</div>
+        <div class="section-title">Free to start.<br><span>More available when agencies are ready.</span></div>
         <p class="section-sub mx-auto text-center">
-          The core platform is free for every member agency, forever. Agencies that want to add advanced capabilities — without any commitment from the association — can upgrade to Pro on their own.
+          Member agencies can grow into the platform at their own pace. Your association does not manage billing, licensing, or upgrades at any tier.
         </p>
       </div>
     </div>
 
-    <div class="row g-2 mb-4" style="max-width:760px;margin-left:auto;margin-right:auto;">
-      <div class="col-sm-6">
-        <div class="upgrade-pill">
-          <i class="bi bi-chat-dots" style="background:#dbeafe;color:#1d4ed8;"></i>
-          <div>SMS / Text Messaging <span>Two-way texting with candidates. 3× higher reply rates than email.</span></div>
+    <div style="max-width:760px;margin:0 auto;">
+
+      <div class="ladder-row">
+        <div class="ladder-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-briefcase"></i></div>
+        <div style="flex:1;">
+          <div class="ladder-title">Free Job Board</div>
+          <div class="ladder-desc">Post openings, attract candidates, and appear on your state's LE job board. Branded agency listing page included.</div>
         </div>
+        <span class="ladder-tag free">Free</span>
       </div>
-      <div class="col-sm-6">
-        <div class="upgrade-pill">
-          <i class="bi bi-calendar3" style="background:#dcfce7;color:#166534;"></i>
-          <div>Hiring Event Management <span>Schedule test days, oral boards, and open houses. Manage RSVPs.</span></div>
-        </div>
+
+      <div style="display:flex;justify-content:center;padding:.1rem 0;">
+        <i class="bi bi-arrow-down" style="color:#cbd5e1;font-size:.8rem;"></i>
       </div>
-      <div class="col-sm-6">
-        <div class="upgrade-pill">
-          <i class="bi bi-lightning-charge" style="background:#f3e8ff;color:#7c3aed;"></i>
-          <div>Automated Workflows <span>Trigger follow-up automatically based on candidate actions.</span></div>
+
+      <div class="ladder-row">
+        <div class="ladder-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-person-lines-fill"></i></div>
+        <div style="flex:1;">
+          <div class="ladder-title">Free Agency Platform</div>
+          <div class="ladder-desc">Adds the full recruiting CRM: candidate tracking, 2-way email, pipeline stages, and agency digital brand page.</div>
         </div>
+        <span class="ladder-tag free">Free</span>
       </div>
-      <div class="col-sm-6">
-        <div class="upgrade-pill">
-          <i class="bi bi-megaphone" style="background:#ffe4e6;color:#be123c;"></i>
-          <div>Multi-Step Campaigns <span>Email and SMS drip sequences for active recruiting drives.</span></div>
-        </div>
+
+      <div style="display:flex;justify-content:center;padding:.1rem 0;">
+        <i class="bi bi-arrow-down" style="color:#cbd5e1;font-size:.8rem;"></i>
       </div>
-      <div class="col-sm-6">
-        <div class="upgrade-pill">
-          <i class="bi bi-bar-chart" style="background:#fef3c7;color:#92400e;"></i>
-          <div>Analytics &amp; Reporting <span>Pipeline dashboards, source tracking, and campaign ROI.</span></div>
+
+      <div class="ladder-row">
+        <div class="ladder-icon" style="background:#ede9fe;color:#5b21b6;"><i class="bi bi-lightning-charge"></i></div>
+        <div style="flex:1;">
+          <div class="ladder-title">Pro Software</div>
+          <div class="ladder-desc">Adds SMS messaging, hiring events, multi-step campaigns, automated workflows, and AI tools. Agencies upgrade directly — no association involvement.</div>
         </div>
+        <span class="ladder-tag pro">Pro</span>
       </div>
-      <div class="col-sm-6">
-        <div class="upgrade-pill">
-          <i class="bi bi-stars" style="background:#faf5ff;color:#7c3aed;"></i>
-          <div>AI Tools <span>Candidate summaries, response drafting, and smart screening.</span></div>
+
+      <div style="display:flex;justify-content:center;padding:.1rem 0;">
+        <i class="bi bi-arrow-down" style="color:#cbd5e1;font-size:.8rem;"></i>
+      </div>
+
+      <div class="ladder-row">
+        <div class="ladder-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-megaphone"></i></div>
+        <div style="flex:1;">
+          <div class="ladder-title">Campaign Services</div>
+          <div class="ladder-desc">Digital advertising, content creation, event promotion, and candidate follow-up managed by the All-Star team. Available to agencies individually or as a statewide initiative.</div>
         </div>
+        <span class="ladder-tag service">Services</span>
+      </div>
+
+      <div style="display:flex;justify-content:center;padding:.1rem 0;">
+        <i class="bi bi-arrow-down" style="color:#cbd5e1;font-size:.8rem;"></i>
+      </div>
+
+      <div class="ladder-row">
+        <div class="ladder-icon" style="background:#fce7f3;color:#9d174d;"><i class="bi bi-person-badge"></i></div>
+        <div style="flex:1;">
+          <div class="ladder-title">Managed Recruiting</div>
+          <div class="ladder-desc">Full-service recruiting support. We run the operation — agencies focus on the mission. For agencies that need more than software.</div>
+        </div>
+        <span class="ladder-tag service">Full Service</span>
+      </div>
+
+    </div>
+
+    <div style="max-width:760px;margin:2rem auto 0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem 2rem;">
+      <div style="display:flex;align-items:flex-start;gap:1rem;">
+        <div style="width:36px;height:36px;background:#dbeafe;color:#1d4ed8;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;"><i class="bi bi-info-circle"></i></div>
+        <p style="font-size:.88rem;color:#374151;line-height:1.7;margin:0;">
+          <strong>Zero risk for the association.</strong> Member agencies can upgrade to Pro or engage services directly with All-Star. The association does not manage billing or procurement at any tier. Each agency owns its own account and relationship.
+          <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" style="color:var(--navy-mid);font-weight:700;text-decoration:none;"> Ask about the partnership structure →</a>
+        </p>
       </div>
     </div>
 
-    <div style="max-width:760px;margin:0 auto;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem 2rem;text-align:center;">
-      <p style="font-size:.9rem;color:#374151;line-height:1.65;margin:0;">
-        Pro upgrades are available directly to individual agencies — no action required from the association. Pricing is based on sworn officer count, not the number of users.
-        <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" style="color:var(--navy-mid);font-weight:700;text-decoration:none;"> Ask us about Pro during your briefing →</a>
-      </p>
-    </div>
   </div>
 </section>
 
@@ -558,18 +859,18 @@
 <section class="cta-section" id="briefing">
   <div class="container">
     <div class="hero-eyebrow d-inline-flex mb-4">
-      <i class="bi bi-calendar-check me-1"></i> Schedule a Briefing
+      <i class="bi bi-handshake me-1"></i> Association Partnership
     </div>
-    <h2>Let's talk about bringing this platform<br><span>to your state.</span></h2>
+    <h2>Talk about a<br><span>statewide rollout.</span></h2>
     <p class="lede">
-      Every Police Chiefs' Association we work with starts with a conversation. Tell us who you are and we'll reach out to schedule a walkthrough of the platform and discuss what a statewide rollout looks like for your members.
+      Every Police Chiefs' Association we work with starts with a conversation. Pick a time that works and we'll walk through the platform, answer questions, and discuss what a rollout looks like for your members.
     </p>
 
     <div style="display:flex;flex-direction:column;align-items:center;gap:1.25rem;">
       <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener"
          style="background:var(--gold);color:#fff;font-weight:700;font-size:1.1rem;padding:.9rem 2.25rem;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:background .15s;"
          onmouseover="this.style.background='var(--gold-hover)'" onmouseout="this.style.background='var(--gold)'">
-        <i class="bi bi-calendar-check"></i> Schedule a Briefing
+        <i class="bi bi-calendar-check"></i> Explore the Association Partnership
       </a>
       <p style="font-size:.78rem;color:rgba(255,255,255,.4);margin:0;">Opens Calendly — pick a time that works for you. No commitment required.</p>
     </div>
@@ -584,11 +885,5 @@
 </footer>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script>
-function submitCta() {
-  document.getElementById('cta-form').style.display = 'none';
-  document.getElementById('cta-confirm').style.display = 'block';
-}
-</script>
 </body>
 </html>
