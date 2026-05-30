@@ -80,14 +80,17 @@
     .dl-normal { color: #374151; }
     .dl-none   { color: #94a3b8; }
 
-    /* ── Page indicator pills ────────────────────────────── */
-    .page-pill {
-      display: inline-flex; align-items: center; gap: .25rem;
-      font-size: .68rem; font-weight: 700; padding: .18rem .5rem;
-      border-radius: 99px; white-space: nowrap;
+    /* ── Page indicator ──────────────────────────────────── */
+    .page-linked {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .75rem; font-weight: 600; color: var(--leftnav-bg);
+      text-decoration: none; white-space: nowrap;
     }
-    .page-pill-branded { background: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; }
-    .page-pill-agency  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .page-linked:hover { text-decoration: underline; color: var(--leftnav-bg); }
+    .page-linked-slug {
+      font-size: .7rem; font-weight: 400; color: #94a3b8;
+      display: block; margin-top: .1rem;
+    }
 
     /* ── Candidate count link ────────────────────────────── */
     .applicant-link { color: var(--leftnav-bg); text-decoration: none; font-weight: 600; }
@@ -258,8 +261,10 @@
                 <td><span class="dl-normal">Jun 30, 2026</span></td>
                 <td><a href="#" class="applicant-link">47</a></td>
                 <td>
-                  <span class="page-pill page-pill-branded" title="Has a branded job page"><i class="bi bi-window-fullscreen"></i> Job Page</span><br>
-                  <span class="page-pill page-pill-agency mt-1" title="Agency has a department page"><i class="bi bi-building"></i> Dept Page</span>
+                  <a href="jb-detail-branded.html" target="_blank" class="page-linked">
+                    <i class="bi bi-window-fullscreen"></i> Page Attached
+                  </a>
+                  <span class="page-linked-slug">/AustinPD/police-officer-2026</span>
                 </td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
@@ -286,9 +291,7 @@
                 <td><span class="salary-val">$58,000–$72,500</span></td>
                 <td><span class="dl-amber">Jun 15, 2026</span></td>
                 <td><a href="#" class="applicant-link">23</a></td>
-                <td>
-                  <span class="page-pill page-pill-agency" title="Agency has a department page"><i class="bi bi-building"></i> Dept Page</span>
-                </td>
+                <td><span style="font-size:.72rem;color:#cbd5e1;">—</span></td>
                 <td><span class="job-badge badge-active">Active</span></td>
                 <td class="action-links">
                   <a href="#" class="act-default">Edit</a>
@@ -413,7 +416,7 @@
           <li>Jobs scoped to <code>org_id</code> — agencies only see their own postings.</li>
           <li>"View" opens the public-facing job detail page in a new tab (<code>/jobs/{slug}</code>).</li>
           <li>"Candidates" count links to a job candidates view (not yet mocked up) — <code>GET /jobs/{id}/candidates</code>.</li>
-          <li><strong>Pages column:</strong> "Job Page" pill (purple) = this job has a branded web-builder page attached (<code>listing_page_type = "branded"</code>). "Dept Page" pill (blue) = the posting agency has a department-level web-builder page set in their org settings. Both can be present. The "View" action link resolves to the branded page URL when a job page exists, or to the standard <code>jb-detail</code> view otherwise.</li>
+          <li><strong>Pages column:</strong> A job has a 1:1 relationship with a page. If <code>listing_page_type = "branded"</code>, the cell shows "Page Attached" linking to the web-builder page URL (<code>/OrgSlug/PageSlug</code>). Otherwise "—". The "View" action resolves to the branded page when one is attached, or the standard <code>jb-detail</code> view otherwise. Department-level pages are an org setting — not shown per-job in this table.</li>
           <li>Job categories are <strong>global platform-level</strong> picklist values managed by platform admins only — individual agencies cannot add or modify categories. This keeps the public-facing job board filter consistent across all agencies.</li>
           <li>Closing a job sets <code>status = closed</code> and <code>closedAt = now()</code>. The public listing immediately returns 404 or "Applications Closed" state.</li>
           <li>"Reopen" sets <code>status = active</code>, resets <code>closedAt</code>, optionally prompts for new deadline.</li>
