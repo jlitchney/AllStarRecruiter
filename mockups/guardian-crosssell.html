@@ -279,19 +279,58 @@
     }
     .cta-section h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: .75rem; letter-spacing: -.01em; }
     .cta-section h2 span { color: var(--gold); }
-    .cta-section p { color: rgba(255,255,255,.7); font-size: .97rem; max-width: 500px; margin: 0 auto 2rem; line-height: 1.6; }
-    .cta-form-row { display: flex; gap: .5rem; max-width: 480px; margin: 0 auto; flex-wrap: wrap; }
-    .cta-form-row input {
-      flex: 1; min-width: 200px; border: none; border-radius: 8px;
-      padding: .75rem 1rem; font-size: .95rem; outline: none;
+    .cta-section .lede { color: rgba(255,255,255,.65); font-size: .97rem; max-width: 500px; margin: 0 auto 2.25rem; line-height: 1.6; }
+    .cta-form-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 2rem; max-width: 660px; margin: 0 auto;
+      text-align: left;
     }
+    .cta-form-card .form-label {
+      font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.8);
+      margin-bottom: .3rem; display: block;
+    }
+    .cta-form-card .form-control,
+    .cta-form-card .form-select {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; color: #fff; font-size: .9rem; padding: .6rem .85rem;
+      width: 100%; outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .cta-form-card .form-control::placeholder { color: rgba(255,255,255,.3); }
+    .cta-form-card .form-control:focus,
+    .cta-form-card .form-select:focus {
+      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(228,170,53,.15);
+      background: rgba(255,255,255,.1);
+    }
+    .cta-form-card .form-select option { background: #1a3a6e; color: #fff; }
+    .cta-plan-row { display: flex; gap: .75rem; }
+    .cta-plan-option {
+      flex: 1; border: 2px solid rgba(255,255,255,.15); border-radius: 10px;
+      padding: .85rem 1rem; cursor: pointer; transition: all .15s; position: relative;
+    }
+    .cta-plan-option:hover { border-color: rgba(255,255,255,.35); }
+    .cta-plan-option.selected-free { border-color: #22c55e; background: rgba(34,197,94,.08); }
+    .cta-plan-option.selected-pro  { border-color: var(--gold); background: rgba(228,170,53,.08); }
+    .cta-plan-option input[type=radio] { position: absolute; opacity: 0; }
+    .cta-plan-name { font-size: .88rem; font-weight: 800; color: #fff; margin-bottom: .15rem; }
+    .cta-plan-desc { font-size: .72rem; color: rgba(255,255,255,.5); line-height: 1.4; }
+    .cta-plan-option.selected-free .cta-plan-name { color: #4ade80; }
+    .cta-plan-option.selected-pro  .cta-plan-name { color: var(--gold); }
     .btn-cta-submit {
       background: var(--gold); color: #fff; border: none;
-      font-weight: 700; font-size: .95rem; padding: .75rem 1.5rem;
-      border-radius: 8px; cursor: pointer; transition: background .15s; white-space: nowrap;
+      font-weight: 700; font-size: 1rem; padding: .85rem;
+      border-radius: 8px; cursor: pointer; transition: background .15s; width: 100%;
     }
     .btn-cta-submit:hover { background: var(--gold-hover); }
-    .cta-fine { font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 1rem; }
+    .cta-fine { font-size: .73rem; color: rgba(255,255,255,.35); margin-top: 1rem; text-align: center; }
+    /* Confirm state */
+    .cta-confirm { display: none; text-align: center; padding: 2rem 1rem; }
+    .cta-confirm-icon {
+      width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,.15);
+      color: #4ade80; font-size: 1.75rem; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 1.25rem;
+    }
+    .cta-confirm h3 { color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: .5rem; }
+    .cta-confirm p { color: rgba(255,255,255,.6); font-size: .9rem; line-height: 1.65; }
 
     /* ── Footer ─────────────────────────────────────────────── */
     footer { background: #0a1628; padding: 2rem 0; text-align: center; }
@@ -735,16 +774,100 @@
 <!-- CTA -->
 <section class="cta-section" id="claim">
   <div class="container">
-    <div class="hero-eyebrow d-inline-flex mb-4" style="margin:0 auto 1.25rem;">
+    <div class="hero-eyebrow d-inline-flex mb-4">
       <i class="bi bi-shield-check me-1"></i> For Guardian Alliance agencies only
     </div>
     <h2>Stop losing candidates<br><span>before they reach Guardian.</span></h2>
-    <p>Enter your work email and we'll have your department page live and your first candidates tracked in under 5 minutes.</p>
-    <div class="cta-form-row justify-content-center">
-      <input type="email" placeholder="your@agency.gov">
-      <button class="btn-cta-submit"><i class="bi bi-rocket-takeoff me-1"></i>Claim Free Account</button>
+    <p class="lede">Tell us about your agency and we'll have your account set up and your first candidates tracked in under 5 minutes.</p>
+
+    <div class="cta-form-card">
+
+      <!-- Form -->
+      <div id="cta-form">
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label class="form-label">Agency Name <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" placeholder="Austin Police Department">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <label class="form-label">First Name <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" placeholder="Jane">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label">Last Name <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" placeholder="Smith">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <label class="form-label">Title <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" placeholder="Recruiting Sergeant">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label">Phone <span style="color:#f87171;">*</span></label>
+            <input type="tel" class="form-control" placeholder="(512) 555-0100">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-8">
+            <label class="form-label">Work Email <span style="color:#f87171;">*</span></label>
+            <input type="email" class="form-control" placeholder="jane@austinpd.gov">
+          </div>
+          <div class="col-sm-4">
+            <label class="form-label">Agency City, State <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" placeholder="Austin, TX">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label class="form-label">Agency Size (Sworn Officers) <span style="color:#f87171;">*</span></label>
+            <select class="form-select">
+              <option value="" disabled selected>Select your agency size…</option>
+              <option value="1-49">1 – 49 Sworn Officers</option>
+              <option value="50-99">50 – 99 Sworn Officers</option>
+              <option value="100-199">100 – 199 Sworn Officers</option>
+              <option value="200-399">200 – 399 Sworn Officers</option>
+              <option value="400+">400+ Sworn Officers</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label mb-2">Select a Plan <span style="color:#f87171;">*</span></label>
+          <div class="cta-plan-row">
+            <label class="cta-plan-option selected-free" onclick="selectPlan(this,'free')">
+              <input type="radio" name="plan" value="free" checked>
+              <div class="cta-plan-name"><i class="bi bi-check-circle-fill me-1"></i>Free</div>
+              <div class="cta-plan-desc">Web Builder, Email, Tagging &amp; Guardian Integration — $0 forever</div>
+            </label>
+            <label class="cta-plan-option" onclick="selectPlan(this,'pro')">
+              <input type="radio" name="plan" value="pro">
+              <div class="cta-plan-name"><i class="bi bi-stars me-1"></i>Pro</div>
+              <div class="cta-plan-desc">Full platform — SMS, Events, Campaigns, AI &amp; more. Pricing by agency size.</div>
+            </label>
+          </div>
+        </div>
+
+        <button class="btn-cta-submit" onclick="submitCta()">
+          <i class="bi bi-rocket-takeoff me-2"></i>Claim My Account
+        </button>
+        <p class="cta-fine">No credit card required. Free tier never expires. We verify Guardian Alliance membership before activation.</p>
+      </div>
+
+      <!-- Confirmation state -->
+      <div class="cta-confirm" id="cta-confirm">
+        <div class="cta-confirm-icon"><i class="bi bi-check-lg"></i></div>
+        <h3>You're on the list!</h3>
+        <p>Thanks, Jane. We'll verify your Guardian Alliance membership and have your account ready within 1 business day. Check your work email for next steps.</p>
+      </div>
+
     </div>
-    <p class="cta-fine">No credit card required. Free tier never expires. We verify Guardian Alliance membership before activation.</p>
   </div>
 </section>
 
@@ -756,5 +879,17 @@
 </footer>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+function selectPlan(el, plan) {
+  document.querySelectorAll('.cta-plan-option').forEach(o => {
+    o.classList.remove('selected-free','selected-pro');
+  });
+  el.classList.add(plan === 'free' ? 'selected-free' : 'selected-pro');
+}
+function submitCta() {
+  document.getElementById('cta-form').style.display = 'none';
+  document.getElementById('cta-confirm').style.display = 'block';
+}
+</script>
 </body>
 </html>
