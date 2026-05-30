@@ -994,11 +994,57 @@
             <span class="deadline-badge">37 days left</span>
           </div>
 
-          <a href="jb-apply.html" class="btn-apply-sidebar">
-            <i class="bi bi-send me-2"></i>Apply Now
-          </a>
+          <!-- Inline application form -->
+          <div id="sidebar-form">
+            <div class="row g-2 mb-2">
+              <div class="col-6">
+                <input type="text" class="form-control form-control-sm" placeholder="First name">
+              </div>
+              <div class="col-6">
+                <input type="text" class="form-control form-control-sm" placeholder="Last name">
+              </div>
+            </div>
+            <div class="mb-2">
+              <input type="email" class="form-control form-control-sm" placeholder="Email address">
+            </div>
+            <div class="mb-2">
+              <input type="tel" class="form-control form-control-sm" placeholder="Phone number">
+            </div>
+            <div class="mb-2">
+              <select class="form-select form-select-sm">
+                <option selected>Police Officer — Entry Level</option>
+                <option>Police Officer — Lateral Transfer</option>
+                <option>Deputy Sheriff</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <textarea class="form-control form-control-sm" rows="2" placeholder="Message (optional)…" style="resize:none;"></textarea>
+            </div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:.6rem .75rem;margin-bottom:.75rem;">
+              <div class="form-check mb-1">
+                <input class="form-check-input" type="checkbox" id="det-optin-email" checked>
+                <label class="form-check-label" for="det-optin-email" style="font-size:.75rem;color:#374151;">Email updates</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="det-optin-sms" checked>
+                <label class="form-check-label" for="det-optin-sms" style="font-size:.75rem;color:#374151;">Text / SMS updates</label>
+              </div>
+            </div>
+            <button class="btn-apply-sidebar" onclick="showSidebarConfirm()">
+              <i class="bi bi-send me-2"></i>Submit Application
+            </button>
+          </div>
 
-          <a href="#" class="save-link">
+          <!-- Confirmation -->
+          <div id="sidebar-confirm" style="display:none;text-align:center;padding:.75rem 0;">
+            <div style="width:48px;height:48px;border-radius:50%;background:#dcfce7;color:#16a34a;font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <div style="font-weight:800;color:#111827;font-size:.95rem;margin-bottom:.3rem;">Application Submitted!</div>
+            <div style="font-size:.8rem;color:#64748b;line-height:1.55;">A recruiter will follow up within 1–2 business days.</div>
+          </div>
+
+          <a href="#" class="save-link" style="margin-top:.75rem;">
             <i class="bi bi-bookmark"></i> Save this Job
           </a>
 
@@ -1133,5 +1179,11 @@
 
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+function showSidebarConfirm() {
+  document.getElementById('sidebar-form').style.display = 'none';
+  document.getElementById('sidebar-confirm').style.display = 'block';
+}
+</script>
 </body>
 </html>

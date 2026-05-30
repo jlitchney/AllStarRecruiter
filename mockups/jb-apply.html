@@ -8,506 +8,302 @@
   <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
   <link rel="stylesheet" href="../assets/css/site.css">
   <style>
-    body { background: #f8fafc; }
-
-    /* ── Navbar ── */
-    .jb-nav { background: var(--leftnav-bg); }
-    .jb-nav .navbar-brand { color: #fff; font-weight: 800; font-size: .95rem; }
-    .jb-nav .nav-link { color: rgba(255,255,255,.8); font-size: .85rem; }
-    .jb-nav .nav-link:hover, .jb-nav .nav-link.active { color: #fff; }
-    .jb-nav .nav-link.active { border-bottom: 2px solid var(--accent); padding-bottom: calc(.5rem - 2px); }
-
-    /* ── Stepper ── */
-    .stepper { display: flex; align-items: flex-start; gap: 0; margin-bottom: 2rem; }
-    .step-item { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .step-item:not(:last-child)::after {
-      content: ''; position: absolute; top: 17px; left: 50%; width: 100%;
-      height: 2px; background: #dee2e6; z-index: 0;
+    :root {
+      --navy: #245194;
+      --navy-dark: #1a3a6e;
+      --gold: #e4aa35;
     }
-    .step-item.done:not(:last-child)::after,
-    .step-item.active:not(:last-child)::after { background: var(--leftnav-bg); }
-    .step-circle {
-      width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; font-size: .8rem; font-weight: 700; position: relative; z-index: 1;
-      background: #e2e8f0; color: #64748b; border: 2px solid #dee2e6;
+
+    body { background: #f4f6fa; }
+
+    /* ── Navbar ─────────────────────────────────────────────── */
+    .jb-navbar { background: var(--navy); padding: .75rem 1.5rem; }
+    .jb-navbar .navbar-brand {
+      color: #fff; font-weight: 800; font-size: 1.1rem;
+      letter-spacing: .01em; text-decoration: none;
+      display: flex; align-items: center; gap: .5rem;
     }
-    .step-item.active .step-circle { background: var(--leftnav-bg); color: #fff; border-color: var(--leftnav-bg); }
-    .step-item.done .step-circle { background: #16a34a; color: #fff; border-color: #16a34a; }
-    .step-label { font-size: .72rem; font-weight: 600; color: #64748b; margin-top: .4rem; text-align: center; }
-    .step-item.active .step-label { color: var(--leftnav-bg); }
-    .step-item.done .step-label { color: #16a34a; }
+    .jb-navbar .navbar-brand .star-icon { color: var(--gold); font-size: 1.2rem; }
+    .jb-navbar .nav-link { color: rgba(255,255,255,.82) !important; font-weight: 500; font-size: .92rem; }
+    .jb-navbar .nav-link:hover { color: #fff !important; }
+    .btn-post-job {
+      border: 2px solid var(--gold); color: var(--gold); background: transparent;
+      font-weight: 600; font-size: .85rem; padding: .35rem .9rem;
+      border-radius: 6px; transition: all .15s; text-decoration: none;
+    }
+    .btn-post-job:hover { background: var(--gold); color: #fff; }
 
-    /* ── Form sections ── */
-    .form-section { background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; padding: 1.5rem; margin-bottom: 1.25rem; }
-    .form-section-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--leftnav-bg); border-bottom: 1px solid #e2e8f0; padding-bottom: .6rem; margin-bottom: 1.25rem; }
-    .form-label .req { color: #dc2626; margin-left: 2px; }
+    /* ── Breadcrumb ──────────────────────────────────────────── */
+    .jb-breadcrumb {
+      background: #fff; border-bottom: 1px solid #e2e8f0;
+      padding: .55rem 0; font-size: .8rem; color: #64748b;
+    }
+    .jb-breadcrumb a { color: var(--navy); text-decoration: none; font-weight: 500; }
+    .jb-breadcrumb a:hover { text-decoration: underline; }
+    .jb-breadcrumb .sep { margin: 0 .4rem; color: #cbd5e1; }
 
-    /* ── Collapsed step cards ── */
-    .step-preview { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: .5rem; padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
-    .step-preview .step-num { width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; color: #64748b; font-weight: 700; font-size: .8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .step-preview .step-info { flex: 1; }
-    .step-preview .step-info strong { display: block; font-size: .88rem; color: #374151; }
-    .step-preview .step-info span { font-size: .78rem; color: #94a3b8; }
+    /* ── Job context banner ──────────────────────────────────── */
+    .job-banner {
+      background: var(--navy);
+      padding: 1.5rem 0;
+    }
+    .job-banner .dept-label {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: rgba(255,255,255,.6); margin-bottom: .3rem;
+    }
+    .job-banner .job-title-lg { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: .35rem; }
+    .job-banner .job-meta { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .job-banner .jmeta-pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.8); font-size: .8rem; font-weight: 500;
+      padding: .25rem .65rem; border-radius: 5px;
+    }
+    .job-banner .jmeta-pill.gold { background: rgba(228,170,53,.2); border-color: rgba(228,170,53,.35); color: var(--gold); }
 
-    /* ── Sidebar cards ── */
-    .tip-item { display: flex; align-items: flex-start; gap: .6rem; font-size: .82rem; color: #374151; padding: .35rem 0; }
-    .tip-item i { color: var(--leftnav-bg); flex-shrink: 0; margin-top: 2px; }
+    /* ── Form card ───────────────────────────────────────────── */
+    .apply-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .apply-card .form-label {
+      font-size: .83rem; font-weight: 600; color: #374151; margin-bottom: .3rem;
+    }
+    .apply-card .form-control,
+    .apply-card .form-select {
+      border-color: #d1d5db; border-radius: 7px; font-size: .92rem;
+      padding: .6rem .85rem;
+    }
+    .apply-card .form-control:focus,
+    .apply-card .form-select:focus {
+      border-color: var(--navy); box-shadow: 0 0 0 3px rgba(36,81,148,.1);
+    }
+    .apply-card textarea.form-control { resize: vertical; min-height: 90px; }
 
-    /* ── Job banner ── */
-    .job-banner { background: #eff6ff; border-bottom: 1px solid #bfdbfe; padding: .75rem 0; }
-    .agency-avatar { width: 44px; height: 44px; border-radius: .4rem; background: var(--leftnav-bg); color: #fff; font-weight: 800; font-size: .78rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    /* ── Opt-in checkboxes ───────────────────────────────────── */
+    .optin-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+    }
+    .optin-box .form-check { margin-bottom: .6rem; }
+    .optin-box .form-check:last-child { margin-bottom: 0; }
+    .optin-box .form-check-label { font-size: .83rem; color: #374151; line-height: 1.5; }
+    .optin-box .form-check-input { margin-top: .2rem; }
 
-    /* ── Footer ── */
-    .jb-footer { background: #1a3a6e; color: rgba(255,255,255,.7); }
-    .jb-footer a { color: rgba(255,255,255,.6); text-decoration: none; font-size: .82rem; }
-    .jb-footer a:hover { color: #fff; }
-    .jb-footer-bottom { background: rgba(0,0,0,.2); font-size: .75rem; color: rgba(255,255,255,.4); }
+    /* ── Submit button ───────────────────────────────────────── */
+    .btn-submit {
+      background: var(--navy); color: #fff; border: none;
+      font-weight: 700; font-size: 1rem; padding: .8rem 2rem;
+      border-radius: 8px; width: 100%; transition: background .15s;
+      cursor: pointer;
+    }
+    .btn-submit:hover { background: var(--navy-dark); }
+
+    /* ── Info sidebar ────────────────────────────────────────── */
+    .info-card {
+      background: #fff; border: 1px solid #e2e8f0;
+      border-radius: 12px; padding: 1.5rem;
+    }
+    .info-card h5 { font-size: .9rem; font-weight: 700; color: #111827; margin-bottom: 1rem; }
+    .info-row { display: flex; justify-content: space-between; align-items: flex-start; padding: .55rem 0; border-bottom: 1px solid #f1f5f9; font-size: .85rem; }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .lbl { color: #64748b; }
+    .info-row .val { font-weight: 600; color: #111827; text-align: right; }
+    .info-row .val.deadline { color: #92400e; }
+    .info-row .val.open { color: #059669; }
+
+    /* ── Confirmation state ──────────────────────────────────── */
+    .confirm-box {
+      display: none;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+    .confirm-box .confirm-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: #dcfce7; color: #16a34a;
+      font-size: 2rem; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .confirm-box h3 { font-size: 1.3rem; font-weight: 800; color: #111827; margin-bottom: .5rem; }
+    .confirm-box p { color: #64748b; font-size: .9rem; line-height: 1.65; margin-bottom: 1.5rem; }
   </style>
 </head>
 <body>
 
-<!-- ── Navbar ─────────────────────────────────────────────────────────────── -->
-<nav class="navbar navbar-expand-lg jb-nav sticky-top shadow-sm">
+<!-- NAVBAR -->
+<nav class="jb-navbar navbar navbar-expand-lg sticky-top">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="jb-listings.html">
-      <i class="bi bi-star-fill" style="color:var(--accent);font-size:1.1rem;"></i>
+    <a class="navbar-brand" href="jb-listings.html">
+      <i class="bi bi-star-fill star-icon"></i>
       Texas Public Safety Jobs
     </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-      <i class="bi bi-list text-white fs-5"></i>
+    <button class="navbar-toggler border-0 shadow-none" type="button"
+            data-bs-toggle="collapse" data-bs-target="#jbNav"
+            style="color:rgba(255,255,255,.7);">
+      <i class="bi bi-list fs-4"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navMain">
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
-        <li class="nav-item"><a href="jb-listings.html" class="nav-link active">Browse Jobs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Agencies</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        <li class="nav-item ms-lg-2"><a href="#" class="btn btn-sm" style="color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);font-size:.82rem;"><i class="bi bi-bookmark me-1"></i>Save Jobs</a></li>
-        <li class="nav-item ms-lg-1"><a href="#" class="btn btn-sm" style="background:var(--accent);color:#000;font-weight:700;font-size:.82rem;">Post a Job</a></li>
+    <div class="collapse navbar-collapse" id="jbNav">
+      <ul class="navbar-nav ms-4 me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="jb-listings.html">Browse Jobs</a></li>
+        <li class="nav-item"><a class="nav-link" href="for-agencies.html">For Agencies</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
       </ul>
+      <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+        <a href="for-agencies.html" class="btn-post-job">Post a Job</a>
+      </div>
     </div>
   </div>
 </nav>
 
-<!-- ── Job context banner ──────────────────────────────────────────────────── -->
-<div class="job-banner">
+<!-- BREADCRUMB -->
+<div class="jb-breadcrumb">
   <div class="container">
-    <div class="d-flex align-items-center gap-3 flex-wrap">
-      <div class="agency-avatar">APD</div>
-      <div>
-        <div class="fw-bold" style="color:#1e293b;font-size:.95rem;">Police Officer — Entry Level</div>
-        <div style="font-size:.8rem;color:#475569;">Austin Police Department &nbsp;·&nbsp; <i class="bi bi-geo-alt"></i> Austin, TX &nbsp;·&nbsp; <i class="bi bi-currency-dollar"></i> $62,400 – $78,000/yr</div>
-      </div>
-      <div class="ms-auto">
-        <span class="badge" style="background:#fee2e2;color:#b91c1c;font-size:.78rem;font-weight:600;padding:.4rem .75rem;">
-          <i class="bi bi-clock me-1"></i>Deadline: June 30, 2026
-        </span>
-      </div>
-    </div>
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb" class="mt-2">
-      <ol class="breadcrumb mb-0" style="font-size:.75rem;">
-        <li class="breadcrumb-item"><a href="jb-listings.html" style="color:#3b82f6;">Home</a></li>
-        <li class="breadcrumb-item"><a href="jb-listings.html" style="color:#3b82f6;">Law Enforcement</a></li>
-        <li class="breadcrumb-item"><a href="jb-detail.html" style="color:#3b82f6;">Police Officer — Entry Level</a></li>
-        <li class="breadcrumb-item active" style="color:#64748b;">Apply</li>
-      </ol>
-    </nav>
+    <a href="jb-listings.html"><i class="bi bi-chevron-left me-1"></i>All Jobs</a>
+    <span class="sep">/</span>
+    <a href="jb-detail.html">Police Officer — Entry Level</a>
+    <span class="sep">/</span>
+    <span style="color:#374151;">Apply</span>
   </div>
 </div>
 
-<!-- ── Main content ────────────────────────────────────────────────────────── -->
-<div class="container py-4">
-
-  <!-- Stepper -->
-  <div class="stepper mb-4">
-    <div class="step-item active">
-      <div class="step-circle">1</div>
-      <div class="step-label">Personal Info</div>
-    </div>
-    <div class="step-item">
-      <div class="step-circle">2</div>
-      <div class="step-label">Background &amp;<br>Experience</div>
-    </div>
-    <div class="step-item">
-      <div class="step-circle">3</div>
-      <div class="step-label">Documents</div>
-    </div>
-    <div class="step-item">
-      <div class="step-circle">4</div>
-      <div class="step-label">Review &amp;<br>Submit</div>
+<!-- JOB CONTEXT BANNER -->
+<div class="job-banner">
+  <div class="container">
+    <div class="dept-label">Austin Police Department · Austin, TX</div>
+    <div class="job-title-lg">Police Officer — Entry Level</div>
+    <div class="job-meta">
+      <span class="jmeta-pill gold"><i class="bi bi-currency-dollar"></i>$62,400 – $78,000/yr</span>
+      <span class="jmeta-pill"><i class="bi bi-briefcase"></i>Full-Time</span>
+      <span class="jmeta-pill"><i class="bi bi-calendar3"></i>Deadline: Jun 30, 2026</span>
     </div>
   </div>
+</div>
 
-  <div class="row g-4">
+<!-- MAIN CONTENT -->
+<div class="container py-4">
+  <div class="row g-4 justify-content-center">
 
-    <!-- ── Form ────────────────────────────────────────────────────────────── -->
-    <div class="col-lg-8">
+    <!-- Form column -->
+    <div class="col-lg-7">
+      <div class="apply-card">
 
-      <!-- Step 1: Personal Information -->
-      <div id="step-1">
+        <!-- Normal form state -->
+        <div id="apply-form">
+          <h2 style="font-size:1.3rem;font-weight:800;color:#111827;margin-bottom:.25rem;">Start Your Application</h2>
+          <p style="color:#64748b;font-size:.88rem;margin-bottom:1.75rem;">Takes less than 2 minutes. A recruiter will follow up within 1–2 business days.</p>
 
-        <!-- Contact Information -->
-        <div class="form-section">
-          <div class="form-section-title"><i class="bi bi-person me-2"></i>Contact Information</div>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">First Name <span class="req">*</span></label>
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label class="form-label">First Name <span style="color:#dc2626;">*</span></label>
               <input type="text" class="form-control" placeholder="Jane">
             </div>
-            <div class="col-md-6">
-              <label class="form-label">Last Name <span class="req">*</span></label>
+            <div class="col-sm-6">
+              <label class="form-label">Last Name <span style="color:#dc2626;">*</span></label>
               <input type="text" class="form-control" placeholder="Smith">
             </div>
-            <div class="col-12">
-              <label class="form-label">Email Address <span class="req">*</span></label>
-              <input type="email" class="form-control" placeholder="jane.smith@email.com">
-              <div class="form-text">We'll send your application confirmation to this address.</div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label class="form-label">Email <span style="color:#dc2626;">*</span></label>
+              <input type="email" class="form-control" placeholder="jane@email.com">
             </div>
-            <div class="col-md-6">
-              <label class="form-label">Phone Number <span class="req">*</span></label>
-              <input type="tel" class="form-control" placeholder="(512) 000-0000">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Alternate Phone <span class="text-muted fw-normal small">(optional)</span></label>
-              <input type="tel" class="form-control" placeholder="(512) 000-0000">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Date of Birth <span class="req">*</span></label>
-              <input type="date" class="form-control">
-              <div class="form-text">Must be 21+ at time of appointment.</div>
+            <div class="col-sm-6">
+              <label class="form-label">Phone <span style="color:#dc2626;">*</span></label>
+              <input type="tel" class="form-control" placeholder="(512) 555-0100">
             </div>
           </div>
+
+          <div class="mb-3">
+            <label class="form-label">Position <span style="color:#dc2626;">*</span></label>
+            <select class="form-select">
+              <option selected>Police Officer — Entry Level</option>
+              <option>Police Officer — Lateral Transfer</option>
+              <option>Deputy Sheriff</option>
+              <option>Firefighter / EMT</option>
+              <option>Emergency Dispatcher</option>
+            </select>
+            <div class="form-text">Pre-selected based on the job you viewed. Change if needed.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message <span style="color:#64748b;font-weight:400;">(optional)</span></label>
+            <textarea class="form-control" placeholder="Tell us a little about yourself, your background, or any questions you have…"></textarea>
+          </div>
+
+          <div class="optin-box mb-4">
+            <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;margin-bottom:.75rem;">Stay in the loop</div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="optin-email" checked>
+              <label class="form-check-label" for="optin-email">
+                <strong>Email updates</strong> — Receive status updates, next steps, and event invitations by email.
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="optin-sms" checked>
+              <label class="form-check-label" for="optin-sms">
+                <strong>Text / SMS updates</strong> — Receive time-sensitive updates and reminders by text message. Msg &amp; data rates may apply. Reply STOP to opt out.
+              </label>
+            </div>
+          </div>
+
+          <button class="btn-submit" onclick="showConfirmation()">
+            <i class="bi bi-send me-2"></i>Submit Application
+          </button>
+          <p style="font-size:.73rem;color:#94a3b8;text-align:center;margin-top:.75rem;">
+            By submitting you agree to our <a href="#" style="color:var(--navy);">Privacy Policy</a>. Your information is only shared with the hiring agency.
+          </p>
         </div>
 
-        <!-- Address -->
-        <div class="form-section">
-          <div class="form-section-title"><i class="bi bi-house me-2"></i>Current Address</div>
-          <div class="row g-3">
-            <div class="col-12">
-              <label class="form-label">Street Address <span class="req">*</span></label>
-              <input type="text" class="form-control" placeholder="123 Main St, Apt 4B">
-            </div>
-            <div class="col-md-5">
-              <label class="form-label">City <span class="req">*</span></label>
-              <input type="text" class="form-control" placeholder="Austin">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">State <span class="req">*</span></label>
-              <select class="form-select">
-                <option selected>Texas</option>
-                <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Florida</option><option>Georgia</option><option>New York</option><option>Other</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">ZIP Code <span class="req">*</span></label>
-              <input type="text" class="form-control" placeholder="78701">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">County</label>
-              <select class="form-select">
-                <option>Select county…</option>
-                <option selected>Travis</option>
-                <option>Harris</option><option>Dallas</option><option>Bexar</option><option>Tarrant</option><option>Collin</option><option>Denton</option><option>El Paso</option><option>Williamson</option><option>Fort Bend</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Identification -->
-        <div class="form-section">
-          <div class="form-section-title"><i class="bi bi-card-text me-2"></i>Identification &amp; Eligibility</div>
-          <div class="row g-3">
-            <div class="col-md-7">
-              <label class="form-label">Driver's License Number <span class="req">*</span></label>
-              <input type="text" class="form-control" placeholder="TX license number">
-            </div>
-            <div class="col-md-5">
-              <label class="form-label">Issuing State <span class="req">*</span></label>
-              <select class="form-select">
-                <option selected>Texas</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label class="form-label d-block">Are you a U.S. Citizen? <span class="req">*</span></label>
-              <div class="d-flex gap-4">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="citizen" id="citizenYes" checked>
-                  <label class="form-check-label" for="citizenYes">Yes</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="citizen" id="citizenNo">
-                  <label class="form-check-label" for="citizenNo">No</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <label class="form-label d-block">Are you legally authorized to work in the United States? <span class="req">*</span></label>
-              <div class="d-flex gap-4">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="workauth" id="authYes" checked>
-                  <label class="form-check-label" for="authYes">Yes</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="workauth" id="authNo">
-                  <label class="form-check-label" for="authNo">No</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <label class="form-label d-block">Have you ever been convicted of a felony? <span class="req">*</span></label>
-              <div class="d-flex gap-4">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="felony" id="felonyYes">
-                  <label class="form-check-label" for="felonyYes">Yes</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="felony" id="felonyNo" checked>
-                  <label class="form-check-label" for="felonyNo">No</label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Demographic (EEO) -->
-        <div class="form-section">
-          <div class="form-section-title"><i class="bi bi-people me-2"></i>Demographic Information <span class="text-muted fw-normal text-lowercase" style="font-size:.7rem;letter-spacing:0;">(optional — for EEO reporting only)</span></div>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">Gender</label>
-              <select class="form-select">
-                <option selected>Prefer not to say</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Non-binary</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Race / Ethnicity</label>
-              <select class="form-select">
-                <option selected>Prefer not to say</option>
-                <option>Hispanic or Latino</option>
-                <option>White (Non-Hispanic)</option>
-                <option>Black or African American</option>
-                <option>Asian</option>
-                <option>American Indian or Alaska Native</option>
-                <option>Native Hawaiian or Other Pacific Islander</option>
-                <option>Two or More Races</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label class="form-label d-block">Are you a Veteran?</label>
-              <div class="d-flex gap-4">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="veteran" id="vetYes">
-                  <label class="form-check-label" for="vetYes">Yes — I'd like to claim veteran's preference</label>
-                </div>
-              </div>
-              <div class="d-flex gap-4 mt-1">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="veteran" id="vetNo" checked>
-                  <label class="form-check-label" for="vetNo">No</label>
-                </div>
-              </div>
-              <div class="d-flex gap-4 mt-1">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="veteran" id="vetPNS">
-                  <label class="form-check-label" for="vetPNS">Prefer not to say</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mt-3 p-3 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;font-size:.78rem;color:#374151;">
-            <i class="bi bi-shield-check text-success me-1"></i>
-            Demographic information is collected solely for EEO compliance and is <strong>never used in the selection process</strong>. It is stored separately from your application.
-          </div>
-        </div>
-
-        <!-- Navigation buttons -->
-        <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
-          <a href="jb-detail.html" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Back to Job</a>
-          <div class="d-flex align-items-center gap-3">
-            <a href="#" class="text-muted small"><i class="bi bi-floppy me-1"></i>Save for Later</a>
-            <button class="btn btn-primary px-4" style="background:var(--leftnav-bg);border-color:var(--leftnav-bg);">
-              Save &amp; Continue <i class="bi bi-arrow-right ms-1"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Steps 2–4 (collapsed previews) -->
-      <div class="mt-2">
-        <div class="step-preview">
-          <div class="step-num">2</div>
-          <div class="step-info">
-            <strong>Background &amp; Experience</strong>
-            <span>Previous employment, education history, and background questions.</span>
-          </div>
-          <span class="badge bg-secondary" style="font-size:.7rem;">Upcoming</span>
-        </div>
-        <div class="step-preview">
-          <div class="step-num">3</div>
-          <div class="step-info">
-            <strong>Documents &amp; Attachments</strong>
-            <span>Resume, cover letter, DD-214 (if applicable), and certifications.</span>
-          </div>
-          <span class="badge bg-secondary" style="font-size:.7rem;">Upcoming</span>
-        </div>
-        <div class="step-preview">
-          <div class="step-num">4</div>
-          <div class="step-info">
-            <strong>Review &amp; Submit</strong>
-            <span>Review your completed application before submitting.</span>
-          </div>
-          <span class="badge bg-secondary" style="font-size:.7rem;">Upcoming</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── Sidebar ──────────────────────────────────────────────────────────── -->
-    <div class="col-lg-4">
-      <div style="position:sticky;top:80px;">
-
-        <!-- Application Tips -->
-        <div class="card border-0 shadow-sm mb-3">
-          <div class="card-body p-4">
-            <h6 class="fw-bold mb-3" style="font-size:.85rem;"><i class="bi bi-lightbulb text-warning me-2"></i>Tips for a Strong Application</h6>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> Complete all required fields marked with <span style="color:#dc2626;">*</span></div>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> Use an email address you check regularly</div>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> Double-check your contact information</div>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> Have your driver's license number ready</div>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> Attach an up-to-date resume in Step 3</div>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> Veterans: attach DD-214 for preference points</div>
-            <div class="tip-item"><i class="bi bi-check-circle-fill"></i> You can save your progress and return later</div>
-          </div>
-        </div>
-
-        <!-- Contact / Help -->
-        <div class="card border-0 shadow-sm mb-3">
-          <div class="card-body p-4">
-            <h6 class="fw-bold mb-3" style="font-size:.85rem;"><i class="bi bi-headset me-2" style="color:var(--leftnav-bg);"></i>Need Help?</h6>
-            <p class="text-muted mb-3" style="font-size:.82rem;">Questions about this position or the application process?</p>
-            <div class="d-flex align-items-center gap-2 mb-2" style="font-size:.82rem;">
-              <i class="bi bi-envelope" style="color:var(--leftnav-bg);"></i>
-              <a href="mailto:recruiting@austinpd.gov" style="color:var(--leftnav-bg);">recruiting@austinpd.gov</a>
-            </div>
-            <div class="d-flex align-items-center gap-2 mb-2" style="font-size:.82rem;">
-              <i class="bi bi-telephone" style="color:var(--leftnav-bg);"></i>
-              <span>(512) 974-5000</span>
-            </div>
-            <div class="text-muted" style="font-size:.75rem;"><i class="bi bi-clock me-1"></i>Mon–Fri, 8:00 AM – 5:00 PM CST</div>
-          </div>
-        </div>
-
-        <!-- Position Summary -->
-        <div class="card border-0 shadow-sm">
-          <div class="card-header bg-white border-bottom" style="border-top: 3px solid var(--leftnav-bg);border-radius:.35rem .35rem 0 0;">
-            <h6 class="mb-0 fw-bold" style="font-size:.85rem;">Position Summary</h6>
-          </div>
-          <div class="card-body p-3">
-            <div class="d-flex flex-column gap-2" style="font-size:.82rem;">
-              <div class="d-flex align-items-start gap-2">
-                <i class="bi bi-briefcase text-muted mt-1" style="flex-shrink:0;"></i>
-                <div>
-                  <div class="fw-semibold text-dark">Police Officer — Entry Level</div>
-                  <div class="text-muted">Austin Police Department</div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center gap-2 text-muted">
-                <i class="bi bi-geo-alt" style="flex-shrink:0;"></i> Austin, TX
-              </div>
-              <div class="d-flex align-items-center gap-2" style="color:var(--leftnav-bg);font-weight:600;">
-                <i class="bi bi-currency-dollar" style="flex-shrink:0;"></i> $62,400 – $78,000/yr
-              </div>
-              <div class="d-flex align-items-center gap-2 text-muted">
-                <i class="bi bi-clock" style="flex-shrink:0;"></i> Deadline: June 30, 2026
-              </div>
-            </div>
-            <a href="jb-detail.html" class="btn btn-outline-secondary btn-sm w-100 mt-3" style="font-size:.78rem;">
-              <i class="bi bi-arrow-left me-1"></i>View Full Posting
-            </a>
-          </div>
+        <!-- Confirmation state (shown after submit) -->
+        <div class="confirm-box" id="confirm-box">
+          <div class="confirm-icon"><i class="bi bi-check-lg"></i></div>
+          <h3>Application Submitted!</h3>
+          <p>Thanks, Jane. A recruiter from Austin Police Department will be in touch within 1–2 business days. Check your email for a confirmation.</p>
+          <a href="jb-listings.html" class="btn" style="background:var(--navy);color:#fff;font-weight:600;padding:.65rem 1.75rem;border-radius:8px;text-decoration:none;display:inline-block;">
+            Browse More Jobs
+          </a>
         </div>
 
       </div>
     </div>
 
-  </div><!-- /row -->
+    <!-- Info sidebar -->
+    <div class="col-lg-4 col-xl-3">
+      <div class="info-card mb-3">
+        <h5><i class="bi bi-info-circle me-2" style="color:var(--navy);"></i>Position Details</h5>
+        <div class="info-row"><span class="lbl">Department</span><span class="val">Austin Police Dept</span></div>
+        <div class="info-row"><span class="lbl">Location</span><span class="val">Austin, TX</span></div>
+        <div class="info-row"><span class="lbl">Salary</span><span class="val">$62,400 – $78,000</span></div>
+        <div class="info-row"><span class="lbl">Type</span><span class="val">Full-Time</span></div>
+        <div class="info-row"><span class="lbl">Deadline</span><span class="val deadline">Jun 30, 2026</span></div>
+        <div class="info-row"><span class="lbl">Openings</span><span class="val open">15 remaining</span></div>
+      </div>
 
-  <!-- Dev Notes -->
-  <div class="mt-5 p-3 rounded" style="background:#fffbeb;border:1px solid #fcd34d;font-size:.78rem;">
-    <strong style="color:#92400e;">📋 Dev Notes:</strong>
-    <ul class="mb-0 mt-1" style="color:#374151;padding-left:1.2rem;">
-      <li><strong>Hosting:</strong> Co-hosted on the same Azure server as the AllStar Recruiter CRM. No separate deployment — the job board and application form are public-facing routes within the same application, sharing the same database and blob storage.</li>
-      <li><strong>Route:</strong> <code>/jobs/{id}/apply</code> — served by the same server under the public route group (no CRM auth guard on this path).</li>
-      <li>Step state managed client-side. Each step validates required fields before advancing — do not allow skipping forward.</li>
-      <li>Progress is auto-saved to <code>localStorage</code> keyed by jobId so the candidate can return later without losing data.</li>
-      <li>On final submit, POST to <code>/api/public/applications</code>. If the email already exists as a Candidate in the CRM, link the application to that record; otherwise create a new Candidate.</li>
-      <li>File uploads (resume, DD-214, certs) go to blob storage via <code>POST /api/public/upload</code>. Max 10MB per file, accept PDF/DOC/DOCX/JPG/PNG.</li>
-      <li>EEO demographic fields are optional and stored in a separate table — never joined to the application in any selection-related query.</li>
-      <li>Veteran's preference: if claimed, prompt for DD-214 upload in Step 3. Apply preference points per agency rules.</li>
-      <li>After submit: redirect to <code>/apply/confirmation?ref={applicationId}</code> with confirmation number. Send confirmation email to applicant.</li>
-      <li>"Save for Later" requires account creation (email + password). Show a modal prompt — not covered in this mockup.</li>
-      <li>The job banner and context header are populated from the same <code>GET /api/public/jobs/{id}</code> endpoint used by the detail page.</li>
-    </ul>
+      <div class="info-card" style="background:#fffbeb;border-color:#fde68a;">
+        <div style="font-size:.8rem;font-weight:700;color:#92400e;margin-bottom:.5rem;"><i class="bi bi-clock me-1"></i>What happens next?</div>
+        <ol style="font-size:.8rem;color:#78350f;line-height:1.9;padding-left:1.1rem;margin:0;">
+          <li>A recruiter reviews your info</li>
+          <li>You'll get a follow-up call or email</li>
+          <li>If selected, you'll be invited to the next exam or event</li>
+        </ol>
+      </div>
+    </div>
+
   </div>
-
-</div><!-- /container -->
-
-<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
-<footer class="jb-footer mt-5 pt-5 pb-4">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6">
-        <div class="d-flex align-items-center gap-2 mb-2">
-          <i class="bi bi-star-fill" style="color:var(--accent);font-size:1.1rem;"></i>
-          <span style="color:#fff;font-weight:800;font-size:.95rem;">Texas Public Safety Jobs</span>
-        </div>
-        <p style="font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.7;">The official job board for public safety careers across Texas — connecting communities with the people who protect them.</p>
-      </div>
-      <div class="col-lg-2 col-md-6">
-        <div style="color:rgba(255,255,255,.5);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;">Quick Links</div>
-        <div class="d-flex flex-column gap-2">
-          <a href="jb-listings.html">Browse Jobs</a>
-          <a href="#">For Agencies</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div style="color:rgba(255,255,255,.5);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;">Categories</div>
-        <div class="d-flex flex-column gap-2">
-          <a href="#">Law Enforcement</a>
-          <a href="#">Fire Services</a>
-          <a href="#">EMS / Paramedic</a>
-          <a href="#">Corrections</a>
-          <a href="#">Emergency Dispatch</a>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div style="color:rgba(255,255,255,.5);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;">Powered By</div>
-        <div style="color:#fff;font-weight:800;font-size:.95rem;margin-bottom:.35rem;">AllStar Recruiter</div>
-        <div style="font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:.75rem;">Recruitment CRM for public safety agencies</div>
-        <a href="#" class="btn btn-sm" style="background:var(--accent);color:#000;font-weight:700;font-size:.75rem;">Agency Login</a>
-      </div>
-    </div>
-  </div>
-  <div class="jb-footer-bottom mt-4 py-3">
-    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
-      <span>© 2026 Texas Public Safety Jobs. All rights reserved.</span>
-      <div class="d-flex gap-3">
-        <a href="#" style="color:rgba(255,255,255,.4);">Privacy Policy</a>
-        <a href="#" style="color:rgba(255,255,255,.4);">Terms of Use</a>
-        <a href="#" style="color:rgba(255,255,255,.4);">Accessibility</a>
-      </div>
-    </div>
-  </div>
-</footer>
+</div>
 
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+function showConfirmation() {
+  document.getElementById('apply-form').style.display = 'none';
+  document.getElementById('confirm-box').style.display = 'block';
+}
+</script>
 </body>
 </html>

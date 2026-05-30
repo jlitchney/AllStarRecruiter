@@ -557,33 +557,59 @@
       </div>
       <div class="col-lg-5">
         <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.75rem;position:sticky;top:80px;">
-          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:1rem;">Quick Apply</div>
-          <div style="font-size:1.1rem;font-weight:800;color:#111827;margin-bottom:.25rem;">Police Officer — Entry Level</div>
-          <div style="font-size:.85rem;color:#64748b;margin-bottom:1.25rem;">Austin Police Department · Austin, TX</div>
-          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1rem;margin-bottom:1.25rem;">
-            <div class="d-flex justify-content-between mb-1">
-              <span style="font-size:.8rem;color:#64748b;">Salary</span>
-              <span style="font-size:.8rem;font-weight:700;color:#111827;">$62,400 – $78,000/yr</span>
+          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.5rem;">Quick Apply</div>
+          <div style="font-size:1rem;font-weight:800;color:#111827;margin-bottom:.15rem;">Police Officer — Entry Level</div>
+          <div style="font-size:.8rem;color:#64748b;margin-bottom:1.1rem;">Austin Police Department · <span style="color:#92400e;font-weight:600;">Deadline Jun 30</span> · <span style="color:#059669;font-weight:600;">15 openings</span></div>
+
+          <!-- Inline form -->
+          <div id="branded-sidebar-form">
+            <div class="row g-2 mb-2">
+              <div class="col-6">
+                <input type="text" class="form-control form-control-sm" placeholder="First name">
+              </div>
+              <div class="col-6">
+                <input type="text" class="form-control form-control-sm" placeholder="Last name">
+              </div>
             </div>
-            <div class="d-flex justify-content-between mb-1">
-              <span style="font-size:.8rem;color:#64748b;">Type</span>
-              <span style="font-size:.8rem;font-weight:600;color:#111827;">Full-Time</span>
+            <div class="mb-2">
+              <input type="email" class="form-control form-control-sm" placeholder="Email address">
             </div>
-            <div class="d-flex justify-content-between mb-1">
-              <span style="font-size:.8rem;color:#64748b;">Deadline</span>
-              <span style="font-size:.8rem;font-weight:600;color:#92400e;">Jun 30, 2026</span>
+            <div class="mb-2">
+              <input type="tel" class="form-control form-control-sm" placeholder="Phone number">
             </div>
-            <div class="d-flex justify-content-between">
-              <span style="font-size:.8rem;color:#64748b;">Open Positions</span>
-              <span style="font-size:.8rem;font-weight:600;color:#059669;">15 remaining</span>
+            <div class="mb-2">
+              <select class="form-select form-select-sm">
+                <option selected>Police Officer — Entry Level</option>
+                <option>Police Officer — Lateral Transfer</option>
+              </select>
             </div>
+            <div class="mb-2">
+              <textarea class="form-control form-control-sm" rows="2" placeholder="Message (optional)…" style="resize:none;"></textarea>
+            </div>
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:.6rem .75rem;margin-bottom:.75rem;">
+              <div class="form-check mb-1">
+                <input class="form-check-input" type="checkbox" id="br-optin-email" checked>
+                <label class="form-check-label" for="br-optin-email" style="font-size:.75rem;color:#374151;">Email updates</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="br-optin-sms" checked>
+                <label class="form-check-label" for="br-optin-sms" style="font-size:.75rem;color:#374151;">Text / SMS updates</label>
+              </div>
+            </div>
+            <button class="btn w-100 fw-bold" style="background:var(--navy);color:#fff;padding:.7rem;border-radius:8px;font-size:.9rem;border:none;" onclick="showBrandedConfirm()">
+              <i class="bi bi-send me-2"></i>Submit Application
+            </button>
           </div>
-          <a href="jb-apply.html" class="btn w-100 fw-bold" style="background:var(--navy);color:#fff;padding:.75rem;border-radius:8px;font-size:.95rem;text-decoration:none;display:block;text-align:center;margin-bottom:.75rem;">
-            <i class="bi bi-pencil-square me-2"></i>Start Application
-          </a>
-          <a href="#" class="btn w-100" style="border:1.5px solid #e2e8f0;color:#374151;padding:.65rem;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;display:block;text-align:center;">
-            <i class="bi bi-bookmark me-2"></i>Save This Job
-          </a>
+
+          <!-- Confirmation -->
+          <div id="branded-sidebar-confirm" style="display:none;text-align:center;padding:.75rem 0;">
+            <div style="width:48px;height:48px;border-radius:50%;background:#dcfce7;color:#16a34a;font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <div style="font-weight:800;color:#111827;font-size:.95rem;margin-bottom:.3rem;">Application Submitted!</div>
+            <div style="font-size:.8rem;color:#64748b;line-height:1.55;">A recruiter will follow up within 1–2 business days.</div>
+          </div>
+
           <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #f1f5f9;text-align:center;">
             <a href="#" style="font-size:.78rem;color:var(--navy);font-weight:600;text-decoration:none;">
               <i class="bi bi-building me-1"></i>View all Austin PD openings →
@@ -737,13 +763,60 @@
 <section class="apply-cta">
   <div class="container">
     <h2>READY TO SERVE?</h2>
-    <p>Applications for the June 2026 academy class close June 30th. Don't wait — positions fill before the deadline.</p>
-    <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <a href="jb-apply.html" class="btn-apply-lg">Start Your Application</a>
-      <a href="#" style="background:transparent;color:rgba(255,255,255,.8);border:2px solid rgba(255,255,255,.3);font-size:.95rem;font-weight:600;padding:.95rem 2rem;border-radius:8px;text-decoration:none;">Ask a Question</a>
+    <p>Applications for the June 2026 academy class close June 30th. Takes less than 2 minutes.</p>
+
+    <div style="max-width:520px;margin:0 auto;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:2rem;">
+      <div id="cta-form">
+        <div class="row g-2 mb-2">
+          <div class="col-6">
+            <input type="text" class="form-control form-control-sm" placeholder="First name" style="background:rgba(255,255,255,.9);border:none;border-radius:6px;">
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control form-control-sm" placeholder="Last name" style="background:rgba(255,255,255,.9);border:none;border-radius:6px;">
+          </div>
+        </div>
+        <div class="row g-2 mb-2">
+          <div class="col-6">
+            <input type="email" class="form-control form-control-sm" placeholder="Email" style="background:rgba(255,255,255,.9);border:none;border-radius:6px;">
+          </div>
+          <div class="col-6">
+            <input type="tel" class="form-control form-control-sm" placeholder="Phone" style="background:rgba(255,255,255,.9);border:none;border-radius:6px;">
+          </div>
+        </div>
+        <div class="mb-2">
+          <select class="form-select form-select-sm" style="background:rgba(255,255,255,.9);border:none;border-radius:6px;">
+            <option selected>Police Officer — Entry Level</option>
+            <option>Police Officer — Lateral Transfer</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control form-control-sm" rows="2" placeholder="Message (optional)…" style="background:rgba(255,255,255,.9);border:none;border-radius:6px;resize:none;"></textarea>
+        </div>
+        <div style="text-align:left;margin-bottom:1rem;">
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="cta-email" checked>
+            <label class="form-check-label" for="cta-email" style="font-size:.78rem;color:rgba(255,255,255,.75);">Email updates</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="cta-sms" checked>
+            <label class="form-check-label" for="cta-sms" style="font-size:.78rem;color:rgba(255,255,255,.75);">Text / SMS updates</label>
+          </div>
+        </div>
+        <button class="btn-apply-lg w-100" style="padding:.85rem;font-size:.95rem;" onclick="showCtaConfirm()">
+          Submit Application
+        </button>
+      </div>
+      <div id="cta-confirm" style="display:none;text-align:center;padding:1.5rem 0;">
+        <div style="width:60px;height:60px;border-radius:50%;background:rgba(22,163,74,.2);border:2px solid #4ade80;color:#4ade80;font-size:1.6rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <i class="bi bi-check-lg"></i>
+        </div>
+        <div style="font-weight:800;color:#fff;font-size:1.1rem;margin-bottom:.4rem;">Application Submitted!</div>
+        <div style="font-size:.85rem;color:rgba(255,255,255,.65);">A recruiter will follow up within 1–2 business days.</div>
+      </div>
     </div>
-    <p style="color:rgba(255,255,255,.4);font-size:.78rem;margin-top:1.75rem;">
-      Questions? Contact APD Recruiting: <strong style="color:rgba(255,255,255,.65);">recruiting@austintexas.gov</strong> · (512) 974-5900
+
+    <p style="color:rgba(255,255,255,.4);font-size:.75rem;margin-top:1.25rem;">
+      Questions? <strong style="color:rgba(255,255,255,.6);">recruiting@austintexas.gov</strong> · (512) 974-5900
     </p>
   </div>
 </section>
@@ -769,5 +842,15 @@
 
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+function showBrandedConfirm() {
+  document.getElementById('branded-sidebar-form').style.display = 'none';
+  document.getElementById('branded-sidebar-confirm').style.display = 'block';
+}
+function showCtaConfirm() {
+  document.getElementById('cta-form').style.display = 'none';
+  document.getElementById('cta-confirm').style.display = 'block';
+}
+</script>
 </body>
 </html>
