@@ -917,10 +917,8 @@
           <li>Slug auto-generated from job title + org name + year on first publish: <code>police-officer-entry-level-acme-pd-2026</code>.</li>
           <li>The public listing routes (<code>/jobs/*</code>) are served by the same Azure app but bypass CRM auth middleware.</li>
           <li>Rich text fields (overview, requirements, qualifications, benefits) stored as sanitized HTML.</li>
-          <li>Selection process steps stored as ordered JSON array on the Job record.</li>
-          <li>Association Tags work identically to the Events module — applying a tag fires workflow automations.</li>
-          <li>"Linked Event" creates a join between Job and Event; applicants auto-added to the event roster with Invited status.</li>
-<li><strong>Listing Page:</strong> <code>listing_page_type</code> field on the Job record — <code>"standard"</code> or <code>"branded"</code>. Branded jobs store a FK <code>page_id</code> referencing the WebBuilderPage table. The public job board router checks this field: standard jobs render the default job detail view; branded jobs render the linked web-builder page with the job board nav injected at the top. The page slug follows the <code>/OrgSlug/PageSlug</code> pattern used by the existing web builder.</li>
+          <li>Position Tag: auto-applied to the candidate record when someone submits an application for this job. Tag assignment fires any workflow automations configured for that tag (e.g. drip sequences, notifications).</li>
+          <li><strong>Listing Page:</strong> <code>listing_page_type</code> field on the Job record — <code>"standard"</code> or <code>"branded"</code>. Branded jobs store a FK <code>page_id</code> referencing the WebBuilderPage table. The public job board router checks this field: standard jobs render the default job detail view; branded jobs render the linked web-builder page with the job board nav injected at the top. The page slug follows the <code>/OrgSlug/PageSlug</code> pattern used by the existing web builder.</li>
         </ul>
       </div>
 
