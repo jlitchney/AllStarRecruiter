@@ -396,6 +396,17 @@
     /* ── Photo strip ─────────────────────────────────────────── */
     .photo-strip { background: #0d1e40; padding: 3rem 0; }
     .photo-strip-label { text-align:center; font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.35); margin-bottom:1.5rem; }
+
+    /* ── Pro pricing toggle ──────────────────────────────────── */
+    .btn-toggle-pro {
+      background: none; border: 1px solid #cbd5e1; color: #64748b;
+      font-size: .82rem; font-weight: 600; padding: .45rem 1.4rem;
+      border-radius: 6px; cursor: pointer; transition: all .15s;
+      display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .btn-toggle-pro:hover { border-color: var(--navy-mid); color: var(--navy-mid); }
+    .btn-toggle-pro[aria-expanded="true"] .toggle-arrow { transform: rotate(180deg); }
+    .toggle-arrow { transition: transform .2s; display: inline-block; }
   </style>
 </head>
 <body>
@@ -490,7 +501,7 @@
         <div class="stat-item"><div class="num">$0</div><div class="lbl">Cost for the partner plan</div></div>
       </div>
       <div class="col-6 col-md-3">
-        <div class="stat-item"><div class="num">5 min</div><div class="lbl">Setup time</div></div>
+        <div class="stat-item"><div class="num">5 min</div><div class="lbl">Setup once verified</div></div>
       </div>
       <div class="col-6 col-md-3">
         <div class="stat-item"><div class="num">100%</div><div class="lbl">Built for law enforcement</div></div>
@@ -521,7 +532,7 @@
         <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Manage hiring events and keep candidates showing up</div>
         <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Organize content, forms, and documents in one place</div>
         <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Measure which campaigns are actually generating candidates</div>
-        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Prepare stronger candidates before background — reducing Guardian fallout</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Prepare stronger candidates before background — improving readiness before Guardian submission</div>
         <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Move ready candidates into Guardian without duplicate data entry</div>
         <div style="margin-top:2rem;padding:1.25rem 1.5rem;background:rgba(228,170,53,.08);border:1px solid rgba(228,170,53,.2);border-radius:10px;">
           <p style="font-size:.9rem;font-weight:700;color:var(--gold);margin-bottom:.35rem;">The platform gives your agency the system.</p>
@@ -799,7 +810,7 @@
         <div class="section-eyebrow">More than software</div>
         <div class="section-title">Need more than software?<br><span>All-Star can run the playbook.</span></div>
         <p class="section-sub mx-auto text-center">
-          Some agencies have the team to run recruiting in-house. Others need help with strategy, content, advertising, follow-up, or campaign execution. All-Star can support your agency with the same services and campaign playbooks that shaped the platform.
+          The platform gives your agency the system. All-Star services can help you generate demand, create content, run campaigns, and keep candidates moving — when your agency needs extra horsepower. These are the same services and campaign playbooks that shaped the platform.
         </p>
       </div>
     </div>
@@ -882,7 +893,7 @@
           <div class="pain-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-chat-dots"></i></div>
           <div>
             <div class="pain-q">Need faster candidate response? <span class="pro-ribbon">PRO</span></div>
-            <div class="pain-a">Add SMS. Two-way text with candidates. Reply rates 3× higher than email. Automated reminders included.</div>
+            <div class="pain-a">Add SMS. Reach candidates faster than email alone with two-way text messaging. Automated reminders included.</div>
           </div>
         </div>
       </div>
@@ -942,7 +953,7 @@
     <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e4d8c 100%);border-radius:12px;padding:2rem;margin-top:2rem;display:flex;flex-direction:column;gap:.5rem;align-items:center;text-align:center;">
       <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--gold);">Everything unlocked. One plan.</div>
       <h4 style="color:#fff;font-size:1.2rem;font-weight:800;margin:0;">Pro gives you every feature in a single upgrade.</h4>
-      <p style="color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;max-width:600px;margin:0;">No picking and choosing. Run your entire hiring funnel from first contact to Guardian referral in one place. Pricing is based on agency size — see the full breakdown below.</p>
+      <p style="color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;max-width:600px;margin:0;">No picking and choosing. Run your entire hiring funnel from first contact to Guardian referral in one place. Start with the free Guardian Partner Plan. Upgrade only when your agency needs more automation, reporting, or campaign support.</p>
     </div>
 
   </div>
@@ -999,7 +1010,16 @@
       </div>
     </div>
 
-    <!-- Pro pricing grid -->
+    <!-- Pro pricing toggle -->
+    <div class="text-center mb-4">
+      <p style="font-size:.88rem;color:#64748b;margin-bottom:.75rem;">Start with the free Guardian Partner Plan. Upgrade only when your agency needs more automation, reporting, users, or campaign support.</p>
+      <button class="btn-toggle-pro" type="button" data-bs-toggle="collapse" data-bs-target="#pro-pricing-details" aria-expanded="false">
+        View Pro Pricing <span class="toggle-arrow">↓</span>
+      </button>
+    </div>
+
+    <!-- Pro pricing grid (collapsed by default) -->
+    <div class="collapse" id="pro-pricing-details">
     <div class="row justify-content-center mb-4">
       <div class="col-12">
         <div style="text-align:center;margin-bottom:1.25rem;">
@@ -1092,6 +1112,7 @@
       </div>
     </div>
 
+    </div><!-- /pro-pricing-details collapse -->
   </div>
 </section>
 
@@ -1102,7 +1123,7 @@
       <i class="bi bi-shield-check me-1"></i> Guardian Partner Free Plan
     </div>
     <h2>Stop losing candidates<br><span>before they reach Guardian.</span></h2>
-    <p class="lede">Tell us about your agency and we'll have your account set up and your first candidates tracked in under 5 minutes.</p>
+    <p class="lede">Tell us about your agency. Account verification within 1 business day. Once verified, you'll be up and running in about 5 minutes.</p>
 
     <div class="cta-form-card">
       <div id="cta-form">
@@ -1114,6 +1135,7 @@
         <input type="hidden" id="field_utm_source" name="utm_source" value="">
         <input type="hidden" id="field_utm_medium" name="utm_medium" value="">
         <input type="hidden" id="field_utm_campaign" name="utm_campaign" value="">
+        <input type="hidden" id="field_plan_selected" name="plan_selected" value="free">
 
         <div class="row g-3 mb-3">
           <div class="col-12">
@@ -1156,7 +1178,7 @@
         </div>
 
         <div class="row g-3 mb-3">
-          <div class="col-12">
+          <div class="col-sm-7">
             <label class="form-label">Agency Size (Sworn Officers) <span style="color:#f87171;">*</span></label>
             <select class="form-select">
               <option value="" disabled selected>Select your agency size…</option>
@@ -1165,6 +1187,15 @@
               <option value="100-199">100 – 199 Sworn Officers</option>
               <option value="200-399">200 – 399 Sworn Officers</option>
               <option value="400+">400+ Sworn Officers</option>
+            </select>
+          </div>
+          <div class="col-sm-5">
+            <label class="form-label">Current Guardian Alliance customer? <span style="color:#f87171;">*</span></label>
+            <select class="form-select" id="field_guardian_customer" name="guardian_customer">
+              <option value="" disabled selected>Select one…</option>
+              <option value="yes">Yes</option>
+              <option value="no">No — not yet</option>
+              <option value="not-sure">Not sure</option>
             </select>
           </div>
         </div>
@@ -1249,6 +1280,7 @@
   function selectPlan(el, plan) {
     document.querySelectorAll('.cta-plan-option').forEach(o => o.classList.remove('selected-free','selected-pro'));
     el.classList.add(plan === 'free' ? 'selected-free' : 'selected-pro');
+    document.getElementById('field_plan_selected').value = plan;
   }
 
   function submitCta() {
