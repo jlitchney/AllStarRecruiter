@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Police Officer — Entry Level | Austin Police Department | Texas Public Safety Jobs</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+
+  <style>
+    :root {
+      --navy: #245194;
+      --navy-dark: #1a3a6e;
+      --gold: #e4aa35;
+      --gold-hover: #c9941f;
+    }
+
+    /* ── Reset / Base ───────────────────────────────────────────── */
+    body {
+      background: #f4f6fa;
+      color: #1e293b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .jb-navbar {
+      background: var(--navy);
+      padding: .75rem 1.5rem;
+    }
+    .jb-navbar .navbar-brand {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: .01em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .jb-navbar .navbar-brand .star-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+    .jb-navbar .nav-link {
+      color: rgba(255,255,255,.82) !important;
+      font-weight: 500;
+      font-size: .92rem;
+      transition: color .15s;
+    }
+    .jb-navbar .nav-link:hover,
+    .jb-navbar .nav-link.active {
+      color: #fff !important;
+    }
+    .jb-navbar .nav-link.active {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: calc(.5rem - 2px);
+    }
+    .btn-post-job {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      font-weight: 600;
+      font-size: .85rem;
+      padding: .35rem .9rem;
+      border-radius: 6px;
+      transition: all .15s;
+      text-decoration: none;
+    }
+    .btn-post-job:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+    .save-jobs-link {
+      color: rgba(255,255,255,.85);
+      font-size: .87rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .save-jobs-link:hover { color: #fff; }
+
+    /* ── Breadcrumb ─────────────────────────────────────────────── */
+    .jb-breadcrumb {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: .65rem 0;
+    }
+    .jb-breadcrumb .breadcrumb {
+      margin: 0;
+      font-size: .85rem;
+    }
+    .jb-breadcrumb .breadcrumb-item a {
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .jb-breadcrumb .breadcrumb-item a:hover { text-decoration: underline; }
+    .jb-breadcrumb .breadcrumb-item.active { color: #64748b; }
+    .jb-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+      color: #94a3b8;
+    }
+
+    /* ── Job Header Card ────────────────────────────────────────── */
+    .job-header-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(0,0,0,.07);
+      padding: 2rem 2rem 1.75rem;
+    }
+    .agency-avatar {
+      width: 72px;
+      height: 72px;
+      background: var(--navy);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: .04em;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(36,81,148,.3);
+    }
+    .job-header-agency {
+      font-size: .88rem;
+      color: #64748b;
+      font-weight: 500;
+      margin-bottom: .25rem;
+    }
+    .job-header-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      margin-bottom: .85rem;
+      letter-spacing: -.02em;
+    }
+    .job-header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem 1.5rem;
+      font-size: .9rem;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+    .job-header-meta span {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    .job-header-meta .salary-text {
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .job-header-meta i {
+      color: #94a3b8;
+      font-size: .95rem;
+    }
+    .job-header-meta .salary-text i { color: var(--navy); }
+    .job-header-footer {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .6rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .cat-badge {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .22rem .65rem;
+      border-radius: 99px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+    .badge-law { background: #dbeafe; color: #1d4ed8; }
+    .posted-text {
+      font-size: .82rem;
+      color: #94a3b8;
+    }
+    .btn-apply-now {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      font-size: .97rem;
+      padding: .65rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      transition: background .15s;
+    }
+    .btn-apply-now:hover {
+      background: var(--navy-dark);
+      color: #fff;
+    }
+    .btn-save-job {
+      background: #fff;
+      color: var(--navy);
+      border: 2px solid #cbd5e1;
+      font-weight: 600;
+      font-size: .93rem;
+      padding: .6rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      transition: all .15s;
+    }
+    .btn-save-job:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    /* ── Section Headings ───────────────────────────────────────── */
+    .section-heading {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #0f172a;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .section-heading i {
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    /* ── Main Content Card ──────────────────────────────────────── */
+    .content-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.25rem;
+    }
+    .content-card p {
+      font-size: .95rem;
+      line-height: 1.75;
+      color: #334155;
+      margin-bottom: .9rem;
+    }
+    .content-card p:last-child { margin-bottom: 0; }
+    .content-card ul, .content-card ol {
+      font-size: .95rem;
+      line-height: 1.8;
+      color: #334155;
+      padding-left: 1.5rem;
+      margin-bottom: 0;
+    }
+    .content-card ul li, .content-card ol li {
+      margin-bottom: .2rem;
+    }
+
+    /* ── Benefits Box ───────────────────────────────────────────── */
+    .benefits-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .benefits-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: .93rem;
+      color: #1e3a5f;
+    }
+    .benefits-box ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      padding: .35rem 0;
+      border-bottom: 1px solid #dbeafe;
+    }
+    .benefits-box ul li:last-child { border-bottom: none; }
+    .benefits-box ul li i {
+      color: #2563eb;
+      font-size: .95rem;
+      margin-top: .1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Selection Steps ────────────────────────────────────────── */
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+    .steps-list::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: #e2e8f0;
+    }
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: .55rem 0;
+      position: relative;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 800;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+      box-shadow: 0 0 0 3px #f4f6fa;
+    }
+    .step-body {
+      padding-top: .45rem;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: .95rem;
+      color: #0f172a;
+    }
+    .step-desc {
+      font-size: .85rem;
+      color: #64748b;
+      margin-top: .1rem;
+    }
+
+    /* ── About Agency Block ─────────────────────────────────────── */
+    .agency-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .agency-block .agency-logo-sm {
+      width: 52px;
+      height: 52px;
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: .03em;
+      flex-shrink: 0;
+    }
+    .agency-block .agency-info p {
+      font-size: .93rem;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: .5rem;
+    }
+    .agency-link {
+      color: var(--navy);
+      font-weight: 600;
+      font-size: .9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .agency-link:hover { text-decoration: underline; }
+
+    /* ── Sidebar Cards ──────────────────────────────────────────── */
+    .sidebar-sticky {
+      position: sticky;
+      top: 76px;
+    }
+    .sidebar-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-card.apply-card {
+      border-top: 4px solid var(--navy);
+    }
+    .deadline-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #94a3b8;
+      margin-bottom: .25rem;
+    }
+    .deadline-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .deadline-badge {
+      font-size: .72rem;
+      font-weight: 700;
+      background: #fef9c3;
+      color: #a16207;
+      border: 1px solid #fde68a;
+      padding: .15rem .5rem;
+      border-radius: 99px;
+    }
+    .btn-apply-sidebar {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: .75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      transition: background .15s;
+    }
+    .btn-apply-sidebar:hover {
+      background: var(--navy-dark);
+      color: #fff;
+    }
+    .save-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .35rem;
+      color: #64748b;
+      font-size: .88rem;
+      font-weight: 500;
+      text-decoration: none;
+      margin-top: .75rem;
+    }
+    .save-link:hover { color: var(--navy); }
+    .share-row {
+      display: flex;
+      gap: .5rem;
+    }
+    .share-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .35rem;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .45rem .5rem;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: all .15s;
+      cursor: pointer;
+    }
+    .share-btn:hover {
+      background: #e8edf8;
+      border-color: #b8cae8;
+      color: var(--navy);
+    }
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid #f1f5f9;
+      margin: 1rem 0;
+    }
+    .share-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #94a3b8;
+      margin-bottom: .6rem;
+    }
+
+    /* ── Quick Facts ────────────────────────────────────────────── */
+    .facts-table {
+      width: 100%;
+      font-size: .88rem;
+    }
+    .facts-table tr td {
+      padding: .45rem 0;
+      vertical-align: top;
+    }
+    .facts-table tr:not(:last-child) td {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .facts-table .fact-label {
+      color: #94a3b8;
+      font-weight: 600;
+      width: 50%;
+      white-space: nowrap;
+    }
+    .facts-table .fact-value {
+      color: #1e293b;
+      font-weight: 500;
+      text-align: right;
+    }
+    .fact-highlight {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    /* ── Similar Jobs ───────────────────────────────────────────── */
+    .similar-job-row {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      padding: .75rem 0;
+    }
+    .similar-job-row:not(:last-child) {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .similar-job-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 7px;
+      background: #e8edf8;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .similar-job-title {
+      font-size: .88rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: .1rem;
+      line-height: 1.3;
+    }
+    .similar-job-agency {
+      font-size: .78rem;
+      color: #94a3b8;
+    }
+    .similar-job-salary {
+      font-size: .78rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .similar-job-link {
+      font-size: .78rem;
+      color: var(--navy);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      align-self: center;
+      margin-left: auto;
+    }
+    .similar-job-link:hover { text-decoration: underline; }
+
+    /* ── Dev Notes ──────────────────────────────────────────────── */
+    .dev-notes {
+      background: #fefce8;
+      border: 2px solid #fde047;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0 0;
+    }
+    .dev-notes-title {
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #713f12;
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .dev-notes ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: .86rem;
+      color: #78350f;
+      line-height: 1.7;
+    }
+    .dev-notes code {
+      background: rgba(0,0,0,.07);
+      padding: .1em .35em;
+      border-radius: 3px;
+      font-size: .82em;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    .jb-footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,.8);
+      padding: 3rem 0 0;
+      margin-top: 3.5rem;
+    }
+    .footer-brand {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: .5rem;
+    }
+    .footer-brand .star-icon { color: var(--gold); }
+    .footer-tagline {
+      font-size: .85rem;
+      color: rgba(255,255,255,.55);
+      max-width: 240px;
+      line-height: 1.5;
+    }
+    .footer-heading {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: rgba(255,255,255,.45);
+      margin-bottom: .75rem;
+    }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: .4rem; }
+    .footer-links a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-powered {
+      font-size: .85rem;
+      color: rgba(255,255,255,.6);
+    }
+    .footer-powered strong { color: #fff; }
+    .footer-bar {
+      border-top: 1px solid rgba(255,255,255,.1);
+      margin-top: 2.5rem;
+      padding: 1rem 0;
+      font-size: .82rem;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 991px) {
+      .job-header-title { font-size: 1.4rem; }
+      .sidebar-sticky { position: static; }
+      .job-header-card { padding: 1.25rem 1.25rem 1.1rem; }
+      .content-card { padding: 1.25rem 1.25rem; }
+    }
+    @media (max-width: 767px) {
+      .job-header-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+      .btn-apply-now, .btn-save-job { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     STICKY NAVBAR
+════════════════════════════════════════════════════════════════ -->
+<nav class="jb-navbar sticky-top navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="jb-listings.html">
+      <i class="bi bi-star-fill star-icon"></i>
+      Texas Public Safety Jobs
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler border-0 shadow-none" type="button"
+            data-bs-toggle="collapse" data-bs-target="#jbNav"
+            style="color:rgba(255,255,255,.7);">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="jbNav">
+      <!-- Center links -->
+      <ul class="navbar-nav ms-4 me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="jb-listings.html">Browse Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Agencies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+
+      <!-- Right actions -->
+      <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+        <a href="#" class="save-jobs-link">
+          <i class="bi bi-bookmark"></i>
+          Save Jobs
+        </a>
+        <a href="#" class="btn-post-job">Post a Job</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     BREADCRUMB
+════════════════════════════════════════════════════════════════ -->
+<div class="jb-breadcrumb">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="jb-listings.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="jb-listings.html?category=law-enforcement">Law Enforcement</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Police Officer — Entry Level</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     JOB HEADER
+════════════════════════════════════════════════════════════════ -->
+<div class="container py-4">
+  <div class="job-header-card">
+    <div class="d-flex gap-3 align-items-start flex-wrap">
+
+      <!-- Agency Avatar -->
+      <div class="agency-avatar">APD</div>
+
+      <!-- Title block -->
+      <div class="flex-grow-1 min-w-0">
+        <div class="job-header-agency">
+          <i class="bi bi-building me-1"></i>Austin Police Department
+        </div>
+        <h2 class="job-header-title">Police Officer — Entry Level</h2>
+
+        <!-- Meta row -->
+        <div class="job-header-meta">
+          <span>
+            <i class="bi bi-geo-alt"></i>
+            Austin, TX
+          </span>
+          <span class="salary-text">
+            <i class="bi bi-currency-dollar"></i>
+            $62,400 – $78,000/yr <span style="font-size:.8rem;font-weight:500;color:#64748b;">(plus step increases)</span>
+          </span>
+          <span>
+            <i class="bi bi-briefcase"></i>
+            Full-Time, Sworn Officer
+          </span>
+          <span>
+            <i class="bi bi-clock"></i>
+            Deadline: <strong style="color:#b45309;">June 30, 2026</strong>
+          </span>
+        </div>
+
+        <!-- Footer row: badge + posted + actions -->
+        <div class="job-header-footer">
+          <span class="cat-badge badge-law">Law Enforcement</span>
+          <span class="posted-text">
+            <i class="bi bi-calendar3 me-1"></i>Posted May 15, 2026
+          </span>
+          <div class="d-flex gap-2 ms-auto job-header-actions flex-wrap">
+            <a href="jb-apply.html" class="btn-apply-now">
+              <i class="bi bi-send"></i> Apply Now
+            </a>
+            <a href="#" class="btn-save-job">
+              <i class="bi bi-bookmark"></i> Save Job
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /.job-header-card -->
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     MAIN CONTENT GRID
+════════════════════════════════════════════════════════════════ -->
+<div class="container pb-5">
+  <div class="row g-4 align-items-start">
+
+    <!-- ── MAIN CONTENT (LEFT) ──────────────────────────────────── -->
+    <div class="col-lg-8">
+
+      <!-- ── Position Overview ─────────────────────────────────── -->
+      <div class="content-card">
+        <div class="section-heading">
+          <i class="bi bi-file-text"></i> Position Overview
+        </div>
+        <p>
+          As an entry-level Police Officer with the Austin Police Department, you will be at the forefront of
+          protecting one of the fastest-growing cities in the United States. Assigned to the Patrol Division,
+          officers respond to a wide variety of calls for service — from traffic incidents and property crimes
+          to medical assists and domestic disturbances — while proactively engaging with the communities they
+          serve. You will patrol designated geographic areas by vehicle and on foot, building relationships
+          with residents and businesses that are essential to Austin PD's community-oriented policing philosophy.
+        </p>
+        <p>
+          Day-to-day duties include conducting preliminary criminal investigations, gathering and preserving
+          evidence, interviewing witnesses and complainants, and preparing thorough, accurate reports. Officers
+          are expected to exercise sound judgment and de-escalation skills in dynamic, rapidly evolving
+          situations. You will work closely with detectives, crisis intervention teams, and social service
+          partners to ensure the best possible outcomes for all parties involved.
+        </p>
+        <p>
+          Austin PD embraces a data-driven, problem-solving approach to public safety. Officers participate
+          in community outreach events, neighborhood meetings, and collaborative programs with local schools
+          and organizations. You will have the opportunity to build a career in one of the nation's most
+          recognized and progressive police departments, with pathways to specialized units including
+          investigations, K-9, mounted patrol, SWAT, and community liaison roles.
+        </p>
+        <p>
+          All newly hired officers attend the Austin Police Training Academy — a rigorous 22-week paid
+          program covering Texas law, defensive tactics, firearms proficiency, emergency vehicle operations,
+          crisis intervention, and community policing strategies. Upon graduation, recruits complete a
+          structured field training program under the supervision of certified Field Training Officers
+          before assuming independent patrol duties.
+        </p>
+      </div>
+
+      <!-- ── Minimum Requirements ──────────────────────────────── -->
+      <div class="content-card">
+        <div class="section-heading">
+          <i class="bi bi-check2-circle"></i> Minimum Requirements
+        </div>
+        <ul>
+          <li>Must be at least 21 years of age at time of appointment</li>
+          <li>U.S. Citizen or authorized to work in the United States</li>
+          <li>High school diploma or GED required; 45+ college credit hours preferred</li>
+          <li>Valid Texas driver's license with an acceptable driving record</li>
+          <li>No felony convictions; no Class A misdemeanor convictions within the past 10 years</li>
+          <li>No Class B misdemeanor convictions within the past 5 years</li>
+          <li>Must pass a physical fitness assessment, written examination, and oral review board</li>
+          <li>Must pass a comprehensive background investigation, polygraph exam, and psychological evaluation</li>
+          <li>Vision correctable to 20/20 in each eye; normal color and depth perception required</li>
+          <li>Must be able to obtain and maintain TCOLE peace officer license (Department will sponsor)</li>
+        </ul>
+      </div>
+
+      <!-- ── Preferred Qualifications ──────────────────────────── -->
+      <div class="content-card">
+        <div class="section-heading">
+          <i class="bi bi-star"></i> Preferred Qualifications
+        </div>
+        <ul>
+          <li>U.S. military experience with honorable discharge — demonstrates discipline, teamwork, and service commitment</li>
+          <li>Bilingual in Spanish and English — strongly preferred given Austin's diverse community demographics</li>
+          <li>Prior law enforcement or security experience at any level</li>
+          <li>Associate's or Bachelor's degree in Criminal Justice, Public Safety Administration, or a related field</li>
+          <li>Community involvement or volunteer service in public safety or youth programs</li>
+          <li>Experience with crisis intervention, mental health first aid, or social services</li>
+        </ul>
+      </div>
+
+      <!-- ── Compensation & Benefits ────────────────────────────── -->
+      <div class="content-card">
+        <div class="section-heading">
+          <i class="bi bi-wallet2"></i> Compensation &amp; Benefits
+        </div>
+        <div class="benefits-box">
+          <ul>
+            <li>
+              <i class="bi bi-currency-dollar"></i>
+              <div>
+                <strong>Starting salary $62,400/yr</strong> — annual step increases reaching $78,000+ within 7 years of service
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-heart-pulse"></i>
+              <div>
+                Comprehensive <strong>health, dental, and vision insurance</strong> for employee and eligible dependents, with multiple plan tiers
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-bank"></i>
+              <div>
+                <strong>Texas Municipal Retirement System (TMRS)</strong> defined-benefit pension — City contributes 2:1 match on employee contributions
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-shield-check"></i>
+              <div>
+                <strong>Paid Academy Training</strong> — 22-week training program at full starting salary; no out-of-pocket costs for uniforms or equipment
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-sun"></i>
+              <div>
+                <strong>15 days vacation + 15 days sick leave</strong> per year, accruing immediately; additional longevity pay after 5 years
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-mortarboard"></i>
+              <div>
+                <strong>Tuition reimbursement program</strong> — up to $5,250/yr for approved degree programs in law enforcement or public administration
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-lightning"></i>
+              <div>
+                Hazard pay, shift differential, overtime opportunities, and bilingual pay supplement available
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── Selection Process ─────────────────────────────────── -->
+      <div class="content-card">
+        <div class="section-heading">
+          <i class="bi bi-diagram-3"></i> Selection Process
+        </div>
+        <ol class="steps-list">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-title">Online Application</div>
+              <div class="step-desc">Submit your application through this portal before the June 30, 2026 deadline. Ensure all employment history and education information is complete and accurate.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-title">Written Exam</div>
+              <div class="step-desc">Proctored exam covering reading comprehension, writing skills, situational judgment, and basic problem solving. Minimum passing score of 70% required.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-title">Physical Fitness Assessment</div>
+              <div class="step-desc">APD Cooper Institute standards — timed 1.5-mile run, push-ups, sit-ups, and vertical jump. Study guides and prep resources provided upon application submission.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-title">Background Investigation</div>
+              <div class="step-desc">Comprehensive review of criminal history, employment history, credit, personal references, driving record, and social media. Typically 6–8 weeks to complete.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-title">Polygraph &amp; Psychological Evaluation</div>
+              <div class="step-desc">Conducted by licensed examiners and certified psychologists contracted by APD. Results remain confidential and are used solely for hiring purposes.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">6</div>
+            <div class="step-body">
+              <div class="step-title">Chief's Interview / Oral Review Board</div>
+              <div class="step-desc">Panel interview with senior APD command staff. Candidates are evaluated on communication skills, situational responses, and alignment with department values.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">7</div>
+            <div class="step-body">
+              <div class="step-title">Conditional Offer of Employment</div>
+              <div class="step-desc">Successful candidates receive a written conditional offer. Employment is contingent on passing the final medical examination.</div>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">8</div>
+            <div class="step-body">
+              <div class="step-title">Medical Examination</div>
+              <div class="step-desc">Comprehensive physical exam including vision, hearing, cardiovascular screening, and drug screening administered by APD-designated medical provider.</div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- ── About Austin Police Department ───────────────────── -->
+      <div class="content-card">
+        <div class="section-heading">
+          <i class="bi bi-building"></i> About Austin Police Department
+        </div>
+        <div class="agency-block">
+          <div class="agency-logo-sm">APD</div>
+          <div class="agency-info">
+            <p>
+              The Austin Police Department is one of the largest and most respected law enforcement agencies
+              in Texas, with approximately 850 sworn officers serving a city of over 1 million residents.
+              Founded in 1839, APD is nationally accredited by the Commission on Accreditation for Law
+              Enforcement Agencies (CALEA) and has been recognized for its commitment to community-oriented
+              policing, crisis intervention training, and innovative public safety partnerships.
+            </p>
+            <p>
+              APD operates 24 hours a day, 365 days a year across patrol, investigations, special operations,
+              and administrative divisions. The Department is dedicated to building trust through transparency,
+              community engagement, and continuous professional development. Austin PD is an equal opportunity
+              employer actively recruiting qualified candidates who reflect the diverse communities they serve.
+            </p>
+            <a href="#" class="agency-link">
+              Visit APD Website <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Dev Notes ──────────────────────────────────────────── -->
+      <div class="dev-notes">
+        <div class="dev-notes-title">
+          <i class="bi bi-cone-striped"></i> Dev Notes — Job Detail Page (jb-detail.html)
+        </div>
+        <ul>
+          <li><strong>Route:</strong> <code>/jobs/{job-id}</code> or <code>/jobs/{slug}</code> (e.g. <code>/jobs/apd-2026-0142</code> or <code>/jobs/police-officer-entry-level-austin-pd</code>)</li>
+          <li><strong>Data source:</strong> <code>GET /api/public/jobs/{id}</code> — no auth required; returns full job object including agency info, requirements, and benefits.</li>
+          <li><strong>"Apply Now"</strong> links to <code>jb-apply.html?jobId={id}</code>. Both the header button and the sidebar button should carry the same <code>jobId</code> query param.</li>
+          <li><strong>Deadline logic:</strong> If <code>job.deadline</code> is in the past, hide all "Apply Now" buttons and replace with a grey "Applications Closed" badge. Show no countdown in the sidebar apply card.</li>
+          <li><strong>Similar jobs query:</strong> <code>GET /api/public/jobs?category={job.category}&exclude={job.id}&limit=3</code> — same category, exclude current job, ordered by <code>postedAt DESC</code>.</li>
+          <li><strong>Agency logo:</strong> Served from blob storage at <code>{storageBaseUrl}/agencies/{agencyId}/logo.png</code>. On 404 or missing URL, fall back to the initials avatar (APD in navy circle) rendered client-side.</li>
+          <li><strong>Bookmark / Save:</strong> Requires candidate session. If unauthenticated, clicking Save Job opens the login/register modal (not yet built — wire up to <code>#saveJobModal</code> trigger).</li>
+          <li><strong>Share buttons:</strong> "Copy link" writes <code>window.location.href</code> to clipboard; "Email" opens <code>mailto:?subject=...&body=...</code>; "LinkedIn" opens LinkedIn share URL with <code>mini=true&url=...</code>.</li>
+          <li><strong>SEO:</strong> Populate <code>&lt;title&gt;</code>, <code>&lt;meta name="description"&gt;</code>, and Open Graph tags (<code>og:title</code>, <code>og:description</code>, <code>og:url</code>) from job data on the server side for indexability.</li>
+        </ul>
+      </div>
+
+    </div><!-- /col-lg-8 -->
+
+
+    <!-- ── SIDEBAR (RIGHT) ──────────────────────────────────────── -->
+    <div class="col-lg-4">
+      <div class="sidebar-sticky">
+
+        <!-- Card 1: Apply -->
+        <div class="sidebar-card apply-card">
+
+          <div class="deadline-label">
+            <i class="bi bi-calendar-event me-1"></i>Application Deadline
+          </div>
+          <div class="deadline-value">
+            June 30, 2026
+            <span class="deadline-badge">37 days left</span>
+          </div>
+
+          <a href="jb-apply.html" class="btn-apply-sidebar">
+            <i class="bi bi-send me-2"></i>Apply Now
+          </a>
+
+          <a href="#" class="save-link">
+            <i class="bi bi-bookmark"></i> Save this Job
+          </a>
+
+          <hr class="sidebar-divider">
+
+          <div class="share-label">Share this posting</div>
+          <div class="share-row">
+            <button class="share-btn" title="Copy link" onclick="navigator.clipboard.writeText(window.location.href)">
+              <i class="bi bi-link-45deg"></i> Copy
+            </button>
+            <a class="share-btn" href="mailto:?subject=Job%20Opportunity%3A%20Police%20Officer%20%E2%80%94%20Austin%20PD&body=Check%20out%20this%20job%20posting%3A%20%0A%0APolice%20Officer%20%E2%80%94%20Entry%20Level%0AAustin%20Police%20Department%0Ahttps%3A%2F%2Ftexaspublicsafetyjobs.com%2Fjobs%2Fapd-2026-0142" title="Share via email">
+              <i class="bi bi-envelope"></i> Email
+            </a>
+            <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftexaspublicsafetyjobs.com%2Fjobs%2Fapd-2026-0142" target="_blank" rel="noopener" title="Share on LinkedIn">
+              <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+          </div>
+
+        </div><!-- /.apply-card -->
+
+        <!-- Card 2: Quick Facts -->
+        <div class="sidebar-card">
+          <div class="section-heading" style="font-size:.95rem;margin-bottom:.85rem;">
+            <i class="bi bi-info-circle"></i> Quick Facts
+          </div>
+          <table class="facts-table">
+            <tbody>
+              <tr>
+                <td class="fact-label">Job ID</td>
+                <td class="fact-value fact-highlight">APD-2026-0142</td>
+              </tr>
+              <tr>
+                <td class="fact-label">Department</td>
+                <td class="fact-value">Patrol Division</td>
+              </tr>
+              <tr>
+                <td class="fact-label">Employment Type</td>
+                <td class="fact-value">Full-Time</td>
+              </tr>
+              <tr>
+                <td class="fact-label">Salary Grade</td>
+                <td class="fact-value">Step 1 – 7</td>
+              </tr>
+              <tr>
+                <td class="fact-label">Union</td>
+                <td class="fact-value">Austin Police Assoc.</td>
+              </tr>
+              <tr>
+                <td class="fact-label">TCOLE License</td>
+                <td class="fact-value">Required (sponsored)</td>
+              </tr>
+              <tr>
+                <td class="fact-label">Physical Demands</td>
+                <td class="fact-value" style="color:#b45309;font-weight:700;">High</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.quick-facts -->
+
+        <!-- Card 3: Similar Jobs -->
+        <div class="sidebar-card">
+          <div class="section-heading" style="font-size:.95rem;margin-bottom:.85rem;">
+            <i class="bi bi-briefcase"></i> Similar Jobs
+          </div>
+
+          <!-- Similar Job 1 -->
+          <div class="similar-job-row">
+            <div class="similar-job-icon"><i class="bi bi-shield"></i></div>
+            <div class="flex-grow-1">
+              <div class="similar-job-title">Police Officer — Lateral Transfer</div>
+              <div class="similar-job-agency">Austin Police Department</div>
+              <div class="similar-job-salary">$72,000 – $92,000/yr</div>
+            </div>
+            <a href="jb-detail.html" class="similar-job-link">View →</a>
+          </div>
+
+          <!-- Similar Job 2 -->
+          <div class="similar-job-row">
+            <div class="similar-job-icon"><i class="bi bi-shield"></i></div>
+            <div class="flex-grow-1">
+              <div class="similar-job-title">Deputy Sheriff</div>
+              <div class="similar-job-agency">Travis County Sheriff's Office</div>
+              <div class="similar-job-salary">$58,000 – $72,500/yr</div>
+            </div>
+            <a href="jb-detail.html" class="similar-job-link">View →</a>
+          </div>
+
+          <!-- Similar Job 3 -->
+          <div class="similar-job-row">
+            <div class="similar-job-icon"><i class="bi bi-shield"></i></div>
+            <div class="flex-grow-1">
+              <div class="similar-job-title">State Trooper — Entry Level</div>
+              <div class="similar-job-agency">Texas Dept of Public Safety</div>
+              <div class="similar-job-salary">$60,000 – $76,000/yr</div>
+            </div>
+            <a href="jb-detail.html" class="similar-job-link">View →</a>
+          </div>
+
+        </div><!-- /.similar-jobs -->
+
+      </div><!-- /.sidebar-sticky -->
+    </div><!-- /col-lg-4 -->
+
+  </div><!-- /.row -->
+</div><!-- /.container -->
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="jb-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Brand / tagline -->
+      <div class="col-md-4">
+        <div class="footer-brand">
+          <i class="bi bi-star-fill star-icon"></i>
+          Texas Public Safety Jobs
+        </div>
+        <p class="footer-tagline">
+          The trusted source for public safety career opportunities across Texas — law enforcement, fire, EMS, and beyond.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="col-md-3 offset-md-1">
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="jb-listings.html">Browse Jobs</a></li>
+          <li><a href="#">For Agencies</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="col-md-2">
+        <div class="footer-heading">Categories</div>
+        <ul class="footer-links">
+          <li><a href="#">Law Enforcement</a></li>
+          <li><a href="#">Fire Services</a></li>
+          <li><a href="#">EMS / Paramedic</a></li>
+          <li><a href="#">Corrections</a></li>
+          <li><a href="#">Dispatch</a></li>
+        </ul>
+      </div>
+
+      <!-- Powered by -->
+      <div class="col-md-2">
+        <div class="footer-heading">Platform</div>
+        <p class="footer-powered" style="font-size:.85rem;line-height:1.6;">
+          Powered by<br>
+          <strong>AllStar Recruiter</strong><br>
+          <span style="font-size:.78rem;color:rgba(255,255,255,.4);">Talent management for<br>public safety agencies</span>
+        </p>
+        <a href="#" style="font-size:.78rem;color:rgba(255,255,255,.45);text-decoration:none;display:block;margin-top:.5rem;">
+          Agency Login →
+        </a>
+      </div>
+
+    </div><!-- /.row -->
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bar">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <span>&copy; 2026 Texas Public Safety Jobs. All rights reserved.</span>
+      <span>
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;margin-right:1rem;">Privacy Policy</a>
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;">Terms of Use</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

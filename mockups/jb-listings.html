@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Jobs — Texas Public Safety Jobs</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+
+  <style>
+    :root {
+      --navy: #245194;
+      --navy-dark: #1a3a6e;
+      --gold: #e4aa35;
+      --gold-hover: #c9941f;
+    }
+
+    /* ── Reset / Base ───────────────────────────────────────────── */
+    body {
+      background: #f4f6fa;
+      color: #1e293b;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .jb-navbar {
+      background: var(--navy);
+      padding: .75rem 1.5rem;
+    }
+    .jb-navbar .navbar-brand {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: .01em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .jb-navbar .navbar-brand .star-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+    .jb-navbar .nav-link {
+      color: rgba(255,255,255,.82) !important;
+      font-weight: 500;
+      font-size: .92rem;
+      transition: color .15s;
+    }
+    .jb-navbar .nav-link:hover,
+    .jb-navbar .nav-link.active {
+      color: #fff !important;
+    }
+    .jb-navbar .nav-link.active {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: calc(.5rem - 2px);
+    }
+    .btn-post-job {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      font-weight: 600;
+      font-size: .85rem;
+      padding: .35rem .9rem;
+      border-radius: 6px;
+      transition: all .15s;
+      text-decoration: none;
+    }
+    .btn-post-job:hover {
+      background: var(--gold);
+      color: #fff;
+    }
+    .save-jobs-link {
+      color: rgba(255,255,255,.85);
+      font-size: .87rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+    .save-jobs-link:hover { color: #fff; }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding: 3rem 0 2.5rem;
+      color: #fff;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin-bottom: .75rem;
+    }
+    .hero .subtitle {
+      color: rgba(255,255,255,.78);
+      font-size: 1rem;
+      max-width: 640px;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+    .hero-search {
+      display: flex;
+      gap: 0;
+      max-width: 680px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+    }
+    .hero-search input {
+      flex: 1;
+      border: none;
+      padding: .85rem 1.25rem;
+      font-size: .97rem;
+      color: #1e293b;
+      outline: none;
+    }
+    .hero-search input::placeholder { color: #94a3b8; }
+    .btn-hero-search {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: .85rem 1.75rem;
+      font-weight: 700;
+      font-size: .97rem;
+      cursor: pointer;
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    .btn-hero-search:hover { background: var(--gold-hover); }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1.5rem;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      padding: .5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .88rem;
+    }
+    .hero-stat .stat-num {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--gold);
+    }
+    .hero-stat .stat-label {
+      color: rgba(255,255,255,.82);
+    }
+
+    /* ── Filter Sidebar ─────────────────────────────────────────── */
+    .filter-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      padding: 1.25rem;
+      position: sticky;
+      top: 76px;
+    }
+    .filter-section-label {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #64748b;
+      margin-top: 1.25rem;
+      margin-bottom: .6rem;
+    }
+    .filter-section-label:first-of-type { margin-top: 0; }
+    .filter-card .form-check-label {
+      font-size: .9rem;
+      color: #334155;
+      cursor: pointer;
+    }
+    .filter-card .form-check { margin-bottom: .35rem; }
+    .filter-card select {
+      font-size: .9rem;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+    .btn-apply-filters {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: .6rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: .9rem;
+      margin-top: 1.25rem;
+      transition: background .15s;
+      cursor: pointer;
+    }
+    .btn-apply-filters:hover { background: var(--navy-dark); }
+
+    /* ── Listings Top Bar ───────────────────────────────────────── */
+    .listings-topbar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: .75rem;
+    }
+    .listings-count {
+      font-weight: 700;
+      font-size: .95rem;
+      color: #1e293b;
+      margin-right: auto;
+    }
+    .listings-count span { color: var(--navy); }
+    .sort-select {
+      font-size: .87rem;
+      border-color: #cbd5e1;
+      color: #334155;
+      padding: .35rem .75rem;
+      border-radius: 6px;
+    }
+    .view-toggle .btn {
+      padding: .35rem .55rem;
+      line-height: 1;
+      font-size: .95rem;
+      border-color: #cbd5e1;
+      color: #64748b;
+    }
+    .view-toggle .btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    /* ── Filter Chips ───────────────────────────────────────────── */
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-bottom: 1rem;
+    }
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      background: #e8edf8;
+      color: var(--navy);
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .25rem .65rem;
+      border-radius: 99px;
+      border: 1px solid #c7d2e8;
+    }
+    .filter-chip .remove {
+      cursor: pointer;
+      opacity: .6;
+      font-size: .75rem;
+    }
+    .filter-chip .remove:hover { opacity: 1; }
+
+    /* ── Job Cards ──────────────────────────────────────────────── */
+    .job-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      padding: 1.1rem 1.25rem 1rem;
+      margin-bottom: 1rem;
+      transition: box-shadow .18s, transform .18s, border-color .18s;
+      cursor: pointer;
+    }
+    .job-card:hover {
+      box-shadow: 0 6px 20px rgba(36,81,148,.13);
+      border-color: #b8cae8;
+      transform: translateY(-2px);
+    }
+    .job-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: .55rem;
+    }
+    .job-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: .25rem;
+    }
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem 1.25rem;
+      font-size: .85rem;
+      color: #64748b;
+      margin-bottom: .7rem;
+    }
+    .job-meta span { display: flex; align-items: center; gap: .3rem; }
+    .job-salary {
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .job-card-bottom {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+    .job-card-bottom .ms-auto {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .btn-view-job {
+      font-size: .82rem;
+      font-weight: 600;
+      padding: .3rem .8rem;
+      border-color: var(--navy);
+      color: var(--navy);
+      border-radius: 6px;
+      transition: all .15s;
+      text-decoration: none;
+    }
+    .btn-view-job:hover {
+      background: var(--navy);
+      color: #fff;
+    }
+    .btn-bookmark {
+      background: none;
+      border: 1px solid #e2e8f0;
+      color: #94a3b8;
+      border-radius: 6px;
+      padding: .3rem .5rem;
+      font-size: .95rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .btn-bookmark:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .posted-date {
+      font-size: .78rem;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    /* Category badges */
+    .badge-law   { background: #dbeafe; color: #1d4ed8; }
+    .badge-fire  { background: #fee2e2; color: #b91c1c; }
+    .badge-ems   { background: #dcfce7; color: #15803d; }
+    .badge-corr  { background: #fef3c7; color: #92400e; }
+    .badge-dispatch { background: #f3e8ff; color: #6d28d9; }
+    .badge-em    { background: #e0f2fe; color: #0369a1; }
+    .cat-badge {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .22rem .65rem;
+      border-radius: 99px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    /* Employment type badges */
+    .type-badge {
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ── Pagination ─────────────────────────────────────────────── */
+    .pagination .page-link {
+      color: var(--navy);
+      border-color: #e2e8f0;
+      font-size: .88rem;
+      padding: .45rem .75rem;
+    }
+    .pagination .page-item.active .page-link {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+    .pagination .page-link:hover {
+      background: #e8edf8;
+      color: var(--navy);
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    .jb-footer {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,.8);
+      padding: 3rem 0 0;
+      margin-top: 3rem;
+    }
+    .footer-brand {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-bottom: .5rem;
+    }
+    .footer-brand .star-icon { color: var(--gold); }
+    .footer-tagline {
+      font-size: .85rem;
+      color: rgba(255,255,255,.55);
+      max-width: 240px;
+      line-height: 1.5;
+    }
+    .footer-heading {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: rgba(255,255,255,.45);
+      margin-bottom: .75rem;
+    }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: .4rem; }
+    .footer-links a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: .88rem;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-powered {
+      font-size: .88rem;
+      color: rgba(255,255,255,.6);
+    }
+    .footer-powered strong { color: #fff; }
+    .footer-bar {
+      border-top: 1px solid rgba(255,255,255,.1);
+      margin-top: 2.5rem;
+      padding: 1rem 0;
+      font-size: .82rem;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* ── Dev Notes ──────────────────────────────────────────────── */
+    .dev-notes {
+      background: #fefce8;
+      border: 2px solid #fde047;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0 0;
+    }
+    .dev-notes-title {
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #713f12;
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .dev-notes ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: .86rem;
+      color: #78350f;
+      line-height: 1.7;
+    }
+    .dev-notes code {
+      background: rgba(0,0,0,.07);
+      padding: .1em .35em;
+      border-radius: 3px;
+      font-size: .82em;
+    }
+
+    /* ── Responsive tweaks ──────────────────────────────────────── */
+    @media (max-width: 991px) {
+      .hero h1 { font-size: 1.55rem; }
+      .hero-search { max-width: 100%; }
+      .listings-topbar { gap: .5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     STICKY NAVBAR
+════════════════════════════════════════════════════════════════ -->
+<nav class="jb-navbar sticky-top navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">
+      <i class="bi bi-star-fill star-icon"></i>
+      Texas Public Safety Jobs
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler border-0 shadow-none" type="button"
+            data-bs-toggle="collapse" data-bs-target="#jbNav"
+            style="color:rgba(255,255,255,.7);">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="jbNav">
+      <!-- Center links -->
+      <ul class="navbar-nav ms-4 me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Browse Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Agencies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+
+      <!-- Right actions -->
+      <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+        <a href="#" class="save-jobs-link">
+          <i class="bi bi-bookmark"></i>
+          Save Jobs
+        </a>
+        <a href="#" class="btn-post-job">Post a Job</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+
+    <h1>Find Your Public Safety Career in Texas</h1>
+    <p class="subtitle">
+      Connecting qualified candidates with law enforcement, fire, EMS, and emergency management
+      opportunities across the state.
+    </p>
+
+    <!-- Search bar -->
+    <div class="hero-search">
+      <input type="text" placeholder="Search by job title, agency, or keyword…" value="Law Enforcement">
+      <button class="btn-hero-search">
+        <i class="bi bi-search me-1"></i> Search
+      </button>
+    </div>
+
+    <!-- Quick stats -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">847</span>
+        <span class="stat-label">Open Positions</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">142</span>
+        <span class="stat-label">Agencies Hiring</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">38</span>
+        <span class="stat-label">Cities Covered</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-num">23</span>
+        <span class="stat-label">New This Week</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     MAIN CONTENT — Filter Sidebar + Job Listings
+════════════════════════════════════════════════════════════════ -->
+<div class="container py-5">
+  <div class="row g-4">
+
+    <!-- ── Filter Sidebar ──────────────────────────────────────── -->
+    <div class="col-lg-3">
+      <div class="filter-card">
+
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span style="font-weight:700;font-size:.97rem;color:#0f172a;">
+            <i class="bi bi-funnel me-1" style="color:var(--navy);"></i>Filters
+          </span>
+          <a href="#" style="font-size:.82rem;color:#64748b;text-decoration:none;">Clear All</a>
+        </div>
+
+        <!-- Category -->
+        <div class="filter-section-label">Category</div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cat-law" checked>
+          <label class="form-check-label" for="cat-law">Law Enforcement</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cat-fire">
+          <label class="form-check-label" for="cat-fire">Fire Services</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cat-ems">
+          <label class="form-check-label" for="cat-ems">EMS / Paramedic</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cat-corr">
+          <label class="form-check-label" for="cat-corr">Corrections</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cat-disp">
+          <label class="form-check-label" for="cat-disp">Emergency Dispatch</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="cat-em">
+          <label class="form-check-label" for="cat-em">Emergency Management</label>
+        </div>
+
+        <!-- Location -->
+        <div class="filter-section-label">Location</div>
+        <select class="form-select form-select-sm">
+          <option>All of Texas</option>
+          <option>Houston</option>
+          <option>Dallas</option>
+          <option>San Antonio</option>
+          <option selected>Austin</option>
+          <option>Fort Worth</option>
+          <option>El Paso</option>
+        </select>
+
+        <!-- Salary Range -->
+        <div class="filter-section-label">Salary Range</div>
+        <select class="form-select form-select-sm">
+          <option>Any</option>
+          <option>$30k+</option>
+          <option>$40k+</option>
+          <option selected>$50k+</option>
+          <option>$60k+</option>
+          <option>$75k+</option>
+        </select>
+
+        <!-- Employment Type -->
+        <div class="filter-section-label">Employment Type</div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="empType" id="type-all" checked>
+          <label class="form-check-label" for="type-all">All Types</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="empType" id="type-full">
+          <label class="form-check-label" for="type-full">Full-Time</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="empType" id="type-part">
+          <label class="form-check-label" for="type-part">Part-Time</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="empType" id="type-res">
+          <label class="form-check-label" for="type-res">Reserve / Volunteer</label>
+        </div>
+
+        <button class="btn-apply-filters">Apply Filters</button>
+
+      </div><!-- /.filter-card -->
+    </div><!-- /col-lg-3 -->
+
+
+    <!-- ── Job Listings ─────────────────────────────────────────── -->
+    <div class="col-lg-9">
+
+      <!-- Top bar -->
+      <div class="listings-topbar">
+        <div class="listings-count">
+          <span>247</span> positions found
+        </div>
+        <label class="visually-hidden" for="sort-select">Sort by</label>
+        <select class="form-select sort-select" id="sort-select" style="width:auto;">
+          <option>Newest</option>
+          <option>Salary: High to Low</option>
+          <option>Salary: Low to High</option>
+          <option>Agency: A–Z</option>
+        </select>
+        <div class="view-toggle btn-group" role="group">
+          <button type="button" class="btn btn-sm btn-outline-secondary active" title="List view">
+            <i class="bi bi-list-ul"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" title="Grid view">
+            <i class="bi bi-grid-3x3-gap"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active filter chips -->
+      <div class="filter-chips">
+        <span class="filter-chip">
+          Law Enforcement <span class="remove">×</span>
+        </span>
+        <span class="filter-chip">
+          Austin <span class="remove">×</span>
+        </span>
+        <span class="filter-chip">
+          $50k+ <span class="remove">×</span>
+        </span>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────── -->
+      <!-- JOB CARD 1: Police Officer — Entry Level               -->
+      <!-- ─────────────────────────────────────────────────────── -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <span class="cat-badge badge-law">Law Enforcement</span>
+          <span class="posted-date">Posted 2 days ago</span>
+        </div>
+        <div class="job-title">Police Officer — Entry Level</div>
+        <div class="job-meta">
+          <span><i class="bi bi-building"></i> Austin Police Department</span>
+          <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
+          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $62,400 – $78,000 / yr</span>
+        </div>
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────── -->
+      <!-- JOB CARD 2: Deputy Sheriff                             -->
+      <!-- ─────────────────────────────────────────────────────── -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <span class="cat-badge badge-law">Law Enforcement</span>
+          <span class="posted-date">Posted 4 days ago</span>
+        </div>
+        <div class="job-title">Deputy Sheriff</div>
+        <div class="job-meta">
+          <span><i class="bi bi-building"></i> Travis County Sheriff's Office</span>
+          <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
+          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $58,000 – $72,500 / yr</span>
+        </div>
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────── -->
+      <!-- JOB CARD 3: Firefighter / EMT                          -->
+      <!-- ─────────────────────────────────────────────────────── -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <span class="cat-badge badge-fire">Fire Services</span>
+          <span class="posted-date">Posted 1 day ago</span>
+        </div>
+        <div class="job-title">Firefighter / EMT</div>
+        <div class="job-meta">
+          <span><i class="bi bi-building"></i> Houston Fire Department</span>
+          <span><i class="bi bi-geo-alt"></i> Houston, TX</span>
+          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $58,656 – $74,880 / yr</span>
+        </div>
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────── -->
+      <!-- JOB CARD 4: State Trooper — Lateral Transfer           -->
+      <!-- ─────────────────────────────────────────────────────── -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <span class="cat-badge badge-law">Law Enforcement</span>
+          <span class="posted-date">Posted 6 days ago</span>
+        </div>
+        <div class="job-title">State Trooper — Lateral Transfer</div>
+        <div class="job-meta">
+          <span><i class="bi bi-building"></i> Texas Dept of Public Safety</span>
+          <span><i class="bi bi-geo-alt"></i> Statewide</span>
+          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $65,000 – $85,000 / yr</span>
+        </div>
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────── -->
+      <!-- JOB CARD 5: Paramedic / Firefighter                    -->
+      <!-- ─────────────────────────────────────────────────────── -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <span class="cat-badge badge-ems">EMS / Paramedic</span>
+          <span class="posted-date">Posted 3 days ago</span>
+        </div>
+        <div class="job-title">Paramedic / Firefighter</div>
+        <div class="job-meta">
+          <span><i class="bi bi-building"></i> San Antonio Fire Department</span>
+          <span><i class="bi bi-geo-alt"></i> San Antonio, TX</span>
+          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $61,200 – $77,400 / yr</span>
+        </div>
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────────────────────────────────────────────────── -->
+      <!-- JOB CARD 6: Corrections Officer I                      -->
+      <!-- ─────────────────────────────────────────────────────── -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <span class="cat-badge badge-corr">Corrections</span>
+          <span class="posted-date">Posted 7 days ago</span>
+        </div>
+        <div class="job-title">Corrections Officer I</div>
+        <div class="job-meta">
+          <span><i class="bi bi-building"></i> Texas Dept of Criminal Justice</span>
+          <span><i class="bi bi-geo-alt"></i> Multiple Locations</span>
+          <span class="job-salary"><i class="bi bi-currency-dollar"></i> $42,000 – $55,000 / yr</span>
+        </div>
+        <div class="job-card-bottom">
+          <span class="type-badge">Full-Time</span>
+          <div class="ms-auto">
+            <a href="jb-detail.html" class="btn btn-sm btn-outline-secondary btn-view-job">View Job →</a>
+            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── Pagination ──────────────────────────────────────── -->
+      <nav class="mt-4" aria-label="Job listings pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">
+              <i class="bi bi-chevron-left me-1" style="font-size:.75rem;"></i> Previous
+            </a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item disabled"><a class="page-link" href="#">…</a></li>
+          <li class="page-item"><a class="page-link" href="#">12</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              Next <i class="bi bi-chevron-right ms-1" style="font-size:.75rem;"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div><!-- /col-lg-9 -->
+  </div><!-- /.row -->
+
+
+  <!-- ── Dev Notes ──────────────────────────────────────────────── -->
+  <div class="dev-notes">
+    <div class="dev-notes-title">
+      <i class="bi bi-cone-striped"></i> Dev Notes — Job Board Listings (jb-listings.html)
+    </div>
+    <ul>
+      <li>This is the <strong>public-facing candidate site</strong>, completely separate from the AllStar Recruiter CRM app shell (no sidebar, no topbar).</li>
+      <li>Job data is served from the CRM API via a <strong>public read-only endpoint</strong> — no auth required to browse.</li>
+      <li>Each job card links to <code>jb-detail.html</code> for the full job description / apply flow.</li>
+      <li>"Save Jobs" requires a candidate account — the login/register flow is not yet built. Clicking the link or bookmark icon should prompt sign-up/login.</li>
+      <li>Filters are reflected as <strong>URL query params</strong> (e.g. <code>?category=law-enforcement&amp;location=austin&amp;salary=50k</code>) for shareable/bookmarkable URLs.</li>
+      <li>"Post a Job" in the navbar links to the <strong>AllStar Recruiter CRM</strong> (agency login required) — external link, opens in new tab.</li>
+      <li>Category badge colors: Law Enforcement = blue, Fire Services = red, EMS = green, Corrections = amber, Dispatch = purple, Emergency Mgmt = sky.</li>
+      <li>Pagination assumes ~20 results per page; 247 results = 13 pages (show 12 as last for demo).</li>
+    </ul>
+  </div>
+
+</div><!-- /.container -->
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="jb-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Brand / tagline -->
+      <div class="col-md-4">
+        <div class="footer-brand">
+          <i class="bi bi-star-fill star-icon"></i>
+          Texas Public Safety Jobs
+        </div>
+        <p class="footer-tagline">
+          The trusted source for public safety career opportunities across Texas — law enforcement, fire, EMS, and beyond.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="col-md-3 offset-md-1">
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#">Browse Jobs</a></li>
+          <li><a href="#">For Agencies</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div class="col-md-2">
+        <div class="footer-heading">Categories</div>
+        <ul class="footer-links">
+          <li><a href="#">Law Enforcement</a></li>
+          <li><a href="#">Fire Services</a></li>
+          <li><a href="#">EMS / Paramedic</a></li>
+          <li><a href="#">Corrections</a></li>
+          <li><a href="#">Dispatch</a></li>
+        </ul>
+      </div>
+
+      <!-- Powered by -->
+      <div class="col-md-2">
+        <div class="footer-heading">Platform</div>
+        <p class="footer-powered" style="font-size:.85rem;line-height:1.6;">
+          Powered by<br>
+          <strong>AllStar Recruiter</strong><br>
+          <span style="font-size:.78rem;color:rgba(255,255,255,.4);">Talent management for<br>public safety agencies</span>
+        </p>
+        <a href="#" style="font-size:.78rem;color:rgba(255,255,255,.45);text-decoration:none;display:block;margin-top:.5rem;">
+          Agency Login →
+        </a>
+      </div>
+
+    </div><!-- /.row -->
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bar">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <span>&copy; 2026 Texas Public Safety Jobs. All rights reserved.</span>
+      <span>
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;margin-right:1rem;">Privacy Policy</a>
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;">Terms of Use</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
