@@ -378,6 +378,39 @@
       border: 1px solid #e2e8f0;
     }
 
+    /* ── Page thumbnail (iframe preview) ────────────────────────── */
+    .page-thumb-wrap {
+      width: 130px; height: 86px;
+      border-radius: 7px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+      flex-shrink: 0; position: relative;
+      cursor: pointer;
+    }
+    .page-thumb-wrap iframe {
+      position: absolute; top: 0; left: 0;
+      width: 1040px; height: 688px;
+      transform: scale(0.125);
+      transform-origin: top left;
+      border: 0; pointer-events: none;
+    }
+    .page-thumb-wrap .thumb-hover-overlay {
+      position: absolute; inset: 0;
+      background: rgba(15,34,68,.0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+      border-radius: 7px;
+    }
+    .page-thumb-wrap:hover .thumb-hover-overlay {
+      background: rgba(15,34,68,.45);
+    }
+    .page-thumb-wrap .thumb-hover-overlay span {
+      color: #fff; font-size: .7rem; font-weight: 700;
+      opacity: 0; transition: opacity .15s;
+      letter-spacing: .04em;
+    }
+    .page-thumb-wrap:hover .thumb-hover-overlay span { opacity: 1; }
+
     /* ── Agency avatar (logo stand-in) ──────────────────────────── */
     .agency-avatar {
       width: 38px; height: 38px; border-radius: 8px; flex-shrink: 0;
@@ -747,43 +780,49 @@
       </div>
 
       <!-- ─────────────────────────────────────────────────────── -->
-      <!-- JOB CARD 1: Branded job page + agency page             -->
-      <!-- Agency has built a dept page AND a specific job page   -->
+      <!-- JOB CARD 1: Has a branded job page                     -->
+      <!-- Thumbnail preview of the branded page shown in card    -->
       <!-- "View Job" → branded job detail page                   -->
       <!-- ─────────────────────────────────────────────────────── -->
-      <div class="job-card has-branded-page">
-        <div class="job-card-top">
-          <span class="cat-badge badge-law">Law Enforcement</span>
-          <div class="d-flex align-items-center gap-2">
-            <span class="branded-pill"><i class="bi bi-window-fullscreen"></i> Branded Page</span>
-            <span class="posted-date">Posted 2 days ago</span>
-          </div>
-        </div>
-        <div class="d-flex align-items-start gap-2 mb-1">
-          <div class="agency-avatar" title="Austin Police Department">APD</div>
-          <div>
-            <div class="job-title">Police Officer — Entry Level</div>
-            <div class="job-meta" style="margin-bottom:.3rem;">
+      <div class="job-card has-branded-page" style="padding-right:1rem;">
+        <div class="d-flex gap-3 align-items-start">
+
+          <!-- Main content -->
+          <div class="flex-grow-1 min-w-0">
+            <div class="job-card-top" style="margin-bottom:.4rem;">
+              <span class="cat-badge badge-law">Law Enforcement</span>
+              <span class="posted-date">Posted 2 days ago</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <div class="agency-avatar" title="Austin Police Department">APD</div>
+              <div class="job-title" style="margin-bottom:0;">Police Officer — Entry Level</div>
+            </div>
+            <div class="job-meta">
               <span>
                 <i class="bi bi-building"></i>
                 Austin Police Department
-                <a href="for-agencies.html" class="agency-page-link ms-1" title="View agency page">
+                <a href="for-agencies.html" class="agency-page-link ms-1">
                   <i class="bi bi-box-arrow-up-right"></i> Agency Page
                 </a>
               </span>
               <span><i class="bi bi-geo-alt"></i> Austin, TX</span>
               <span class="job-salary"><i class="bi bi-currency-dollar"></i> $62,400 – $78,000 / yr</span>
             </div>
+            <div class="job-card-bottom">
+              <span class="type-badge">Full-Time</span>
+              <div class="ms-auto">
+                <a href="jb-detail-branded.html" class="btn btn-sm btn-view-job" style="background:var(--navy);color:#fff;border-color:var(--navy);">View Job →</a>
+                <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="job-card-bottom">
-          <span class="type-badge">Full-Time</span>
-          <div class="ms-auto">
-            <a href="jb-detail-branded.html" class="btn btn-sm btn-view-job" style="background:#7c3aed;color:#fff;border-color:#7c3aed;">
-              <i class="bi bi-window-fullscreen me-1" style="font-size:.75rem;"></i>View Job →
-            </a>
-            <button class="btn-bookmark" title="Save job"><i class="bi bi-bookmark"></i></button>
-          </div>
+
+          <!-- Page thumbnail -->
+          <a href="jb-detail-branded.html" class="page-thumb-wrap d-none d-md-block" title="Preview this listing">
+            <iframe src="jb-detail-branded.html" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+            <div class="thumb-hover-overlay"><span>View Full Listing</span></div>
+          </a>
+
         </div>
       </div>
 
