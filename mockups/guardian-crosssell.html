@@ -35,12 +35,13 @@
 
     /* ── Hero ────────────────────────────────────────────────── */
     .hero {
-      background: linear-gradient(135deg, #0f2147 0%, var(--navy) 55%, #1e4d8c 100%);
+      background: linear-gradient(135deg, rgba(10,25,60,.96) 0%, rgba(26,58,110,.93) 55%, rgba(20,50,100,.9) 100%),
+                  url('../assets/images/officers-briefing.jpg') center/cover no-repeat;
       padding: 5rem 0 4.5rem; position: relative; overflow: hidden;
     }
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(228,170,53,.08) 0%, transparent 65%);
+      background: radial-gradient(ellipse at 70% 50%, rgba(228,170,53,.07) 0%, transparent 65%);
     }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: .5rem;
@@ -442,6 +443,30 @@
   </div>
 </div>
 
+<!-- PHOTO STRIP -->
+<div style="background:#0d1e40;padding:3rem 0;">
+  <div class="container">
+    <p style="text-align:center;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:1.5rem;">Trusted by agencies across Texas</p>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div style="border-radius:12px;overflow:hidden;height:220px;">
+          <img src="../assets/images/applicant-recruiting.jpg" alt="Recruiting" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="border-radius:12px;overflow:hidden;height:220px;">
+          <img src="../assets/images/cadets-training.jpg" alt="Cadets in training" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="border-radius:12px;overflow:hidden;height:220px;">
+          <img src="../assets/images/officer-portrait-1.jpg" alt="Officer" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FREE TIER — WHAT'S INCLUDED -->
 <section class="free-section" id="whats-included">
   <div class="container">
@@ -549,6 +574,19 @@
 </section>
 
 <!-- UPGRADE FEATURES -->
+<!-- PHOTO BANNER -->
+<div style="position:relative;height:260px;overflow:hidden;">
+  <img src="../assets/images/applicant-recruiting.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,25,60,.88) 0%,rgba(10,25,60,.6) 50%,rgba(10,25,60,.4) 100%);display:flex;align-items:center;">
+    <div class="container">
+      <div style="max-width:540px;">
+        <p style="font-size:1.35rem;font-weight:800;color:#fff;line-height:1.4;margin-bottom:.5rem;">"We went from spreadsheets to a full recruiting pipeline — and it didn't cost us a dime to get started."</p>
+        <p style="font-size:.8rem;color:rgba(255,255,255,.55);margin:0;">— Recruiting Sergeant, Texas Law Enforcement Agency</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section class="upgrade-section" id="upgrade">
   <div class="container">
     <div class="row justify-content-center mb-5">
