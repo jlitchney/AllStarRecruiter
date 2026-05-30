@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AllStar Recruiter — For Guardian Alliance Agencies</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    :root {
+      --navy: #1a3a6e;
+      --navy-mid: #245194;
+      --gold: #e4aa35;
+      --gold-hover: #c9941f;
+      --gat-blue: #1e4d8c;
+    }
+
+    * { box-sizing: border-box; }
+    body { background: #fff; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    .top-nav {
+      background: var(--navy); padding: .75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .top-nav .brand { color: #fff; font-weight: 800; font-size: 1.05rem; text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+    .top-nav .brand .star { color: var(--gold); }
+    .btn-nav-cta {
+      background: var(--gold); color: #fff; border: none;
+      font-weight: 700; font-size: .85rem; padding: .4rem 1rem;
+      border-radius: 6px; text-decoration: none; transition: background .15s;
+    }
+    .btn-nav-cta:hover { background: var(--gold-hover); color: #fff; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #0f2147 0%, var(--navy) 55%, #1e4d8c 100%);
+      padding: 5rem 0 4.5rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(228,170,53,.08) 0%, transparent 65%);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(228,170,53,.15); border: 1px solid rgba(228,170,53,.3);
+      color: var(--gold); font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: .35rem .85rem; border-radius: 99px; margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1.15;
+      letter-spacing: -.02em; margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero .lede {
+      color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.65;
+      max-width: 520px; margin-bottom: 2rem;
+    }
+    .hero-cta-group { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn-hero-primary {
+      background: var(--gold); color: #fff; border: 2px solid var(--gold);
+      font-weight: 700; font-size: 1rem; padding: .75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s; display: inline-flex; align-items: center;
+    }
+    .btn-hero-primary:hover { background: var(--gold-hover); border-color: var(--gold-hover); color: #fff; }
+    .btn-hero-outline {
+      background: transparent; color: rgba(255,255,255,.85);
+      border: 2px solid rgba(255,255,255,.3);
+      font-weight: 600; font-size: 1rem; padding: .75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s;
+    }
+    .btn-hero-outline:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+    /* Hero illustration card */
+    .hero-card {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px; padding: 1.25rem; position: relative; z-index: 1;
+    }
+    .hero-card-row {
+      background: rgba(255,255,255,.08); border-radius: 8px; padding: .85rem 1rem;
+      margin-bottom: .6rem;
+    }
+    .hc-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.45); margin-bottom: .3rem; }
+    .hc-val { font-size: .88rem; font-weight: 600; color: #fff; }
+    .hc-val .tag {
+      display: inline-block; font-size: .68rem; font-weight: 700;
+      padding: .12rem .5rem; border-radius: 4px; margin-left: .35rem;
+    }
+    .sync-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(52,211,153,.15); border: 1px solid rgba(52,211,153,.3);
+      color: #34d399; font-size: .72rem; font-weight: 700;
+      padding: .25rem .65rem; border-radius: 99px;
+    }
+    .sync-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+    /* ── Stats strip ─────────────────────────────────────────── */
+    .stats-strip {
+      background: var(--gold); padding: 1.25rem 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num { font-size: 1.65rem; font-weight: 900; color: #fff; line-height: 1; }
+    .stat-item .lbl { font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.8); margin-top: .2rem; }
+
+    /* ── Section shared ─────────────────────────────────────── */
+    .section-eyebrow {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--navy-mid); margin-bottom: .5rem;
+    }
+    .section-title { font-size: 1.85rem; font-weight: 900; color: #0f172a; letter-spacing: -.01em; line-height: 1.2; }
+    .section-title span { color: var(--navy-mid); }
+    .section-sub { color: #64748b; font-size: 1rem; line-height: 1.65; max-width: 540px; margin: .75rem 0 0; }
+
+    /* ── Free tier section ──────────────────────────────────── */
+    .free-section { background: #f8fafc; padding: 5rem 0; }
+    .free-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: #dcfce7; color: #166534;
+      font-size: .72rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .07em; padding: .3rem .8rem; border-radius: 99px;
+      margin-bottom: 1.25rem;
+    }
+    .feature-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.5rem; height: 100%;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 24px rgba(36,81,148,.1); transform: translateY(-3px); }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; margin-bottom: 1rem; flex-shrink: 0;
+    }
+    .feature-card h3 { font-size: .97rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .feature-card p { font-size: .85rem; color: #64748b; line-height: 1.6; margin: 0; }
+
+    /* Integration callout */
+    .integration-callout {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e4d8c 100%);
+      border-radius: 14px; padding: 2rem 2.5rem;
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .int-logos { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+    .int-logo-box {
+      width: 56px; height: 56px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 800; letter-spacing: .02em; text-align: center;
+    }
+    .int-plus { color: rgba(255,255,255,.5); font-size: 1.3rem; font-weight: 300; }
+    .int-text h4 { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: .35rem; }
+    .int-text p { color: rgba(255,255,255,.7); font-size: .88rem; line-height: 1.6; margin: 0; }
+
+    /* ── Upgrade section ────────────────────────────────────── */
+    .upgrade-section { padding: 5rem 0; background: #fff; }
+    .upgrade-card {
+      border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem; height: 100%;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .upgrade-card:hover { border-color: var(--navy-mid); box-shadow: 0 4px 16px rgba(36,81,148,.08); }
+    .upgrade-icon {
+      width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .upgrade-card h4 { font-size: .93rem; font-weight: 800; color: #0f172a; margin-bottom: .25rem; }
+    .upgrade-card p { font-size: .82rem; color: #64748b; line-height: 1.55; margin: 0; }
+    .pro-ribbon {
+      font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+      background: var(--gold); color: #fff; padding: .1rem .45rem; border-radius: 3px;
+      vertical-align: middle; margin-left: .35rem;
+    }
+
+    /* ── Tier comparison ────────────────────────────────────── */
+    .tier-section { background: #f8fafc; padding: 5rem 0; }
+    .tier-card {
+      background: #fff; border: 2px solid #e2e8f0; border-radius: 14px;
+      padding: 2rem; height: 100%;
+    }
+    .tier-card.highlighted {
+      border-color: var(--navy-mid);
+      box-shadow: 0 8px 32px rgba(36,81,148,.15);
+    }
+    .tier-name { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #64748b; margin-bottom: .5rem; }
+    .tier-price { font-size: 2.2rem; font-weight: 900; color: #0f172a; line-height: 1; margin-bottom: .25rem; }
+    .tier-price sup { font-size: 1rem; font-weight: 700; vertical-align: super; }
+    .tier-price .per { font-size: .85rem; font-weight: 500; color: #64748b; }
+    .tier-tagline { font-size: .85rem; color: #64748b; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; }
+    .tier-features { list-style: none; padding: 0; margin: 0 0 1.75rem; }
+    .tier-features li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: .87rem; color: #374151; padding: .4rem 0;
+      border-bottom: 1px solid #f8fafc;
+    }
+    .tier-features li i { color: #16a34a; font-size: .9rem; flex-shrink: 0; margin-top: .1rem; }
+    .btn-tier {
+      display: block; width: 100%; text-align: center;
+      font-weight: 700; font-size: .93rem; padding: .7rem 1rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s;
+    }
+    .btn-tier-primary { background: var(--navy-mid); color: #fff; border: 2px solid var(--navy-mid); }
+    .btn-tier-primary:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .btn-tier-outline { background: #fff; color: var(--navy-mid); border: 2px solid var(--navy-mid); }
+    .btn-tier-outline:hover { background: var(--navy-mid); color: #fff; }
+
+    /* ── CTA section ────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, #0f2147 0%, var(--navy) 60%, #1e4d8c 100%);
+      padding: 5rem 0; text-align: center;
+    }
+    .cta-section h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: .75rem; letter-spacing: -.01em; }
+    .cta-section h2 span { color: var(--gold); }
+    .cta-section p { color: rgba(255,255,255,.7); font-size: .97rem; max-width: 500px; margin: 0 auto 2rem; line-height: 1.6; }
+    .cta-form-row { display: flex; gap: .5rem; max-width: 480px; margin: 0 auto; flex-wrap: wrap; }
+    .cta-form-row input {
+      flex: 1; min-width: 200px; border: none; border-radius: 8px;
+      padding: .75rem 1rem; font-size: .95rem; outline: none;
+    }
+    .btn-cta-submit {
+      background: var(--gold); color: #fff; border: none;
+      font-weight: 700; font-size: .95rem; padding: .75rem 1.5rem;
+      border-radius: 8px; cursor: pointer; transition: background .15s; white-space: nowrap;
+    }
+    .btn-cta-submit:hover { background: var(--gold-hover); }
+    .cta-fine { font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 1rem; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer { background: #0a1628; padding: 2rem 0; text-align: center; }
+    footer p { color: rgba(255,255,255,.35); font-size: .8rem; margin: 0; }
+    footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,.7); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="top-nav">
+  <a href="#" class="brand">
+    <i class="bi bi-star-fill star"></i> AllStar Recruiter
+  </a>
+  <a href="#claim" class="btn-nav-cta">Claim Free Account</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-eyebrow">
+          <i class="bi bi-shield-check"></i>
+          Exclusive offer for Guardian Alliance customers
+        </div>
+        <h1>Your Guardian data.<br><span>Finally working for you.</span></h1>
+        <p class="lede">
+          You use Guardian Alliance to screen candidates. Now turn every applicant into a
+          managed relationship — with two-way email, tagging, a web page builder, and
+          direct Guardian integration. Free, forever.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#claim" class="btn-hero-primary">
+            <i class="bi bi-rocket-takeoff me-2"></i>Claim Your Free Account
+          </a>
+          <a href="#whats-included" class="btn-hero-outline">See What's Included</a>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="hero-card">
+
+          <!-- Sync event row -->
+          <div class="hero-card-row">
+            <div class="hc-label">Guardian Alliance → AllStar Recruiter</div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="hc-val">
+                Marcus T. completed background check
+                <span class="tag" style="background:rgba(52,211,153,.15);color:#34d399;">Background Clear</span>
+              </div>
+              <span class="sync-badge"><span class="dot"></span>Synced</span>
+            </div>
+          </div>
+
+          <!-- Candidate record row -->
+          <div class="hero-card-row">
+            <div class="hc-label">Candidate Record — Auto Created</div>
+            <div class="hc-val mb-2">Marcus Thompson · <span style="color:rgba(255,255,255,.5);font-weight:400;">mthompson@email.com</span></div>
+            <div style="display:flex;gap:.35rem;flex-wrap:wrap;">
+              <span style="background:rgba(36,81,148,.4);color:#93c5fd;font-size:.68rem;padding:.12rem .5rem;border-radius:4px;font-weight:600;">Police Officer Applicants 2026</span>
+              <span style="background:rgba(228,170,53,.15);color:var(--gold);font-size:.68rem;padding:.12rem .5rem;border-radius:4px;font-weight:600;">Background Clear</span>
+            </div>
+          </div>
+
+          <!-- Email thread row -->
+          <div class="hero-card-row" style="margin-bottom:0;">
+            <div class="hc-label">2-Way Email — Last Message</div>
+            <div style="display:flex;align-items:flex-start;gap:.6rem;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#fff;flex-shrink:0;">MT</div>
+              <div>
+                <div style="font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:.2rem;">Marcus T. · 2h ago</div>
+                <div style="font-size:.82rem;color:rgba(255,255,255,.8);">"What's the next step after the background check?"</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-3 justify-content-center text-center">
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">1,400+</div><div class="lbl">Guardian Alliance agencies</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">$0</div><div class="lbl">Cost to get started</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">5 min</div><div class="lbl">Setup time</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">100%</div><div class="lbl">Built for law enforcement</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FREE TIER — WHAT'S INCLUDED -->
+<section class="free-section" id="whats-included">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="free-badge"><i class="bi bi-gift me-1"></i>Free for Guardian Alliance agencies</div>
+        <div class="section-title">Everything you need to<br><span>start recruiting smarter</span></div>
+        <p class="section-sub mx-auto text-center">
+          No credit card. No trial period. These four tools are yours permanently — because every
+          agency deserves a baseline that actually works.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#eff6ff;color:#1d4ed8;"><i class="bi bi-envelope-arrow-up"></i></div>
+          <h3>2-Way Email</h3>
+          <p>Send and receive candidate emails directly in AllStar Recruiter. Every reply is logged to the candidate record automatically — no BCC hacks, no copy-paste.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-tags"></i></div>
+          <h3>Candidate Tagging</h3>
+          <p>Organize candidates with flexible tags and groups. Tag by position, hiring stage, location, or anything your agency needs. Filter and act on any group instantly.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card" style="border-color:#bfdbfe;">
+          <div class="feature-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-plug"></i></div>
+          <h3>Guardian Integration</h3>
+          <p>Candidates who complete their Guardian Alliance background check automatically appear in AllStar Recruiter — tagged, organized, and ready to contact.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-window-fullscreen"></i></div>
+          <h3>Web Page Builder</h3>
+          <p>Build a branded recruiting page for your department in minutes. Share it on social media, your city website, or anywhere candidates might find you.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Integration callout -->
+    <div class="integration-callout">
+      <div class="int-logos">
+        <div class="int-logo-box" style="background:rgba(255,255,255,.12);color:#fff;font-size:.58rem;line-height:1.3;">Guardian<br>Alliance</div>
+        <div class="int-plus">+</div>
+        <div class="int-logo-box" style="background:var(--gold);color:#fff;font-size:.68rem;line-height:1.3;font-weight:900;">AllStar<br>Recruiter</div>
+      </div>
+      <div class="int-text">
+        <h4>The integration does the heavy lifting</h4>
+        <p>When a candidate finishes their Guardian background check, AllStar Recruiter automatically creates their record, applies the appropriate tag, and puts them in your queue — ready for follow-up. No manual data entry, no spreadsheets.</p>
+      </div>
+      <a href="#claim" class="btn-hero-primary flex-shrink-0" style="font-size:.9rem;padding:.6rem 1.25rem;white-space:nowrap;">Connect My Account</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- UPGRADE FEATURES -->
+<section class="upgrade-section" id="upgrade">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">When you're ready to grow</div>
+        <div class="section-title">Scale your recruiting<br><span>at your own pace</span></div>
+        <p class="section-sub mx-auto text-center">
+          Start free. Add capabilities as your agency needs them. Every upgrade works with your existing Guardian data and candidate records.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-3">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-chat-dots"></i></div>
+          <div>
+            <h4>SMS / Text Messaging <span class="pro-ribbon">PRO</span></h4>
+            <p>Two-way text communication with candidates. Send appointment reminders, status updates, and time-sensitive messages. Reply rates 3× higher than email.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-calendar3"></i></div>
+          <div>
+            <h4>Events Management <span class="pro-ribbon">PRO</span></h4>
+            <p>Schedule written exams, physical agility tests, oral boards, and open houses. Manage RSVPs, track attendance, and send automated reminders.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-clipboard-check"></i></div>
+          <div>
+            <h4>Surveys &amp; Pre-Screens <span class="pro-ribbon">PRO</span></h4>
+            <p>Collect structured information from candidates before the background check even begins. Filter out ineligible applicants early and surface your best candidates faster.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-lightning-charge"></i></div>
+          <div>
+            <h4>Automated Workflows <span class="pro-ribbon">PRO</span></h4>
+            <p>Trigger emails, tag assignments, and task creation automatically based on candidate actions — like completing a Guardian check or attending an event.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-megaphone"></i></div>
+          <div>
+            <h4>Campaigns <span class="pro-ribbon">PRO</span></h4>
+            <p>Multi-step email and SMS sequences for recruiting drives. Drip content to candidates over days or weeks, with open and click tracking for every message.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#e0f2fe;color:#0369a1;"><i class="bi bi-file-earmark-arrow-up"></i></div>
+          <div>
+            <h4>Document Requests <span class="pro-ribbon">PRO</span></h4>
+            <p>Securely request, collect, and track required documents from candidates — training certificates, DD-214s, references. Know exactly what you have and what's missing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="upgrade-card">
+          <div class="upgrade-icon" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-stars"></i></div>
+          <div>
+            <h4>AI Integration <span class="pro-ribbon">PRO</span></h4>
+            <p>AI-assisted candidate summaries, response drafting, and smart screening. Spend less time reading applications and more time talking to your best candidates.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-8 d-flex">
+        <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e4d8c 100%);border-radius:12px;padding:2rem;display:flex;flex-direction:column;justify-content:center;width:100%;">
+          <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--gold);margin-bottom:.5rem;">All Pro features included</div>
+          <h4 style="color:#fff;font-size:1.2rem;font-weight:800;margin-bottom:.5rem;">One upgrade. Everything unlocked.</h4>
+          <p style="color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;margin-bottom:1.25rem;">Pro gives you every feature above in a single plan — no picking and choosing. Pricing is based on your agency size. Most agencies pay less per month than a tank of gas.</p>
+          <a href="#claim" class="btn-hero-primary" style="font-size:.88rem;padding:.6rem 1.25rem;align-self:flex-start;">Request Pro Pricing →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIER COMPARISON -->
+<section class="tier-section" id="pricing">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <div class="section-eyebrow">Simple pricing</div>
+        <div class="section-title">Start free.<br><span>Upgrade when it makes sense.</span></div>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+
+      <!-- Free -->
+      <div class="col-md-5">
+        <div class="tier-card">
+          <div class="tier-name">Free — Guardian Agencies</div>
+          <div class="tier-price">$0 <span class="per">/ forever</span></div>
+          <div class="tier-tagline">Everything you need to get started — no strings attached.</div>
+          <ul class="tier-features">
+            <li><i class="bi bi-check-circle-fill"></i>2-way email communication</li>
+            <li><i class="bi bi-check-circle-fill"></i>Candidate tagging &amp; groups</li>
+            <li><i class="bi bi-check-circle-fill"></i>Guardian Alliance integration</li>
+            <li><i class="bi bi-check-circle-fill"></i>Web page builder</li>
+            <li><i class="bi bi-check-circle-fill"></i>Unlimited candidates</li>
+            <li><i class="bi bi-check-circle-fill"></i>Up to 3 users</li>
+          </ul>
+          <a href="#claim" class="btn-tier btn-tier-outline">Get Started Free</a>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="col-md-5">
+        <div class="tier-card highlighted">
+          <div class="tier-name" style="color:var(--gold);">Pro — Full Platform</div>
+          <div class="tier-price" style="color:var(--navy-mid);">Custom <span class="per">/ agency size</span></div>
+          <div class="tier-tagline">Every tool your agency needs to run a world-class recruiting program.</div>
+          <ul class="tier-features">
+            <li><i class="bi bi-check-circle-fill"></i>Everything in Free</li>
+            <li><i class="bi bi-check-circle-fill"></i>SMS / Text messaging</li>
+            <li><i class="bi bi-check-circle-fill"></i>Events management</li>
+            <li><i class="bi bi-check-circle-fill"></i>Surveys &amp; pre-screens</li>
+            <li><i class="bi bi-check-circle-fill"></i>Automated workflows</li>
+            <li><i class="bi bi-check-circle-fill"></i>Campaigns</li>
+            <li><i class="bi bi-check-circle-fill"></i>Document requests</li>
+            <li><i class="bi bi-check-circle-fill"></i>AI integration</li>
+            <li><i class="bi bi-check-circle-fill"></i>Unlimited users</li>
+          </ul>
+          <a href="#claim" class="btn-tier btn-tier-primary">Request Pro Pricing</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="claim">
+  <div class="container">
+    <div class="hero-eyebrow d-inline-flex mb-4" style="margin:0 auto 1.25rem;">
+      <i class="bi bi-shield-check me-1"></i> For Guardian Alliance agencies only
+    </div>
+    <h2>Ready to get more<br>from <span>every candidate?</span></h2>
+    <p>Enter your work email and we'll connect your Guardian Alliance account and have you up and running in under 5 minutes.</p>
+    <div class="cta-form-row justify-content-center">
+      <input type="email" placeholder="your@agency.gov">
+      <button class="btn-cta-submit"><i class="bi bi-rocket-takeoff me-1"></i>Claim Free Account</button>
+    </div>
+    <p class="cta-fine">No credit card required. Free tier never expires. We verify Guardian Alliance membership before activation.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 AllStar Recruiter · <a href="#">Privacy Policy</a> · <a href="#">Terms</a> · Not affiliated with Guardian Alliance Technologies</p>
+  </div>
+</footer>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
