@@ -441,7 +441,8 @@
   <div class="mt-5 p-3 rounded" style="background:#fffbeb;border:1px solid #fcd34d;font-size:.78rem;">
     <strong style="color:#92400e;">📋 Dev Notes:</strong>
     <ul class="mb-0 mt-1" style="color:#374151;padding-left:1.2rem;">
-      <li>Route: <code>/jobs/{id}/apply</code> or <code>/apply?jobId={id}</code></li>
+      <li><strong>Hosting:</strong> Co-hosted on the same Azure server as the AllStar Recruiter CRM. No separate deployment — the job board and application form are public-facing routes within the same application, sharing the same database and blob storage.</li>
+      <li><strong>Route:</strong> <code>/jobs/{id}/apply</code> — served by the same server under the public route group (no CRM auth guard on this path).</li>
       <li>Step state managed client-side. Each step validates required fields before advancing — do not allow skipping forward.</li>
       <li>Progress is auto-saved to <code>localStorage</code> keyed by jobId so the candidate can return later without losing data.</li>
       <li>On final submit, POST to <code>/api/public/applications</code>. If the email already exists as a Candidate in the CRM, link the application to that record; otherwise create a new Candidate.</li>

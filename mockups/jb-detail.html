@@ -1028,8 +1028,9 @@
           <i class="bi bi-cone-striped"></i> Dev Notes — Job Detail Page (jb-detail.html)
         </div>
         <ul>
-          <li><strong>Route:</strong> <code>/jobs/{job-id}</code> or <code>/jobs/{slug}</code> (e.g. <code>/jobs/apd-2026-0142</code> or <code>/jobs/police-officer-entry-level-austin-pd</code>)</li>
-          <li><strong>Data source:</strong> <code>GET /api/public/jobs/{id}</code> — no auth required; returns full job object including agency info, requirements, and benefits.</li>
+          <li><strong>Hosting:</strong> Co-hosted on the same Azure server as the AllStar Recruiter CRM — no separate deployment. Served under the same domain at <code>/jobs/{id}</code> or a public subdomain (e.g. <code>jobs.allstarrecruiter.com/{id}</code>). Shares the same database, blob storage, and API layer.</li>
+          <li><strong>Route:</strong> <code>/jobs/{slug}</code> (e.g. <code>/jobs/police-officer-entry-level-austin-pd-2026</code>). Slug is generated from job title + agency + year on create.</li>
+          <li><strong>Data source:</strong> <code>GET /api/public/jobs/{id}</code> — public route on the CRM API, no auth required. Returns full job object including agency info, requirements, and benefits. Public routes bypass the CRM auth middleware.</li>
           <li><strong>"Apply Now"</strong> links to <code>jb-apply.html?jobId={id}</code>. Both the header button and the sidebar button should carry the same <code>jobId</code> query param.</li>
           <li><strong>Deadline logic:</strong> If <code>job.deadline</code> is in the past, hide all "Apply Now" buttons and replace with a grey "Applications Closed" badge. Show no countdown in the sidebar apply card.</li>
           <li><strong>Similar jobs query:</strong> <code>GET /api/public/jobs?category={job.category}&exclude={job.id}&limit=3</code> — same category, exclude current job, ordered by <code>postedAt DESC</code>.</li>

@@ -882,12 +882,13 @@
       <i class="bi bi-cone-striped"></i> Dev Notes — Job Board Listings (jb-listings.html)
     </div>
     <ul>
-      <li>This is the <strong>public-facing candidate site</strong>, completely separate from the AllStar Recruiter CRM app shell (no sidebar, no topbar).</li>
-      <li>Job data is served from the CRM API via a <strong>public read-only endpoint</strong> — no auth required to browse.</li>
-      <li>Each job card links to <code>jb-detail.html</code> for the full job description / apply flow.</li>
+      <li><strong>Hosting:</strong> Co-hosted on the same Azure server as the AllStar Recruiter CRM. The job board is a public-facing section of the same application — served under a subdomain (e.g. <code>jobs.allstarrecruiter.com</code>) or a path prefix (e.g. <code>/jobs</code>). No separate deployment needed.</li>
+      <li>The job board uses <strong>no CRM app shell</strong> (no sidebar, no topbar) — it has its own public-facing navbar and footer while sharing the same backend, database, and Azure blob storage.</li>
+      <li>Job data is served from the same CRM database via <strong>public read-only routes</strong> — no auth required to browse. These routes are flagged as public in the API middleware and bypass the CRM auth guard.</li>
+      <li>Each job card links to <code>/jobs/{id}</code> (the job detail page) for the full description and apply flow.</li>
       <li>"Save Jobs" requires a candidate account — the login/register flow is not yet built. Clicking the link or bookmark icon should prompt sign-up/login.</li>
       <li>Filters are reflected as <strong>URL query params</strong> (e.g. <code>?category=law-enforcement&amp;location=austin&amp;salary=50k</code>) for shareable/bookmarkable URLs.</li>
-      <li>"Post a Job" in the navbar links to the <strong>AllStar Recruiter CRM</strong> (agency login required) — external link, opens in new tab.</li>
+      <li>"Post a Job" in the navbar links to the AllStar Recruiter CRM at <code>/jobs/new</code> (agency login required) — same server, no external redirect needed.</li>
       <li>Category badge colors: Law Enforcement = blue, Fire Services = red, EMS = green, Corrections = amber, Dispatch = purple, Emergency Mgmt = sky.</li>
       <li>Pagination assumes ~20 results per page; 247 results = 13 pages (show 12 as last for demo).</li>
     </ul>
