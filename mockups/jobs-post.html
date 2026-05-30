@@ -247,26 +247,6 @@
                 </div>
               </div>
 
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Internal Job ID <span class="text-muted fw-normal small">(optional)</span></label>
-                  <input type="text" class="form-control" placeholder="e.g. APD-2026-0142">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold d-block">TCOLE License Required</label>
-                  <div class="d-flex gap-4 mt-1">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="tcole" id="tcole-yes" value="yes">
-                      <label class="form-check-label" for="tcole-yes">Yes</label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="tcole" id="tcole-no" value="no" checked>
-                      <label class="form-check-label" for="tcole-no">No</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
 
@@ -712,61 +692,6 @@
             </div>
           </div>
 
-          <!-- ─── Section 5: Selection Process ──────────────────────────── -->
-          <div class="card border-0 shadow-sm mb-3">
-            <div class="card-body p-4">
-              <div class="d-flex align-items-center gap-2 mb-3">
-                <div class="form-section-title mb-0" style="margin-top:0;padding-top:0;border-top:none;">
-                  <i class="bi bi-list-ol me-1"></i>Selection Process Steps
-                </div>
-                <span class="text-muted ms-auto" style="font-size:.74rem;"><i class="bi bi-grip-vertical me-1"></i>Drag to reorder</span>
-              </div>
-
-              <div id="steps-list">
-                <div class="step-row">
-                  <span class="step-drag"><i class="bi bi-grip-vertical"></i></span>
-                  <span class="step-badge">1</span>
-                  <input class="step-input" type="text" value="Online Application">
-                  <button class="step-delete" title="Remove step"><i class="bi bi-trash"></i></button>
-                </div>
-                <div class="step-row">
-                  <span class="step-drag"><i class="bi bi-grip-vertical"></i></span>
-                  <span class="step-badge">2</span>
-                  <input class="step-input" type="text" value="Written Exam">
-                  <button class="step-delete" title="Remove step"><i class="bi bi-trash"></i></button>
-                </div>
-                <div class="step-row">
-                  <span class="step-drag"><i class="bi bi-grip-vertical"></i></span>
-                  <span class="step-badge">3</span>
-                  <input class="step-input" type="text" value="Physical Fitness Assessment">
-                  <button class="step-delete" title="Remove step"><i class="bi bi-trash"></i></button>
-                </div>
-                <div class="step-row">
-                  <span class="step-drag"><i class="bi bi-grip-vertical"></i></span>
-                  <span class="step-badge">4</span>
-                  <input class="step-input" type="text" value="Background Investigation">
-                  <button class="step-delete" title="Remove step"><i class="bi bi-trash"></i></button>
-                </div>
-                <div class="step-row">
-                  <span class="step-drag"><i class="bi bi-grip-vertical"></i></span>
-                  <span class="step-badge">5</span>
-                  <input class="step-input" type="text" value="Polygraph &amp; Psychological Evaluation">
-                  <button class="step-delete" title="Remove step"><i class="bi bi-trash"></i></button>
-                </div>
-                <div class="step-row">
-                  <span class="step-drag"><i class="bi bi-grip-vertical"></i></span>
-                  <span class="step-badge">6</span>
-                  <input class="step-input" type="text" value="Conditional Offer &amp; Medical Exam">
-                  <button class="step-delete" title="Remove step"><i class="bi bi-trash"></i></button>
-                </div>
-              </div>
-
-              <div class="mt-2">
-                <a href="#" class="add-step-link"><i class="bi bi-plus me-1"></i>Add Step</a>
-              </div>
-            </div>
-          </div>
-
           <!-- ─── Section 6: Application Settings ──────────────────────── -->
           <div class="card border-0 shadow-sm mb-3">
             <div class="card-body p-4">
@@ -783,19 +708,6 @@
                   <label class="form-label fw-semibold">Max Applicants <span class="text-muted fw-normal small">(optional)</span></label>
                   <input type="number" class="form-control" placeholder="No limit" min="1">
                 </div>
-              </div>
-
-              <div class="mb-3">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="autoCRM" checked>
-                  <label class="form-check-label fw-semibold" for="autoCRM">Automatically create a Candidate record in the CRM when someone applies</label>
-                </div>
-                <div class="form-text ms-4 ps-1">New applicants will appear in Candidates with status "Applicant". If the email already exists, the application will be linked to the existing record.</div>
-              </div>
-
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="notifyApps" checked>
-                <label class="form-check-label fw-semibold" for="notifyApps">Notify me when new applications are received</label>
               </div>
 
             </div>
