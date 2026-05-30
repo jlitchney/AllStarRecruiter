@@ -168,7 +168,7 @@
               <div class="row g-3 align-items-start mb-3">
                 <div class="col-auto">
                   <div class="logo-upload" style="width:160px;">
-                    <div class="logo-preview">APD</div>
+                    <div class="logo-preview" id="avatar-preview" style="background:#245194;">APD</div>
                     <div class="upload-hint">
                       <strong>Agency Logo</strong>
                       Click to upload<br>PNG or JPG, min 200×200px
@@ -180,6 +180,20 @@
                     <label class="form-label fw-semibold">Agency Name</label>
                     <input type="text" class="form-control" value="Austin Police Department" disabled>
                     <div class="form-text">Set at account creation. Contact support to change.</div>
+                  </div>
+                  <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                      <label class="form-label fw-semibold">Abbreviation</label>
+                      <input type="text" class="form-control" id="abbrev-input" value="APD" maxlength="6" placeholder="e.g. APD" oninput="updateAvatar()">
+                      <div class="form-text">2–5 letters shown on your avatar when no logo is uploaded.</div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="form-label fw-semibold">Avatar Color</label>
+                      <div class="d-flex align-items-center gap-2 mt-1">
+                        <input type="color" id="avatar-color" value="#245194" class="form-control form-control-color" style="width:44px;height:38px;padding:.2rem;" oninput="updateAvatar()">
+                        <span class="text-muted" style="font-size:.8rem;">Used when no logo is uploaded</span>
+                      </div>
+                    </div>
                   </div>
                   <div class="row g-3">
                     <div class="col-sm-6">
@@ -285,7 +299,7 @@
             <ul>
               <li>Route: <code>GET/PUT /settings/agency</code> — scoped to the authenticated org. Agencies can only edit their own profile.</li>
               <li><strong>Description</strong> is stored as sanitized HTML on the <code>Organization</code> record (<code>org.description</code>). It is rendered verbatim in the "About" section on every job listing card and on the public agency profile page.</li>
-              <li><strong>Logo</strong> uploaded to Azure Blob Storage at <code>/agencies/{orgId}/logo.png</code>. On 404 or missing URL, all public pages fall back to an initials avatar rendered client-side.</li>
+              <li><strong>Logo</strong> uploaded to Azure Blob Storage at <code>/agencies/{orgId}/logo.png</code>. On 404 or missing URL, all public pages fall back to the initials avatar using <code>org.abbreviation</code> and <code>org.avatarColor</code> — both set here.</li>
               <li><strong>Agency page link</strong> stored as two fields: <code>org.agency_page_type</code> (<code>"builder"</code> or <code>"external"</code>) and <code>org.agency_page_url</code> (the resolved URL). For builder pages this is the <code>/OrgSlug/PageSlug</code> path. For external URLs this is the raw https:// value. All public-facing "Agency Page →" links use <code>org.agency_page_url</code> and open in a new tab.</li>
               <li>Agency name and org slug are set at account creation and cannot be self-edited — contact support flow required to change.</li>
               <li>The public agency profile page (<code>/agencies/{orgSlug}</code>) is automatically available to any agency with a published job — no opt-in required. The profile page shows whatever is saved here.</li>
@@ -362,6 +376,14 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
+function updateAvatar() {
+  const abbrev = document.getElementById('abbrev-input').value || '?';
+  const color  = document.getElementById('avatar-color').value;
+  const preview = document.getElementById('avatar-preview');
+  preview.textContent = abbrev.toUpperCase();
+  preview.style.background = color;
+}
+
 function selectLinkType(type) {
   document.getElementById('builder-picker').style.display  = type === 'builder'  ? 'block' : 'none';
   document.getElementById('external-picker').style.display = type === 'external' ? 'block' : 'none';
