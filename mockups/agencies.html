@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agencies — Texas Public Safety Jobs</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    :root { --navy: #245194; --navy-dark: #1a3a6e; --gold: #e4aa35; }
+    body { background: #f4f6fa; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    .jb-navbar { background: var(--navy); padding: .75rem 1.5rem; }
+    .jb-navbar .navbar-brand { color: #fff; font-weight: 800; font-size: 1.1rem; letter-spacing: .01em; text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+    .jb-navbar .navbar-brand .star-icon { color: var(--gold); font-size: 1.2rem; }
+    .jb-navbar .nav-link { color: rgba(255,255,255,.82) !important; font-weight: 500; font-size: .92rem; }
+    .jb-navbar .nav-link:hover, .jb-navbar .nav-link.active { color: #fff !important; }
+    .jb-navbar .nav-link.active { border-bottom: 2px solid var(--gold); padding-bottom: calc(.5rem - 2px); }
+    .btn-post-job { border: 2px solid var(--gold); color: var(--gold); background: transparent; font-weight: 600; font-size: .85rem; padding: .35rem .9rem; border-radius: 6px; transition: all .15s; text-decoration: none; }
+    .btn-post-job:hover { background: var(--gold); color: #fff; }
+
+    /* ── Page header ─────────────────────────────────────────── */
+    .page-header {
+      background: var(--navy); padding: 2rem 0 1.75rem;
+    }
+    .page-header h1 { font-size: 1.65rem; font-weight: 800; color: #fff; margin-bottom: .4rem; }
+    .page-header p { color: rgba(255,255,255,.7); font-size: .93rem; margin-bottom: 1.25rem; }
+
+    /* Search bar */
+    .agency-search {
+      display: flex; gap: 0; max-width: 560px;
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+    .agency-search input {
+      flex: 1; border: none; padding: .75rem 1.1rem;
+      font-size: .95rem; color: #1e293b; outline: none;
+    }
+    .agency-search input::placeholder { color: #94a3b8; }
+    .btn-agency-search {
+      background: var(--gold); color: #fff; border: none;
+      padding: .75rem 1.25rem; font-weight: 700; font-size: .93rem;
+      cursor: pointer; transition: background .15s; white-space: nowrap;
+    }
+    .btn-agency-search:hover { background: #c9941f; }
+
+    /* ── Results bar ────────────────────────────────────────── */
+    .results-bar {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: .75rem; margin-bottom: 1.25rem;
+    }
+    .results-count { font-weight: 700; font-size: .95rem; color: #1e293b; margin-right: auto; }
+    .results-count span { color: var(--navy); }
+
+    /* ── Agency Cards ────────────────────────────────────────── */
+    .agency-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.25rem; transition: box-shadow .18s, transform .18s, border-color .18s;
+      height: 100%; display: flex; flex-direction: column;
+    }
+    .agency-card:hover {
+      box-shadow: 0 6px 20px rgba(36,81,148,.13);
+      border-color: #b8cae8; transform: translateY(-2px);
+    }
+    .agency-logo {
+      width: 56px; height: 56px; border-radius: 10px; flex-shrink: 0;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; font-weight: 800; letter-spacing: .02em;
+    }
+    .agency-card .agency-name { font-size: .97rem; font-weight: 700; color: #0f172a; margin-bottom: .15rem; }
+    .agency-card .agency-location { font-size: .8rem; color: #64748b; display: flex; align-items: center; gap: .25rem; }
+    .agency-card .agency-desc {
+      font-size: .83rem; color: #475569; line-height: 1.6;
+      margin: .75rem 0; flex-grow: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .agency-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: .5rem; flex-wrap: wrap; margin-top: auto; padding-top: .75rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .jobs-pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: #eff6ff; color: var(--navy);
+      font-size: .75rem; font-weight: 700;
+      padding: .25rem .65rem; border-radius: 99px;
+      border: 1px solid #bfdbfe;
+    }
+    .btn-view-agency {
+      font-size: .82rem; font-weight: 600; padding: .3rem .85rem;
+      border: 1px solid var(--navy); color: var(--navy);
+      border-radius: 6px; transition: all .15s; text-decoration: none; white-space: nowrap;
+    }
+    .btn-view-agency:hover { background: var(--navy); color: #fff; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    .jb-footer { background: var(--navy-dark); color: rgba(255,255,255,.8); padding: 3rem 0 0; margin-top: 3rem; }
+    .footer-brand { font-size: 1.05rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+    .footer-brand .star-icon { color: var(--gold); }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.55); max-width: 240px; line-height: 1.5; }
+    .footer-heading { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.45); margin-bottom: .75rem; }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: .4rem; }
+    .footer-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .88rem; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bar { border-top: 1px solid rgba(255,255,255,.1); margin-top: 2.5rem; padding: 1rem 0; font-size: .82rem; color: rgba(255,255,255,.4); }
+
+    /* ── Dev Notes ──────────────────────────────────────────── */
+    .dev-notes { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 1rem 1.25rem; font-size: .78rem; margin-top: 1.5rem; }
+    .dev-notes-title { font-weight: 700; color: #92400e; margin-bottom: .5rem; font-size: .82rem; }
+    .dev-notes ul { padding-left: 1.2rem; color: #374151; line-height: 1.9; margin: 0; }
+    .dev-notes code { background: #fef3c7; padding: .05rem .3rem; border-radius: 3px; font-size: .8rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="jb-navbar navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="jb-listings.html">
+      <i class="bi bi-star-fill star-icon"></i>
+      Texas Public Safety Jobs
+    </a>
+    <button class="navbar-toggler border-0 shadow-none" type="button"
+            data-bs-toggle="collapse" data-bs-target="#jbNav"
+            style="color:rgba(255,255,255,.7);">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="jbNav">
+      <ul class="navbar-nav ms-4 me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="jb-listings.html">Browse Jobs</a></li>
+        <li class="nav-item"><a class="nav-link active" href="agencies.html">Agencies</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+        <a href="for-agencies.html" class="btn-post-job">Post a Job</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container">
+    <h1>Hiring Agencies</h1>
+    <p>Browse public safety agencies across Texas that are actively recruiting.</p>
+    <div class="agency-search">
+      <input type="text" placeholder="Search by agency name or city…" value="">
+      <button class="btn-agency-search"><i class="bi bi-search me-1"></i>Search</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container py-4">
+
+  <div class="results-bar">
+    <div class="results-count"><span>12</span> agencies actively hiring</div>
+  </div>
+
+  <div class="row g-3">
+
+    <!-- Austin Police Department -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo">APD</div>
+          <div>
+            <div class="agency-name">Austin Police Department</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Austin, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">One of the largest and most respected law enforcement agencies in Texas, with approximately 850 sworn officers serving a city of over 1 million residents. Nationally accredited by CALEA.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>4 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Travis County Sheriff's Office -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#1a3a6e;">TCSO</div>
+          <div>
+            <div class="agency-name">Travis County Sheriff's Office</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Austin, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">The Travis County Sheriff's Office serves over 1.2 million residents across Travis County, providing patrol, detention, and civil services with a commitment to community-centered public safety.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>7 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Houston Police Department -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#374151;">HPD</div>
+          <div>
+            <div class="agency-name">Houston Police Department</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Houston, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">The Houston Police Department is one of the largest municipal police departments in the United States, serving the country's fourth-largest city with over 5,200 sworn officers.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>22 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- San Antonio Fire Department -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#b91c1c;">SAFD</div>
+          <div>
+            <div class="agency-name">San Antonio Fire Department</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>San Antonio, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">Serving over 1.4 million residents, SAFD operates 51 fire stations and provides fire suppression, emergency medical services, and hazardous materials response across Bexar County.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>9 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dallas County EMS -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#15803d;">DCEMS</div>
+          <div>
+            <div class="agency-name">Dallas County EMS</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Dallas, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">Dallas County EMS provides Advanced Life Support services to nearly 2.7 million residents, operating one of the busiest EMS systems in Texas with a focus on cardiac arrest outcomes and clinical excellence.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>5 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fort Worth Police Department -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#7c3aed;">FWPD</div>
+          <div>
+            <div class="agency-name">Fort Worth Police Department</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Fort Worth, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">FWPD serves one of the fastest-growing cities in the country with over 1,700 sworn officers. Known for its community policing initiatives and nationally recognized training programs.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>11 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bexar County Sheriff's Office -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#92400e;">BCSO</div>
+          <div>
+            <div class="agency-name">Bexar County Sheriff's Office</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>San Antonio, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">The Bexar County Sheriff's Office provides law enforcement services to unincorporated areas of Bexar County, operating one of the largest jail facilities in Texas.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>6 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- El Paso Police Department -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#0369a1;">EPPD</div>
+          <div>
+            <div class="agency-name">El Paso Police Department</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>El Paso, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">El Paso PD protects one of the safest large cities in the United States, with a strong bilingual workforce serving a diverse border community of nearly 700,000 residents.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>8 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Texas DPS -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#1e3a5f;font-size:.72rem;">TXDPS</div>
+          <div>
+            <div class="agency-name">Texas Dept. of Public Safety</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Statewide, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">The Texas Department of Public Safety encompasses the Texas Highway Patrol, Texas Rangers, Criminal Investigations, and multiple statewide law enforcement and regulatory programs.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>31 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round Rock Fire Department -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#dc2626;font-size:.72rem;">RRFD</div>
+          <div>
+            <div class="agency-name">Round Rock Fire Department</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Round Rock, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">Round Rock Fire Department serves one of the fastest-growing cities in Central Texas, providing fire suppression, ALS, and technical rescue services across six stations.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>3 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Williamson County SO -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#4338ca;font-size:.72rem;">WCSO</div>
+          <div>
+            <div class="agency-name">Williamson County Sheriff</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Georgetown, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">The Williamson County Sheriff's Office provides law enforcement, civil process, and detention services to one of the fastest-growing counties in the United States.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>4 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Austin-Travis County EMS -->
+    <div class="col-md-6 col-lg-4">
+      <div class="agency-card">
+        <div class="d-flex align-items-center gap-3 mb-2">
+          <div class="agency-logo" style="background:#047857;font-size:.65rem;">ATCEMS</div>
+          <div>
+            <div class="agency-name">Austin-Travis County EMS</div>
+            <div class="agency-location"><i class="bi bi-geo-alt-fill"></i>Austin, TX</div>
+          </div>
+        </div>
+        <div class="agency-desc">Austin-Travis County EMS is a nationally recognized high-performance EMS system providing ALS and community paramedicine services to Austin and Travis County residents.</div>
+        <div class="agency-card-footer">
+          <span class="jobs-pill"><i class="bi bi-briefcase-fill"></i>5 Open Positions</span>
+          <a href="agency-profile.html" class="btn-view-agency">View Agency →</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row -->
+
+  <!-- Dev Notes -->
+  <div class="dev-notes">
+    <div class="dev-notes-title"><i class="bi bi-cone-striped me-1"></i>Dev Notes — Agencies List (agencies.html)</div>
+    <ul>
+      <li><strong>Route:</strong> <code>/agencies</code> — public, no auth required.</li>
+      <li><strong>Data:</strong> <code>GET /api/public/agencies?hasActiveJobs=true</code> — returns agencies with at least one active job, ordered by active job count descending. Each record includes <code>name</code>, <code>city</code>, <code>state</code>, <code>logoUrl</code>, <code>description</code>, and <code>activeJobCount</code>.</li>
+      <li><strong>Search</strong> filters client-side on name and city, or server-side via <code>?q=</code> param for SEO-friendly URLs (e.g. <code>/agencies?q=austin</code>).</li>
+      <li>Description is truncated to 3 lines via CSS <code>-webkit-line-clamp</code> — no server-side truncation needed.</li>
+      <li>Logo falls back to initials avatar if <code>logoUrl</code> is null or 404.</li>
+      <li>Each "View Agency →" links to <code>/agencies/{orgSlug}</code>.</li>
+    </ul>
+  </div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer class="jb-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="footer-brand"><i class="bi bi-star-fill star-icon"></i>Texas Public Safety Jobs</div>
+        <p class="footer-tagline">The trusted source for public safety career opportunities across Texas.</p>
+      </div>
+      <div class="col-md-3 offset-md-1">
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="jb-listings.html">Browse Jobs</a></li>
+          <li><a href="agencies.html">Agencies</a></li>
+          <li><a href="for-agencies.html">For Agencies</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <div class="footer-heading">Categories</div>
+        <ul class="footer-links">
+          <li><a href="#">Law Enforcement</a></li>
+          <li><a href="#">Fire Services</a></li>
+          <li><a href="#">EMS / Paramedic</a></li>
+          <li><a href="#">Dispatch</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <div class="footer-heading">Platform</div>
+        <p style="font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.6);">Powered by<br><strong style="color:#fff;">AllStar Recruiter</strong><br><span style="font-size:.78rem;color:rgba(255,255,255,.4);">Talent management for<br>public safety agencies</span></p>
+        <a href="#" style="font-size:.78rem;color:rgba(255,255,255,.45);text-decoration:none;display:block;margin-top:.5rem;">Agency Login →</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="container d-flex justify-content-between flex-wrap gap-2">
+      <span>© 2026 Texas Public Safety Jobs · Powered by AllStar Recruiter</span>
+      <span><a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
