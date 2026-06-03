@@ -220,6 +220,18 @@
     }
     .fg-add-link:hover { color: var(--leftnav-bg); }
 
+    /* Assign-tag dropdown */
+    .fg-assign-select {
+      display: block; width: 100%; margin-top: .3rem;
+      font-size: .76rem; padding: .28rem .5rem;
+      border: 1.5px dashed #e2e8f0; border-radius: .3rem;
+      background: #fafbfc; color: #94a3b8;
+      cursor: pointer; outline: none; transition: all .12s;
+    }
+    .fg-assign-select:hover, .fg-assign-select:focus {
+      border-color: var(--leftnav-bg); background: #eff6ff; color: #1e293b;
+    }
+
     /* Removed rows */
     .fg-removed-row .fg-tag-name { opacity: .45; text-decoration: line-through; }
     .fg-removed-row .fg-date-field { opacity: .45; }
@@ -920,7 +932,7 @@
                     <span class="fg-group-count">2 tags</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#ff9000;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="75">
                       <div class="fg-tag-name">
                         <i class="bi bi-star-fill" style="color:#ff9000;font-size:.65rem;"></i>
                         75
@@ -950,7 +962,7 @@
                     <span class="fg-group-count">1 applied</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#e702f7;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="75">
                       <div class="fg-tag-name"><i class="bi bi-star-fill" style="color:#ff9000;font-size:.65rem;"></i> 75</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
@@ -960,7 +972,12 @@
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03" disabled></div>
                       <span class="fg-removed-badge">removed 6/3</span>
                     </div>
-                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                    <select class="fg-assign-select" data-type="multi" onchange="addFgTag(this)">
+                      <option value="">+ Assign tag…</option>
+                      <option value="77">77</option>
+                      <option value="78">78</option>
+                      <option value="79">79</option>
+                    </select>
                   </div>
                 </div>
 
@@ -973,22 +990,27 @@
                     <span class="fg-group-count">3 applied</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#272fa0;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Applied">
                       <div class="fg-tag-name">Applied</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Withdrew">
                       <div class="fg-tag-name">Withdrew</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Written Failed">
                       <div class="fg-tag-name">Written Failed</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-17"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                    <select class="fg-assign-select" data-type="multi" onchange="addFgTag(this)">
+                      <option value="">+ Assign tag…</option>
+                      <option value="DQ">DQ</option>
+                      <option value="Pre-Screen Fail">Pre-Screen Fail</option>
+                      <option value="Backgrounds">Backgrounds</option>
+                    </select>
                   </div>
                 </div>
 
@@ -1001,7 +1023,7 @@
                     <span class="fg-group-count">1 applied</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#81cf20;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Medium">
                       <div class="fg-tag-name">Medium</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-04-28"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
@@ -1016,7 +1038,11 @@
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-26" disabled></div>
                       <span class="fg-removed-badge">removed 2/27</span>
                     </div>
-                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                    <select class="fg-assign-select" data-type="single" onchange="addFgTag(this)">
+                      <option value="">Change priority…</option>
+                      <option value="High">High</option>
+                      <option value="Low">Low</option>
+                    </select>
                   </div>
                 </div>
 
@@ -1029,12 +1055,16 @@
                     <span class="fg-group-count">1 applied</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#7b7b7b;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Entry Level">
                       <div class="fg-tag-name">Entry Level</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-01"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                    <select class="fg-assign-select" data-type="single" onchange="addFgTag(this)">
+                      <option value="">Change position…</option>
+                      <option value="Lateral">Lateral</option>
+                      <option value="Promotion">Promotion</option>
+                    </select>
                   </div>
                 </div>
 
@@ -1047,7 +1077,7 @@
                     <span class="fg-group-count">1 applied</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#7b7b7b;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Pre-Screen Fail">
                       <div class="fg-tag-name">Pre-Screen Fail</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-17"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
@@ -1057,7 +1087,12 @@
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-01" disabled></div>
                       <span class="fg-removed-badge">removed 4/6</span>
                     </div>
-                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                    <select class="fg-assign-select" data-type="single" onchange="addFgTag(this)">
+                      <option value="">Change status…</option>
+                      <option value="New">New</option>
+                      <option value="Active">Active</option>
+                      <option value="Hired">Hired</option>
+                    </select>
                   </div>
                 </div>
 
@@ -1070,12 +1105,16 @@
                     <span class="fg-group-count">1 applied</span>
                   </div>
                   <div class="fg-group-body" style="border-left-color:#7b7b7b;">
-                    <div class="fg-tag-row">
+                    <div class="fg-tag-row" data-tag-value="Interview Event">
                       <div class="fg-tag-name">Interview Event</div>
                       <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-05-22"></div>
                       <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                    <select class="fg-assign-select" data-type="multi" onchange="addFgTag(this)">
+                      <option value="">+ Assign tag…</option>
+                      <option value="Ride Along">Ride Along</option>
+                      <option value="Physical Test">Physical Test</option>
+                    </select>
                   </div>
                 </div>
 
@@ -1141,6 +1180,94 @@
     icon.className = panel.classList.contains('open')
       ? 'bi bi-chevron-up ms-auto' : 'bi bi-chevron-down ms-auto';
   }
+
+  function addFgTag(sel) {
+    const val = sel.value;
+    if (!val) return;
+
+    const body = sel.parentElement;
+    const isMulti = sel.dataset.type === 'multi';
+    const today = new Date();
+    const todayVal = today.toISOString().slice(0, 10);
+    const todayDisplay = (today.getMonth() + 1) + '/' + today.getDate();
+
+    if (!isMulti) {
+      body.querySelectorAll('.fg-tag-row:not(.fg-removed-row)').forEach(row => {
+        const dateInput = row.querySelector('input[type="date"]');
+        const removeBtn = row.querySelector('.fg-remove-btn');
+        if (dateInput) dateInput.disabled = true;
+        if (removeBtn) {
+          const badge = document.createElement('span');
+          badge.className = 'fg-removed-badge';
+          badge.textContent = 'removed ' + todayDisplay;
+          removeBtn.replaceWith(badge);
+        }
+        row.classList.add('fg-removed-row');
+        const tagVal = row.dataset.tagValue || row.querySelector('.fg-tag-name').textContent.trim();
+        const opt = document.createElement('option');
+        opt.value = tagVal;
+        opt.textContent = tagVal;
+        sel.appendChild(opt);
+      });
+    }
+
+    const row = document.createElement('div');
+    row.className = 'fg-tag-row';
+    row.dataset.tagValue = val;
+    row.innerHTML =
+      '<div class="fg-tag-name">' + val + '</div>' +
+      '<div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="' + todayVal + '"></div>' +
+      '<button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>';
+    body.insertBefore(row, sel);
+
+    const opt = Array.from(sel.options).find(o => o.value === val);
+    if (opt) opt.remove();
+    sel.selectedIndex = 0;
+
+    updateFgCount(body);
+  }
+
+  function removeFgTag(btn) {
+    const row = btn.closest('.fg-tag-row');
+    const body = row.closest('.fg-group-body');
+    const today = new Date();
+    const todayDisplay = (today.getMonth() + 1) + '/' + today.getDate();
+
+    const dateInput = row.querySelector('input[type="date"]');
+    if (dateInput) dateInput.disabled = true;
+
+    const badge = document.createElement('span');
+    badge.className = 'fg-removed-badge';
+    badge.textContent = 'removed ' + todayDisplay;
+    btn.replaceWith(badge);
+
+    row.classList.add('fg-removed-row');
+
+    const tagVal = row.dataset.tagValue || row.querySelector('.fg-tag-name').textContent.trim();
+    const sel = body.querySelector('.fg-assign-select');
+    if (sel) {
+      const opt = document.createElement('option');
+      opt.value = tagVal;
+      opt.textContent = tagVal;
+      sel.appendChild(opt);
+    }
+
+    updateFgCount(body);
+  }
+
+  function updateFgCount(body) {
+    const group = body.closest('.fg-group');
+    const countEl = group.querySelector('.fg-group-count');
+    if (!countEl) return;
+    const active = body.querySelectorAll('.fg-tag-row:not(.fg-removed-row)').length;
+    const hasSel = !!body.querySelector('.fg-assign-select');
+    countEl.textContent = active + (hasSel ? ' applied' : ' tags');
+  }
+
+  document.getElementById('view-form').addEventListener('click', function(e) {
+    const btn = e.target.closest('.fg-remove-btn');
+    if (btn) removeFgTag(btn);
+  });
 
   /* Make candidate rows selectable */
   document.querySelectorAll('.list-group-item').forEach(row => {
