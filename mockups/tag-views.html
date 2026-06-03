@@ -14,203 +14,162 @@
     /* ── Layout ──────────────────────────────────────────────────── */
     .candidate-layout {
       display: grid;
-      grid-template-columns: 1fr 340px;
+      grid-template-columns: 1fr 360px;
       height: calc(100vh - var(--topbar-height) - 40px);
       overflow: hidden;
     }
-    .candidate-main   { overflow-y: auto; padding: 1.5rem 2rem; }
-    .tag-pane         { border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+    .candidate-main { overflow-y: auto; padding: 1.5rem 2rem; background: var(--bg-muted); }
+    .tag-pane       { border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+
+    /* ── Real tag-pill (matches actual app) ─────────────────────── */
+    .tag-pill {
+      display: inline-flex; align-items: center;
+      border-radius: .5rem;
+      margin-right: .25rem; margin-bottom: .25rem;
+    }
+    .tag-pill .pill-inner { display: flex; flex-direction: column; line-height: 1.25; padding: .25rem .4rem; }
+    .tag-pill .pill-group { font-size: .63rem; color: #6b7280; }
+    .tag-pill .pill-name  { font-size: .82rem; font-weight: 600; color: #111827; }
+    .tag-pill .pill-date  { font-size: .63rem; color: #6b7280; }
+    .tag-pill .pill-removed { font-size: .63rem; color: #dc2626; }
+    .tag-pill .pill-star  { color: #ff9000; font-size: .72rem; margin-right: .1rem; }
+    .btn-remove {
+      background: none; border: none; opacity: .45; padding: 0 .3rem;
+      font-size: .7rem; line-height: 1; cursor: pointer; align-self: center;
+    }
+    .btn-remove:hover { opacity: .85; }
 
     /* ── Candidate card ─────────────────────────────────────────── */
     .cand-avatar {
-      width: 56px; height: 56px; border-radius: 50%;
+      width: 52px; height: 52px; border-radius: 50%;
       background: var(--leftnav-bg); color: #fff;
-      font-size: 1.3rem; font-weight: 800;
+      font-size: 1.15rem; font-weight: 800;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .info-row { display: flex; gap: .5rem; align-items: center; font-size: .82rem; color: #64748b; margin-top: .25rem; }
-    .info-row i { font-size: .75rem; }
-    .stage-pill {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .72rem; font-weight: 700; padding: .25rem .7rem;
-      border-radius: 99px; background: #dbeafe; color: #1d4ed8;
+    .info-chip {
+      display: inline-flex; align-items: center; gap: .25rem;
+      font-size: .72rem; color: #64748b;
     }
-    .detail-section { background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; padding: 1.25rem; margin-top: 1rem; }
-    .detail-section h6 { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #94a3b8; margin-bottom: .75rem; }
-    .notes-text { font-size: .88rem; color: #374151; line-height: 1.65; }
+    .detail-card { background: #fff; border: 1px solid #e2e8f0; border-radius: .4rem; padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+    .detail-card h6 { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #94a3b8; margin-bottom: .75rem; }
 
-    /* ── Tag Pane header ────────────────────────────────────────── */
-    .tag-pane-header {
+    /* ── Pane header ────────────────────────────────────────────── */
+    .pane-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: .75rem 1rem; border-bottom: 1px solid #e2e8f0;
-      flex-shrink: 0; background: #f8fafc;
+      padding: .6rem .85rem; border-bottom: 1px solid #e2e8f0;
+      flex-shrink: 0; background: #f8fafc; gap: .5rem;
     }
-    .tag-pane-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #374151; }
-    .view-toggle { display: flex; gap: 2px; background: #e2e8f0; border-radius: 6px; padding: 2px; }
-    .view-btn {
-      width: 28px; height: 28px; border-radius: 4px; border: none; background: transparent;
+    .pane-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #374151; white-space: nowrap; }
+    .view-toggle { display: flex; gap: 2px; background: #e2e8f0; border-radius: 5px; padding: 2px; flex-shrink: 0; }
+    .vbtn {
+      width: 26px; height: 26px; border-radius: 3px; border: none; background: transparent;
       color: #64748b; display: flex; align-items: center; justify-content: center;
-      font-size: .85rem; cursor: pointer; transition: all .15s;
+      font-size: .82rem; cursor: pointer; transition: all .12s;
     }
-    .view-btn.active { background: #fff; color: var(--leftnav-bg); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
-    .view-btn:hover:not(.active) { color: #374151; }
+    .vbtn.active { background: #fff; color: var(--leftnav-bg); box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+    .vbtn:hover:not(.active) { color: #374151; }
 
-    /* ── Tag Pane scroll body ───────────────────────────────────── */
-    .tag-pane-body { flex: 1; overflow-y: auto; padding: 0; }
+    /* Filter row */
+    .filter-row { padding: .5rem .85rem; border-bottom: 1px solid #f1f5f9; flex-shrink: 0; display: flex; gap: .4rem; }
+    .filter-row .form-select, .filter-row .form-control {
+      font-size: .78rem; padding: .28rem .5rem; border-radius: .3rem;
+      border: 1px solid #e2e8f0; background: #fff; color: #374151;
+    }
+    .filter-row .form-select { width: 130px; flex-shrink: 0; }
+    .filter-row .form-control { flex: 1; }
 
-    /* ═══════════════════════════════════════════════════════════════
-       VIEW 1: ORGANIZED
-    ═══════════════════════════════════════════════════════════════ */
-    .tag-view { display: none; }
+    /* ── Tag pane body ──────────────────────────────────────────── */
+    .pane-body  { flex: 1; overflow-y: auto; }
+    .tag-view   { display: none; }
     .tag-view.active { display: block; }
 
-    /* Favorites strip */
-    .fav-strip {
-      padding: .65rem 1rem; background: #fffbf0;
-      border-bottom: 1px solid #fde68a;
-    }
-    .fav-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #92400e; margin-bottom: .4rem; display: flex; align-items: center; gap: .35rem; }
-    .fav-label i { color: #f59e0b; }
-    .fav-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+    /* ════════════════════════════════════════════════════════════
+       VIEW 1: ORGANIZED
+    ════════════════════════════════════════════════════════════ */
+    .fav-strip { padding: .55rem .85rem; background: #fffbf0; border-bottom: 1px solid #fde68a; }
+    .fav-label { font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #92400e; margin-bottom: .35rem; display: flex; align-items: center; gap: .3rem; }
 
-    /* Group sections */
-    .tag-group { border-bottom: 1px solid #f1f5f9; }
-    .tag-group-header {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .6rem 1rem; cursor: pointer;
-      font-size: .78rem; font-weight: 700; color: #374151;
-      user-select: none; transition: background .12s;
+    .org-group { border-bottom: 1px solid #f1f5f9; }
+    .org-group-hdr {
+      display: flex; align-items: center; gap: .45rem;
+      padding: .5rem .85rem; cursor: pointer; user-select: none;
+      font-size: .77rem; font-weight: 700; color: #374151;
+      transition: background .1s;
     }
-    .tag-group-header:hover { background: #f8fafc; }
-    .tag-group-header .group-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .tag-group-header .group-meta { font-size: .65rem; font-weight: 600; color: #94a3b8; margin-left: auto; text-transform: uppercase; letter-spacing: .04em; }
-    .tag-group-header .chevron { color: #94a3b8; font-size: .7rem; transition: transform .15s; }
-    .tag-group-header.collapsed .chevron { transform: rotate(-90deg); }
-    .tag-group-body { padding: .5rem 1rem .75rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-    .tag-group-body.collapsed { display: none; }
+    .org-group-hdr:hover { background: #f8fafc; }
+    .org-group-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .org-group-meta { font-size: .62rem; font-weight: 600; color: #94a3b8; margin-left: auto; }
+    .org-chevron { color: #94a3b8; font-size: .68rem; transition: transform .15s; }
+    .org-group-hdr.collapsed .org-chevron { transform: rotate(-90deg); }
+    .org-group-body { padding: .4rem .85rem .65rem; display: flex; flex-wrap: wrap; }
+    .org-group-body.hidden { display: none; }
 
-    /* Tag pills — organized view */
-    .tag-pill {
-      display: inline-flex; align-items: center; gap: .3rem;
-      font-size: .75rem; font-weight: 600; padding: .25rem .65rem;
-      border-radius: 99px; cursor: pointer; transition: all .15s;
-      border: 1.5px solid transparent; user-select: none;
-      white-space: nowrap;
-    }
-    .tag-pill.applied {
-      color: #fff;
-    }
-    .tag-pill.unapplied {
-      background: #f1f5f9; color: #64748b; border-color: #e2e8f0;
-    }
-    .tag-pill.unapplied:hover { background: #e2e8f0; color: #374151; }
-    .tag-pill .pill-date { font-size: .62rem; font-weight: 600; opacity: .8; }
-    .tag-pill .pill-fav { font-size: .62rem; color: #fbbf24; }
-    .tag-pill .pill-check { font-size: .65rem; }
+    /* removed-tag strip */
+    .removed-strip { padding: .3rem .85rem .5rem; }
+    .removed-label { font-size: .62rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .25rem; }
+    .removed-pills { display: flex; flex-wrap: wrap; opacity: .55; }
 
-    /* Hidden groups */
-    .hidden-section {
-      padding: .5rem 1rem; border-top: 1px solid #f1f5f9;
-    }
-    .hidden-toggle {
-      display: flex; align-items: center; gap: .4rem;
-      font-size: .72rem; color: #94a3b8; cursor: pointer;
-      user-select: none; padding: .35rem 0;
-    }
+    .hidden-groups-section { padding: .4rem .85rem; }
+    .hidden-toggle { display: flex; align-items: center; gap: .35rem; font-size: .72rem; color: #94a3b8; cursor: pointer; padding: .3rem 0; user-select: none; }
     .hidden-toggle:hover { color: #64748b; }
-    .hidden-groups { display: none; margin-top: .5rem; }
-    .hidden-groups.open { display: block; }
+    .hidden-panel { display: none; }
+    .hidden-panel.open { display: block; }
 
-    /* ═══════════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════════
        VIEW 2: TIMELINE
-    ═══════════════════════════════════════════════════════════════ */
-    .timeline-wrap { padding: 1rem; }
-    .timeline-month { font-size: .67rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #94a3b8; margin-bottom: .6rem; margin-top: 1rem; padding-left: 1.25rem; }
-    .timeline-month:first-child { margin-top: 0; }
-    .tl-entry {
-      display: flex; gap: .75rem; align-items: flex-start;
-      padding: .3rem 0;
-    }
-    .tl-spine {
-      display: flex; flex-direction: column; align-items: center;
-      width: 20px; flex-shrink: 0; padding-top: .35rem;
-    }
-    .tl-dot {
-      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-      border: 2px solid currentColor;
-    }
-    .tl-dot.filled { }
-    .tl-line { width: 2px; flex: 1; min-height: 12px; background: #e2e8f0; margin-top: 2px; }
-    .tl-content { flex: 1; padding-bottom: .6rem; }
-    .tl-date-label { font-size: .67rem; font-weight: 600; color: #94a3b8; margin-bottom: .25rem; }
-    .tl-tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .78rem; font-weight: 700; padding: .22rem .65rem; border-radius: 99px; color: #fff; margin-bottom: .2rem; }
-    .tl-group-label { font-size: .67rem; color: #94a3b8; margin-top: .1rem; }
+    ════════════════════════════════════════════════════════════ */
+    .tl-wrap { padding: .85rem; }
+    .tl-month { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #94a3b8; margin: .85rem 0 .5rem; padding-left: 1.4rem; }
+    .tl-month:first-child { margin-top: 0; }
+    .tl-row { display: flex; gap: .65rem; align-items: flex-start; margin-bottom: .5rem; }
+    .tl-spine { display: flex; flex-direction: column; align-items: center; width: 18px; flex-shrink: 0; padding-top: .4rem; }
+    .tl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .tl-dot.applied { }
+    .tl-dot.removed { background: #fff !important; border: 2px solid #dc2626; }
+    .tl-line { width: 2px; background: #e2e8f0; flex: 1; min-height: 10px; margin-top: 2px; }
+    .tl-body { flex: 1; }
+    .tl-meta { font-size: .65rem; color: #94a3b8; margin-bottom: .22rem; }
+    .tl-event-removed .tl-meta { color: #dc2626; }
 
-    .tl-upcoming { padding-top: .5rem; border-top: 1px dashed #e2e8f0; margin-top: .75rem; }
-    .tl-upcoming-label { font-size: .67rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #cbd5e1; margin-bottom: .6rem; padding-left: 1.25rem; }
-    .tl-entry.future .tl-dot { background: #fff; border-color: #cbd5e1; }
-    .tl-entry.future .tl-content { opacity: .45; }
-    .tl-entry.future .tl-tag { background: #f1f5f9 !important; color: #94a3b8 !important; }
-
-    /* ═══════════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════════
        VIEW 3: FORM / CRM
-    ═══════════════════════════════════════════════════════════════ */
-    .form-view-wrap { padding: .5rem 0; }
-    .form-group-row {
-      padding: .75rem 1rem;
-      border-bottom: 1px solid #f1f5f9;
-    }
+    ════════════════════════════════════════════════════════════ */
+    .form-group-row { padding: .65rem .85rem; border-bottom: 1px solid #f1f5f9; }
     .form-group-row:last-child { border-bottom: none; }
-    .form-group-label {
-      font-size: .72rem; font-weight: 700; color: #374151;
-      display: flex; align-items: center; gap: .4rem;
-      margin-bottom: .5rem;
+    .fg-label { display: flex; align-items: center; gap: .35rem; font-size: .72rem; font-weight: 700; color: #374151; margin-bottom: .45rem; }
+    .fg-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .fg-type { font-size: .6rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-left: auto; }
+    .form-opts { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .35rem; }
+    .form-opt {
+      display: inline-flex; align-items: center; gap: .28rem;
+      font-size: .77rem; padding: .25rem .6rem; border-radius: 6px;
+      border: 1.5px solid #e2e8f0; background: #fff; cursor: pointer;
+      transition: all .12s; color: #374151; user-select: none;
     }
-    .form-group-label .fg-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .form-group-label .fg-type { font-size: .6rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-left: auto; }
-    .form-radio-group { display: flex; flex-wrap: wrap; gap: .3rem; }
-    .form-radio-opt {
+    .form-opt:hover { border-color: #c7d2fe; background: #f0f4ff; }
+    .form-opt.applied { border-color: transparent; color: #fff; }
+    .form-opt .opt-indicator { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; }
+    .form-opt.applied .opt-indicator { background: rgba(255,255,255,.5); border-color: rgba(255,255,255,.5); }
+    .form-opt .opt-check { font-size: .68rem; }
+    .fg-dates { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .fg-date-badge {
       display: inline-flex; align-items: center; gap: .3rem;
-      font-size: .78rem; padding: .28rem .7rem;
-      border-radius: 6px; border: 1.5px solid #e2e8f0;
-      background: #fff; cursor: pointer; transition: all .13s;
-      color: #374151; user-select: none;
+      font-size: .7rem; background: #f8fafc; border: 1px solid #e2e8f0;
+      border-radius: 4px; padding: .18rem .5rem; color: #64748b;
     }
-    .form-radio-opt:hover { border-color: #c7d2fe; background: #f0f4ff; }
-    .form-radio-opt.selected { border-color: transparent; color: #fff; }
-    .form-radio-opt .opt-dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; }
-    .form-radio-opt.selected .opt-dot { background: rgba(255,255,255,.6); border-color: transparent; }
-    .form-check-opt {
-      display: inline-flex; align-items: center; gap: .3rem;
-      font-size: .78rem; padding: .28rem .7rem;
-      border-radius: 6px; border: 1.5px solid #e2e8f0;
-      background: #fff; cursor: pointer; transition: all .13s;
-      color: #374151; user-select: none;
-    }
-    .form-check-opt:hover { border-color: #c7d2fe; background: #f0f4ff; }
-    .form-check-opt.checked { border-color: transparent; color: #fff; }
-    .form-check-opt i { font-size: .72rem; }
-    .form-date-row { display: flex; align-items: center; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
-    .form-date-item {
-      display: flex; align-items: center; gap: .35rem;
-      font-size: .72rem; color: #64748b;
-      background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 5px; padding: .2rem .55rem;
-    }
-    .form-date-item .fd-tag { font-weight: 600; }
-    .form-date-item i { font-size: .65rem; color: #94a3b8; cursor: pointer; }
-    .form-date-item i:hover { color: var(--leftnav-bg); }
-
+    .fg-date-badge .fdb-name { font-weight: 600; }
+    .fg-date-badge i { font-size: .63rem; cursor: pointer; color: #94a3b8; }
+    .fg-date-badge i:hover { color: var(--leftnav-bg); }
   </style>
 </head>
 <body>
 
 <div class="app">
 
-  <!-- ── Sidebar ───────────────────────────────────────────────────── -->
+  <!-- Sidebar -->
   <aside class="sidebar d-none d-md-flex flex-column">
     <div class="brand">
-      <a class="logo-wrap" href="../index.html" aria-label="Home">
+      <a class="logo-wrap" href="../index.html">
         <span style="color:#fff;font-weight:800;font-size:1.1rem;letter-spacing:.02em;">AllStar Recruiter</span>
       </a>
     </div>
@@ -231,236 +190,303 @@
     </div>
   </aside>
 
-  <!-- ── Topbar ─────────────────────────────────────────────────────── -->
+  <!-- Topbar -->
   <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
     <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
     <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
       <a href="#" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Candidates</a>
-      <i class="bi bi-chevron-right" style="color:rgba(255,255,255,.35);font-size:.65rem;"></i>
-      <h1 class="h6 mb-0 text-truncate">Marcus Thompson</h1>
+      <i class="bi bi-chevron-right" style="color:rgba(255,255,255,.3);font-size:.65rem;"></i>
+      <h1 class="h6 mb-0 text-truncate">Sarah Mitchell</h1>
     </div>
     <div class="d-flex align-items-center gap-2 flex-shrink-0">
-      <!-- View label badge -->
-      <span id="view-label" style="font-size:.72rem;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:.2rem .65rem;border-radius:99px;font-weight:600;">Organized View</span>
+      <span id="view-label" style="font-size:.71rem;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:.18rem .6rem;border-radius:99px;font-weight:600;">Organized View</span>
       <button class="btn btn-sm" style="color:#fff;"><i class="bi bi-bell"></i></button>
       <div class="avatar avatar-sm">JL</div>
     </div>
   </header>
 
-  <!-- ── Quick bar ──────────────────────────────────────────────────── -->
+  <!-- Quick bar -->
   <div class="quick-bar d-flex align-items-center gap-2 flex-wrap">
-    <button class="btn btn-sm btn-outline-light" style="font-size:.78rem;">
-      <i class="bi bi-arrow-left me-1"></i>Back to list
-    </button>
+    <button class="btn btn-sm btn-outline-light" style="font-size:.78rem;"><i class="bi bi-arrow-left me-1"></i>Back</button>
     <div class="ms-auto d-flex gap-2">
       <button class="btn btn-sm btn-outline-light" style="font-size:.78rem;"><i class="bi bi-envelope me-1"></i>Send Email</button>
       <button class="btn btn-sm" style="background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;border:none;"><i class="bi bi-plus me-1"></i>Add Note</button>
     </div>
   </div>
 
-  <!-- ── Main content ───────────────────────────────────────────────── -->
+  <!-- Main content -->
   <main class="content p-0">
     <div class="candidate-layout">
 
-      <!-- Left: candidate main panel -->
+      <!-- ── Left: candidate detail ──────────────────────────────── -->
       <div class="candidate-main">
 
-        <!-- Header card -->
-        <div style="display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:1.25rem;">
-          <div class="cand-avatar">MT</div>
-          <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;">
-              <h2 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0;">Marcus Thompson</h2>
-              <span class="stage-pill"><i class="bi bi-arrow-right-circle-fill"></i>Physical Agility Test</span>
+        <div class="detail-card">
+          <div style="display:flex;gap:1rem;align-items:flex-start;">
+            <div class="cand-avatar">SM</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;">
+                <h2 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin:0;">Sarah Mitchell</h2>
+                <span style="font-size:.72rem;background:rgba(39,47,160,.12);border:1px solid rgba(39,47,160,.3);color:#272fa0;padding:.18rem .6rem;border-radius:99px;font-weight:700;">Police Officer · Applied</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:.85rem;margin-top:.4rem;">
+                <span class="info-chip"><i class="bi bi-envelope" style="font-size:.7rem;"></i>s.mitchell@email.com</span>
+                <span class="info-chip"><i class="bi bi-telephone" style="font-size:.7rem;"></i>(302) 555-0142</span>
+                <span class="info-chip"><i class="bi bi-geo-alt" style="font-size:.7rem;"></i>Wilmington, DE</span>
+              </div>
+              <!-- Applied tags shown on candidate card — real pill format -->
+              <div style="margin-top:.65rem;display:flex;flex-wrap:wrap;">
+                <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Applied</span><span class="pill-date">6/3/2026</span></div>
+                </div>
+                <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">Medium</span><span class="pill-date">4/28/2026</span></div>
+                </div>
+                <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>75</span><span class="pill-date">6/3/2026</span></div>
+                </div>
+                <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Position</span><span class="pill-name">Entry Level</span><span class="pill-date">2/1/2026</span></div>
+                </div>
+              </div>
             </div>
-            <div class="info-row"><i class="bi bi-envelope"></i>m.thompson@gmail.com</div>
-            <div class="info-row"><i class="bi bi-telephone"></i>(512) 555-0183 &nbsp;·&nbsp; <i class="bi bi-geo-alt"></i>Austin, TX &nbsp;·&nbsp; <i class="bi bi-calendar3"></i>Applied Apr 1, 2026</div>
-            <div class="info-row" style="margin-top:.5rem;">
-              <span style="font-size:.72rem;background:#dcfce7;color:#166534;padding:.15rem .55rem;border-radius:99px;font-weight:700;">Military Veteran</span>
-              <span style="font-size:.72rem;background:#e0f2fe;color:#0369a1;padding:.15rem .55rem;border-radius:99px;font-weight:700;">Bilingual</span>
-              <span style="font-size:.72rem;background:#f3e8ff;color:#7c3aed;padding:.15rem .55rem;border-radius:99px;font-weight:700;">Police Officer</span>
-            </div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:.4rem;align-items:flex-end;flex-shrink:0;">
-            <button class="btn btn-sm btn-outline-secondary" style="font-size:.75rem;"><i class="bi bi-pencil me-1"></i>Edit</button>
-            <button class="btn btn-sm btn-outline-secondary" style="font-size:.75rem;"><i class="bi bi-three-dots"></i></button>
+            <button class="btn btn-sm btn-outline-secondary" style="font-size:.75rem;flex-shrink:0;"><i class="bi bi-pencil"></i></button>
           </div>
         </div>
 
-        <!-- Activity timeline stub -->
-        <div class="detail-section">
+        <div class="detail-card">
           <h6>Recent Activity</h6>
-          <div style="display:flex;flex-direction:column;gap:.85rem;">
-            <div style="display:flex;gap:.75rem;">
-              <div style="width:28px;height:28px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;"><i class="bi bi-tags"></i></div>
-              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Tag updated — Physical Agility Test</div><div style="font-size:.72rem;color:#94a3b8;">May 15, 2026 · Jason L.</div></div>
+          <div style="display:flex;flex-direction:column;gap:.75rem;">
+            <div style="display:flex;gap:.65rem;align-items:flex-start;">
+              <div style="width:26px;height:26px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;margin-top:.1rem;"><i class="bi bi-tags"></i></div>
+              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Tags updated — Applied, Withdrew, Academy: 75</div><div style="font-size:.7rem;color:#94a3b8;">Jun 3, 2026 · Jason L.</div></div>
             </div>
-            <div style="display:flex;gap:.75rem;">
-              <div style="width:28px;height:28px;border-radius:50%;background:#dcfce7;color:#166534;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;"><i class="bi bi-check-circle"></i></div>
-              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Written Exam — passed</div><div style="font-size:.72rem;color:#94a3b8;">Apr 22, 2026 · Auto-logged</div></div>
+            <div style="display:flex;gap:.65rem;align-items:flex-start;">
+              <div style="width:26px;height:26px;border-radius:50%;background:#fef3c7;color:#b45309;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;margin-top:.1rem;"><i class="bi bi-calendar2-event"></i></div>
+              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Registered for Interview Event</div><div style="font-size:.7rem;color:#94a3b8;">May 22, 2026 · Auto-logged</div></div>
             </div>
-            <div style="display:flex;gap:.75rem;">
-              <div style="width:28px;height:28px;border-radius:50%;background:#f3e8ff;color:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;"><i class="bi bi-envelope"></i></div>
-              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Email sent — PAT reminder</div><div style="font-size:.72rem;color:#94a3b8;">Apr 18, 2026 · Sarah K.</div></div>
+            <div style="display:flex;gap:.65rem;align-items:flex-start;">
+              <div style="width:26px;height:26px;border-radius:50%;background:#dcfce7;color:#166534;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0;margin-top:.1rem;"><i class="bi bi-envelope-check"></i></div>
+              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Email sent — Follow Up Campaign</div><div style="font-size:.7rem;color:#94a3b8;">Apr 28, 2026 · Jason L.</div></div>
             </div>
           </div>
         </div>
 
-        <!-- Notes stub -->
-        <div class="detail-section">
+        <div class="detail-card">
           <h6>Notes</h6>
-          <p class="notes-text">Strong candidate — prior USMC, 4 years service. Bilingual English/Spanish. Scored 94 on written. PAT scheduled May 15. Follow up after results.</p>
+          <p style="font-size:.88rem;color:#374151;line-height:1.65;margin:0;">Strong candidate, Entry Level Police Officer position. Pre-screen failed initially — re-evaluated and cleared. Written exam failed Feb 17. Withdrew Jun 3 but also re-applied same day. Follow up on academy cohort 75 status.</p>
         </div>
 
       </div><!-- /candidate-main -->
 
-      <!-- Right: tag pane -->
+      <!-- ── Right: tag pane ─────────────────────────────────────── -->
       <div class="tag-pane">
 
-        <!-- Pane header -->
-        <div class="tag-pane-header">
-          <div class="tag-pane-title"><i class="bi bi-tags me-1" style="font-size:.8rem;"></i>Tags</div>
+        <!-- Pane header with view toggle -->
+        <div class="pane-header">
+          <span class="pane-title"><i class="bi bi-tags me-1" style="font-size:.75rem;"></i>Tags</span>
           <div class="view-toggle">
-            <button class="view-btn active" id="btn-organized" onclick="switchView('organized')" title="Organized view">
+            <button class="vbtn active" id="btn-organized" onclick="switchView('organized')" title="Organized — groups &amp; pills">
               <i class="bi bi-tags"></i>
             </button>
-            <button class="view-btn" id="btn-timeline" onclick="switchView('timeline')" title="Timeline view">
+            <button class="vbtn" id="btn-timeline" onclick="switchView('timeline')" title="Timeline — chronological history">
               <i class="bi bi-clock-history"></i>
             </button>
-            <button class="view-btn" id="btn-form" onclick="switchView('form')" title="Form view">
+            <button class="vbtn" id="btn-form" onclick="switchView('form')" title="Form — field per group">
               <i class="bi bi-card-list"></i>
             </button>
           </div>
+          <button class="btn btn-sm" style="font-size:.75rem;color:var(--leftnav-bg);border:1px solid #c7d2fe;background:#eff6ff;padding:.2rem .6rem;border-radius:.3rem;white-space:nowrap;">
+            <i class="bi bi-plus me-1"></i>Assign
+          </button>
         </div>
 
-        <div class="tag-pane-body">
+        <!-- Filter row -->
+        <div class="filter-row">
+          <select class="form-select">
+            <option value="__all__">All Groups</option>
+            <option>Academy</option>
+            <option>Police Officer</option>
+            <option>Priority</option>
+            <option>Position</option>
+            <option>Status</option>
+            <option>In-Person</option>
+          </select>
+          <input type="text" class="form-control" placeholder="Search tags…">
+        </div>
 
-          <!-- ════════════════════════════════════════
+        <div class="pane-body">
+
+          <!-- ══════════════════════════════════════════════
                VIEW 1: ORGANIZED
-          ════════════════════════════════════════ -->
+          ══════════════════════════════════════════════ -->
           <div id="view-organized" class="tag-view active">
 
             <!-- Favorites -->
             <div class="fav-strip">
-              <div class="fav-label"><i class="bi bi-star-fill"></i>Favorites</div>
-              <div class="fav-tags">
-                <span class="tag-pill applied pill-fav-item" style="background:#1d4ed8;" title="Hiring Stage — Physical Agility Test">
-                  <i class="bi bi-star-fill pill-fav" style="font-size:.6rem;color:#fde68a;"></i>Physical Agility Test
-                  <span class="pill-date">May 15</span>
-                </span>
-                <span class="tag-pill applied pill-fav-item" style="background:#7c3aed;" title="Position Applied — Police Officer">
-                  <i class="bi bi-star-fill pill-fav" style="font-size:.6rem;color:#fde68a;"></i>Police Officer
-                </span>
+              <div class="fav-label"><i class="bi bi-star-fill" style="color:#ff9000;"></i>Favorites</div>
+              <div style="display:flex;flex-wrap:wrap;">
+                <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>75</span><span class="pill-date">6/3/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
+                <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>105</span><span class="pill-date">—</span></div>
+                </div>
               </div>
             </div>
 
-            <!-- Group: Hiring Stage -->
-            <div class="tag-group">
-              <div class="tag-group-header" onclick="toggleGroup(this)">
-                <span class="group-swatch" style="background:#1d4ed8;"></span>
-                Hiring Stage
-                <span class="group-meta">single</span>
-                <i class="bi bi-chevron-down chevron"></i>
+            <!-- Group: Academy -->
+            <div class="org-group">
+              <div class="org-group-hdr" onclick="toggleGroup(this)">
+                <span class="org-group-swatch" style="background:#e702f7;"></span>
+                Academy
+                <span class="org-group-meta">multi</span>
+                <i class="bi bi-chevron-down org-chevron"></i>
               </div>
-              <div class="tag-group-body">
-                <span class="tag-pill applied" style="background:#1d4ed8;" title="Applied Apr 1"><i class="bi bi-check-circle-fill pill-check"></i>Applied<span class="pill-date">Apr 1</span></span>
-                <span class="tag-pill unapplied">Written Exam</span>
-                <span class="tag-pill applied" style="background:#1d4ed8;" title="Physical Agility Test May 15"><i class="bi bi-check-circle-fill pill-check"></i>Physical Agility<span class="pill-date">May 15</span><i class="bi bi-star-fill" style="font-size:.58rem;color:#fde68a;"></i></span>
-                <span class="tag-pill unapplied">Oral Board</span>
-                <span class="tag-pill unapplied">Background</span>
-                <span class="tag-pill unapplied">Conditional Offer</span>
-                <span class="tag-pill unapplied">Academy</span>
+              <div class="org-group-body">
+                <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>75</span><span class="pill-date">6/3/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
               </div>
-            </div>
-
-            <!-- Group: Position Applied -->
-            <div class="tag-group">
-              <div class="tag-group-header" onclick="toggleGroup(this)">
-                <span class="group-swatch" style="background:#7c3aed;"></span>
-                Position Applied
-                <span class="group-meta">single</span>
-                <i class="bi bi-chevron-down chevron"></i>
-              </div>
-              <div class="tag-group-body">
-                <span class="tag-pill applied" style="background:#7c3aed;"><i class="bi bi-check-circle-fill pill-check"></i>Police Officer<i class="bi bi-star-fill" style="font-size:.58rem;color:#fde68a;margin-left:2px;"></i></span>
-                <span class="tag-pill unapplied">Sergeant</span>
-                <span class="tag-pill unapplied">Detective</span>
-                <span class="tag-pill unapplied">Dispatcher</span>
+              <div class="removed-strip">
+                <div class="removed-label">Removed</div>
+                <div class="removed-pills">
+                  <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>105</span><span class="pill-date">6/3/2026</span><span class="pill-removed">Removed: 6/3/2026</span></div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Group: Recruiting Source -->
-            <div class="tag-group">
-              <div class="tag-group-header" onclick="toggleGroup(this)">
-                <span class="group-swatch" style="background:#0369a1;"></span>
-                Recruiting Source
-                <span class="group-meta">single</span>
-                <i class="bi bi-chevron-down chevron"></i>
+            <!-- Group: Police Officer -->
+            <div class="org-group">
+              <div class="org-group-hdr" onclick="toggleGroup(this)">
+                <span class="org-group-swatch" style="background:#272fa0;"></span>
+                Police Officer
+                <span class="org-group-meta">multi</span>
+                <i class="bi bi-chevron-down org-chevron"></i>
               </div>
-              <div class="tag-group-body">
-                <span class="tag-pill applied" style="background:#0369a1;"><i class="bi bi-check-circle-fill pill-check"></i>Career Fair<span class="pill-date">Apr 1</span></span>
-                <span class="tag-pill unapplied">Job Board</span>
-                <span class="tag-pill unapplied">Social Media</span>
-                <span class="tag-pill unapplied">Referral</span>
-                <span class="tag-pill unapplied">Walk-In</span>
+              <div class="org-group-body">
+                <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Applied</span><span class="pill-date">6/3/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
+                <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Withdrew</span><span class="pill-date">6/3/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
+                <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Written Failed</span><span class="pill-date">2/17/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
               </div>
             </div>
 
-            <!-- Group: Special Qualifications -->
-            <div class="tag-group">
-              <div class="tag-group-header" onclick="toggleGroup(this)">
-                <span class="group-swatch" style="background:#166534;"></span>
-                Special Qualifications
-                <span class="group-meta">multi</span>
-                <i class="bi bi-chevron-down chevron"></i>
+            <!-- Group: Priority -->
+            <div class="org-group">
+              <div class="org-group-hdr" onclick="toggleGroup(this)">
+                <span class="org-group-swatch" style="background:#81cf20;"></span>
+                Priority
+                <span class="org-group-meta">single</span>
+                <i class="bi bi-chevron-down org-chevron"></i>
               </div>
-              <div class="tag-group-body">
-                <span class="tag-pill applied" style="background:#166534;"><i class="bi bi-check-square-fill pill-check"></i>Military Veteran<span class="pill-date">Apr 1</span></span>
-                <span class="tag-pill applied" style="background:#166534;"><i class="bi bi-check-square-fill pill-check"></i>Bilingual<span class="pill-date">Apr 1</span></span>
-                <span class="tag-pill unapplied">Prior LE</span>
-                <span class="tag-pill unapplied">College Degree</span>
-                <span class="tag-pill unapplied">Lateral Transfer</span>
+              <div class="org-group-body">
+                <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">Medium</span><span class="pill-date">4/28/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
+              </div>
+              <div class="removed-strip">
+                <div class="removed-label">Removed</div>
+                <div class="removed-pills">
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">Low</span><span class="pill-date">2/27/2026</span><span class="pill-removed">Removed: 4/28/2026</span></div>
+                  </div>
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">High</span><span class="pill-date">2/26/2026</span><span class="pill-removed">Removed: 2/27/2026</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group: Position -->
+            <div class="org-group">
+              <div class="org-group-hdr" onclick="toggleGroup(this)">
+                <span class="org-group-swatch" style="background:#7b7b7b;"></span>
+                Position
+                <span class="org-group-meta">single</span>
+                <i class="bi bi-chevron-down org-chevron"></i>
+              </div>
+              <div class="org-group-body">
+                <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Position</span><span class="pill-name">Entry Level</span><span class="pill-date">2/1/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
               </div>
             </div>
 
             <!-- Group: Status -->
-            <div class="tag-group">
-              <div class="tag-group-header" onclick="toggleGroup(this)">
-                <span class="group-swatch" style="background:#b45309;"></span>
+            <div class="org-group">
+              <div class="org-group-hdr" onclick="toggleGroup(this)">
+                <span class="org-group-swatch" style="background:#7b7b7b;"></span>
                 Status
-                <span class="group-meta">single</span>
-                <i class="bi bi-chevron-down chevron"></i>
+                <span class="org-group-meta">single</span>
+                <i class="bi bi-chevron-down org-chevron"></i>
               </div>
-              <div class="tag-group-body">
-                <span class="tag-pill applied" style="background:#b45309;"><i class="bi bi-check-circle-fill pill-check"></i>Active</span>
-                <span class="tag-pill unapplied">On Hold</span>
-                <span class="tag-pill unapplied">Withdrawn</span>
-                <span class="tag-pill unapplied">Hired</span>
+              <div class="org-group-body">
+                <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                  <div class="pill-inner"><span class="pill-group">Status</span><span class="pill-name">Pre-Screen Fail</span><span class="pill-date">2/17/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
+              </div>
+              <div class="removed-strip">
+                <div class="removed-label">Removed</div>
+                <div class="removed-pills">
+                  <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Status</span><span class="pill-name">New</span><span class="pill-date">2/1/2026</span><span class="pill-removed">Removed: 4/6/2026</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group: In-Person + hidden groups -->
+            <div class="org-group">
+              <div class="org-group-hdr" onclick="toggleGroup(this)">
+                <span class="org-group-swatch" style="background:#7b7b7b;"></span>
+                In-Person
+                <span class="org-group-meta">multi</span>
+                <i class="bi bi-chevron-down org-chevron"></i>
+              </div>
+              <div class="org-group-body">
+                <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                  <div class="pill-inner"><span class="pill-group">In-Person</span><span class="pill-name">Interview Event</span><span class="pill-date">5/22/2026</span></div>
+                  <button class="btn-remove">×</button>
+                </div>
               </div>
             </div>
 
             <!-- Hidden groups -->
-            <div class="hidden-section">
+            <div class="hidden-groups-section">
               <div class="hidden-toggle" onclick="toggleHidden(this)">
                 <i class="bi bi-eye-slash"></i>
                 <span>2 hidden groups</span>
                 <i class="bi bi-chevron-down ms-auto" style="font-size:.65rem;"></i>
               </div>
-              <div class="hidden-groups">
-                <div class="tag-group" style="opacity:.5;">
-                  <div class="tag-group-header" style="font-size:.75rem;">
-                    <span class="group-swatch" style="background:#0e7490;"></span>
-                    Document Checklist
-                    <span class="group-meta">multi</span>
-                    <i class="bi bi-chevron-down chevron"></i>
+              <div class="hidden-panel">
+                <div class="org-group" style="opacity:.5;pointer-events:none;">
+                  <div class="org-group-hdr">
+                    <span class="org-group-swatch" style="background:#040e9a;"></span>
+                    JL Debug
+                    <span class="org-group-meta">multi</span>
                   </div>
                 </div>
-                <div class="tag-group" style="opacity:.5;">
-                  <div class="tag-group-header" style="font-size:.75rem;">
-                    <span class="group-swatch" style="background:#9f1239;"></span>
-                    Disqualifiers
-                    <span class="group-meta">multi</span>
-                    <i class="bi bi-chevron-down chevron"></i>
+                <div class="org-group" style="opacity:.5;pointer-events:none;">
+                  <div class="org-group-hdr">
+                    <span class="org-group-swatch" style="background:#7b7b7b;"></span>
+                    candidate
+                    <span class="org-group-meta">multi</span>
                   </div>
                 </div>
               </div>
@@ -468,112 +494,156 @@
 
           </div><!-- /view-organized -->
 
-          <!-- ════════════════════════════════════════
+          <!-- ══════════════════════════════════════════════
                VIEW 2: TIMELINE
-          ════════════════════════════════════════ -->
+          ══════════════════════════════════════════════ -->
           <div id="view-timeline" class="tag-view">
-            <div class="timeline-wrap">
+            <div class="tl-wrap">
 
-              <div class="timeline-month">May 2026</div>
+              <div class="tl-month">June 2026</div>
 
-              <div class="tl-entry">
-                <div class="tl-spine">
-                  <div class="tl-dot filled" style="color:#1d4ed8;background:#1d4ed8;"></div>
-                  <div class="tl-line"></div>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-date-label">May 15 · Jason L.</div>
-                  <div><span class="tl-tag" style="background:#1d4ed8;">Physical Agility Test</span></div>
-                  <div class="tl-group-label">Hiring Stage &nbsp;·&nbsp; single-select</div>
-                </div>
-              </div>
-
-              <div class="timeline-month">April 2026</div>
-
-              <div class="tl-entry">
-                <div class="tl-spine">
-                  <div class="tl-dot filled" style="color:#166534;background:#166534;"></div>
-                  <div class="tl-line"></div>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-date-label">Apr 1 · Jason L.</div>
-                  <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.2rem;">
-                    <span class="tl-tag" style="background:#166534;">Military Veteran</span>
-                    <span class="tl-tag" style="background:#166534;">Bilingual</span>
-                  </div>
-                  <div class="tl-group-label">Special Qualifications &nbsp;·&nbsp; multi-select</div>
-                </div>
-              </div>
-
-              <div class="tl-entry">
-                <div class="tl-spine">
-                  <div class="tl-dot filled" style="color:#7c3aed;background:#7c3aed;"></div>
-                  <div class="tl-line"></div>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-date-label">Apr 1 · Jason L.</div>
-                  <div><span class="tl-tag" style="background:#7c3aed;">Police Officer</span></div>
-                  <div class="tl-group-label">Position Applied &nbsp;·&nbsp; single-select</div>
-                </div>
-              </div>
-
-              <div class="tl-entry">
-                <div class="tl-spine">
-                  <div class="tl-dot filled" style="color:#0369a1;background:#0369a1;"></div>
-                  <div class="tl-line"></div>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-date-label">Apr 1 · Jason L.</div>
-                  <div><span class="tl-tag" style="background:#0369a1;">Career Fair</span></div>
-                  <div class="tl-group-label">Recruiting Source &nbsp;·&nbsp; single-select</div>
-                </div>
-              </div>
-
-              <div class="tl-entry">
-                <div class="tl-spine">
-                  <div class="tl-dot filled" style="color:#1d4ed8;background:#1d4ed8;"></div>
-                  <div class="tl-line"></div>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-date-label">Apr 1 · Auto-logged</div>
-                  <div><span class="tl-tag" style="background:#1d4ed8;">Applied</span></div>
-                  <div class="tl-group-label">Hiring Stage &nbsp;·&nbsp; single-select</div>
-                </div>
-              </div>
-
-              <div class="tl-entry">
-                <div class="tl-spine">
-                  <div class="tl-dot filled" style="color:#b45309;background:#b45309;"></div>
-                </div>
-                <div class="tl-content">
-                  <div class="tl-date-label">Apr 1 · Auto-logged</div>
-                  <div><span class="tl-tag" style="background:#b45309;">Active</span></div>
-                  <div class="tl-group-label">Status &nbsp;·&nbsp; single-select</div>
-                </div>
-              </div>
-
-              <!-- Upcoming -->
-              <div class="tl-upcoming">
-                <div class="tl-upcoming-label">Not yet applied</div>
-                <div class="tl-entry future">
-                  <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
-                  <div class="tl-content">
-                    <div><span class="tl-tag">Oral Board</span></div>
-                    <div class="tl-group-label">Hiring Stage</div>
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#272fa0;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Jun 3 · Jason L.</div>
+                  <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Applied</span></div>
                   </div>
                 </div>
-                <div class="tl-entry future">
-                  <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
-                  <div class="tl-content">
-                    <div><span class="tl-tag">Background</span></div>
-                    <div class="tl-group-label">Hiring Stage</div>
+              </div>
+
+              <div class="tl-row tl-event-removed">
+                <div class="tl-spine"><div class="tl-dot removed"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta" style="color:#dc2626;">Jun 3 · Jason L. — removed</div>
+                  <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.08);opacity:.6;">
+                    <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Withdrew</span></div>
                   </div>
                 </div>
-                <div class="tl-entry future">
-                  <div class="tl-spine"><div class="tl-dot"></div></div>
-                  <div class="tl-content">
-                    <div><span class="tl-tag">Conditional Offer</span></div>
-                    <div class="tl-group-label">Hiring Stage</div>
+              </div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#e702f7;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Jun 3 · Jason L.</div>
+                  <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>75</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row tl-event-removed">
+                <div class="tl-spine"><div class="tl-dot removed"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta" style="color:#dc2626;">Jun 3 · Jason L. — removed</div>
+                  <div class="tag-pill" style="border:1px solid rgb(231,2,247);background:rgba(231,2,247,0.08);opacity:.6;">
+                    <div class="pill-inner"><span class="pill-group">Academy</span><span class="pill-name"><i class="bi bi-star-fill pill-star"></i>105</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-month">May 2026</div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#7b7b7b;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">May 22 · Auto-logged</div>
+                  <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                    <div class="pill-inner"><span class="pill-group">In-Person</span><span class="pill-name">Interview Event</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-month">April 2026</div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#81cf20;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Apr 28 · Jason L.</div>
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">Medium</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row tl-event-removed">
+                <div class="tl-spine"><div class="tl-dot removed"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta" style="color:#dc2626;">Apr 28 · Jason L. — removed</div>
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.08);opacity:.6;">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">Low</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row tl-event-removed">
+                <div class="tl-spine"><div class="tl-dot removed"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta" style="color:#dc2626;">Apr 6 · Jason L. — removed</div>
+                  <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.08);opacity:.6;">
+                    <div class="pill-inner"><span class="pill-group">Status</span><span class="pill-name">New</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-month">February 2026</div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#7b7b7b;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Feb 17 · Auto-logged</div>
+                  <div style="display:flex;flex-wrap:wrap;">
+                    <div class="tag-pill" style="border:1px solid rgb(39,47,160);background:rgba(39,47,160,0.12);">
+                      <div class="pill-inner"><span class="pill-group">Police Officer</span><span class="pill-name">Written Failed</span></div>
+                    </div>
+                    <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                      <div class="pill-inner"><span class="pill-group">Status</span><span class="pill-name">Pre-Screen Fail</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#81cf20;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Feb 27 · Jason L.</div>
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">Low</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row tl-event-removed">
+                <div class="tl-spine"><div class="tl-dot removed"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta" style="color:#dc2626;">Feb 27 · Jason L. — removed</div>
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.08);opacity:.6;">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">High</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#81cf20;"></div><div class="tl-line"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Feb 26 · Jason L.</div>
+                  <div class="tag-pill" style="border:1px solid rgb(129,207,32);background:rgba(129,207,32,0.12);">
+                    <div class="pill-inner"><span class="pill-group">Priority</span><span class="pill-name">High</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row">
+                <div class="tl-spine"><div class="tl-dot applied" style="background:#7b7b7b;"></div></div>
+                <div class="tl-body">
+                  <div class="tl-meta">Feb 1 · Auto-logged</div>
+                  <div style="display:flex;flex-wrap:wrap;">
+                    <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                      <div class="pill-inner"><span class="pill-group">Position</span><span class="pill-name">Entry Level</span></div>
+                    </div>
+                    <div class="tag-pill" style="border:1px solid rgb(123,123,123);background:rgba(123,123,123,0.12);">
+                      <div class="pill-inner"><span class="pill-group">Status</span><span class="pill-name">New</span></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -581,139 +651,105 @@
             </div>
           </div><!-- /view-timeline -->
 
-          <!-- ════════════════════════════════════════
+          <!-- ══════════════════════════════════════════════
                VIEW 3: FORM / CRM
-          ════════════════════════════════════════ -->
+          ══════════════════════════════════════════════ -->
           <div id="view-form" class="tag-view">
-            <div class="form-view-wrap">
+            <div>
 
-              <!-- Hiring Stage -->
+              <!-- Academy -->
               <div class="form-group-row">
-                <div class="form-group-label">
-                  <span class="fg-swatch" style="background:#1d4ed8;"></span>
-                  Hiring Stage
-                  <span class="fg-type">single</span>
+                <div class="fg-label"><span class="fg-swatch" style="background:#e702f7;"></span>Academy<span class="fg-type">multi</span></div>
+                <div class="form-opts">
+                  <span class="form-opt applied" style="background:#e702f7;border-color:#e702f7;"><i class="bi bi-check-square-fill opt-check"></i><i class="bi bi-star-fill" style="color:#fde68a;font-size:.68rem;"></i>75</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i><i class="bi bi-star-fill" style="color:#ff9000;font-size:.68rem;"></i>105</span>
                 </div>
-                <div class="form-radio-group">
-                  <span class="form-radio-opt selected" style="background:#1d4ed8;border-color:#1d4ed8;"><span class="opt-dot"></span>Applied</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Written Exam</span>
-                  <span class="form-radio-opt selected" style="background:#1d4ed8;border-color:#1d4ed8;"><span class="opt-dot"></span>Physical Agility</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Oral Board</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Background</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Conditional Offer</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Academy</span>
-                </div>
-                <div class="form-date-row">
-                  <div class="form-date-item">
-                    <span class="fd-tag" style="color:#1d4ed8;">Applied</span>
-                    <span>Apr 1, 2026</span>
-                    <i class="bi bi-pencil"></i>
-                  </div>
-                  <div class="form-date-item">
-                    <span class="fd-tag" style="color:#1d4ed8;">Physical Agility</span>
-                    <span>May 15, 2026</span>
-                    <i class="bi bi-pencil"></i>
-                  </div>
+                <div class="fg-dates">
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#e702f7;">75</span><span>6/3/2026</span><i class="bi bi-pencil"></i></div>
                 </div>
               </div>
 
-              <!-- Position Applied -->
+              <!-- Police Officer -->
               <div class="form-group-row">
-                <div class="form-group-label">
-                  <span class="fg-swatch" style="background:#7c3aed;"></span>
-                  Position Applied
-                  <span class="fg-type">single</span>
+                <div class="fg-label"><span class="fg-swatch" style="background:#272fa0;"></span>Police Officer<span class="fg-type">multi</span></div>
+                <div class="form-opts">
+                  <span class="form-opt applied" style="background:#272fa0;border-color:#272fa0;"><i class="bi bi-check-square-fill opt-check"></i>Applied</span>
+                  <span class="form-opt applied" style="background:#272fa0;border-color:#272fa0;"><i class="bi bi-check-square-fill opt-check"></i>Withdrew</span>
+                  <span class="form-opt applied" style="background:#272fa0;border-color:#272fa0;"><i class="bi bi-check-square-fill opt-check"></i>Written Failed</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i>PAT Passed</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i>Written Passed</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i>Poly Passed</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i>Psych Passed</span>
                 </div>
-                <div class="form-radio-group">
-                  <span class="form-radio-opt selected" style="background:#7c3aed;border-color:#7c3aed;"><span class="opt-dot"></span>Police Officer</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Sergeant</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Detective</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Dispatcher</span>
-                </div>
-                <div class="form-date-row">
-                  <div class="form-date-item">
-                    <span class="fd-tag" style="color:#7c3aed;">Police Officer</span>
-                    <span>Apr 1, 2026</span>
-                    <i class="bi bi-pencil"></i>
-                  </div>
+                <div class="fg-dates">
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#272fa0;">Applied</span><span>6/3/2026</span><i class="bi bi-pencil"></i></div>
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#272fa0;">Withdrew</span><span>6/3/2026</span><i class="bi bi-pencil"></i></div>
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#272fa0;">Written Failed</span><span>2/17/2026</span><i class="bi bi-pencil"></i></div>
                 </div>
               </div>
 
-              <!-- Recruiting Source -->
+              <!-- Priority -->
               <div class="form-group-row">
-                <div class="form-group-label">
-                  <span class="fg-swatch" style="background:#0369a1;"></span>
-                  Recruiting Source
-                  <span class="fg-type">single</span>
+                <div class="fg-label"><span class="fg-swatch" style="background:#81cf20;"></span>Priority<span class="fg-type">single</span></div>
+                <div class="form-opts">
+                  <span class="form-opt"><div class="opt-indicator"></div>High</span>
+                  <span class="form-opt applied" style="background:#81cf20;border-color:#81cf20;"><div class="opt-indicator"></div>Medium</span>
+                  <span class="form-opt"><div class="opt-indicator"></div>Low</span>
                 </div>
-                <div class="form-radio-group">
-                  <span class="form-radio-opt selected" style="background:#0369a1;border-color:#0369a1;"><span class="opt-dot"></span>Career Fair</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Job Board</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Social Media</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Referral</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Walk-In</span>
-                </div>
-                <div class="form-date-row">
-                  <div class="form-date-item">
-                    <span class="fd-tag" style="color:#0369a1;">Career Fair</span>
-                    <span>Apr 1, 2026</span>
-                    <i class="bi bi-pencil"></i>
-                  </div>
+                <div class="fg-dates">
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#81cf20;">Medium</span><span>4/28/2026</span><i class="bi bi-pencil"></i></div>
                 </div>
               </div>
 
-              <!-- Special Qualifications -->
+              <!-- Position -->
               <div class="form-group-row">
-                <div class="form-group-label">
-                  <span class="fg-swatch" style="background:#166534;"></span>
-                  Special Qualifications
-                  <span class="fg-type">multi</span>
+                <div class="fg-label"><span class="fg-swatch" style="background:#7b7b7b;"></span>Position<span class="fg-type">single</span></div>
+                <div class="form-opts">
+                  <span class="form-opt applied" style="background:#7b7b7b;border-color:#7b7b7b;"><div class="opt-indicator"></div>Entry Level</span>
+                  <span class="form-opt"><div class="opt-indicator"></div>Lateral</span>
+                  <span class="form-opt"><div class="opt-indicator"></div>Promotion</span>
                 </div>
-                <div class="form-radio-group">
-                  <span class="form-check-opt checked" style="background:#166634;background:#166534;border-color:#166534;"><i class="bi bi-check-square-fill"></i>Military Veteran</span>
-                  <span class="form-check-opt checked" style="background:#166534;border-color:#166534;"><i class="bi bi-check-square-fill"></i>Bilingual</span>
-                  <span class="form-check-opt"><i class="bi bi-square"></i>Prior LE</span>
-                  <span class="form-check-opt"><i class="bi bi-square"></i>College Degree</span>
-                  <span class="form-check-opt"><i class="bi bi-square"></i>Lateral Transfer</span>
-                </div>
-                <div class="form-date-row">
-                  <div class="form-date-item">
-                    <span class="fd-tag" style="color:#166534;">Military Veteran</span>
-                    <span>Apr 1, 2026</span>
-                    <i class="bi bi-pencil"></i>
-                  </div>
-                  <div class="form-date-item">
-                    <span class="fd-tag" style="color:#166534;">Bilingual</span>
-                    <span>Apr 1, 2026</span>
-                    <i class="bi bi-pencil"></i>
-                  </div>
+                <div class="fg-dates">
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#7b7b7b;">Entry Level</span><span>2/1/2026</span><i class="bi bi-pencil"></i></div>
                 </div>
               </div>
 
               <!-- Status -->
               <div class="form-group-row">
-                <div class="form-group-label">
-                  <span class="fg-swatch" style="background:#b45309;"></span>
-                  Status
-                  <span class="fg-type">single</span>
+                <div class="fg-label"><span class="fg-swatch" style="background:#7b7b7b;"></span>Status<span class="fg-type">single</span></div>
+                <div class="form-opts">
+                  <span class="form-opt"><div class="opt-indicator"></div>New</span>
+                  <span class="form-opt applied" style="background:#7b7b7b;border-color:#7b7b7b;"><div class="opt-indicator"></div>Pre-Screen Fail</span>
+                  <span class="form-opt"><div class="opt-indicator"></div>Active</span>
+                  <span class="form-opt"><div class="opt-indicator"></div>Hired</span>
                 </div>
-                <div class="form-radio-group">
-                  <span class="form-radio-opt selected" style="background:#b45309;border-color:#b45309;"><span class="opt-dot"></span>Active</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>On Hold</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Withdrawn</span>
-                  <span class="form-radio-opt"><span class="opt-dot"></span>Hired</span>
+                <div class="fg-dates">
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#7b7b7b;">Pre-Screen Fail</span><span>2/17/2026</span><i class="bi bi-pencil"></i></div>
                 </div>
               </div>
 
-              <!-- Hidden indicator -->
-              <div class="form-group-row" style="opacity:.5;">
-                <div class="form-group-label"><i class="bi bi-eye-slash" style="color:#94a3b8;"></i><span style="color:#94a3b8;font-size:.72rem;">2 hidden groups not shown</span></div>
+              <!-- In-Person -->
+              <div class="form-group-row">
+                <div class="fg-label"><span class="fg-swatch" style="background:#7b7b7b;"></span>In-Person<span class="fg-type">multi</span></div>
+                <div class="form-opts">
+                  <span class="form-opt applied" style="background:#7b7b7b;border-color:#7b7b7b;"><i class="bi bi-check-square-fill opt-check"></i>Interview Event</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i>Ride Along</span>
+                  <span class="form-opt"><i class="bi bi-square opt-check"></i>Physical Test</span>
+                </div>
+                <div class="fg-dates">
+                  <div class="fg-date-badge"><span class="fdb-name" style="color:#7b7b7b;">Interview Event</span><span>5/22/2026</span><i class="bi bi-pencil"></i></div>
+                </div>
+              </div>
+
+              <!-- Hidden note -->
+              <div class="form-group-row" style="opacity:.45;">
+                <div class="fg-label"><i class="bi bi-eye-slash" style="color:#94a3b8;font-size:.75rem;"></i><span style="color:#94a3b8;">2 hidden groups not shown</span></div>
               </div>
 
             </div>
           </div><!-- /view-form -->
 
-        </div><!-- /tag-pane-body -->
+        </div><!-- /pane-body -->
       </div><!-- /tag-pane -->
 
     </div><!-- /candidate-layout -->
@@ -724,35 +760,27 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
-  const viewLabels = {
-    organized: 'Organized View',
-    timeline:  'Timeline View',
-    form:      'Form View',
-  };
+  const viewLabels = { organized: 'Organized View', timeline: 'Timeline View', form: 'Form View' };
 
   function switchView(name) {
     document.querySelectorAll('.tag-view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.vbtn').forEach(b => b.classList.remove('active'));
     document.getElementById('view-' + name).classList.add('active');
     document.getElementById('btn-' + name).classList.add('active');
     document.getElementById('view-label').textContent = viewLabels[name];
   }
 
-  function toggleGroup(header) {
-    header.classList.toggle('collapsed');
-    const body = header.nextElementSibling;
-    body.classList.toggle('collapsed');
+  function toggleGroup(hdr) {
+    hdr.classList.toggle('collapsed');
+    hdr.nextElementSibling.classList.toggle('hidden');
   }
 
   function toggleHidden(toggle) {
     const panel = toggle.nextElementSibling;
     panel.classList.toggle('open');
-    const chevron = toggle.querySelector('.bi-chevron-down, .bi-chevron-up');
-    if (panel.classList.contains('open')) {
-      chevron.className = 'bi bi-chevron-up ms-auto';
-    } else {
-      chevron.className = 'bi bi-chevron-down ms-auto';
-    }
+    const icon = toggle.querySelector('.bi-chevron-down, .bi-chevron-up');
+    icon.className = panel.classList.contains('open')
+      ? 'bi bi-chevron-up ms-auto' : 'bi bi-chevron-down ms-auto';
   }
 </script>
 </body>
