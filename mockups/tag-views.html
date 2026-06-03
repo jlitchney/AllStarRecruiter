@@ -310,7 +310,7 @@
       <h1 class="h6 mb-0 text-truncate">Wilmington Police Department</h1>
     </div>
     <div class="d-flex align-items-center gap-2 flex-shrink-0">
-      <span id="view-label" style="font-size:.71rem;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:.18rem .6rem;border-radius:99px;font-weight:600;">Organized View</span>
+      <span id="view-label" style="font-size:.71rem;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:.18rem .6rem;border-radius:99px;font-weight:600;">Form View</span>
       <button class="btn btn-sm" style="color:#fff;"><i class="bi bi-bell"></i></button>
       <div class="avatar avatar-sm">JL</div>
     </div>
@@ -579,13 +579,13 @@
             <div class="pane-header">
               <span class="pane-title"><i class="bi bi-tags me-1" style="font-size:.75rem;"></i>Tags</span>
               <div class="view-toggle">
-                <button class="vbtn" id="btn-form" onclick="switchView('form')" title="Form — field per group">
+                <button class="vbtn active" id="btn-form" onclick="switchView('form')" title="Form — field per group">
                   <i class="bi bi-card-list"></i>
                 </button>
                 <button class="vbtn" id="btn-timeline" onclick="switchView('timeline')" title="Timeline — chronological history">
                   <i class="bi bi-clock-history"></i>
                 </button>
-                <button class="vbtn active" id="btn-organized" onclick="switchView('organized')" title="Organized — groups &amp; pills">
+                <button class="vbtn" id="btn-organized" onclick="switchView('organized')" title="Organized — groups &amp; pills">
                   <i class="bi bi-tags"></i>
                 </button>
               </div>
@@ -616,7 +616,7 @@
               <!-- ══════════════════════════════════════════════
                    VIEW 1: ORGANIZED
               ══════════════════════════════════════════════ -->
-              <div id="view-organized" class="tag-view active">
+              <div id="view-organized" class="tag-view">
 
                 <!-- Favorites -->
                 <div class="fav-strip">
@@ -921,7 +921,7 @@
               <!-- ══════════════════════════════════════════════
                    VIEW 3: FORM / CRM
               ══════════════════════════════════════════════ -->
-              <div id="view-form" class="tag-view">
+              <div id="view-form" class="tag-view active">
 
                 <!-- Favorites -->
                 <div class="fg-group">
