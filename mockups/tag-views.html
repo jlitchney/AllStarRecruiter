@@ -139,32 +139,54 @@
     /* ════════════════════════════════════════════════════════════
        VIEW 3: FORM / CRM
     ════════════════════════════════════════════════════════════ */
-    .form-group-row { padding: .65rem .85rem; border-bottom: 1px solid #f1f5f9; }
+    .form-group-row { padding: .6rem .85rem; border-bottom: 1px solid #f1f5f9; }
     .form-group-row:last-child { border-bottom: none; }
-    .fg-label { display: flex; align-items: center; gap: .35rem; font-size: .72rem; font-weight: 700; color: #374151; margin-bottom: .45rem; }
+    .fg-label { display: flex; align-items: center; gap: .35rem; font-size: .72rem; font-weight: 700; color: #374151; margin-bottom: .4rem; }
     .fg-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .fg-type { font-size: .6rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-left: auto; }
-    .form-opts { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .35rem; }
-    .form-opt {
-      display: inline-flex; align-items: center; gap: .28rem;
-      font-size: .77rem; padding: .25rem .6rem; border-radius: 6px;
-      border: 1.5px solid #e2e8f0; background: #fff; cursor: pointer;
-      transition: all .12s; color: #374151; user-select: none;
+
+    /* Tag rows */
+    .fg-tag-row {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .3rem .45rem; border-radius: .35rem;
+      border: 1px solid #eef2f7; background: #fdfdfe;
+      margin-bottom: .28rem;
+      transition: background .1s;
     }
-    .form-opt:hover { border-color: #c7d2fe; background: #f0f4ff; }
-    .form-opt.applied { border-color: transparent; color: #fff; }
-    .form-opt .opt-indicator { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; }
-    .form-opt.applied .opt-indicator { background: rgba(255,255,255,.5); border-color: rgba(255,255,255,.5); }
-    .form-opt .opt-check { font-size: .68rem; }
-    .fg-dates { display: flex; flex-wrap: wrap; gap: .3rem; }
-    .fg-date-badge {
-      display: inline-flex; align-items: center; gap: .3rem;
-      font-size: .7rem; background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 4px; padding: .18rem .5rem; color: #64748b;
+    .fg-tag-row:hover { background: #f8fafc; border-color: #e2e8f0; }
+    .fg-tag-name {
+      flex: 1; font-size: .8rem; font-weight: 600; color: #1e293b;
+      display: flex; align-items: center; gap: .25rem;
     }
-    .fg-date-badge .fdb-name { font-weight: 600; }
-    .fg-date-badge i { font-size: .63rem; cursor: pointer; color: #94a3b8; }
-    .fg-date-badge i:hover { color: var(--leftnav-bg); }
+    .fg-tag-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .fg-date-field {
+      display: flex; align-items: center; gap: .25rem;
+      background: #fff; border: 1px solid #e2e8f0; border-radius: .3rem;
+      padding: .18rem .42rem; font-size: .74rem; color: #475569;
+      flex-shrink: 0;
+    }
+    .fg-date-field i { font-size: .65rem; color: #94a3b8; }
+    .fg-date-field input[type="date"] {
+      border: none; background: transparent; font-size: .74rem;
+      color: #475569; padding: 0; cursor: pointer; outline: none;
+      width: 90px;
+    }
+    .fg-date-field input[type="date"]:focus { color: var(--leftnav-bg); }
+    .fg-remove-btn {
+      background: none; border: none; padding: .18rem .28rem;
+      color: #cbd5e1; cursor: pointer; border-radius: .25rem;
+      font-size: .72rem; line-height: 1; flex-shrink: 0;
+      transition: all .1s;
+    }
+    .fg-remove-btn:hover { color: #dc2626; background: #fef2f2; }
+    .fg-add-link {
+      display: inline-flex; align-items: center; gap: .25rem;
+      font-size: .72rem; color: #94a3b8; cursor: pointer;
+      padding: .2rem .1rem; margin-top: .15rem;
+      border: none; background: none;
+      transition: color .1s;
+    }
+    .fg-add-link:hover { color: var(--leftnav-bg); }
 
     /* ── Candidate row action drawer ────────────────────────────── */
     .candidate-row-action-drawer { display: none; }
@@ -826,98 +848,140 @@
                    VIEW 3: FORM / CRM
               ══════════════════════════════════════════════ -->
               <div id="view-form" class="tag-view">
-                <div>
 
-                  <!-- Academy -->
-                  <div class="form-group-row">
-                    <div class="fg-label"><span class="fg-swatch" style="background:#e702f7;"></span>Academy<span class="fg-type">multi</span></div>
-                    <div class="form-opts">
-                      <span class="form-opt applied" style="background:#e702f7;border-color:#e702f7;"><i class="bi bi-check-square-fill opt-check"></i><i class="bi bi-star-fill" style="color:#fde68a;font-size:.68rem;"></i>75</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i><i class="bi bi-star-fill" style="color:#ff9000;font-size:.68rem;"></i>105</span>
-                    </div>
-                    <div class="fg-dates">
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#e702f7;">75</span><span>6/3/2026</span><i class="bi bi-pencil"></i></div>
-                    </div>
+                <!-- Academy -->
+                <div class="form-group-row">
+                  <div class="fg-label">
+                    <span class="fg-swatch" style="background:#e702f7;"></span>
+                    Academy
+                    <span class="fg-type">multi</span>
                   </div>
-
-                  <!-- Police Officer -->
-                  <div class="form-group-row">
-                    <div class="fg-label"><span class="fg-swatch" style="background:#272fa0;"></span>Police Officer<span class="fg-type">multi</span></div>
-                    <div class="form-opts">
-                      <span class="form-opt applied" style="background:#272fa0;border-color:#272fa0;"><i class="bi bi-check-square-fill opt-check"></i>Applied</span>
-                      <span class="form-opt applied" style="background:#272fa0;border-color:#272fa0;"><i class="bi bi-check-square-fill opt-check"></i>Withdrew</span>
-                      <span class="form-opt applied" style="background:#272fa0;border-color:#272fa0;"><i class="bi bi-check-square-fill opt-check"></i>Written Failed</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i>PAT Passed</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i>Written Passed</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i>Poly Passed</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i>Psych Passed</span>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name">
+                      <span class="fg-tag-dot" style="background:#e702f7;"></span>
+                      <i class="bi bi-star-fill" style="color:#ff9000;font-size:.68rem;"></i>
+                      75
                     </div>
-                    <div class="fg-dates">
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#272fa0;">Applied</span><span>6/3/2026</span><i class="bi bi-pencil"></i></div>
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#272fa0;">Withdrew</span><span>6/3/2026</span><i class="bi bi-pencil"></i></div>
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#272fa0;">Written Failed</span><span>2/17/2026</span><i class="bi bi-pencil"></i></div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-06-03">
                     </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                   </div>
-
-                  <!-- Priority -->
-                  <div class="form-group-row">
-                    <div class="fg-label"><span class="fg-swatch" style="background:#81cf20;"></span>Priority<span class="fg-type">single</span></div>
-                    <div class="form-opts">
-                      <span class="form-opt"><div class="opt-indicator"></div>High</span>
-                      <span class="form-opt applied" style="background:#81cf20;border-color:#81cf20;"><div class="opt-indicator"></div>Medium</span>
-                      <span class="form-opt"><div class="opt-indicator"></div>Low</span>
-                    </div>
-                    <div class="fg-dates">
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#81cf20;">Medium</span><span>4/28/2026</span><i class="bi bi-pencil"></i></div>
-                    </div>
-                  </div>
-
-                  <!-- Position -->
-                  <div class="form-group-row">
-                    <div class="fg-label"><span class="fg-swatch" style="background:#7b7b7b;"></span>Position<span class="fg-type">single</span></div>
-                    <div class="form-opts">
-                      <span class="form-opt applied" style="background:#7b7b7b;border-color:#7b7b7b;"><div class="opt-indicator"></div>Entry Level</span>
-                      <span class="form-opt"><div class="opt-indicator"></div>Lateral</span>
-                      <span class="form-opt"><div class="opt-indicator"></div>Promotion</span>
-                    </div>
-                    <div class="fg-dates">
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#7b7b7b;">Entry Level</span><span>2/1/2026</span><i class="bi bi-pencil"></i></div>
-                    </div>
-                  </div>
-
-                  <!-- Status -->
-                  <div class="form-group-row">
-                    <div class="fg-label"><span class="fg-swatch" style="background:#7b7b7b;"></span>Status<span class="fg-type">single</span></div>
-                    <div class="form-opts">
-                      <span class="form-opt"><div class="opt-indicator"></div>New</span>
-                      <span class="form-opt applied" style="background:#7b7b7b;border-color:#7b7b7b;"><div class="opt-indicator"></div>Pre-Screen Fail</span>
-                      <span class="form-opt"><div class="opt-indicator"></div>Active</span>
-                      <span class="form-opt"><div class="opt-indicator"></div>Hired</span>
-                    </div>
-                    <div class="fg-dates">
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#7b7b7b;">Pre-Screen Fail</span><span>2/17/2026</span><i class="bi bi-pencil"></i></div>
-                    </div>
-                  </div>
-
-                  <!-- In-Person -->
-                  <div class="form-group-row">
-                    <div class="fg-label"><span class="fg-swatch" style="background:#7b7b7b;"></span>In-Person<span class="fg-type">multi</span></div>
-                    <div class="form-opts">
-                      <span class="form-opt applied" style="background:#7b7b7b;border-color:#7b7b7b;"><i class="bi bi-check-square-fill opt-check"></i>Interview Event</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i>Ride Along</span>
-                      <span class="form-opt"><i class="bi bi-square opt-check"></i>Physical Test</span>
-                    </div>
-                    <div class="fg-dates">
-                      <div class="fg-date-badge"><span class="fdb-name" style="color:#7b7b7b;">Interview Event</span><span>5/22/2026</span><i class="bi bi-pencil"></i></div>
-                    </div>
-                  </div>
-
-                  <!-- Hidden note -->
-                  <div class="form-group-row" style="opacity:.45;">
-                    <div class="fg-label"><i class="bi bi-eye-slash" style="color:#94a3b8;font-size:.75rem;"></i><span style="color:#94a3b8;">2 hidden groups not shown</span></div>
-                  </div>
-
+                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
+
+                <!-- Police Officer -->
+                <div class="form-group-row">
+                  <div class="fg-label">
+                    <span class="fg-swatch" style="background:#272fa0;"></span>
+                    Police Officer
+                    <span class="fg-type">multi</span>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#272fa0;"></span>Applied</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-06-03">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#272fa0;"></span>Withdrew</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-06-03">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#272fa0;"></span>Written Failed</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-02-17">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                </div>
+
+                <!-- Priority -->
+                <div class="form-group-row">
+                  <div class="fg-label">
+                    <span class="fg-swatch" style="background:#81cf20;"></span>
+                    Priority
+                    <span class="fg-type">single</span>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#81cf20;"></span>Medium</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-04-28">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                </div>
+
+                <!-- Position -->
+                <div class="form-group-row">
+                  <div class="fg-label">
+                    <span class="fg-swatch" style="background:#7b7b7b;"></span>
+                    Position
+                    <span class="fg-type">single</span>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>Entry Level</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-02-01">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                </div>
+
+                <!-- Status -->
+                <div class="form-group-row">
+                  <div class="fg-label">
+                    <span class="fg-swatch" style="background:#7b7b7b;"></span>
+                    Status
+                    <span class="fg-type">single</span>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>Pre-Screen Fail</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-02-17">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                </div>
+
+                <!-- In-Person -->
+                <div class="form-group-row">
+                  <div class="fg-label">
+                    <span class="fg-swatch" style="background:#7b7b7b;"></span>
+                    In-Person
+                    <span class="fg-type">multi</span>
+                  </div>
+                  <div class="fg-tag-row">
+                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>Interview Event</div>
+                    <div class="fg-date-field">
+                      <i class="bi bi-calendar3"></i>
+                      <input type="date" value="2026-05-22">
+                    </div>
+                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                  </div>
+                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
+                </div>
+
+                <!-- Hidden groups note -->
+                <div class="form-group-row" style="opacity:.45;">
+                  <div class="fg-label"><i class="bi bi-eye-slash" style="color:#94a3b8;font-size:.75rem;"></i><span style="color:#94a3b8;">2 hidden groups not shown</span></div>
+                </div>
+
               </div><!-- /view-form -->
 
             </div><!-- /pane-body -->
