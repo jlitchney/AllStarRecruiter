@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tag Views — AllStar Recruiter</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/mockup.css">
+
+  <style>
+    /* ── Layout ──────────────────────────────────────────────────── */
+    .candidate-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      height: calc(100vh - var(--topbar-height) - 40px);
+      overflow: hidden;
+    }
+    .candidate-main   { overflow-y: auto; padding: 1.5rem 2rem; }
+    .tag-pane         { border-left: 1px solid #e2e8f0; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+
+    /* ── Candidate card ─────────────────────────────────────────── */
+    .cand-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--leftnav-bg); color: #fff;
+      font-size: 1.3rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .info-row { display: flex; gap: .5rem; align-items: center; font-size: .82rem; color: #64748b; margin-top: .25rem; }
+    .info-row i { font-size: .75rem; }
+    .stage-pill {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .72rem; font-weight: 700; padding: .25rem .7rem;
+      border-radius: 99px; background: #dbeafe; color: #1d4ed8;
+    }
+    .detail-section { background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem; padding: 1.25rem; margin-top: 1rem; }
+    .detail-section h6 { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #94a3b8; margin-bottom: .75rem; }
+    .notes-text { font-size: .88rem; color: #374151; line-height: 1.65; }
+
+    /* ── Tag Pane header ────────────────────────────────────────── */
+    .tag-pane-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .75rem 1rem; border-bottom: 1px solid #e2e8f0;
+      flex-shrink: 0; background: #f8fafc;
+    }
+    .tag-pane-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #374151; }
+    .view-toggle { display: flex; gap: 2px; background: #e2e8f0; border-radius: 6px; padding: 2px; }
+    .view-btn {
+      width: 28px; height: 28px; border-radius: 4px; border: none; background: transparent;
+      color: #64748b; display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; cursor: pointer; transition: all .15s;
+    }
+    .view-btn.active { background: #fff; color: var(--leftnav-bg); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+    .view-btn:hover:not(.active) { color: #374151; }
+
+    /* ── Tag Pane scroll body ───────────────────────────────────── */
+    .tag-pane-body { flex: 1; overflow-y: auto; padding: 0; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VIEW 1: ORGANIZED
+    ═══════════════════════════════════════════════════════════════ */
+    .tag-view { display: none; }
+    .tag-view.active { display: block; }
+
+    /* Favorites strip */
+    .fav-strip {
+      padding: .65rem 1rem; background: #fffbf0;
+      border-bottom: 1px solid #fde68a;
+    }
+    .fav-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #92400e; margin-bottom: .4rem; display: flex; align-items: center; gap: .35rem; }
+    .fav-label i { color: #f59e0b; }
+    .fav-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+    /* Group sections */
+    .tag-group { border-bottom: 1px solid #f1f5f9; }
+    .tag-group-header {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .6rem 1rem; cursor: pointer;
+      font-size: .78rem; font-weight: 700; color: #374151;
+      user-select: none; transition: background .12s;
+    }
+    .tag-group-header:hover { background: #f8fafc; }
+    .tag-group-header .group-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .tag-group-header .group-meta { font-size: .65rem; font-weight: 600; color: #94a3b8; margin-left: auto; text-transform: uppercase; letter-spacing: .04em; }
+    .tag-group-header .chevron { color: #94a3b8; font-size: .7rem; transition: transform .15s; }
+    .tag-group-header.collapsed .chevron { transform: rotate(-90deg); }
+    .tag-group-body { padding: .5rem 1rem .75rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag-group-body.collapsed { display: none; }
+
+    /* Tag pills — organized view */
+    .tag-pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .75rem; font-weight: 600; padding: .25rem .65rem;
+      border-radius: 99px; cursor: pointer; transition: all .15s;
+      border: 1.5px solid transparent; user-select: none;
+      white-space: nowrap;
+    }
+    .tag-pill.applied {
+      color: #fff;
+    }
+    .tag-pill.unapplied {
+      background: #f1f5f9; color: #64748b; border-color: #e2e8f0;
+    }
+    .tag-pill.unapplied:hover { background: #e2e8f0; color: #374151; }
+    .tag-pill .pill-date { font-size: .62rem; font-weight: 600; opacity: .8; }
+    .tag-pill .pill-fav { font-size: .62rem; color: #fbbf24; }
+    .tag-pill .pill-check { font-size: .65rem; }
+
+    /* Hidden groups */
+    .hidden-section {
+      padding: .5rem 1rem; border-top: 1px solid #f1f5f9;
+    }
+    .hidden-toggle {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .72rem; color: #94a3b8; cursor: pointer;
+      user-select: none; padding: .35rem 0;
+    }
+    .hidden-toggle:hover { color: #64748b; }
+    .hidden-groups { display: none; margin-top: .5rem; }
+    .hidden-groups.open { display: block; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VIEW 2: TIMELINE
+    ═══════════════════════════════════════════════════════════════ */
+    .timeline-wrap { padding: 1rem; }
+    .timeline-month { font-size: .67rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #94a3b8; margin-bottom: .6rem; margin-top: 1rem; padding-left: 1.25rem; }
+    .timeline-month:first-child { margin-top: 0; }
+    .tl-entry {
+      display: flex; gap: .75rem; align-items: flex-start;
+      padding: .3rem 0;
+    }
+    .tl-spine {
+      display: flex; flex-direction: column; align-items: center;
+      width: 20px; flex-shrink: 0; padding-top: .35rem;
+    }
+    .tl-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid currentColor;
+    }
+    .tl-dot.filled { }
+    .tl-line { width: 2px; flex: 1; min-height: 12px; background: #e2e8f0; margin-top: 2px; }
+    .tl-content { flex: 1; padding-bottom: .6rem; }
+    .tl-date-label { font-size: .67rem; font-weight: 600; color: #94a3b8; margin-bottom: .25rem; }
+    .tl-tag { display: inline-flex; align-items: center; gap: .3rem; font-size: .78rem; font-weight: 700; padding: .22rem .65rem; border-radius: 99px; color: #fff; margin-bottom: .2rem; }
+    .tl-group-label { font-size: .67rem; color: #94a3b8; margin-top: .1rem; }
+
+    .tl-upcoming { padding-top: .5rem; border-top: 1px dashed #e2e8f0; margin-top: .75rem; }
+    .tl-upcoming-label { font-size: .67rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #cbd5e1; margin-bottom: .6rem; padding-left: 1.25rem; }
+    .tl-entry.future .tl-dot { background: #fff; border-color: #cbd5e1; }
+    .tl-entry.future .tl-content { opacity: .45; }
+    .tl-entry.future .tl-tag { background: #f1f5f9 !important; color: #94a3b8 !important; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VIEW 3: FORM / CRM
+    ═══════════════════════════════════════════════════════════════ */
+    .form-view-wrap { padding: .5rem 0; }
+    .form-group-row {
+      padding: .75rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .form-group-row:last-child { border-bottom: none; }
+    .form-group-label {
+      font-size: .72rem; font-weight: 700; color: #374151;
+      display: flex; align-items: center; gap: .4rem;
+      margin-bottom: .5rem;
+    }
+    .form-group-label .fg-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .form-group-label .fg-type { font-size: .6rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-left: auto; }
+    .form-radio-group { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .form-radio-opt {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .78rem; padding: .28rem .7rem;
+      border-radius: 6px; border: 1.5px solid #e2e8f0;
+      background: #fff; cursor: pointer; transition: all .13s;
+      color: #374151; user-select: none;
+    }
+    .form-radio-opt:hover { border-color: #c7d2fe; background: #f0f4ff; }
+    .form-radio-opt.selected { border-color: transparent; color: #fff; }
+    .form-radio-opt .opt-dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; }
+    .form-radio-opt.selected .opt-dot { background: rgba(255,255,255,.6); border-color: transparent; }
+    .form-check-opt {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .78rem; padding: .28rem .7rem;
+      border-radius: 6px; border: 1.5px solid #e2e8f0;
+      background: #fff; cursor: pointer; transition: all .13s;
+      color: #374151; user-select: none;
+    }
+    .form-check-opt:hover { border-color: #c7d2fe; background: #f0f4ff; }
+    .form-check-opt.checked { border-color: transparent; color: #fff; }
+    .form-check-opt i { font-size: .72rem; }
+    .form-date-row { display: flex; align-items: center; gap: .5rem; margin-top: .5rem; flex-wrap: wrap; }
+    .form-date-item {
+      display: flex; align-items: center; gap: .35rem;
+      font-size: .72rem; color: #64748b;
+      background: #f8fafc; border: 1px solid #e2e8f0;
+      border-radius: 5px; padding: .2rem .55rem;
+    }
+    .form-date-item .fd-tag { font-weight: 600; }
+    .form-date-item i { font-size: .65rem; color: #94a3b8; cursor: pointer; }
+    .form-date-item i:hover { color: var(--leftnav-bg); }
+
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ── Sidebar ───────────────────────────────────────────────────── -->
+  <aside class="sidebar d-none d-md-flex flex-column">
+    <div class="brand">
+      <a class="logo-wrap" href="../index.html" aria-label="Home">
+        <span style="color:#fff;font-weight:800;font-size:1.1rem;letter-spacing:.02em;">AllStar Recruiter</span>
+      </a>
+    </div>
+    <nav class="mt-2">
+      <a href="#" class="nav-link active"><i class="bi bi-people"></i><span class="nav-label">Candidates</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-building"></i><span class="nav-label">Employers</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-briefcase"></i><span class="nav-label">Jobs</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-calendar3"></i><span class="nav-label">Calendar</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-broadcast"></i><span class="nav-label">Message Center</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-bar-chart-line"></i><span class="nav-label">Reports</span></a>
+      <a href="#" class="nav-link"><i class="bi bi-gear"></i><span class="nav-label">Settings</span></a>
+    </nav>
+    <div class="mt-auto p-3">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar avatar-sm">JL</div>
+        <span class="nav-label text-white-50 small">Jason L.</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ─────────────────────────────────────────────────────── -->
+  <header class="topbar d-flex align-items-center gap-2 flex-nowrap">
+    <button class="btn btn-sm d-md-none" style="color:#fff;"><i class="bi bi-list fs-5"></i></button>
+    <div class="topbar-title d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+      <a href="#" style="color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;">Candidates</a>
+      <i class="bi bi-chevron-right" style="color:rgba(255,255,255,.35);font-size:.65rem;"></i>
+      <h1 class="h6 mb-0 text-truncate">Marcus Thompson</h1>
+    </div>
+    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+      <!-- View label badge -->
+      <span id="view-label" style="font-size:.72rem;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:.2rem .65rem;border-radius:99px;font-weight:600;">Organized View</span>
+      <button class="btn btn-sm" style="color:#fff;"><i class="bi bi-bell"></i></button>
+      <div class="avatar avatar-sm">JL</div>
+    </div>
+  </header>
+
+  <!-- ── Quick bar ──────────────────────────────────────────────────── -->
+  <div class="quick-bar d-flex align-items-center gap-2 flex-wrap">
+    <button class="btn btn-sm btn-outline-light" style="font-size:.78rem;">
+      <i class="bi bi-arrow-left me-1"></i>Back to list
+    </button>
+    <div class="ms-auto d-flex gap-2">
+      <button class="btn btn-sm btn-outline-light" style="font-size:.78rem;"><i class="bi bi-envelope me-1"></i>Send Email</button>
+      <button class="btn btn-sm" style="background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;border:none;"><i class="bi bi-plus me-1"></i>Add Note</button>
+    </div>
+  </div>
+
+  <!-- ── Main content ───────────────────────────────────────────────── -->
+  <main class="content p-0">
+    <div class="candidate-layout">
+
+      <!-- Left: candidate main panel -->
+      <div class="candidate-main">
+
+        <!-- Header card -->
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:1.25rem;">
+          <div class="cand-avatar">MT</div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap;">
+              <h2 style="font-size:1.2rem;font-weight:800;color:#0f172a;margin:0;">Marcus Thompson</h2>
+              <span class="stage-pill"><i class="bi bi-arrow-right-circle-fill"></i>Physical Agility Test</span>
+            </div>
+            <div class="info-row"><i class="bi bi-envelope"></i>m.thompson@gmail.com</div>
+            <div class="info-row"><i class="bi bi-telephone"></i>(512) 555-0183 &nbsp;·&nbsp; <i class="bi bi-geo-alt"></i>Austin, TX &nbsp;·&nbsp; <i class="bi bi-calendar3"></i>Applied Apr 1, 2026</div>
+            <div class="info-row" style="margin-top:.5rem;">
+              <span style="font-size:.72rem;background:#dcfce7;color:#166534;padding:.15rem .55rem;border-radius:99px;font-weight:700;">Military Veteran</span>
+              <span style="font-size:.72rem;background:#e0f2fe;color:#0369a1;padding:.15rem .55rem;border-radius:99px;font-weight:700;">Bilingual</span>
+              <span style="font-size:.72rem;background:#f3e8ff;color:#7c3aed;padding:.15rem .55rem;border-radius:99px;font-weight:700;">Police Officer</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.4rem;align-items:flex-end;flex-shrink:0;">
+            <button class="btn btn-sm btn-outline-secondary" style="font-size:.75rem;"><i class="bi bi-pencil me-1"></i>Edit</button>
+            <button class="btn btn-sm btn-outline-secondary" style="font-size:.75rem;"><i class="bi bi-three-dots"></i></button>
+          </div>
+        </div>
+
+        <!-- Activity timeline stub -->
+        <div class="detail-section">
+          <h6>Recent Activity</h6>
+          <div style="display:flex;flex-direction:column;gap:.85rem;">
+            <div style="display:flex;gap:.75rem;">
+              <div style="width:28px;height:28px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;"><i class="bi bi-tags"></i></div>
+              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Tag updated — Physical Agility Test</div><div style="font-size:.72rem;color:#94a3b8;">May 15, 2026 · Jason L.</div></div>
+            </div>
+            <div style="display:flex;gap:.75rem;">
+              <div style="width:28px;height:28px;border-radius:50%;background:#dcfce7;color:#166534;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;"><i class="bi bi-check-circle"></i></div>
+              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Written Exam — passed</div><div style="font-size:.72rem;color:#94a3b8;">Apr 22, 2026 · Auto-logged</div></div>
+            </div>
+            <div style="display:flex;gap:.75rem;">
+              <div style="width:28px;height:28px;border-radius:50%;background:#f3e8ff;color:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;"><i class="bi bi-envelope"></i></div>
+              <div><div style="font-size:.82rem;font-weight:600;color:#374151;">Email sent — PAT reminder</div><div style="font-size:.72rem;color:#94a3b8;">Apr 18, 2026 · Sarah K.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes stub -->
+        <div class="detail-section">
+          <h6>Notes</h6>
+          <p class="notes-text">Strong candidate — prior USMC, 4 years service. Bilingual English/Spanish. Scored 94 on written. PAT scheduled May 15. Follow up after results.</p>
+        </div>
+
+      </div><!-- /candidate-main -->
+
+      <!-- Right: tag pane -->
+      <div class="tag-pane">
+
+        <!-- Pane header -->
+        <div class="tag-pane-header">
+          <div class="tag-pane-title"><i class="bi bi-tags me-1" style="font-size:.8rem;"></i>Tags</div>
+          <div class="view-toggle">
+            <button class="view-btn active" id="btn-organized" onclick="switchView('organized')" title="Organized view">
+              <i class="bi bi-tags"></i>
+            </button>
+            <button class="view-btn" id="btn-timeline" onclick="switchView('timeline')" title="Timeline view">
+              <i class="bi bi-clock-history"></i>
+            </button>
+            <button class="view-btn" id="btn-form" onclick="switchView('form')" title="Form view">
+              <i class="bi bi-card-list"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="tag-pane-body">
+
+          <!-- ════════════════════════════════════════
+               VIEW 1: ORGANIZED
+          ════════════════════════════════════════ -->
+          <div id="view-organized" class="tag-view active">
+
+            <!-- Favorites -->
+            <div class="fav-strip">
+              <div class="fav-label"><i class="bi bi-star-fill"></i>Favorites</div>
+              <div class="fav-tags">
+                <span class="tag-pill applied pill-fav-item" style="background:#1d4ed8;" title="Hiring Stage — Physical Agility Test">
+                  <i class="bi bi-star-fill pill-fav" style="font-size:.6rem;color:#fde68a;"></i>Physical Agility Test
+                  <span class="pill-date">May 15</span>
+                </span>
+                <span class="tag-pill applied pill-fav-item" style="background:#7c3aed;" title="Position Applied — Police Officer">
+                  <i class="bi bi-star-fill pill-fav" style="font-size:.6rem;color:#fde68a;"></i>Police Officer
+                </span>
+              </div>
+            </div>
+
+            <!-- Group: Hiring Stage -->
+            <div class="tag-group">
+              <div class="tag-group-header" onclick="toggleGroup(this)">
+                <span class="group-swatch" style="background:#1d4ed8;"></span>
+                Hiring Stage
+                <span class="group-meta">single</span>
+                <i class="bi bi-chevron-down chevron"></i>
+              </div>
+              <div class="tag-group-body">
+                <span class="tag-pill applied" style="background:#1d4ed8;" title="Applied Apr 1"><i class="bi bi-check-circle-fill pill-check"></i>Applied<span class="pill-date">Apr 1</span></span>
+                <span class="tag-pill unapplied">Written Exam</span>
+                <span class="tag-pill applied" style="background:#1d4ed8;" title="Physical Agility Test May 15"><i class="bi bi-check-circle-fill pill-check"></i>Physical Agility<span class="pill-date">May 15</span><i class="bi bi-star-fill" style="font-size:.58rem;color:#fde68a;"></i></span>
+                <span class="tag-pill unapplied">Oral Board</span>
+                <span class="tag-pill unapplied">Background</span>
+                <span class="tag-pill unapplied">Conditional Offer</span>
+                <span class="tag-pill unapplied">Academy</span>
+              </div>
+            </div>
+
+            <!-- Group: Position Applied -->
+            <div class="tag-group">
+              <div class="tag-group-header" onclick="toggleGroup(this)">
+                <span class="group-swatch" style="background:#7c3aed;"></span>
+                Position Applied
+                <span class="group-meta">single</span>
+                <i class="bi bi-chevron-down chevron"></i>
+              </div>
+              <div class="tag-group-body">
+                <span class="tag-pill applied" style="background:#7c3aed;"><i class="bi bi-check-circle-fill pill-check"></i>Police Officer<i class="bi bi-star-fill" style="font-size:.58rem;color:#fde68a;margin-left:2px;"></i></span>
+                <span class="tag-pill unapplied">Sergeant</span>
+                <span class="tag-pill unapplied">Detective</span>
+                <span class="tag-pill unapplied">Dispatcher</span>
+              </div>
+            </div>
+
+            <!-- Group: Recruiting Source -->
+            <div class="tag-group">
+              <div class="tag-group-header" onclick="toggleGroup(this)">
+                <span class="group-swatch" style="background:#0369a1;"></span>
+                Recruiting Source
+                <span class="group-meta">single</span>
+                <i class="bi bi-chevron-down chevron"></i>
+              </div>
+              <div class="tag-group-body">
+                <span class="tag-pill applied" style="background:#0369a1;"><i class="bi bi-check-circle-fill pill-check"></i>Career Fair<span class="pill-date">Apr 1</span></span>
+                <span class="tag-pill unapplied">Job Board</span>
+                <span class="tag-pill unapplied">Social Media</span>
+                <span class="tag-pill unapplied">Referral</span>
+                <span class="tag-pill unapplied">Walk-In</span>
+              </div>
+            </div>
+
+            <!-- Group: Special Qualifications -->
+            <div class="tag-group">
+              <div class="tag-group-header" onclick="toggleGroup(this)">
+                <span class="group-swatch" style="background:#166534;"></span>
+                Special Qualifications
+                <span class="group-meta">multi</span>
+                <i class="bi bi-chevron-down chevron"></i>
+              </div>
+              <div class="tag-group-body">
+                <span class="tag-pill applied" style="background:#166534;"><i class="bi bi-check-square-fill pill-check"></i>Military Veteran<span class="pill-date">Apr 1</span></span>
+                <span class="tag-pill applied" style="background:#166534;"><i class="bi bi-check-square-fill pill-check"></i>Bilingual<span class="pill-date">Apr 1</span></span>
+                <span class="tag-pill unapplied">Prior LE</span>
+                <span class="tag-pill unapplied">College Degree</span>
+                <span class="tag-pill unapplied">Lateral Transfer</span>
+              </div>
+            </div>
+
+            <!-- Group: Status -->
+            <div class="tag-group">
+              <div class="tag-group-header" onclick="toggleGroup(this)">
+                <span class="group-swatch" style="background:#b45309;"></span>
+                Status
+                <span class="group-meta">single</span>
+                <i class="bi bi-chevron-down chevron"></i>
+              </div>
+              <div class="tag-group-body">
+                <span class="tag-pill applied" style="background:#b45309;"><i class="bi bi-check-circle-fill pill-check"></i>Active</span>
+                <span class="tag-pill unapplied">On Hold</span>
+                <span class="tag-pill unapplied">Withdrawn</span>
+                <span class="tag-pill unapplied">Hired</span>
+              </div>
+            </div>
+
+            <!-- Hidden groups -->
+            <div class="hidden-section">
+              <div class="hidden-toggle" onclick="toggleHidden(this)">
+                <i class="bi bi-eye-slash"></i>
+                <span>2 hidden groups</span>
+                <i class="bi bi-chevron-down ms-auto" style="font-size:.65rem;"></i>
+              </div>
+              <div class="hidden-groups">
+                <div class="tag-group" style="opacity:.5;">
+                  <div class="tag-group-header" style="font-size:.75rem;">
+                    <span class="group-swatch" style="background:#0e7490;"></span>
+                    Document Checklist
+                    <span class="group-meta">multi</span>
+                    <i class="bi bi-chevron-down chevron"></i>
+                  </div>
+                </div>
+                <div class="tag-group" style="opacity:.5;">
+                  <div class="tag-group-header" style="font-size:.75rem;">
+                    <span class="group-swatch" style="background:#9f1239;"></span>
+                    Disqualifiers
+                    <span class="group-meta">multi</span>
+                    <i class="bi bi-chevron-down chevron"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /view-organized -->
+
+          <!-- ════════════════════════════════════════
+               VIEW 2: TIMELINE
+          ════════════════════════════════════════ -->
+          <div id="view-timeline" class="tag-view">
+            <div class="timeline-wrap">
+
+              <div class="timeline-month">May 2026</div>
+
+              <div class="tl-entry">
+                <div class="tl-spine">
+                  <div class="tl-dot filled" style="color:#1d4ed8;background:#1d4ed8;"></div>
+                  <div class="tl-line"></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-date-label">May 15 · Jason L.</div>
+                  <div><span class="tl-tag" style="background:#1d4ed8;">Physical Agility Test</span></div>
+                  <div class="tl-group-label">Hiring Stage &nbsp;·&nbsp; single-select</div>
+                </div>
+              </div>
+
+              <div class="timeline-month">April 2026</div>
+
+              <div class="tl-entry">
+                <div class="tl-spine">
+                  <div class="tl-dot filled" style="color:#166534;background:#166534;"></div>
+                  <div class="tl-line"></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-date-label">Apr 1 · Jason L.</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.2rem;">
+                    <span class="tl-tag" style="background:#166534;">Military Veteran</span>
+                    <span class="tl-tag" style="background:#166534;">Bilingual</span>
+                  </div>
+                  <div class="tl-group-label">Special Qualifications &nbsp;·&nbsp; multi-select</div>
+                </div>
+              </div>
+
+              <div class="tl-entry">
+                <div class="tl-spine">
+                  <div class="tl-dot filled" style="color:#7c3aed;background:#7c3aed;"></div>
+                  <div class="tl-line"></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-date-label">Apr 1 · Jason L.</div>
+                  <div><span class="tl-tag" style="background:#7c3aed;">Police Officer</span></div>
+                  <div class="tl-group-label">Position Applied &nbsp;·&nbsp; single-select</div>
+                </div>
+              </div>
+
+              <div class="tl-entry">
+                <div class="tl-spine">
+                  <div class="tl-dot filled" style="color:#0369a1;background:#0369a1;"></div>
+                  <div class="tl-line"></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-date-label">Apr 1 · Jason L.</div>
+                  <div><span class="tl-tag" style="background:#0369a1;">Career Fair</span></div>
+                  <div class="tl-group-label">Recruiting Source &nbsp;·&nbsp; single-select</div>
+                </div>
+              </div>
+
+              <div class="tl-entry">
+                <div class="tl-spine">
+                  <div class="tl-dot filled" style="color:#1d4ed8;background:#1d4ed8;"></div>
+                  <div class="tl-line"></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-date-label">Apr 1 · Auto-logged</div>
+                  <div><span class="tl-tag" style="background:#1d4ed8;">Applied</span></div>
+                  <div class="tl-group-label">Hiring Stage &nbsp;·&nbsp; single-select</div>
+                </div>
+              </div>
+
+              <div class="tl-entry">
+                <div class="tl-spine">
+                  <div class="tl-dot filled" style="color:#b45309;background:#b45309;"></div>
+                </div>
+                <div class="tl-content">
+                  <div class="tl-date-label">Apr 1 · Auto-logged</div>
+                  <div><span class="tl-tag" style="background:#b45309;">Active</span></div>
+                  <div class="tl-group-label">Status &nbsp;·&nbsp; single-select</div>
+                </div>
+              </div>
+
+              <!-- Upcoming -->
+              <div class="tl-upcoming">
+                <div class="tl-upcoming-label">Not yet applied</div>
+                <div class="tl-entry future">
+                  <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+                  <div class="tl-content">
+                    <div><span class="tl-tag">Oral Board</span></div>
+                    <div class="tl-group-label">Hiring Stage</div>
+                  </div>
+                </div>
+                <div class="tl-entry future">
+                  <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+                  <div class="tl-content">
+                    <div><span class="tl-tag">Background</span></div>
+                    <div class="tl-group-label">Hiring Stage</div>
+                  </div>
+                </div>
+                <div class="tl-entry future">
+                  <div class="tl-spine"><div class="tl-dot"></div></div>
+                  <div class="tl-content">
+                    <div><span class="tl-tag">Conditional Offer</span></div>
+                    <div class="tl-group-label">Hiring Stage</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /view-timeline -->
+
+          <!-- ════════════════════════════════════════
+               VIEW 3: FORM / CRM
+          ════════════════════════════════════════ -->
+          <div id="view-form" class="tag-view">
+            <div class="form-view-wrap">
+
+              <!-- Hiring Stage -->
+              <div class="form-group-row">
+                <div class="form-group-label">
+                  <span class="fg-swatch" style="background:#1d4ed8;"></span>
+                  Hiring Stage
+                  <span class="fg-type">single</span>
+                </div>
+                <div class="form-radio-group">
+                  <span class="form-radio-opt selected" style="background:#1d4ed8;border-color:#1d4ed8;"><span class="opt-dot"></span>Applied</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Written Exam</span>
+                  <span class="form-radio-opt selected" style="background:#1d4ed8;border-color:#1d4ed8;"><span class="opt-dot"></span>Physical Agility</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Oral Board</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Background</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Conditional Offer</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Academy</span>
+                </div>
+                <div class="form-date-row">
+                  <div class="form-date-item">
+                    <span class="fd-tag" style="color:#1d4ed8;">Applied</span>
+                    <span>Apr 1, 2026</span>
+                    <i class="bi bi-pencil"></i>
+                  </div>
+                  <div class="form-date-item">
+                    <span class="fd-tag" style="color:#1d4ed8;">Physical Agility</span>
+                    <span>May 15, 2026</span>
+                    <i class="bi bi-pencil"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Position Applied -->
+              <div class="form-group-row">
+                <div class="form-group-label">
+                  <span class="fg-swatch" style="background:#7c3aed;"></span>
+                  Position Applied
+                  <span class="fg-type">single</span>
+                </div>
+                <div class="form-radio-group">
+                  <span class="form-radio-opt selected" style="background:#7c3aed;border-color:#7c3aed;"><span class="opt-dot"></span>Police Officer</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Sergeant</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Detective</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Dispatcher</span>
+                </div>
+                <div class="form-date-row">
+                  <div class="form-date-item">
+                    <span class="fd-tag" style="color:#7c3aed;">Police Officer</span>
+                    <span>Apr 1, 2026</span>
+                    <i class="bi bi-pencil"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recruiting Source -->
+              <div class="form-group-row">
+                <div class="form-group-label">
+                  <span class="fg-swatch" style="background:#0369a1;"></span>
+                  Recruiting Source
+                  <span class="fg-type">single</span>
+                </div>
+                <div class="form-radio-group">
+                  <span class="form-radio-opt selected" style="background:#0369a1;border-color:#0369a1;"><span class="opt-dot"></span>Career Fair</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Job Board</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Social Media</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Referral</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Walk-In</span>
+                </div>
+                <div class="form-date-row">
+                  <div class="form-date-item">
+                    <span class="fd-tag" style="color:#0369a1;">Career Fair</span>
+                    <span>Apr 1, 2026</span>
+                    <i class="bi bi-pencil"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Special Qualifications -->
+              <div class="form-group-row">
+                <div class="form-group-label">
+                  <span class="fg-swatch" style="background:#166534;"></span>
+                  Special Qualifications
+                  <span class="fg-type">multi</span>
+                </div>
+                <div class="form-radio-group">
+                  <span class="form-check-opt checked" style="background:#166634;background:#166534;border-color:#166534;"><i class="bi bi-check-square-fill"></i>Military Veteran</span>
+                  <span class="form-check-opt checked" style="background:#166534;border-color:#166534;"><i class="bi bi-check-square-fill"></i>Bilingual</span>
+                  <span class="form-check-opt"><i class="bi bi-square"></i>Prior LE</span>
+                  <span class="form-check-opt"><i class="bi bi-square"></i>College Degree</span>
+                  <span class="form-check-opt"><i class="bi bi-square"></i>Lateral Transfer</span>
+                </div>
+                <div class="form-date-row">
+                  <div class="form-date-item">
+                    <span class="fd-tag" style="color:#166534;">Military Veteran</span>
+                    <span>Apr 1, 2026</span>
+                    <i class="bi bi-pencil"></i>
+                  </div>
+                  <div class="form-date-item">
+                    <span class="fd-tag" style="color:#166534;">Bilingual</span>
+                    <span>Apr 1, 2026</span>
+                    <i class="bi bi-pencil"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Status -->
+              <div class="form-group-row">
+                <div class="form-group-label">
+                  <span class="fg-swatch" style="background:#b45309;"></span>
+                  Status
+                  <span class="fg-type">single</span>
+                </div>
+                <div class="form-radio-group">
+                  <span class="form-radio-opt selected" style="background:#b45309;border-color:#b45309;"><span class="opt-dot"></span>Active</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>On Hold</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Withdrawn</span>
+                  <span class="form-radio-opt"><span class="opt-dot"></span>Hired</span>
+                </div>
+              </div>
+
+              <!-- Hidden indicator -->
+              <div class="form-group-row" style="opacity:.5;">
+                <div class="form-group-label"><i class="bi bi-eye-slash" style="color:#94a3b8;"></i><span style="color:#94a3b8;font-size:.72rem;">2 hidden groups not shown</span></div>
+              </div>
+
+            </div>
+          </div><!-- /view-form -->
+
+        </div><!-- /tag-pane-body -->
+      </div><!-- /tag-pane -->
+
+    </div><!-- /candidate-layout -->
+  </main>
+
+</div><!-- /.app -->
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+  const viewLabels = {
+    organized: 'Organized View',
+    timeline:  'Timeline View',
+    form:      'Form View',
+  };
+
+  function switchView(name) {
+    document.querySelectorAll('.tag-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('view-' + name).classList.add('active');
+    document.getElementById('btn-' + name).classList.add('active');
+    document.getElementById('view-label').textContent = viewLabels[name];
+  }
+
+  function toggleGroup(header) {
+    header.classList.toggle('collapsed');
+    const body = header.nextElementSibling;
+    body.classList.toggle('collapsed');
+  }
+
+  function toggleHidden(toggle) {
+    const panel = toggle.nextElementSibling;
+    panel.classList.toggle('open');
+    const chevron = toggle.querySelector('.bi-chevron-down, .bi-chevron-up');
+    if (panel.classList.contains('open')) {
+      chevron.className = 'bi bi-chevron-up ms-auto';
+    } else {
+      chevron.className = 'bi bi-chevron-down ms-auto';
+    }
+  }
+</script>
+</body>
+</html>
