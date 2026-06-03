@@ -137,63 +137,95 @@
     .tl-event-removed .tl-meta { color: #dc2626; }
 
     /* ════════════════════════════════════════════════════════════
-       VIEW 3: FORM / CRM
+       VIEW 3: FORM / CRM  — accordion style
     ════════════════════════════════════════════════════════════ */
-    .form-group-row { padding: .6rem .85rem; border-bottom: 1px solid #f1f5f9; }
-    .form-group-row:last-child { border-bottom: none; }
-    .fg-label { display: flex; align-items: center; gap: .35rem; font-size: .72rem; font-weight: 700; color: #374151; margin-bottom: .4rem; }
-    .fg-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .fg-type { font-size: .6rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-left: auto; }
 
-    /* Tag rows */
-    .fg-tag-row {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .3rem .45rem; border-radius: .35rem;
-      border: 1px solid #eef2f7; background: #fdfdfe;
-      margin-bottom: .28rem;
+    /* Group accordion */
+    .fg-group { border-bottom: 1px solid #f1f5f9; }
+    .fg-group:last-child { border-bottom: none; }
+
+    .fg-group-hdr {
+      display: flex; align-items: center; gap: .45rem;
+      padding: .62rem .85rem; cursor: pointer; user-select: none;
       transition: background .1s;
     }
-    .fg-tag-row:hover { background: #f8fafc; border-color: #e2e8f0; }
+    .fg-group-hdr:hover { background: #f8fafc; }
+
+    .fg-caret {
+      font-size: .55rem; color: #94a3b8; flex-shrink: 0;
+      transition: transform .15s; transform: rotate(90deg);
+    }
+    .fg-group-hdr.closed .fg-caret { transform: rotate(0deg); }
+
+    .fg-group-gname { font-size: .82rem; font-weight: 700; color: #1e293b; }
+    .fg-group-badge {
+      font-size: .6rem; color: #64748b; border: 1px solid #e2e8f0;
+      border-radius: 999px; padding: .07rem .48rem; font-weight: 500;
+      white-space: nowrap;
+    }
+    .fg-group-count { margin-left: auto; font-size: .7rem; color: #94a3b8; white-space: nowrap; }
+
+    /* Collapsible body with left color bar */
+    .fg-group-body {
+      padding: .15rem 0 .55rem 0;
+      border-left: 3px solid #e2e8f0;
+      margin-left: 1.35rem;
+      padding-left: .75rem;
+      padding-right: .85rem;
+    }
+    .fg-group-body.closed { display: none; }
+
+    /* Individual tag rows */
+    .fg-tag-row {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .32rem .4rem .32rem .5rem;
+      border-radius: 0 .3rem .3rem 0;
+      margin-bottom: .2rem;
+      transition: background .1s;
+    }
+    .fg-tag-row:hover { background: #f8fafc; }
+
     .fg-tag-name {
       flex: 1; font-size: .8rem; font-weight: 600; color: #1e293b;
-      display: flex; align-items: center; gap: .25rem;
+      display: flex; align-items: center; gap: .3rem;
     }
-    .fg-tag-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .fg-tag-name .fg-group-sub {
+      font-size: .65rem; font-weight: 400; color: #94a3b8; margin-left: .1rem;
+    }
+
     .fg-date-field {
-      display: flex; align-items: center; gap: .25rem;
+      display: flex; align-items: center; gap: .22rem;
       background: #fff; border: 1px solid #e2e8f0; border-radius: .3rem;
-      padding: .18rem .42rem; font-size: .74rem; color: #475569;
-      flex-shrink: 0;
+      padding: .16rem .38rem; font-size: .74rem; color: #475569; flex-shrink: 0;
     }
-    .fg-date-field i { font-size: .65rem; color: #94a3b8; }
+    .fg-date-field i { font-size: .62rem; color: #b0b8c8; }
     .fg-date-field input[type="date"] {
       border: none; background: transparent; font-size: .74rem;
-      color: #475569; padding: 0; cursor: pointer; outline: none;
-      width: 90px;
+      color: #475569; padding: 0; cursor: pointer; outline: none; width: 88px;
     }
     .fg-date-field input[type="date"]:focus { color: var(--leftnav-bg); }
+
     .fg-remove-btn {
-      background: none; border: none; padding: .18rem .28rem;
+      background: none; border: none; padding: .16rem .26rem;
       color: #cbd5e1; cursor: pointer; border-radius: .25rem;
-      font-size: .72rem; line-height: 1; flex-shrink: 0;
-      transition: all .1s;
+      font-size: .7rem; line-height: 1; flex-shrink: 0; transition: all .1s;
     }
     .fg-remove-btn:hover { color: #dc2626; background: #fef2f2; }
+
     .fg-add-link {
-      display: inline-flex; align-items: center; gap: .25rem;
-      font-size: .72rem; color: #94a3b8; cursor: pointer;
-      padding: .2rem .1rem; margin-top: .15rem;
-      border: none; background: none;
-      transition: color .1s;
+      display: inline-flex; align-items: center; gap: .22rem;
+      font-size: .71rem; color: #b0b8c8; cursor: pointer;
+      padding: .28rem .5rem; margin-top: .1rem;
+      border: none; background: none; transition: color .1s;
     }
     .fg-add-link:hover { color: var(--leftnav-bg); }
 
-    /* Removed row in form view */
-    .fg-removed-row .fg-tag-name { opacity: .5; text-decoration: line-through; }
-    .fg-removed-row .fg-date-field { opacity: .5; }
+    /* Removed rows */
+    .fg-removed-row .fg-tag-name { opacity: .45; text-decoration: line-through; }
+    .fg-removed-row .fg-date-field { opacity: .45; }
     .fg-removed-row .fg-remove-btn { display: none; }
     .fg-removed-badge {
-      font-size: .62rem; color: #dc2626; padding: .1rem .32rem;
+      font-size: .6rem; color: #dc2626; padding: .08rem .3rem;
       background: #fef2f2; border: 1px solid #fecaca; border-radius: .25rem;
       flex-shrink: 0; white-space: nowrap;
     }
@@ -878,173 +910,185 @@
               ══════════════════════════════════════════════ -->
               <div id="view-form" class="tag-view">
 
+                <!-- Favorites -->
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <i class="bi bi-star-fill" style="color:#ff9000;font-size:.75rem;"></i>
+                    <span class="fg-group-gname">Favorites</span>
+                    <span class="fg-group-count">2 tags</span>
+                  </div>
+                  <div class="fg-group-body" style="border-left-color:#ff9000;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">
+                        <i class="bi bi-star-fill" style="color:#ff9000;font-size:.65rem;"></i>
+                        75
+                        <span class="fg-group-sub">Academy</span>
+                      </div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                    </div>
+                    <div class="fg-tag-row fav-removed-pill">
+                      <div class="fg-tag-name" style="opacity:.45;text-decoration:line-through;">
+                        <i class="bi bi-star-fill" style="color:#ff9000;font-size:.65rem;opacity:.4;"></i>
+                        105
+                        <span class="fg-group-sub">Academy</span>
+                      </div>
+                      <div class="fg-date-field" style="opacity:.45;"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03" disabled></div>
+                      <span class="fg-removed-badge">removed 6/3</span>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Academy -->
-                <div class="form-group-row">
-                  <div class="fg-label">
-                    <span class="fg-swatch" style="background:#e702f7;"></span>
-                    Academy
-                    <span class="fg-type">multi</span>
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname">Academy</span>
+                    <span class="fg-group-badge">Multi select</span>
+                    <span class="fg-group-count">1 applied</span>
                   </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name">
-                      <span class="fg-tag-dot" style="background:#e702f7;"></span>
-                      <i class="bi bi-star-fill" style="color:#ff9000;font-size:.68rem;"></i>
-                      75
+                  <div class="fg-group-body" style="border-left-color:#e702f7;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name"><i class="bi bi-star-fill" style="color:#ff9000;font-size:.65rem;"></i> 75</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-06-03">
+                    <div class="fg-tag-row fg-removed-row">
+                      <div class="fg-tag-name"><i class="bi bi-star-fill" style="color:#ff9000;font-size:.65rem;opacity:.4;"></i> 105</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03" disabled></div>
+                      <span class="fg-removed-badge">removed 6/3</span>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                   </div>
-                  <div class="fg-tag-row fg-removed-row">
-                    <div class="fg-tag-name">
-                      <span class="fg-tag-dot" style="background:#e702f7;"></span>
-                      <i class="bi bi-star-fill" style="color:#ff9000;font-size:.68rem;opacity:.5;"></i>
-                      105
-                    </div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-06-03" disabled>
-                    </div>
-                    <span class="fg-removed-badge">removed 6/3</span>
-                  </div>
-                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
 
                 <!-- Police Officer -->
-                <div class="form-group-row">
-                  <div class="fg-label">
-                    <span class="fg-swatch" style="background:#272fa0;"></span>
-                    Police Officer
-                    <span class="fg-type">multi</span>
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname">Police Officer</span>
+                    <span class="fg-group-badge">Multi select</span>
+                    <span class="fg-group-count">3 applied</span>
                   </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#272fa0;"></span>Applied</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-06-03">
+                  <div class="fg-group-body" style="border-left-color:#272fa0;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Applied</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
-                  </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#272fa0;"></span>Withdrew</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-06-03">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Withdrew</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-06-03"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
-                  </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#272fa0;"></span>Written Failed</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-02-17">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Written Failed</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-17"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                   </div>
-                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
 
                 <!-- Priority -->
-                <div class="form-group-row">
-                  <div class="fg-label">
-                    <span class="fg-swatch" style="background:#81cf20;"></span>
-                    Priority
-                    <span class="fg-type">single</span>
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname">Priority</span>
+                    <span class="fg-group-badge">Single select</span>
+                    <span class="fg-group-count">1 applied</span>
                   </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#81cf20;"></span>Medium</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-04-28">
+                  <div class="fg-group-body" style="border-left-color:#81cf20;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Medium</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-04-28"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
-                  </div>
-                  <div class="fg-tag-row fg-removed-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#81cf20;"></span>Low</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-02-27" disabled>
+                    <div class="fg-tag-row fg-removed-row">
+                      <div class="fg-tag-name">Low</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-27" disabled></div>
+                      <span class="fg-removed-badge">removed 4/28</span>
                     </div>
-                    <span class="fg-removed-badge">removed 4/28</span>
-                  </div>
-                  <div class="fg-tag-row fg-removed-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#81cf20;"></span>High</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-02-26" disabled>
+                    <div class="fg-tag-row fg-removed-row">
+                      <div class="fg-tag-name">High</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-26" disabled></div>
+                      <span class="fg-removed-badge">removed 2/27</span>
                     </div>
-                    <span class="fg-removed-badge">removed 2/27</span>
+                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                   </div>
-                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
 
                 <!-- Position -->
-                <div class="form-group-row">
-                  <div class="fg-label">
-                    <span class="fg-swatch" style="background:#7b7b7b;"></span>
-                    Position
-                    <span class="fg-type">single</span>
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname">Position</span>
+                    <span class="fg-group-badge">Single select</span>
+                    <span class="fg-group-count">1 applied</span>
                   </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>Entry Level</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-02-01">
+                  <div class="fg-group-body" style="border-left-color:#7b7b7b;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Entry Level</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-01"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                   </div>
-                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
 
                 <!-- Status -->
-                <div class="form-group-row">
-                  <div class="fg-label">
-                    <span class="fg-swatch" style="background:#7b7b7b;"></span>
-                    Status
-                    <span class="fg-type">single</span>
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname">Status</span>
+                    <span class="fg-group-badge">Single select</span>
+                    <span class="fg-group-count">1 applied</span>
                   </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>Pre-Screen Fail</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-02-17">
+                  <div class="fg-group-body" style="border-left-color:#7b7b7b;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Pre-Screen Fail</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-17"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
-                  </div>
-                  <div class="fg-tag-row fg-removed-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>New</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-02-01" disabled>
+                    <div class="fg-tag-row fg-removed-row">
+                      <div class="fg-tag-name">New</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-02-01" disabled></div>
+                      <span class="fg-removed-badge">removed 4/6</span>
                     </div>
-                    <span class="fg-removed-badge">removed 4/6</span>
+                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                   </div>
-                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
 
                 <!-- In-Person -->
-                <div class="form-group-row">
-                  <div class="fg-label">
-                    <span class="fg-swatch" style="background:#7b7b7b;"></span>
-                    In-Person
-                    <span class="fg-type">multi</span>
+                <div class="fg-group">
+                  <div class="fg-group-hdr" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname">In-Person</span>
+                    <span class="fg-group-badge">Multi select</span>
+                    <span class="fg-group-count">1 applied</span>
                   </div>
-                  <div class="fg-tag-row">
-                    <div class="fg-tag-name"><span class="fg-tag-dot" style="background:#7b7b7b;"></span>Interview Event</div>
-                    <div class="fg-date-field">
-                      <i class="bi bi-calendar3"></i>
-                      <input type="date" value="2026-05-22">
+                  <div class="fg-group-body" style="border-left-color:#7b7b7b;">
+                    <div class="fg-tag-row">
+                      <div class="fg-tag-name">Interview Event</div>
+                      <div class="fg-date-field"><i class="bi bi-calendar3"></i><input type="date" value="2026-05-22"></div>
+                      <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
                     </div>
-                    <button class="fg-remove-btn" title="Remove"><i class="bi bi-x-lg"></i></button>
+                    <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                   </div>
-                  <button class="fg-add-link"><i class="bi bi-plus"></i> assign tag</button>
                 </div>
 
-                <!-- Hidden groups note -->
-                <div class="form-group-row" style="opacity:.45;">
-                  <div class="fg-label"><i class="bi bi-eye-slash" style="color:#94a3b8;font-size:.75rem;"></i><span style="color:#94a3b8;">2 hidden groups not shown</span></div>
+                <!-- Hidden groups -->
+                <div class="fg-group" style="opacity:.45;">
+                  <div class="fg-group-hdr closed" onclick="toggleFgGroup(this)">
+                    <i class="bi bi-caret-right-fill fg-caret"></i>
+                    <span class="fg-group-gname" style="color:#94a3b8;">Hidden groups (2)</span>
+                    <i class="bi bi-eye-slash ms-1" style="font-size:.7rem;color:#94a3b8;"></i>
+                  </div>
+                  <div class="fg-group-body closed" style="border-left-color:#e2e8f0;">
+                    <div class="fg-tag-row"><div class="fg-tag-name" style="color:#94a3b8;">JL Debug — Follow Up Campaign</div></div>
+                    <div class="fg-tag-row"><div class="fg-tag-name" style="color:#94a3b8;">candidate — updated</div></div>
+                  </div>
                 </div>
 
               </div><!-- /view-form -->
@@ -1063,6 +1107,11 @@
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
   const viewLabels = { organized: 'Organized View', timeline: 'Timeline View', form: 'Form View' };
+
+  function toggleFgGroup(hdr) {
+    hdr.classList.toggle('closed');
+    hdr.nextElementSibling.classList.toggle('closed');
+  }
 
   function toggleRemoved(btn) {
     const paneBody = document.querySelector('.pane-body');
