@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launch Package — All-Star Recruiter</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #e4aa35;
+      --gold-hover: #c9941f;
+      --gold-bg:    rgba(228,170,53,0.10);
+      --gold-border:rgba(228,170,53,0.35);
+      --navy:       #1a3a6e;
+      --navy-mid:   #152d56;
+      --navy-dark:  #0f2040;
+      --blue:       #1e4d8c;
+      --blue-light: #e8f0fb;
+      --text:       #1e293b;
+      --text-2:     #4b5563;
+      --text-3:     #9ca3af;
+      --border:     #e5e7eb;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      background: var(--navy);
+      padding: 0 40px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: box-shadow .2s;
+    }
+    nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.35); }
+    .logo {
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .logo span { color: var(--gold); }
+    .logo .badge-pro {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    nav a.nav-link-ghost {
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    nav a.nav-link-ghost:hover { color: #fff; }
+    nav a.cta-nav {
+      background: var(--gold);
+      color: white;
+      padding: 7px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    nav a.cta-nav:hover { background: var(--gold-hover); }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      color: white;
+      padding: 88px 40px 80px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero .sub {
+      font-size: 18px;
+      color: rgba(255,255,255,.62);
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: white;
+      padding: 13px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .btn-primary:hover { background: var(--gold-hover); color: white; }
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      padding: 13px 26px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid rgba(255,255,255,.2);
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.45); color: white; }
+
+    /* ── STATS BAR ───────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat {
+      padding: 22px 48px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+    .stat:last-child { border-right: none; }
+    .stat .num {
+      font-size: 26px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat .lbl {
+      font-size: 11px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    /* ── SHARED LAYOUT ───────────────────────────────────────── */
+    section { padding: 80px 40px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .subhead {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 560px;
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+
+    /* ── WHAT'S INCLUDED ─────────────────────────────────────── */
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .included-card {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--navy);
+      border-radius: 10px;
+      padding: 26px 24px;
+      transition: box-shadow .15s, transform .15s;
+    }
+    .included-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .included-card .icon {
+      width: 40px; height: 40px;
+      background: var(--navy);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+      color: white;
+      font-size: 18px;
+    }
+    .included-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .included-card p { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+    .card-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-light);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* Card accent colors */
+    .included-card.accent-gold  { border-left-color: var(--gold); }
+    .included-card.accent-gold .icon  { background: var(--gold); }
+    .included-card.accent-blue  { border-left-color: var(--blue); }
+    .included-card.accent-green { border-left-color: #16a34a; }
+    .included-card.accent-green .icon { background: #16a34a; }
+    .included-card.accent-purple { border-left-color: #7c3aed; }
+    .included-card.accent-purple .icon { background: #7c3aed; }
+    .included-card.accent-teal { border-left-color: #0891b2; }
+    .included-card.accent-teal .icon { background: #0891b2; }
+
+    /* ── PROCESS ─────────────────────────────────────────────── */
+    .process-section { background: var(--navy); color: white; }
+    .process-section h2 { color: white; }
+    .process-section .subhead { color: rgba(255,255,255,.58); max-width: 500px; }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .step {
+      padding: 32px 26px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step-circle {
+      width: 36px; height: 36px;
+      background: rgba(228,170,53,.15);
+      border: 1.5px solid rgba(228,170,53,.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .step h3 { font-size: 15px; font-weight: 700; color: white; margin-bottom: 8px; }
+    .step p { font-size: 13px; color: rgba(255,255,255,.52); line-height: 1.65; }
+    .step-duration {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      background: rgba(255,255,255,.05);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* ── DELIVERABLES ────────────────────────────────────────── */
+    .deliverables-section { background: var(--blue-light); }
+    .deliverables-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .deliverable-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: white;
+      border: 1px solid #c5d8f5;
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: box-shadow .15s;
+    }
+    .deliverable-item:hover { box-shadow: 0 2px 10px rgba(30,77,140,.1); }
+    .deliverable-item .check {
+      width: 24px; height: 24px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      font-size: 13px;
+    }
+    .deliverable-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .deliverable-item p  { font-size: 13px; color: var(--text-2); }
+
+    /* ── TESTIMONIAL ─────────────────────────────────────────── */
+    .testimonial-section { background: #f9fafb; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .testimonial-block { max-width: 680px; margin: 0 auto; text-align: center; }
+    .quote-mark {
+      font-size: 56px; line-height: .8;
+      color: var(--gold);
+      font-family: Georgia, serif;
+      margin-bottom: 12px;
+      display: block;
+    }
+    blockquote {
+      font-size: 19px; font-weight: 500; line-height: 1.55;
+      color: var(--text); margin-bottom: 22px; font-style: italic;
+    }
+    .attribution { font-size: 14px; font-weight: 600; color: var(--text-2); }
+    .attribution span { color: var(--text-3); font-weight: 400; }
+
+    /* ── PRICING ─────────────────────────────────────────────── */
+    .pricing-section { background: white; }
+    .pricing-note {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 36px;
+      font-size: 14px;
+      color: var(--text-2);
+      max-width: 660px;
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+    }
+    .pricing-note i { color: var(--blue); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .pricing-note strong { color: var(--text); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .pricing-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 18px;
+      text-align: center;
+      transition: box-shadow .15s, transform .15s;
+    }
+    .pricing-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.08); transform: translateY(-2px); }
+    .pricing-card.featured {
+      border-color: var(--blue);
+      border-top: 3px solid var(--blue);
+      position: relative;
+    }
+    .pricing-card.featured::before {
+      content: 'Most Common';
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: var(--blue); color: white;
+      font-size: 10px; font-weight: 700; letter-spacing: .5px;
+      padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .pricing-card .tier {
+      font-size: 11px; font-weight: 700; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px;
+    }
+    .pricing-card .price {
+      font-size: 30px; font-weight: 800; color: var(--text);
+      line-height: 1; margin-bottom: 3px;
+    }
+    .pricing-card .price-note { font-size: 12px; color: var(--text-3); margin-bottom: 14px; }
+    .pricing-card .sworn { font-size: 12px; font-weight: 600; color: var(--text-2); }
+
+    .pricing-waiver {
+      background: rgba(228,170,53,.07);
+      border: 1px solid rgba(228,170,53,.3);
+      border-radius: 10px;
+      padding: 18px 22px;
+      font-size: 14px;
+      color: var(--text-2);
+      max-width: 660px;
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+    }
+    .pricing-waiver i { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .pricing-waiver strong { color: #a07010; }
+
+    /* ── FAQ ─────────────────────────────────────────────────── */
+    .faq-section { background: #f9fafb; border-top: 1px solid var(--border); }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+      gap: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .faq-item:nth-child(odd) { border-right: 1px solid var(--border); padding-right: 40px; }
+    .faq-item:nth-child(even) { padding-left: 40px; }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 22px 0; cursor: pointer;
+      font-size: 15px; font-weight: 700; color: var(--text);
+      list-style: none; user-select: none;
+    }
+    .faq-q::marker { display: none; }
+    .faq-q i { font-size: 13px; color: var(--text-3); flex-shrink: 0; transition: transform .2s; }
+    details[open] .faq-q i { transform: rotate(180deg); color: var(--blue); }
+    .faq-a {
+      font-size: 14px; color: var(--text-2);
+      line-height: 1.7; padding-bottom: 22px;
+    }
+
+    /* ── CTA ─────────────────────────────────────────────────── */
+    .cta-section {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 88px 40px;
+    }
+    .cta-section h2 { color: white; margin-bottom: 14px; }
+    .cta-section p { color: rgba(255,255,255,.58); font-size: 17px; max-width: 480px; margin: 0 auto 36px; }
+    .cta-section .btn-primary { font-size: 15px; padding: 14px 32px; }
+    .cta-mini { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,.38); }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-dark);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 22px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: #4b5563;
+    }
+    footer a { color: #6b7280; text-decoration: none; }
+    footer a:hover { color: #9ca3af; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      nav a.nav-link-ghost { display: none; }
+      section { padding: 60px 20px; }
+      .hero { padding: 64px 20px 56px; }
+      .stat { padding: 18px 24px; }
+      .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .step:last-child { border-bottom: none; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-item:nth-child(odd) { border-right: none; padding-right: 0; }
+      .faq-item:nth-child(even) { padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="../mockups/guardian-crosssell-v2.html" class="logo">
+    All&#8209;Star <span>Recruiter</span>
+    <span class="badge-pro">Pro</span>
+  </a>
+  <div class="nav-right">
+    <a href="#whats-included" class="nav-link-ghost">What's Included</a>
+    <a href="#pricing" class="nav-link-ghost">Pricing</a>
+    <a href="#get-started" class="cta-nav">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><i class="bi bi-rocket-takeoff-fill"></i> Pro Add-On · Launch Package</div>
+  <h1>We build your department's <em>recruiting system</em> for you.</h1>
+  <p class="sub">Your hiring process, mapped and automated. One engagement. Everything configured, connected, and ready to run.</p>
+  <div class="hero-ctas">
+    <a href="#get-started" class="btn-primary">Get Your Launch Package <i class="bi bi-arrow-right"></i></a>
+    <a href="#whats-included" class="btn-ghost"><i class="bi bi-list-check"></i> See What's Included</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="num">62+</div>
+    <div class="lbl">Live Agencies</div>
+  </div>
+  <div class="stat">
+    <div class="num">2–3</div>
+    <div class="lbl">Week Delivery</div>
+  </div>
+  <div class="stat">
+    <div class="num">$0</div>
+    <div class="lbl">Pro Setup Fee</div>
+  </div>
+  <div class="stat">
+    <div class="num">100%</div>
+    <div class="lbl">Law Enforcement Built</div>
+  </div>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<section id="whats-included">
+  <div class="container">
+    <div class="section-label">What's Included</div>
+    <h2>Everything your agency needs to run a full recruiting operation.</h2>
+    <p class="subhead">The Launch Package is a done-for-you engagement. We come in, understand how your department hires, and build the system around it.</p>
+
+    <div class="included-grid">
+      <div class="included-card accent-gold">
+        <div class="icon"><i class="bi bi-map-fill"></i></div>
+        <h3>Hiring Flow Discovery</h3>
+        <p>We walk through your current process — how candidates find you, where they drop off, what stages you track, and what your team is managing manually. We map it before we build anything.</p>
+        <span class="card-tag">Foundation</span>
+      </div>
+      <div class="included-card accent-blue">
+        <div class="icon"><i class="bi bi-globe2"></i></div>
+        <h3>Recruiting Website Build</h3>
+        <p>A branded department recruiting page — built, configured, and connected to your All-Star account. Candidates apply directly; every lead lands in your pipeline automatically.</p>
+        <span class="card-tag">Deliverable</span>
+      </div>
+      <div class="included-card accent-green">
+        <div class="icon"><i class="bi bi-envelope-paper-fill"></i></div>
+        <h3>Drip Campaign Setup</h3>
+        <p>A multi-step email sequence that keeps candidates moving from application to background check. Written, loaded, and scheduled so no candidate goes cold waiting for follow-up.</p>
+        <span class="card-tag">Deliverable</span>
+      </div>
+      <div class="included-card accent-purple">
+        <div class="icon"><i class="bi bi-diagram-3-fill"></i></div>
+        <h3>Workflow & Automation Build</h3>
+        <p>Triggers, tags, and automations configured around your stages — physical agility, written exam, oral board, medical. Candidates move through your pipeline without manual tracking.</p>
+        <span class="card-tag">Deliverable</span>
+      </div>
+      <div class="included-card accent-teal">
+        <div class="icon"><i class="bi bi-shield-check"></i></div>
+        <h3>Guardian Integration Verification</h3>
+        <p>We confirm your Guardian connection is live, test the candidate handoff, and make sure results flow back to All-Star correctly. No double entry. No chasing status updates.</p>
+        <span class="card-tag">Deliverable</span>
+      </div>
+      <div class="included-card accent-gold">
+        <div class="icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+        <h3>Go-Live Walkthrough</h3>
+        <p>A live session with your recruiting team to walk through everything we built, show them how to use it, and answer questions before we hand it off. Your team runs it from day one.</p>
+        <span class="card-tag">Handoff</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-label" style="color:rgba(228,170,53,.75);">How It Works</div>
+    <h2>From kickoff to live system in two to three weeks.</h2>
+    <p class="subhead">We handle the build. You stay focused on hiring.</p>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-circle">1</div>
+        <h3>Discovery Call</h3>
+        <p>We walk through your current hiring flow, pain points, stages, and tools. We ask the right questions so we build the right system.</p>
+        <span class="step-duration"><i class="bi bi-clock" style="margin-right:3px;"></i>~60 min</span>
+      </div>
+      <div class="step">
+        <div class="step-circle">2</div>
+        <h3>Build</h3>
+        <p>We configure your recruiting page, drip campaign, automations, and workflows — all mapped to how your department actually hires.</p>
+        <span class="step-duration"><i class="bi bi-clock" style="margin-right:3px;"></i>~1 week</span>
+      </div>
+      <div class="step">
+        <div class="step-circle">3</div>
+        <h3>Review & Revise</h3>
+        <p>You review everything. We make adjustments. Nothing goes live until it matches your process and your team is comfortable with it.</p>
+        <span class="step-duration"><i class="bi bi-clock" style="margin-right:3px;"></i>~3–5 days</span>
+      </div>
+      <div class="step">
+        <div class="step-circle">4</div>
+        <h3>Go Live</h3>
+        <p>We flip the switch together. Your pipeline is live, your drip is running, and candidates start moving through a system built for your agency.</p>
+        <span class="step-duration"><i class="bi bi-check-circle" style="margin-right:3px;"></i>Day 1 of hiring</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliverables-section">
+  <div class="container">
+    <div class="section-label">What You Walk Away With</div>
+    <h2>A fully operational recruiting system — built around your department.</h2>
+    <p class="subhead">Not a template. Not a demo environment. A configured system ready to run real candidates through your real process.</p>
+
+    <div class="deliverables-list">
+      <div class="deliverable-item">
+        <div class="check"><i class="bi bi-check-lg"></i></div>
+        <div>
+          <h4>Branded Recruiting Website</h4>
+          <p>Live, connected, accepting applicants on day one</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="check"><i class="bi bi-check-lg"></i></div>
+        <div>
+          <h4>Candidate Pipeline</h4>
+          <p>Stages configured to match your hiring process</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="check"><i class="bi bi-check-lg"></i></div>
+        <div>
+          <h4>Email Drip Sequences</h4>
+          <p>Written and scheduled to keep candidates engaged</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="check"><i class="bi bi-check-lg"></i></div>
+        <div>
+          <h4>Automated Workflows</h4>
+          <p>Triggers and tags that move candidates without manual work</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="check"><i class="bi bi-check-lg"></i></div>
+        <div>
+          <h4>Guardian Handoff Configured</h4>
+          <p>Tested and verified — one click sends to background</p>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="check"><i class="bi bi-check-lg"></i></div>
+        <div>
+          <h4>Team Training Session</h4>
+          <p>Your recruiters know how to run the system from day one</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="testimonial-block">
+      <span class="quote-mark">&ldquo;</span>
+      <blockquote>We went from spreadsheets to a full recruiting pipeline — and it didn't cost us a dime to get started. All-Star built everything around how we actually work, not how some software assumes we work.</blockquote>
+      <div class="attribution">
+        Lieutenant Gregory D'Elia <span>· Newark Police Department</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2>One engagement. Priced by agency size.</h2>
+
+    <div class="pricing-note">
+      <i class="bi bi-info-circle-fill"></i>
+      <div><strong>Requires an active Pro subscription.</strong> The Launch Package is an add-on service for agencies on Pro. Your Pro plan stays in place — this covers the build, configuration, and go-live support.</div>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier">1–49 Sworn</div>
+        <div class="price">$1,500</div>
+        <div class="price-note">one-time</div>
+        <div class="sworn">Small Agency</div>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">50–99 Sworn</div>
+        <div class="price">$2,000</div>
+        <div class="price-note">one-time</div>
+        <div class="sworn">Mid-Size Agency</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="tier">100–199 Sworn</div>
+        <div class="price">$2,500</div>
+        <div class="price-note">one-time</div>
+        <div class="sworn">Large Agency</div>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">200–399 Sworn</div>
+        <div class="price">$3,000</div>
+        <div class="price-note">one-time</div>
+        <div class="sworn">Major Agency</div>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">400+ Sworn</div>
+        <div class="price">$3,500</div>
+        <div class="price-note">one-time</div>
+        <div class="sworn">Metro / State</div>
+      </div>
+    </div>
+
+    <div class="pricing-waiver">
+      <i class="bi bi-tag-fill"></i>
+      <div><strong>Setup fee waiver available.</strong> Agencies that upgrade to Pro within 30 days of activating their free Guardian Partner account qualify for a waived Launch Package fee. Ask your All-Star contact for details.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-label">Common Questions</div>
+    <h2>Everything you might be wondering.</h2>
+    <p class="subhead" style="margin-bottom:40px;">If something isn't answered here, reach out — we're happy to walk through it.</p>
+
+    <div class="faq-grid">
+
+      <details class="faq-item">
+        <summary class="faq-q">Do I need to be on Pro already to buy this? <i class="bi bi-chevron-down"></i></summary>
+        <p class="faq-a">Yes — the Launch Package requires an active Pro subscription. If you're on a free Guardian Partner account, you'd upgrade to Pro first. We can walk you through both at the same time if you're starting from scratch.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How much of my team's time does this take? <i class="bi bi-chevron-down"></i></summary>
+        <p class="faq-a">Minimal. The discovery call is about an hour. After that, we do the build. You review the work and give feedback — maybe another 2–3 hours total on your end. The go-live walkthrough is an hour. Most agencies are surprised how little they need to do.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What if we want to change things after go-live? <i class="bi bi-chevron-down"></i></summary>
+        <p class="faq-a">The system is fully editable from inside your All-Star account. We show you how everything works during the go-live walkthrough, so your team can adjust stages, update drip sequences, and modify workflows on your own. Larger overhauls can be scoped separately.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Is the recruiting website hosted by All-Star? <i class="bi bi-chevron-down"></i></summary>
+        <p class="faq-a">Yes — it runs on All-Star's infrastructure and connects directly to your account. No separate hosting costs, no plugins to manage. When a candidate submits, they land in your pipeline automatically.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Does this include the text messaging / Guardian integration? <i class="bi bi-chevron-down"></i></summary>
+        <p class="faq-a">We verify and configure the Guardian handoff as part of the Launch Package. Text messaging through All-Star Pro is included in your Pro subscription — the Launch Package makes sure it's set up correctly and connected to your workflows from day one.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What happens if my department's process changes? <i class="bi bi-chevron-down"></i></summary>
+        <p class="faq-a">Your system adapts. We build everything in a way that's easy to edit — stages, automations, drip sequences. Most changes take minutes, not days. If you need a significant rebuild down the road, we can scope a follow-on engagement.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="get-started">
+  <div class="container">
+    <h2>Ready to build your recruiting system?</h2>
+    <p>Start with a free Guardian Partner account, upgrade to Pro, and we'll build the rest.</p>
+    <a href="mailto:jason@allstartalent.us" class="btn-primary">Get Started <i class="bi bi-arrow-right"></i></a>
+    <p class="cta-mini">Or email us at jason@allstartalent.us — we'll respond same day.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 All-Star Recruiter &nbsp;·&nbsp; All-Star Talent, Inc. &nbsp;·&nbsp;
+  <a href="guardian-crosssell-v2.html">Guardian Partner Program</a> &nbsp;·&nbsp;
+  <a href="chiefs-crosssell.html">Chiefs' Associations</a>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+</script>
+</body>
+</html>
