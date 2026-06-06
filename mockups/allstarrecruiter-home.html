@@ -225,6 +225,32 @@
     .footer-contact-item { display: flex; align-items: center; gap: .5rem; font-size: .85rem; color: rgba(255,255,255,.5); margin-bottom: .5rem; }
     .footer-contact-item a { color: rgba(255,255,255,.5); text-decoration: none; }
     .footer-contact-item a:hover { color: rgba(255,255,255,.85); }
+
+    /* ── Browser frame ───────────────────────────────────────── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-expand { margin-left: 8px; font-size: 11px; color: #aaa; flex-shrink: 0; }
+    .browser-frame img { width: 100%; display: block; height: 300px; object-fit: cover; object-position: top; transition: transform .25s ease; }
+    .browser-frame:hover img { transform: scale(1.02); }
+
+    /* ── Platform preview section ────────────────────────────── */
+    .platform-section { background: #0f172a; padding: 6rem 0; }
+    .platform-section .section-eyebrow { color: rgba(228,170,53,.8); }
+    .platform-section .section-title { color: #fff; }
+    .platform-section .section-title span { color: var(--gold); }
+    .platform-section .section-sub { color: rgba(255,255,255,.5); }
+
+    /* ── Logo scroll ─────────────────────────────────────────── */
+    .logo-scroll-section { padding: 2.5rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; overflow: hidden; }
+    .logo-scroll-label { text-align: center; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 1.25rem; margin-top: 0; }
+    .logo-scroll-track-wrap { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-scroll-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: logo-scroll 55s linear infinite; }
+    .logo-scroll-track:hover { animation-play-state: paused; }
+    @keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-scroll-track img { height: 50px; width: auto; max-width: 110px; object-fit: contain; filter: grayscale(100%) opacity(.45); transition: filter .25s; flex-shrink: 0; }
+    .logo-scroll-track img:hover { filter: grayscale(0%) opacity(1); }
   </style>
 </head>
 <body>
@@ -374,6 +400,102 @@
   </div>
 </div>
 
+<!-- LOGO SCROLL -->
+<div class="logo-scroll-section">
+  <p class="logo-scroll-label">Trusted by law enforcement agencies nationwide</p>
+  <div class="logo-scroll-track-wrap">
+    <div class="logo-scroll-track">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach">
+      <img src="../assets/img/logos/blades.png" alt="Blades">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville">
+      <img src="../assets/img/logos/camden.png" alt="Camden">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="DE City">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar">
+      <img src="../assets/img/logos/dover.png" alt="Dover">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton">
+      <img src="../assets/img/logos/milford.png" alt="Milford">
+      <img src="../assets/img/logos/milton.png" alt="Milton">
+      <img src="../assets/img/logos/natural-resources.png" alt="Natural Resources">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County">
+      <img src="../assets/img/logos/newark.png" alt="Newark">
+      <img src="../assets/img/logos/newport.png" alt="Newport">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River and Bay">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware">
+      <img src="../assets/img/logos/viola.png" alt="Viola">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington">
+      <!-- duplicate set for seamless loop -->
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach">
+      <img src="../assets/img/logos/blades.png" alt="Blades">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville">
+      <img src="../assets/img/logos/camden.png" alt="Camden">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="DE City">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar">
+      <img src="../assets/img/logos/dover.png" alt="Dover">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton">
+      <img src="../assets/img/logos/milford.png" alt="Milford">
+      <img src="../assets/img/logos/milton.png" alt="Milton">
+      <img src="../assets/img/logos/natural-resources.png" alt="Natural Resources">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County">
+      <img src="../assets/img/logos/newark.png" alt="Newark">
+      <img src="../assets/img/logos/newport.png" alt="Newport">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River and Bay">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware">
+      <img src="../assets/img/logos/viola.png" alt="Viola">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington">
+    </div>
+  </div>
+</div>
+
 <!-- FEATURES -->
 <section class="features-section" id="features">
   <div class="container">
@@ -460,6 +582,99 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section class="platform-section" id="platform-preview">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">The Platform, Up Close</div>
+        <div class="section-title">Built for recruiters.<br><span>Designed to be used every day.</span></div>
+        <p class="section-sub mx-auto text-center">
+          Every screen in All-Star Recruiter is purpose-built for public safety hiring — from the candidate pipeline to automated campaigns and recruiting reports.
+        </p>
+      </div>
+    </div>
+
+    <!-- CRM full-width -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/candidates</span>
+          </div>
+          <img src="../assets/img/crm-candidates.png" alt="All-Star Recruiter Candidate CRM">
+        </div>
+      </div>
+    </div>
+
+    <!-- Web builder + SMS side by side -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-7">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/website-builder</span>
+          </div>
+          <img src="../assets/img/web-builder.png" alt="All-Star Recruiter Web Builder">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/messaging</span>
+          </div>
+          <img src="../assets/img/sms-messaging.png" alt="All-Star Recruiter SMS & Email Messaging">
+        </div>
+      </div>
+    </div>
+
+    <!-- Workflow + Campaign + Reports -->
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/workflows</span>
+          </div>
+          <img src="../assets/img/workflow-builder.png" alt="All-Star Recruiter Workflow Builder">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/campaigns</span>
+          </div>
+          <img src="../assets/img/campaign-builder.png" alt="All-Star Recruiter Campaign Builder">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/reports</span>
+          </div>
+          <img src="../assets/img/reports-dashboard.png" alt="All-Star Recruiter Reports Dashboard">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -750,5 +965,27 @@
 </footer>
 
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+(function() {
+  var lbx = document.createElement('div'); lbx.id = 'lbx';
+  lbx.innerHTML = '<button id="lbx-close" title="Close (Esc)">&times;</button><div id="lbx-inner"><img id="lbx-img" src="" alt=""></div>';
+  lbx.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);overflow-y:auto;padding:40px 20px;';
+  document.body.appendChild(lbx);
+  document.getElementById('lbx-close').style.cssText = 'position:fixed;top:14px;right:18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:10000;';
+  document.getElementById('lbx-inner').style.cssText = 'max-width:1300px;margin:0 auto;';
+  document.getElementById('lbx-img').style.cssText = 'width:100%;border-radius:8px;box-shadow:0 32px 80px rgba(0,0,0,.5);display:block;';
+  function lbxOpen(src,alt){document.getElementById('lbx-img').src=src;document.getElementById('lbx-img').alt=alt||'';lbx.style.display='block';document.body.style.overflow='hidden';}
+  function lbxClose(){lbx.style.display='none';document.body.style.overflow='';}
+  document.getElementById('lbx-close').addEventListener('click',lbxClose);
+  lbx.addEventListener('click',function(e){if(e.target===lbx)lbxClose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lbxClose();});
+  document.querySelectorAll('.browser-frame img').forEach(function(img){
+    img.addEventListener('click',function(){lbxOpen(this.src,this.alt);});
+  });
+  document.querySelectorAll('.browser-chrome').forEach(function(c){
+    var s=document.createElement('span');s.className='browser-expand';s.textContent='⤢ expand';c.appendChild(s);
+  });
+})();
+</script>
 </body>
 </html>
