@@ -408,6 +408,16 @@
     .btn-toggle-pro[aria-expanded="true"] .toggle-arrow { transform: rotate(180deg); }
     .toggle-arrow { transition: transform .2s; display: inline-block; }
 
+    /* ── Logo scroll ─────────────────────────────────────────── */
+    .logo-scroll-section { padding: 2.5rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; overflow: hidden; }
+    .logo-scroll-label { text-align: center; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 1.25rem; margin-top: 0; }
+    .logo-scroll-track-wrap { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-scroll-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: logo-scroll 55s linear infinite; }
+    .logo-scroll-track:hover { animation-play-state: paused; }
+    @keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-scroll-track img { height: 50px; width: auto; max-width: 110px; object-fit: contain; filter: grayscale(100%) opacity(.45); transition: filter .25s; flex-shrink: 0; }
+    .logo-scroll-track img:hover { filter: grayscale(0%) opacity(1); }
+
     /* ── Browser frame ───────────────────────────────────────── */
     .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
     .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
@@ -518,6 +528,101 @@
     </div>
   </div>
 </div>
+
+<!-- LOGO SCROLL -->
+<section class="logo-scroll-section">
+  <p class="logo-scroll-label">Agencies already using All-Star Recruiter</p>
+  <div class="logo-scroll-track-wrap">
+    <div class="logo-scroll-track">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach PD">
+      <img src="../assets/img/logos/blades.png" alt="Blades PD">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville PD">
+      <img src="../assets/img/logos/camden.png" alt="Camden PD">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol Police">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold PD">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton PD">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro PD">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="Delaware City PD">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University PD">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar PD">
+      <img src="../assets/img/logos/dover.png" alt="Dover PD">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale PD">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere PD">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island PD">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Delaware State Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford PD">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood PD">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington PD">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington PD">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton PD">
+      <img src="../assets/img/logos/milford.png" alt="Milford PD">
+      <img src="../assets/img/logos/milton.png" alt="Milton PD">
+      <img src="../assets/img/logos/natural-resources.png" alt="DNREC">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County PD">
+      <img src="../assets/img/logos/newark.png" alt="Newark PD">
+      <img src="../assets/img/logos/newport.png" alt="Newport PD">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach PD">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River &amp; Bay Authority">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville PD">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany PD">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield PD">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/viola.png" alt="Viola PD">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach PD">
+      <img src="../assets/img/logos/blades.png" alt="Blades PD">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville PD">
+      <img src="../assets/img/logos/camden.png" alt="Camden PD">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol Police">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold PD">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton PD">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro PD">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="Delaware City PD">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University PD">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar PD">
+      <img src="../assets/img/logos/dover.png" alt="Dover PD">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale PD">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere PD">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island PD">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Delaware State Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford PD">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood PD">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington PD">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington PD">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton PD">
+      <img src="../assets/img/logos/milford.png" alt="Milford PD">
+      <img src="../assets/img/logos/milton.png" alt="Milton PD">
+      <img src="../assets/img/logos/natural-resources.png" alt="DNREC">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County PD">
+      <img src="../assets/img/logos/newark.png" alt="Newark PD">
+      <img src="../assets/img/logos/newport.png" alt="Newport PD">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach PD">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River &amp; Bay Authority">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville PD">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany PD">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield PD">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/viola.png" alt="Viola PD">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington PD">
+    </div>
+  </div>
+</section>
 
 <!-- TRANSPARENCY / WHY FREE -->
 <section style="background:#fff;padding:5rem 0;border-bottom:1px solid #e2e8f0;">
@@ -1246,7 +1351,7 @@
     <p class="lede">Tell us about your agency. Account verification within 1 business day. Once verified, you'll be up and running in about 5 minutes.</p>
 
     <div class="cta-form-card">
-      <div id="cta-form">
+      <form id="cta-form" novalidate>
 
         <!-- Hidden tracking fields (populated by JS from URL params) -->
         <input type="hidden" id="field_ref" name="ref" value="">
@@ -1260,47 +1365,47 @@
         <div class="row g-3 mb-3">
           <div class="col-12">
             <label class="form-label">Agency Name <span style="color:#f87171;">*</span></label>
-            <input type="text" class="form-control" placeholder="Austin Police Department">
+            <input type="text" class="form-control" name="agency_name" placeholder="Austin Police Department">
           </div>
         </div>
 
         <div class="row g-3 mb-3">
           <div class="col-sm-6">
             <label class="form-label">First Name <span style="color:#f87171;">*</span></label>
-            <input type="text" class="form-control" placeholder="Jane">
+            <input type="text" class="form-control" name="first_name" placeholder="Jane">
           </div>
           <div class="col-sm-6">
             <label class="form-label">Last Name <span style="color:#f87171;">*</span></label>
-            <input type="text" class="form-control" placeholder="Smith">
+            <input type="text" class="form-control" name="last_name" placeholder="Smith">
           </div>
         </div>
 
         <div class="row g-3 mb-3">
           <div class="col-sm-8">
             <label class="form-label">Work Email <span style="color:#f87171;">*</span></label>
-            <input type="email" class="form-control" placeholder="jane@austinpd.gov">
+            <input type="email" class="form-control" name="email" placeholder="jane@austinpd.gov">
           </div>
           <div class="col-sm-4">
             <label class="form-label">Phone <span style="color:#f87171;">*</span></label>
-            <input type="tel" class="form-control" placeholder="(512) 555-0100">
+            <input type="tel" class="form-control" name="phone" placeholder="(512) 555-0100">
           </div>
         </div>
 
         <div class="row g-3 mb-3">
           <div class="col-sm-6">
             <label class="form-label">Title</label>
-            <input type="text" class="form-control" placeholder="Recruiting Sergeant">
+            <input type="text" class="form-control" name="title" placeholder="Recruiting Sergeant">
           </div>
           <div class="col-sm-6">
             <label class="form-label">State <span style="color:#f87171;">*</span></label>
-            <input type="text" class="form-control" placeholder="TX">
+            <input type="text" class="form-control" name="state" placeholder="TX">
           </div>
         </div>
 
         <div class="row g-3 mb-3">
           <div class="col-sm-7">
             <label class="form-label">Agency Size (Sworn Officers) <span style="color:#f87171;">*</span></label>
-            <select class="form-select">
+            <select class="form-select" name="agency_size">
               <option value="" disabled selected>Select your agency size…</option>
               <option value="1-49">1 – 49 Sworn Officers</option>
               <option value="50-99">50 – 99 Sworn Officers</option>
@@ -1323,7 +1428,7 @@
         <div class="row g-3 mb-3">
           <div class="col-12">
             <label class="form-label">What is your biggest recruiting challenge right now?</label>
-            <select class="form-select">
+            <select class="form-select" name="challenge">
               <option value="" disabled selected>Select your biggest challenge…</option>
               <option value="not-enough-applicants">Not enough applicants</option>
               <option value="slow-followup">Slow candidate follow-up</option>
@@ -1340,7 +1445,7 @@
         <div class="row g-3 mb-3">
           <div class="col-12">
             <label class="form-label">Referred by a Guardian representative or referral code <span style="color:rgba(255,255,255,.4);">(optional)</span></label>
-            <input type="text" id="field_ref_visible" class="form-control" placeholder="Rep name or referral code">
+            <input type="text" id="field_ref_visible" name="referral" class="form-control" placeholder="Rep name or referral code">
           </div>
         </div>
 
@@ -1360,11 +1465,11 @@
           </div>
         </div>
 
-        <button class="btn-cta-submit" onclick="submitCta()">
+        <button type="button" class="btn-cta-submit" onclick="submitCta()">
           <i class="bi bi-rocket-takeoff me-2"></i>Claim My Free Partner Account
         </button>
         <p class="cta-fine">No credit card required. Free tier never expires. We verify Guardian Alliance membership before activation.</p>
-      </div>
+      </form>
 
       <div class="cta-confirm" id="cta-confirm">
         <div class="cta-confirm-icon"><i class="bi bi-check-lg"></i></div>
@@ -1404,8 +1509,47 @@
   }
 
   function submitCta() {
-    document.getElementById('cta-form').style.display = 'none';
-    document.getElementById('cta-confirm').style.display = 'block';
+    var form = document.getElementById('cta-form');
+    var required = [
+      {name:'agency_name', label:'Agency Name'},
+      {name:'first_name',  label:'First Name'},
+      {name:'last_name',   label:'Last Name'},
+      {name:'email',       label:'Work Email'},
+      {name:'phone',       label:'Phone'},
+      {name:'state',       label:'State'},
+      {name:'agency_size', label:'Agency Size'},
+      {name:'guardian_customer', label:'Guardian Alliance customer'}
+    ];
+    for (var i = 0; i < required.length; i++) {
+      var el = form.querySelector('[name="' + required[i].name + '"]');
+      if (!el || !el.value.trim()) {
+        el && el.focus();
+        el && (el.style.borderColor = '#f87171');
+        setTimeout(function(e){ e.style.borderColor = ''; }.bind(null, el), 2000);
+        return;
+      }
+    }
+    var btn = form.querySelector('.btn-cta-submit');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting…';
+    fetch('https://formspree.io/f/mlgkgygj', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r) {
+      if (r.ok) {
+        form.style.display = 'none';
+        document.getElementById('cta-confirm').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-rocket-takeoff me-2"></i>Claim My Free Partner Account';
+        alert('Something went wrong. Please try again.');
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-rocket-takeoff me-2"></i>Claim My Free Partner Account';
+      alert('Something went wrong. Please check your connection and try again.');
+    });
   }
 
   /* Lightbox */
