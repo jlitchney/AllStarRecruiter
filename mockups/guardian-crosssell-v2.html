@@ -407,6 +407,13 @@
     .btn-toggle-pro:hover { border-color: var(--navy-mid); color: var(--navy-mid); }
     .btn-toggle-pro[aria-expanded="true"] .toggle-arrow { transform: rotate(180deg); }
     .toggle-arrow { transition: transform .2s; display: inline-block; }
+
+    /* ── Browser frame ───────────────────────────────────────── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-frame img { width: 100%; display: block; }
   </style>
 </head>
 <body>
@@ -756,6 +763,28 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section style="background:#f8fafc;padding:5rem 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">The Platform</div>
+        <div class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);margin-bottom:.75rem;">This is what your recruiting team sees.</div>
+        <p class="section-sub mx-auto text-center">Every candidate, every tag, every conversation — in one place. No spreadsheets. No chasing emails. Real data from a live department.</p>
+      </div>
+    </div>
+    <div class="browser-frame">
+      <div class="browser-chrome">
+        <span class="browser-dot" style="background:#ff5f57;"></span>
+        <span class="browser-dot" style="background:#febc2e;"></span>
+        <span class="browser-dot" style="background:#28c840;"></span>
+        <span class="browser-url">app.allstarrecruiter.com · Candidates</span>
+      </div>
+      <img src="../assets/img/crm-candidates.png" alt="All-Star Recruiter — Candidates CRM">
     </div>
   </div>
 </section>

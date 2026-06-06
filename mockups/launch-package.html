@@ -489,6 +489,16 @@
       .faq-item:nth-child(odd) { border-right: none; padding-right: 0; }
       .faq-item:nth-child(even) { padding-left: 0; }
     }
+
+    /* ── Browser frame ───────────────────────────────────────── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.1); }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-frame img { width: 100%; display: block; }
+    .screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .screenshot-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,.45); margin-bottom: 10px; }
+    @media (max-width: 768px) { .screenshot-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -598,6 +608,43 @@
         <h3>4-Week Adoption Training</h3>
         <p>Four weekly 30-minute sessions with your recruiting team after go-live. We review what's working, answer questions, and make sure adoption sticks — not just a one-time handoff. Each session is recorded so anyone who misses can catch up.</p>
         <span class="card-tag">Adoption</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM SCREENSHOTS -->
+<section style="background:var(--navy);padding:80px 40px;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-label" style="color:rgba(228,170,53,.75);">Built Inside Your Account</div>
+      <h2 style="color:white;">The tools we configure for you.</h2>
+      <p class="subhead" style="color:rgba(255,255,255,.55);margin:0 auto;">These are real screens from All-Star Recruiter — the workflow builder and campaign creator we set up as part of your Launch Package.</p>
+    </div>
+    <div class="screenshot-grid">
+      <div>
+        <div class="screenshot-label">Workflow Builder</div>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Workflows</span>
+          </div>
+          <img src="../assets/img/workflow-builder.png" alt="All-Star Recruiter — Workflow Builder">
+        </div>
+      </div>
+      <div>
+        <div class="screenshot-label">Campaign Builder</div>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Campaigns</span>
+          </div>
+          <img src="../assets/img/campaign-builder.png" alt="All-Star Recruiter — Campaign Builder">
+        </div>
       </div>
     </div>
   </div>
