@@ -608,10 +608,12 @@
     var btn = form.querySelector('.btn-submit');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting…';
-    fetch('https://formspree.io/f/mlgkgygj', {
+    var data = {};
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
+    fetch('https://app.lawenforcementrecruiter.com/api/submit', {
       method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).then(function(r) {
       if (r.ok) {
         form.style.display = 'none';
