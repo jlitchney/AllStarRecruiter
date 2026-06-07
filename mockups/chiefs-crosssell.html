@@ -264,6 +264,16 @@
     footer a { color: rgba(255,255,255,.4); text-decoration: none; }
     footer a:hover { color: rgba(255,255,255,.7); }
 
+    /* ── Logo scroll ─────────────────────────────────────────── */
+    .logo-scroll-section { padding: 2.5rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; overflow: hidden; }
+    .logo-scroll-label { text-align: center; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 1.25rem; margin-top: 0; }
+    .logo-scroll-track-wrap { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-scroll-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: logo-scroll 55s linear infinite; }
+    .logo-scroll-track:hover { animation-play-state: paused; }
+    @keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-scroll-track img { height: 50px; width: auto; max-width: 110px; object-fit: contain; filter: grayscale(100%) opacity(.45); transition: filter .25s; flex-shrink: 0; }
+    .logo-scroll-track img:hover { filter: grayscale(0%) opacity(1); }
+
     /* ── Browser frame ───────────────────────────────────────── */
     .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
     .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
@@ -368,6 +378,120 @@
     </div>
   </div>
 </div>
+
+<!-- LOGO SCROLL -->
+<section class="logo-scroll-section">
+  <p class="logo-scroll-label">Agencies already using All-Star Recruiter</p>
+  <div class="logo-scroll-track-wrap">
+    <div class="logo-scroll-track">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach PD">
+      <img src="../assets/img/logos/blades.png" alt="Blades PD">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville PD">
+      <img src="../assets/img/logos/camden.png" alt="Camden PD">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol Police">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold PD">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton PD">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro PD">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="Delaware City PD">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University PD">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar PD">
+      <img src="../assets/img/logos/dover.png" alt="Dover PD">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale PD">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere PD">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island PD">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Delaware State Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford PD">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood PD">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington PD">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington PD">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton PD">
+      <img src="../assets/img/logos/milford.png" alt="Milford PD">
+      <img src="../assets/img/logos/milton.png" alt="Milton PD">
+      <img src="../assets/img/logos/natural-resources.png" alt="DNREC">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County PD">
+      <img src="../assets/img/logos/newark.png" alt="Newark PD">
+      <img src="../assets/img/logos/newport.png" alt="Newport PD">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach PD">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River &amp; Bay Authority">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville PD">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany PD">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield PD">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/viola.png" alt="Viola PD">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach PD">
+      <img src="../assets/img/logos/blades.png" alt="Blades PD">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville PD">
+      <img src="../assets/img/logos/camden.png" alt="Camden PD">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol Police">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold PD">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton PD">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro PD">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="Delaware City PD">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University PD">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar PD">
+      <img src="../assets/img/logos/dover.png" alt="Dover PD">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale PD">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere PD">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island PD">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Delaware State Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford PD">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood PD">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington PD">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington PD">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton PD">
+      <img src="../assets/img/logos/milford.png" alt="Milford PD">
+      <img src="../assets/img/logos/milton.png" alt="Milton PD">
+      <img src="../assets/img/logos/natural-resources.png" alt="DNREC">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County PD">
+      <img src="../assets/img/logos/newark.png" alt="Newark PD">
+      <img src="../assets/img/logos/newport.png" alt="Newport PD">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach PD">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River &amp; Bay Authority">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville PD">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany PD">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield PD">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/viola.png" alt="Viola PD">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington PD">
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section style="background:#0f172a;padding:5rem 0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(228,170,53,.8);margin-bottom:.5rem;">See It In Action</div>
+        <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:0;">Everything your team needs,<br><span style="color:var(--gold);">in two minutes.</span></h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div style="padding:56.25% 0 0 0;position:relative;border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);">
+          <iframe src="https://player.vimeo.com/video/1154471246?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="AST Sizzle Reel"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- TRANSPARENCY / WHY FREE -->
 <section style="background:#fff;padding:5rem 0;border-bottom:1px solid #e2e8f0;">
@@ -974,6 +1098,7 @@
   </div>
 </footer>
 
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script>
   (function() {
