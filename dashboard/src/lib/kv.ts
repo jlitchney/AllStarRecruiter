@@ -76,6 +76,20 @@ export async function updateAgency(id: string, patch: Partial<Pick<Agency, "stat
   return updated;
 }
 
+export async function deleteAgency(id: string): Promise<void> {
+  if (!hasKV()) {
+    delete memAgencies[id];
+    memIndex = memIndex.filter((i) => i !== id);
+    return;
+  }
+  const db = await kv();
+  const ids = (await db.get<string[]>(AGENCIES_INDEX_KEY)) ?? [];
+  await Promise.all([
+    db.del(agencyKey(id)),
+    db.set(AGENCIES_INDEX_KEY, ids.filter((i) => i !== id)),
+  ]);
+}
+
 export async function getAgenciesByStatus(status: AgencyStatus): Promise<Agency[]> {
   const all = await getAgencies();
   return all.filter((a) => a.status === status);

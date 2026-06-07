@@ -23,6 +23,14 @@ export function AgencyDetailClient({ agency: initial }: { agency: Agency }) {
   const [notes, setNotes] = useState(initial.notes ?? "");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  async function handleDelete() {
+    if (!confirm(`Delete ${agency.agency_name}? This cannot be undone.`)) return;
+    setDeleting(true);
+    await fetch(`/api/agencies/${agency.id}`, { method: "DELETE" });
+    router.push("/dashboard");
+  }
 
   async function save(patch: Partial<Pick<Agency, "status" | "notes">>) {
     setSaving(true);
@@ -56,6 +64,15 @@ export function AgencyDetailClient({ agency: initial }: { agency: Agency }) {
           <span className="text-gray-300">/</span>
           <span className="text-sm font-semibold text-gray-900">{agency.agency_name}</span>
           <span className="text-xs font-mono text-gray-400 bg-gray-100 px-2 py-0.5 rounded">{agency.agency_abbr}</span>
+          <div className="ml-auto">
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="text-xs text-red-500 hover:text-red-700 border border-red-200 hover:border-red-300 rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {deleting ? "Deleting…" : "Delete"}
+            </button>
+          </div>
         </div>
       </header>
 
