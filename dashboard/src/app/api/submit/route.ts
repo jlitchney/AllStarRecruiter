@@ -45,8 +45,7 @@ export async function POST(req: NextRequest) {
       ref: body.ref ?? body.guardian_ref ?? undefined,
     });
 
-    // Fire-and-forget notification — don't block the response
-    sendNewAgencyNotification(agency).catch(console.error);
+    await sendNewAgencyNotification(agency);
 
     return NextResponse.json({ ok: true, id: agency.id }, { status: 201, headers: CORS_HEADERS });
   } catch (err) {

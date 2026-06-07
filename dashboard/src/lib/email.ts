@@ -11,7 +11,7 @@ export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
     ? settings.notificationEmails
     : [process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us"];
 
-  await resend.emails.send({
+  const result = await resend.emails.send({
     from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
     to,
     subject: `New Agency Signup: ${agency.agency_name} (${agency.agency_abbr}) — ${agency.state}`,
@@ -37,4 +37,5 @@ export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
       </div>
     `,
   });
+  if (result.error) throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
 }
