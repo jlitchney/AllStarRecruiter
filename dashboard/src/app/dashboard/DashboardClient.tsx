@@ -50,10 +50,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-md bg-blue-900 flex items-center justify-center flex-shrink-0">
-              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-yellow-400"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-            </div>
-            <span className="font-bold text-gray-900 text-sm">Agency Dashboard</span>
+            <img src="/logo-black.svg" alt="All-Star Recruiter" className="h-7 w-auto" />
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs text-gray-500 hidden sm:block">{user}</span>
