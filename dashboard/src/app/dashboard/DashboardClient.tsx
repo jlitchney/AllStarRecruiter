@@ -8,6 +8,56 @@ import { STATUS_LABELS, STATUS_COLORS } from "@/types";
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
 
+const CSV_COLUMNS: { key: keyof Agency; label: string }[] = [
+  { key: "agency_name",   label: "Agency Name" },
+  { key: "agency_abbr",   label: "Abbreviation" },
+  { key: "address",       label: "Address" },
+  { key: "city",          label: "City" },
+  { key: "state",         label: "State" },
+  { key: "zip",           label: "Zip" },
+  { key: "first_name",    label: "First Name" },
+  { key: "last_name",     label: "Last Name" },
+  { key: "title",         label: "Title" },
+  { key: "email",         label: "Email" },
+  { key: "phone",         label: "Phone" },
+  { key: "agency_size",   label: "Agency Size" },
+  { key: "status",        label: "Status" },
+  { key: "plan_selected", label: "Plan" },
+  { key: "variant",       label: "Form Variant" },
+  { key: "utm_source",    label: "UTM Source" },
+  { key: "utm_medium",    label: "UTM Medium" },
+  { key: "utm_campaign",  label: "UTM Campaign" },
+  { key: "ref",           label: "Ref" },
+  { key: "notes",         label: "Notes" },
+  { key: "created_at",    label: "Submitted At" },
+  { key: "updated_at",    label: "Updated At" },
+  { key: "id",            label: "ID" },
+];
+
+function csvCell(value: unknown): string {
+  if (value == null) return "";
+  const s = String(value);
+  if (s.includes('"') || s.includes(",") || s.includes("\n")) {
+    return `"${s.replace(/"/g, '""')}"`;
+  }
+  return s;
+}
+
+function downloadCSV(agencies: Agency[]) {
+  const header = CSV_COLUMNS.map((c) => c.label).join(",");
+  const rows = agencies.map((a) =>
+    CSV_COLUMNS.map((c) => csvCell(a[c.key])).join(",")
+  );
+  const csv = [header, ...rows].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `agencies-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function StatusBadge({ status }: { status: AgencyStatus }) {
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${STATUS_COLORS[status]}`}>
@@ -94,7 +144,14 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
             onChange={(e) => setSearch(e.target.value)}
             className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap items-start">
+            <button
+              onClick={() => downloadCSV(agencies)}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-gray-300 transition-colors cursor-pointer whitespace-nowrap"
+              title="Export all agencies to CSV"
+            >
+              ↓ Export CSV
+            </button>
             {(["all", ...ALL_STATUSES] as const).map((s) => (
               <button
                 key={s}
