@@ -1,11 +1,15 @@
 import type { Agency } from "@/types";
+import { getSettings } from "@/lib/kv";
 
 export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
   if (!process.env.RESEND_API_KEY) return;
 
   const { Resend } = await import("resend");
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const to = process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us";
+  const settings = await getSettings();
+  const to = settings.notificationEmails.length > 0
+    ? settings.notificationEmails
+    : [process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us"];
 
   await resend.emails.send({
     from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",

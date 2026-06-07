@@ -76,6 +76,30 @@ export async function updateAgency(id: string, patch: Partial<Pick<Agency, "stat
   return updated;
 }
 
+const SETTINGS_KEY = "asr:settings";
+
+export interface AppSettings {
+  notificationEmails: string[];
+}
+
+const DEFAULT_SETTINGS: AppSettings = {
+  notificationEmails: [process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us"],
+};
+
+export async function getSettings(): Promise<AppSettings> {
+  if (!hasKV()) return { ...DEFAULT_SETTINGS };
+  try {
+    const db = await kv();
+    return (await db.get<AppSettings>(SETTINGS_KEY)) ?? { ...DEFAULT_SETTINGS };
+  } catch { return { ...DEFAULT_SETTINGS }; }
+}
+
+export async function saveSettings(settings: AppSettings): Promise<void> {
+  if (!hasKV()) return;
+  const db = await kv();
+  await db.set(SETTINGS_KEY, settings);
+}
+
 export async function deleteAgency(id: string): Promise<void> {
   if (!hasKV()) {
     delete memAgencies[id];
