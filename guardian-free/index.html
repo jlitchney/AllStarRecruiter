@@ -484,6 +484,26 @@
               </div>
             </div>
             <div class="row g-3 mb-3">
+              <div class="col-12">
+                <label class="form-label">Agency Address <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="address" placeholder="123 Main Street">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-sm-5">
+                <label class="form-label">City <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="city" placeholder="Austin">
+              </div>
+              <div class="col-sm-3">
+                <label class="form-label">State <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="state" placeholder="TX">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label">Zip <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="zip" placeholder="78701">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
               <div class="col-sm-6">
                 <label class="form-label">First Name <span style="color:#f87171;">*</span></label>
                 <input type="text" class="form-control" name="first_name" placeholder="Jane">
@@ -501,16 +521,6 @@
               <div class="col-sm-4">
                 <label class="form-label">Phone <span style="color:#f87171;">*</span></label>
                 <input type="tel" class="form-control" name="phone" placeholder="(512) 555-0100">
-              </div>
-            </div>
-            <div class="row g-3 mb-3">
-              <div class="col-sm-6">
-                <label class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" placeholder="Recruiting Sergeant">
-              </div>
-              <div class="col-sm-6">
-                <label class="form-label">State <span style="color:#f87171;">*</span></label>
-                <input type="text" class="form-control" name="state" placeholder="TX">
               </div>
             </div>
             <div class="row g-3 mb-4">
@@ -566,11 +576,14 @@
     var form = document.getElementById('cta-form');
     var required = [
       {name:'agency_name', label:'Agency Name'},
+      {name:'address',     label:'Agency Address'},
+      {name:'city',        label:'City'},
+      {name:'state',       label:'State'},
+      {name:'zip',         label:'Zip'},
       {name:'first_name',  label:'First Name'},
       {name:'last_name',   label:'Last Name'},
       {name:'email',       label:'Work Email'},
       {name:'phone',       label:'Phone'},
-      {name:'state',       label:'State'},
       {name:'agency_size', label:'Agency Size'}
     ];
     for (var i = 0; i < required.length; i++) {
