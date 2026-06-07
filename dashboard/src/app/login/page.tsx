@@ -12,12 +12,7 @@ function LoginContent() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl border border-gray-200 shadow-sm w-full max-w-sm p-8">
         <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-blue-900 flex items-center justify-center">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-yellow-400"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-            </div>
-            <span className="font-bold text-gray-900 text-sm">All-Star Recruiter</span>
-          </div>
+          <img src="/logo-black.svg" alt="All-Star Recruiter" className="h-8 w-auto mx-auto mb-3" />
           <p className="text-sm text-gray-500">Agency Dashboard — Sign in to continue</p>
         </div>
 
