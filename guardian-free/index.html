@@ -84,6 +84,15 @@
     .cta-confirm h3 { color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: .5rem; }
     .cta-confirm p { color: rgba(255,255,255,.55); font-size: .95rem; }
 
+    /* ── Browser frame ── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-expand { margin-left: 8px; font-size: 11px; color: #aaa; flex-shrink: 0; letter-spacing: .2px; }
+    .browser-frame img { width: 100%; display: block; height: 300px; object-fit: cover; object-position: top; transition: transform .25s ease; }
+    .browser-frame:hover img { transform: scale(1.02); }
+
     /* ── Footer ── */
     footer { background: #060e1f; padding: 2rem 0; }
     footer p { color: rgba(255,255,255,.25); font-size: .78rem; margin: 0; text-align: center; }
@@ -270,6 +279,66 @@
   </div>
 </div>
 
+<!-- TRANSPARENCY / WHY FREE -->
+<section style="background:#fff;padding:5rem 0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div style="display:inline-flex;align-items:center;gap:.75rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:1rem;">
+          <span style="width:24px;height:2px;background:#cbd5e1;display:inline-block;"></span>
+          Plain Talk
+          <span style="width:24px;height:2px;background:#cbd5e1;display:inline-block;"></span>
+        </div>
+        <h2 style="font-size:1.9rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.2;margin-bottom:.85rem;">
+          You're a cop. You're skeptical of "free."<br>That's fair. Here's the honest answer.
+        </h2>
+        <p style="color:#64748b;font-size:1rem;line-height:1.7;max-width:600px;margin:0 auto;">
+          We've heard it. "Nothing is free — what's the catch?" The catch is there isn't one. But we're not going to just say that and expect you to believe us. Here's exactly how this works.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid var(--navy);padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.6rem;">The cost reality</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">The infrastructure cost is genuinely low</h3>
+          <p style="font-size:.88rem;color:#374151;line-height:1.75;margin:0;">
+            Running email, candidate records, tagging, a recruiting web page, and Guardian integration for a law enforcement agency costs a few dollars a month — maybe less. We built this system already. Adding your account doesn't cost us much to operate. We're not absorbing a significant loss. We're offering something that costs us very little but is genuinely useful to you.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid var(--gold);padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#92400e;margin-bottom:.6rem;">Where this came from</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">Built from real campaigns, not a pitch deck</h3>
+          <p style="font-size:.88rem;color:#374151;line-height:1.75;margin:0;">
+            Before there was software, we ran law enforcement recruitment campaigns for some of the largest agencies in the country. We built this platform to support a statewide hiring initiative for the State of Delaware. The software didn't come first — the real work did. We learned what agencies actually needed by doing it, then built the tools that solved it.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid #7c3aed;padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#7c3aed;margin-bottom:.6rem;">Our business model</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">About 15% of free agencies upgrade. That's enough.</h3>
+          <p style="font-size:.88rem;color:#374151;line-height:1.75;margin:0;">
+            We expect about 15% of agencies on the free plan will eventually upgrade to Pro — for SMS, events, automation, or analytics. That pays for everything. The other 85% can use the free plan forever. If you never upgrade, we still want your agency using this. Safer communities are the point. Revenue comes when we've earned it.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="max-width:680px;margin:2.5rem auto 0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem 2rem;text-align:center;">
+      <p style="font-size:.97rem;font-weight:700;color:#0f172a;margin-bottom:.4rem;">Use the free version forever. Upgrade when it makes sense — or don't.</p>
+      <p style="font-size:.85rem;color:#64748b;line-height:1.65;margin:0;">No sales calls every 30 days. No trial period that flips to paid. No feature that disappears next quarter. The free plan stays free. If Pro ever becomes worth it to your agency, you'll know.</p>
+    </div>
+  </div>
+</section>
+
 <!-- WHAT'S INCLUDED -->
 <section class="included-section" id="included">
   <div class="container">
@@ -333,6 +402,57 @@
             <i class="bi bi-rocket-takeoff me-2"></i>Claim Your Free Account
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section style="background:#f8fafc;padding:5rem 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-7 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.5rem;">The Platform</div>
+        <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.2;margin-bottom:.75rem;">This is what your recruiting team sees.</h2>
+        <p style="color:#64748b;font-size:.95rem;line-height:1.65;max-width:520px;margin:0 auto;">Every candidate, every tag, every conversation — in one place. No spreadsheets. No chasing emails. Real data from a live department.</p>
+      </div>
+    </div>
+    <div class="row g-4 mb-4">
+      <div class="col-lg-7">
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">Recruiting CRM</p>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Candidates</span>
+          </div>
+          <img src="../assets/img/crm-candidates.png" alt="All-Star Recruiter — Candidates CRM">
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">Recruiting Website Builder</p>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Web Builder</span>
+          </div>
+          <img src="../assets/img/web-builder.png" alt="All-Star Recruiter — Web Builder">
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">SMS &amp; Email — Built-In Messaging</p>
+      <div class="browser-frame">
+        <div class="browser-chrome">
+          <span class="browser-dot" style="background:#ff5f57;"></span>
+          <span class="browser-dot" style="background:#febc2e;"></span>
+          <span class="browser-dot" style="background:#28c840;"></span>
+          <span class="browser-url">app.allstarrecruiter.com · Candidates · Conversation</span>
+        </div>
+        <img src="../assets/img/sms-messaging.png" alt="All-Star Recruiter — SMS &amp; Email Messaging">
       </div>
     </div>
   </div>
@@ -483,6 +603,30 @@
       alert('Something went wrong. Please check your connection and try again.');
     });
   }
+</script>
+<script>
+  /* Lightbox */
+  (function() {
+    var lbx = document.createElement('div');
+    lbx.id = 'lbx';
+    lbx.innerHTML = '<button id="lbx-close" title="Close (Esc)">&times;</button><div id="lbx-inner"><img id="lbx-img" src="" alt=""></div>';
+    lbx.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);overflow-y:auto;padding:40px 20px;';
+    document.body.appendChild(lbx);
+    document.getElementById('lbx-close').style.cssText = 'position:fixed;top:14px;right:18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:10000;';
+    document.getElementById('lbx-inner').style.cssText = 'max-width:1300px;margin:0 auto;';
+    document.getElementById('lbx-img').style.cssText = 'width:100%;border-radius:8px;box-shadow:0 32px 80px rgba(0,0,0,.5);display:block;';
+    function lbxOpen(src,alt){document.getElementById('lbx-img').src=src;document.getElementById('lbx-img').alt=alt||'';lbx.style.display='block';document.body.style.overflow='hidden';}
+    function lbxClose(){lbx.style.display='none';document.body.style.overflow='';}
+    document.getElementById('lbx-close').addEventListener('click',lbxClose);
+    lbx.addEventListener('click',function(e){if(e.target===lbx)lbxClose();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')lbxClose();});
+    document.querySelectorAll('.browser-frame img').forEach(function(img){
+      img.addEventListener('click',function(){lbxOpen(this.src,this.alt);});
+    });
+    document.querySelectorAll('.browser-chrome').forEach(function(c){
+      var s=document.createElement('span');s.className='browser-expand';s.textContent='⤢ expand';c.appendChild(s);
+    });
+  })();
 </script>
 </body>
 </html>
