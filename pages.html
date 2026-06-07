@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>All-Star Recruiter — Pages</title>
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/mockup.css">
+
+  <style>
+    body { background: var(--leftnav-bg); min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1rem; }
+    .index-card { background: #fff; border-radius: .4rem; max-width: 760px; width: 100%; padding: 2.5rem; }
+    .mockup-link { display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-radius: .3rem; text-decoration: none; color: #1e293b; border: 1px solid #e2e8f0; transition: .15s; }
+    .mockup-link:hover { background: #f0f4ff; border-color: var(--leftnav-bg); color: var(--leftnav-bg); }
+    .mockup-link .badge-new { font-size: .65rem; background: var(--accent); color: #000; padding: 2px 8px; border-radius: 99px; font-weight: 700; }
+    .mockup-link .meta { font-size: .78rem; color: #64748b; margin-top: 2px; }
+
+    /* Accordion overrides */
+    .accordion-button {
+      font-size: .78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: #374151;
+      background: #f8fafc; padding: .65rem 1rem;
+    }
+    .accordion-button:not(.collapsed) {
+      background: #eef2ff; color: var(--leftnav-bg);
+      box-shadow: none;
+    }
+    .accordion-button::after { background-size: .85rem; }
+    .accordion-button .count-badge {
+      margin-left: .5rem; font-size: .65rem; font-weight: 700;
+      background: #e2e8f0; color: #475569;
+      padding: 1px 7px; border-radius: 99px;
+      text-transform: none; letter-spacing: 0;
+    }
+    .accordion-button:not(.collapsed) .count-badge {
+      background: #c7d2fe; color: var(--leftnav-bg);
+    }
+    .accordion-item { border: 1px solid #e2e8f0; border-radius: .3rem !important; margin-bottom: .5rem; overflow: hidden; }
+    .accordion-item:last-of-type { margin-bottom: 0; }
+    .accordion-body { padding: .75rem; display: flex; flex-direction: column; gap: .5rem; background: #fff; }
+  </style>
+</head>
+<body>
+
+<div class="index-card">
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <div style="width:44px;height:44px;background:var(--leftnav-bg);border-radius:.3rem;display:flex;align-items:center;justify-content:center;">
+      <i class="bi bi-layers text-white fs-5"></i>
+    </div>
+    <div>
+      <h1 class="h5 mb-0 fw-bold">AllStar Recruiter</h1>
+      <p class="text-muted small mb-0">Feature mockups &amp; wireframes for developer handoff</p>
+    </div>
+  </div>
+
+  <hr class="mb-4">
+
+  <p class="text-muted small mb-3">
+    Each mockup below is a standalone HTML file demonstrating a proposed feature.
+    Open any file in a browser — no build step needed. Share the link or file directly with developers.
+  </p>
+
+  <div class="accordion" id="mockupAccordion">
+
+    <!-- ── Main Website ──────────────────────────────────────────── -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#cat-main" aria-expanded="true">
+          <i class="bi bi-house me-2" style="font-size:.9rem;"></i>
+          Main Website
+          <span class="count-badge">1</span>
+        </button>
+      </h2>
+      <div id="cat-main" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+          <a href="/" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-globe2 fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">LawEnforcementRecruiter.com — Homepage <span class="badge-new">LIVE</span></div>
+              <div class="meta">Main marketing site. Full product pitch, pipeline UI mockup, proof stats, testimonials, "backed by All-Star Talent" section.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Job Board — Candidate Facing ─────────────────────────── -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#cat-jb-public" aria-expanded="true">
+          <i class="bi bi-globe2 me-2" style="font-size:.9rem;"></i>
+          Job Board — Candidate Facing
+          <span class="count-badge">6</span>
+        </button>
+      </h2>
+      <div id="cat-jb-public" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+
+          <a href="mockups/jb-listings.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-search fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Job Board — Listings &amp; Search <span class="badge-new">NEW</span></div>
+              <div class="meta">Public-facing job board. Hero search, category/location/salary filters, job cards, pagination.</div>
+            </div>
+          </a>
+
+          <a href="mockups/jb-detail.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-file-earmark-text fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Job Detail — Full Posting <span class="badge-new">NEW</span></div>
+              <div class="meta">Full job description, requirements, benefits, apply sidebar with inline form, similar jobs.</div>
+            </div>
+          </a>
+
+          <a href="mockups/jb-detail-branded.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-layout-text-window-reverse fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Job Detail — Branded Page <span class="badge-new">NEW</span></div>
+              <div class="meta">Branded job detail experience built by the agency in the web builder. Department hero, values, photos, benefits, dual-track requirements, apply CTA.</div>
+            </div>
+          </a>
+
+          <a href="mockups/jb-apply.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-pencil-square fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Job Application Form <span class="badge-new">NEW</span></div>
+              <div class="meta">Standalone apply page. Name, email, phone, position, message, email/SMS opt-ins. Confirmation state on submit.</div>
+            </div>
+          </a>
+
+          <a href="mockups/agencies.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-buildings fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Agencies — Search &amp; Browse <span class="badge-new">NEW</span></div>
+              <div class="meta">Public-facing agency directory. Search by name or city, grid of agency cards with description and open job count.</div>
+            </div>
+          </a>
+
+          <a href="mockups/agency-profile.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-building fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Agency Profile — Public Page <span class="badge-new">NEW</span></div>
+              <div class="meta">Candidate-facing agency profile. Agency description, open job listings, agency info sidebar.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Marketing Landing Pages ───────────────────────────────── -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#cat-marketing" aria-expanded="false">
+          <i class="bi bi-megaphone me-2" style="font-size:.9rem;"></i>
+          Marketing Landing Pages
+          <span class="count-badge">3</span>
+        </button>
+      </h2>
+      <div id="cat-marketing" class="accordion-collapse collapse">
+        <div class="accordion-body">
+
+          <a href="mockups/guardian-crosssell-v2.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-shield-fill-check fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Guardian Alliance — Cross-Sell v2 (Partner Funnel) <span class="badge-new">NEW</span></div>
+              <div class="meta">Repositioned as a Guardian partner channel offer. Guardian Partner Free Plan, built-from-real-campaigns section, workflow, services upsell, pain-based Pro framing, referral tracking, UTM params.</div>
+            </div>
+          </a>
+
+          <a href="mockups/chiefs-crosssell.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-award fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Police Chiefs' Associations — Cross-Sell <span class="badge-new">NEW</span></div>
+              <div class="meta">Targets Police Chiefs' Associations. Free tier includes Web Builder, Email, Tagging &amp; LE Job Board. Pro upsell with SMS, Events, Campaigns, AI and more.</div>
+            </div>
+          </a>
+
+          <a href="mockups/launch-package.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-rocket-takeoff-fill fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Pro Add-On — Launch Package <span class="badge-new">NEW</span></div>
+              <div class="meta">Done-for-you onboarding add-on for Pro agencies. Covers recruiting website build, drip campaigns, workflow automation, pre-screen setup, Guardian integration, and CALEA-ready reporting.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Job Board — CRM (Recruiter Facing) ────────────────────── -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#cat-jb-crm" aria-expanded="true">
+          <i class="bi bi-briefcase me-2" style="font-size:.9rem;"></i>
+          Job Board — CRM (Recruiter Facing)
+          <span class="count-badge">3</span>
+        </button>
+      </h2>
+      <div id="cat-jb-crm" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+
+          <a href="mockups/jobs-manage.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-briefcase fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Job Postings — Management List <span class="badge-new">NEW</span></div>
+              <div class="meta">CRM jobs dashboard. Stat cards, filter/search, table of active/draft/closed postings with candidate counts.</div>
+            </div>
+          </a>
+
+          <a href="mockups/jobs-post.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-plus-square fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Post a Job — Create / Edit Form <span class="badge-new">NEW</span></div>
+              <div class="meta">Full job posting form. Details, location, compensation, rich-text description, publishing sidebar with listing page selector.</div>
+            </div>
+          </a>
+
+          <a href="mockups/agency-settings.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-gear fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Agency Settings — Profile &amp; Page Link <span class="badge-new">NEW</span></div>
+              <div class="meta">CRM settings page. Agency logo, abbreviation, avatar color, about description, web builder or external URL link.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tag Views ─────────────────────────────────────────────────── -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#cat-tags" aria-expanded="true">
+          <i class="bi bi-tags me-2" style="font-size:.9rem;"></i>
+          Tag Views
+          <span class="count-badge">1</span>
+        </button>
+      </h2>
+      <div id="cat-tags" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+          <a href="mockups/tag-views.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-tags fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Tag Views — Organized, Timeline &amp; Form <span class="badge-new">NEW</span></div>
+              <div class="meta">Three toggleable tag pane layouts on a candidate detail view. Organized (grouped pills + favorites + hidden), Timeline (chronological with dates), Form/CRM (radio + checkbox fields with date editing).</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Events ─────────────────────────────────────────────────── -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#cat-events" aria-expanded="true">
+          <i class="bi bi-calendar3 me-2" style="font-size:.9rem;"></i>
+          Events
+          <span class="count-badge">5</span>
+        </button>
+      </h2>
+      <div id="cat-events" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+
+          <a href="mockups/events-list.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-calendar3 fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Events List — Calendar Landing Page <span class="badge-new">NEW</span></div>
+              <div class="meta">Start here. Lists all upcoming &amp; past events. Links to Add Event and Event Detail.</div>
+            </div>
+          </a>
+
+          <a href="mockups/events-add.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-calendar-plus fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Add Event — Templates &amp; Form <span class="badge-new">NEW</span></div>
+              <div class="meta">Template selector pre-fills form fields. Save-as-template flow. Before/After comparison.</div>
+            </div>
+          </a>
+
+          <a href="mockups/events-detail.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-calendar3 fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Event Detail Page — Roster Management <span class="badge-new">NEW</span></div>
+              <div class="meta">Stat cards, filter bar, bulk actions, paginated roster. Designed for 247+ invitees.</div>
+            </div>
+          </a>
+
+          <a href="mockups/event-types.html" class="mockup-link" target="_blank" rel="noopener">
+            <i class="bi bi-tags fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2">Event Types — Settings Page <span class="badge-new">NEW</span></div>
+              <div class="meta">Manage custom event types (In-Person, Interview, Virtual…) with colors. Matches current functionality.</div>
+            </div>
+          </a>
+
+          <a href="mockups/events-spec.html" class="mockup-link" target="_blank" rel="noopener" style="border-color:#e4aa35;background:#fffdf0;">
+            <i class="bi bi-file-text fs-5" style="color:#92400e;flex-shrink:0;"></i>
+            <div>
+              <div class="d-flex align-items-center gap-2" style="color:#92400e;">Events Module — Developer Spec <span class="badge-new" style="background:#e4aa35;">SPEC</span></div>
+              <div class="meta">Data model, API endpoints, business rules, and field-by-field notes for all 4 event pages.</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /accordion -->
+
+  <hr class="mt-4 mb-3">
+  <p class="text-muted" style="font-size:.72rem;">
+    <i class="bi bi-info-circle me-1"></i>
+    Base template: <code>_template.html</code> &mdash;
+    copy it into <code>mockups/</code> to start a new feature.
+    CSS lives in <code>assets/css/site.css</code>.
+  </p>
+</div>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

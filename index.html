@@ -4,330 +4,1005 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All-Star Recruiter — Recruiting Software for Law Enforcement</title>
-  <meta http-equiv="refresh" content="0; url=/mockups/allstarrecruiter-home.html">
-  <link rel="canonical" href="/mockups/allstarrecruiter-home.html">
-
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/mockup.css">
-
   <style>
-    body { background: var(--leftnav-bg); min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1rem; }
-    .index-card { background: #fff; border-radius: .4rem; max-width: 760px; width: 100%; padding: 2.5rem; }
-    .mockup-link { display: flex; align-items: center; gap: .75rem; padding: .75rem 1rem; border-radius: .3rem; text-decoration: none; color: #1e293b; border: 1px solid #e2e8f0; transition: .15s; }
-    .mockup-link:hover { background: #f0f4ff; border-color: var(--leftnav-bg); color: var(--leftnav-bg); }
-    .mockup-link .badge-new { font-size: .65rem; background: var(--accent); color: #000; padding: 2px 8px; border-radius: 99px; font-weight: 700; }
-    .mockup-link .meta { font-size: .78rem; color: #64748b; margin-top: 2px; }
+    :root {
+      --navy: #1a3a6e;
+      --navy-mid: #245194;
+      --navy-light: #2d5fa8;
+      --gold: #e4aa35;
+      --gold-hover: #c9941f;
+    }
 
-    /* Accordion overrides */
-    .accordion-button {
-      font-size: .78rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .06em; color: #374151;
-      background: #f8fafc; padding: .65rem 1rem;
+    * { box-sizing: border-box; }
+    body { background: #fff; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    .top-nav {
+      background: var(--navy); padding: .75rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .accordion-button:not(.collapsed) {
-      background: #eef2ff; color: var(--leftnav-bg);
-      box-shadow: none;
+    .top-nav .brand { text-decoration: none; display: flex; align-items: center; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: .92rem; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover { color: #fff; }
+    .btn-nav-demo {
+      background: var(--gold); color: #fff; border: none;
+      font-weight: 700; font-size: .88rem; padding: .5rem 1.2rem;
+      border-radius: 6px; text-decoration: none; transition: background .15s; white-space: nowrap;
     }
-    .accordion-button::after { background-size: .85rem; }
-    .accordion-button .count-badge {
-      margin-left: .5rem; font-size: .65rem; font-weight: 700;
-      background: #e2e8f0; color: #475569;
-      padding: 1px 7px; border-radius: 99px;
-      text-transform: none; letter-spacing: 0;
+    .btn-nav-demo:hover { background: var(--gold-hover); color: #fff; }
+    @media (max-width: 767px) { .nav-links { display: none; } }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, rgba(8,18,45,.97) 0%, rgba(20,48,100,.95) 55%, rgba(18,44,90,.93) 100%),
+                  url('assets/images/officers-briefing.jpg') center/cover no-repeat;
+      padding: 5.5rem 0 5rem; position: relative; overflow: hidden;
     }
-    .accordion-button:not(.collapsed) .count-badge {
-      background: #c7d2fe; color: var(--leftnav-bg);
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 75% 40%, rgba(228,170,53,.06) 0%, transparent 60%);
     }
-    .accordion-item { border: 1px solid #e2e8f0; border-radius: .3rem !important; margin-bottom: .5rem; overflow: hidden; }
-    .accordion-item:last-of-type { margin-bottom: 0; }
-    .accordion-body { padding: .75rem; display: flex; flex-direction: column; gap: .5rem; background: #fff; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(228,170,53,.15); border: 1px solid rgba(228,170,53,.3);
+      color: var(--gold); font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .09em;
+      padding: .35rem .85rem; border-radius: 99px; margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: 3rem; font-weight: 900; color: #fff; line-height: 1.1;
+      letter-spacing: -.025em; margin-bottom: 1.1rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero .lede {
+      color: rgba(255,255,255,.72); font-size: 1.05rem; line-height: 1.7;
+      max-width: 500px; margin-bottom: 2.25rem;
+    }
+    .hero-cta-group { display: flex; gap: .85rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary-lg {
+      background: var(--gold); color: #fff; border: 2px solid var(--gold);
+      font-weight: 700; font-size: 1rem; padding: .8rem 1.9rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s;
+      display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-primary-lg:hover { background: var(--gold-hover); border-color: var(--gold-hover); color: #fff; }
+    .btn-ghost-lg {
+      background: transparent; color: rgba(255,255,255,.8);
+      border: 2px solid rgba(255,255,255,.25);
+      font-weight: 600; font-size: 1rem; padding: .8rem 1.9rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s;
+    }
+    .btn-ghost-lg:hover { border-color: rgba(255,255,255,.65); color: #fff; }
+
+    /* ── Hero dashboard mockup ──────────────────────────────── */
+    .dash-preview {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; overflow: hidden; position: relative; z-index: 1;
+    }
+    .dash-bar {
+      background: rgba(255,255,255,.07); border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: .7rem 1.1rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .dash-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dash-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.4); margin-left: .25rem; }
+    .dash-body { padding: 1.1rem; }
+    .pipeline-stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: .5rem; margin-bottom: 1rem; }
+    .stage-col { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 8px; padding: .6rem .5rem; text-align: center; }
+    .stage-num { font-size: 1.3rem; font-weight: 900; color: #fff; line-height: 1; }
+    .stage-lbl { font-size: .58rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.4); margin-top: .2rem; }
+    .stage-col.active .stage-num { color: var(--gold); }
+    .stage-col.active { border-color: rgba(228,170,53,.25); background: rgba(228,170,53,.06); }
+    .candidate-row {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .55rem .65rem; border-radius: 7px; margin-bottom: .35rem;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+    }
+    .cand-avatar { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .6rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .cand-name { font-size: .78rem; font-weight: 600; color: #fff; flex: 1; }
+    .cand-role { font-size: .68rem; color: rgba(255,255,255,.45); }
+    .stage-pill { font-size: .62rem; font-weight: 700; padding: .18rem .55rem; border-radius: 99px; white-space: nowrap; }
+    .sp-applied  { background: rgba(100,116,139,.25); color: #94a3b8; }
+    .sp-screen   { background: rgba(59,130,246,.2);  color: #93c5fd; }
+    .sp-test     { background: rgba(228,170,53,.2);  color: var(--gold); }
+    .sp-interview{ background: rgba(139,92,246,.2);  color: #c4b5fd; }
+    .sp-offer    { background: rgba(16,185,129,.2);  color: #34d399; }
+    .activity-item {
+      display: flex; align-items: flex-start; gap: .55rem;
+      padding: .45rem 0; border-top: 1px solid rgba(255,255,255,.05);
+      font-size: .73rem; color: rgba(255,255,255,.55);
+    }
+    .activity-item i { flex-shrink: 0; margin-top: .1rem; font-size: .7rem; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; animation: pulse 1.8s infinite; display: inline-block; margin-right: .3rem; }
+
+    /* ── Proof strip ─────────────────────────────────────────── */
+    .proof-strip { background: var(--navy); padding: 2rem 0; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .proof-label { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); text-align: center; margin-bottom: 1.5rem; }
+    .proof-stat { text-align: center; }
+    .proof-stat .num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1; }
+    .proof-stat .num span { color: var(--gold); }
+    .proof-stat .ctx { font-size: .8rem; color: rgba(255,255,255,.5); margin-top: .3rem; line-height: 1.45; }
+    .proof-divider { width: 1px; background: rgba(255,255,255,.08); align-self: stretch; }
+
+    /* ── Section shared ─────────────────────────────────────── */
+    .section-eyebrow { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--navy-mid); margin-bottom: .5rem; }
+    .section-title { font-size: 2rem; font-weight: 900; color: #0f172a; letter-spacing: -.02em; line-height: 1.15; }
+    .section-title span { color: var(--navy-mid); }
+    .section-sub { color: #64748b; font-size: 1rem; line-height: 1.7; max-width: 560px; margin: .85rem 0 0; }
+
+    /* ── Features ────────────────────────────────────────────── */
+    .features-section { background: #fff; padding: 6rem 0; }
+    .feat-card {
+      padding: 1.75rem; border: 1px solid #e2e8f0; border-radius: 14px;
+      height: 100%; transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .feat-card:hover { box-shadow: 0 10px 32px rgba(26,58,110,.1); transform: translateY(-3px); border-color: #c7d2fe; }
+    .feat-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1.1rem; }
+    .feat-card h3 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: .45rem; }
+    .feat-card p { font-size: .875rem; color: #64748b; line-height: 1.65; margin: 0; }
+
+    /* ── How it works ────────────────────────────────────────── */
+    .hiw-section { background: #f8fafc; padding: 6rem 0; }
+    .hiw-step { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .hiw-num {
+      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      background: var(--navy); color: var(--gold);
+      font-size: 1.1rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hiw-step h3 { font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .hiw-step p { font-size: .9rem; color: #64748b; line-height: 1.65; margin: 0; }
+    .hiw-connector { width: 2px; background: #e2e8f0; height: 2.5rem; margin-left: 23px; }
+
+    /* ── Results section ─────────────────────────────────────── */
+    .results-section {
+      background: linear-gradient(135deg, #080f23 0%, #0d1b3e 50%, #0f2147 100%);
+      padding: 6rem 0;
+    }
+    .result-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; padding: 2rem; height: 100%;
+      border-top: 3px solid var(--gold);
+    }
+    .result-agency { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: rgba(255,255,255,.4); margin-bottom: 1.25rem; }
+    .result-stat { margin-bottom: 1.1rem; }
+    .result-stat .big { font-size: 2.5rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .result-stat .desc { font-size: .85rem; color: rgba(255,255,255,.6); margin-top: .2rem; line-height: 1.45; }
+
+    /* ── Testimonials ────────────────────────────────────────── */
+    .testimonials-section { background: #fff; padding: 6rem 0; }
+    .testi-card {
+      background: #f8fafc; border: 1px solid #e2e8f0;
+      border-radius: 14px; padding: 2rem; height: 100%;
+    }
+    .testi-stars { color: var(--gold); font-size: .85rem; margin-bottom: 1rem; letter-spacing: .05em; }
+    .testi-quote { font-size: .95rem; color: #374151; line-height: 1.75; margin-bottom: 1.25rem; font-style: italic; }
+    .testi-attr { font-size: .8rem; color: #64748b; font-weight: 600; }
+    .testi-attr span { color: #94a3b8; font-weight: 400; }
+
+    /* ── Backed by expertise ─────────────────────────────────── */
+    .expertise-section { background: #f8fafc; padding: 6rem 0; }
+    .exp-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.5rem; height: 100%; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .exp-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .exp-card h4 { font-size: .95rem; font-weight: 800; color: #0f172a; margin-bottom: .3rem; }
+    .exp-card p { font-size: .83rem; color: #64748b; line-height: 1.6; margin: 0; }
+
+    /* ── CTA section ─────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, #0f2147 0%, var(--navy) 55%, #1e4d8c 100%);
+      padding: 6rem 0; text-align: center;
+    }
+    .cta-section h2 { font-size: 2.4rem; font-weight: 900; color: #fff; letter-spacing: -.02em; margin-bottom: .75rem; line-height: 1.15; }
+    .cta-section h2 span { color: var(--gold); }
+    .cta-section .lede { color: rgba(255,255,255,.62); font-size: 1rem; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .btn-cta-xl {
+      background: var(--gold); color: #fff; border: none;
+      font-weight: 700; font-size: 1.1rem; padding: 1rem 2.5rem;
+      border-radius: 8px; text-decoration: none; transition: background .15s;
+      display: inline-flex; align-items: center; gap: .6rem;
+    }
+    .btn-cta-xl:hover { background: var(--gold-hover); color: #fff; }
+    .cta-fine { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: 1.1rem; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer { background: #060e1f; padding: 3rem 0 2rem; }
+    .footer-brand { margin-bottom: 1rem; }
+    .footer-tagline { font-size: .83rem; color: rgba(255,255,255,.4); line-height: 1.6; max-width: 280px; margin-top: .5rem; }
+    .footer-heading { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: rgba(255,255,255,.35); margin-bottom: 1rem; }
+    .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-links a { color: rgba(255,255,255,.5); text-decoration: none; font-size: .85rem; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,.85); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 1.5rem; margin-top: 2.5rem; }
+    .footer-bottom p { color: rgba(255,255,255,.25); font-size: .78rem; margin: 0; }
+    .footer-contact-item { display: flex; align-items: center; gap: .5rem; font-size: .85rem; color: rgba(255,255,255,.5); margin-bottom: .5rem; }
+    .footer-contact-item a { color: rgba(255,255,255,.5); text-decoration: none; }
+    .footer-contact-item a:hover { color: rgba(255,255,255,.85); }
+
+    /* ── Browser frame ───────────────────────────────────────── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-expand { margin-left: 8px; font-size: 11px; color: #aaa; flex-shrink: 0; }
+    .browser-frame img { width: 100%; display: block; height: 300px; object-fit: cover; object-position: top; transition: transform .25s ease; }
+    .browser-frame:hover img { transform: scale(1.02); }
+
+    /* ── Platform preview section ────────────────────────────── */
+    .platform-section { background: #0f172a; padding: 6rem 0; }
+    .platform-section .section-eyebrow { color: rgba(228,170,53,.8); }
+    .platform-section .section-title { color: #fff; }
+    .platform-section .section-title span { color: var(--gold); }
+    .platform-section .section-sub { color: rgba(255,255,255,.5); }
+
+    /* ── Logo scroll ─────────────────────────────────────────── */
+    .logo-scroll-section { padding: 2.5rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; overflow: hidden; }
+    .logo-scroll-label { text-align: center; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 1.25rem; margin-top: 0; }
+    .logo-scroll-track-wrap { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-scroll-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: logo-scroll 55s linear infinite; }
+    .logo-scroll-track:hover { animation-play-state: paused; }
+    @keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-scroll-track img { height: 50px; width: auto; max-width: 110px; object-fit: contain; filter: grayscale(100%) opacity(.45); transition: filter .25s; flex-shrink: 0; }
+    .logo-scroll-track img:hover { filter: grayscale(0%) opacity(1); }
   </style>
 </head>
 <body>
 
-<div class="index-card">
-  <div class="d-flex align-items-center gap-3 mb-4">
-    <div style="width:44px;height:44px;background:var(--leftnav-bg);border-radius:.3rem;display:flex;align-items:center;justify-content:center;">
-      <i class="bi bi-layers text-white fs-5"></i>
-    </div>
-    <div>
-      <h1 class="h5 mb-0 fw-bold">AllStar Recruiter</h1>
-      <p class="text-muted small mb-0">Feature mockups &amp; wireframes for developer handoff</p>
+<!-- NAVBAR -->
+<nav class="top-nav">
+  <a href="#" class="brand">
+    <img src="assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="36">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Platform</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">About</a></li>
+  </ul>
+  <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-nav-demo">
+    Request a Demo
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-eyebrow">
+          <i class="bi bi-shield-check"></i>
+          Law Enforcement Recruiting Software
+        </div>
+        <h1>The Recruiting Platform<br><span>Built for Public Safety.</span></h1>
+        <p class="lede">
+          All-Star Recruiter gives law enforcement agencies a professional recruiting website they can promote anywhere — social media, paid ads, flyers, QR codes — backed by a full candidate CRM, automated communications, and campaigns.
+        </p>
+        <div class="hero-cta-group">
+          <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-primary-lg">
+            <i class="bi bi-calendar-check"></i>Request a Demo
+          </a>
+          <a href="#features" class="btn-ghost-lg">See the Platform</a>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="dash-preview">
+          <div class="dash-bar">
+            <div class="dash-dot" style="background:#ff5f56;"></div>
+            <div class="dash-dot" style="background:#ffbd2e;"></div>
+            <div class="dash-dot" style="background:#27c93f;"></div>
+            <span class="dash-title">All-Star Recruiter — Candidate Pipeline</span>
+            <span style="margin-left:auto;font-size:.62rem;font-weight:700;color:rgba(255,255,255,.3);"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="dash-body">
+            <div class="pipeline-stages">
+              <div class="stage-col active">
+                <div class="stage-num">47</div>
+                <div class="stage-lbl">Applied</div>
+              </div>
+              <div class="stage-col">
+                <div class="stage-num">23</div>
+                <div class="stage-lbl">Screen</div>
+              </div>
+              <div class="stage-col">
+                <div class="stage-num">18</div>
+                <div class="stage-lbl">Testing</div>
+              </div>
+              <div class="stage-col">
+                <div class="stage-num">9</div>
+                <div class="stage-lbl">Interview</div>
+              </div>
+              <div class="stage-col">
+                <div class="stage-num">4</div>
+                <div class="stage-lbl">Offer</div>
+              </div>
+            </div>
+
+            <div class="candidate-row">
+              <div class="cand-avatar" style="background:#3b82f6;">MJ</div>
+              <div style="flex:1;">
+                <div class="cand-name">Marcus Johnson</div>
+                <div class="cand-role">Police Officer — Entry Level</div>
+              </div>
+              <span class="stage-pill sp-test">Testing</span>
+            </div>
+            <div class="candidate-row">
+              <div class="cand-avatar" style="background:#8b5cf6;">SR</div>
+              <div style="flex:1;">
+                <div class="cand-name">Sofia Reyes</div>
+                <div class="cand-role">Deputy Sheriff — Patrol</div>
+              </div>
+              <span class="stage-pill sp-interview">Interview</span>
+            </div>
+            <div class="candidate-row">
+              <div class="cand-avatar" style="background:#059669;">DW</div>
+              <div style="flex:1;">
+                <div class="cand-name">Derek Washington</div>
+                <div class="cand-role">Police Officer — Lateral</div>
+              </div>
+              <span class="stage-pill sp-offer">Offer</span>
+            </div>
+
+            <div class="activity-item">
+              <i class="bi bi-envelope-fill" style="color:var(--gold);"></i>
+              Email sent to 12 candidates in Testing stage
+            </div>
+            <div class="activity-item">
+              <i class="bi bi-calendar-check-fill" style="color:#34d399;"></i>
+              Oral Board · Jun 15 · 34 RSVPs confirmed
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <hr class="mb-4">
-
-  <p class="text-muted small mb-3">
-    Each mockup below is a standalone HTML file demonstrating a proposed feature.
-    Open any file in a browser — no build step needed. Share the link or file directly with developers.
-  </p>
-
-  <div class="accordion" id="mockupAccordion">
-
-    <!-- ── Main Website ──────────────────────────────────────────── -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button"
-                data-bs-toggle="collapse" data-bs-target="#cat-main" aria-expanded="true">
-          <i class="bi bi-house me-2" style="font-size:.9rem;"></i>
-          Main Website
-          <span class="count-badge">1</span>
-        </button>
-      </h2>
-      <div id="cat-main" class="accordion-collapse collapse show">
-        <div class="accordion-body">
-          <a href="mockups/allstarrecruiter-home.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-globe2 fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">AllStarRecruiter.com — Homepage <span class="badge-new">NEW</span></div>
-              <div class="meta">Main marketing site for allstarrecruiter.com. Full product pitch, pipeline UI mockup, proof stats, testimonials, "backed by All-Star Talent" section. No free tier.</div>
-            </div>
-          </a>
+<!-- PROOF STRIP -->
+<div class="proof-strip">
+  <div class="container">
+    <p class="proof-label">Results from real law enforcement recruiting campaigns</p>
+    <div class="row g-4 justify-content-center align-items-center">
+      <div class="col-6 col-md-3">
+        <div class="proof-stat">
+          <div class="num"><span>7,296</span></div>
+          <div class="ctx">Police candidates delivered<br>City of Columbus</div>
+        </div>
+      </div>
+      <div class="d-none d-md-block col-md-auto"><div class="proof-divider"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="proof-stat">
+          <div class="num"><span>13,742</span></div>
+          <div class="ctx">Candidates generated<br>Nevada Dept. of Corrections</div>
+        </div>
+      </div>
+      <div class="d-none d-md-block col-md-auto"><div class="proof-divider"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="proof-stat">
+          <div class="num"><span>17%</span></div>
+          <div class="ctx">Decrease in vacancy rates<br>Nevada Dept. of Corrections</div>
+        </div>
+      </div>
+      <div class="d-none d-md-block col-md-auto"><div class="proof-divider"></div></div>
+      <div class="col-6 col-md-2">
+        <div class="proof-stat">
+          <div class="num"><span>3</span></div>
+          <div class="ctx">Industries. One focus:<br>public sector hiring</div>
         </div>
       </div>
     </div>
-
-    <!-- ── Job Board — Candidate Facing ─────────────────────────── -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button"
-                data-bs-toggle="collapse" data-bs-target="#cat-jb-public" aria-expanded="true">
-          <i class="bi bi-globe2 me-2" style="font-size:.9rem;"></i>
-          Job Board — Candidate Facing
-          <span class="count-badge">6</span>
-        </button>
-      </h2>
-      <div id="cat-jb-public" class="accordion-collapse collapse show">
-        <div class="accordion-body">
-
-          <a href="mockups/jb-listings.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-search fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Job Board — Listings &amp; Search <span class="badge-new">NEW</span></div>
-              <div class="meta">Public-facing job board. Hero search, category/location/salary filters, job cards, pagination.</div>
-            </div>
-          </a>
-
-          <a href="mockups/jb-detail.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-file-earmark-text fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Job Detail — Full Posting <span class="badge-new">NEW</span></div>
-              <div class="meta">Full job description, requirements, benefits, apply sidebar with inline form, similar jobs.</div>
-            </div>
-          </a>
-
-          <a href="mockups/jb-detail-branded.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-layout-text-window-reverse fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Job Detail — Branded Page <span class="badge-new">NEW</span></div>
-              <div class="meta">Branded job detail experience built by the agency in the web builder. Department hero, values, photos, benefits, dual-track requirements, apply CTA.</div>
-            </div>
-          </a>
-
-          <a href="mockups/jb-apply.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-pencil-square fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Job Application Form <span class="badge-new">NEW</span></div>
-              <div class="meta">Standalone apply page. Name, email, phone, position, message, email/SMS opt-ins. Confirmation state on submit.</div>
-            </div>
-          </a>
-
-          <a href="mockups/agencies.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-buildings fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Agencies — Search &amp; Browse <span class="badge-new">NEW</span></div>
-              <div class="meta">Public-facing agency directory. Search by name or city, grid of agency cards with description and open job count.</div>
-            </div>
-          </a>
-
-          <a href="mockups/agency-profile.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-building fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Agency Profile — Public Page <span class="badge-new">NEW</span></div>
-              <div class="meta">Candidate-facing agency profile. Agency description, open job listings, agency info sidebar.</div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Marketing Landing Pages ───────────────────────────────── -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#cat-marketing" aria-expanded="false">
-          <i class="bi bi-megaphone me-2" style="font-size:.9rem;"></i>
-          Marketing Landing Pages
-          <span class="count-badge">3</span>
-        </button>
-      </h2>
-      <div id="cat-marketing" class="accordion-collapse collapse">
-        <div class="accordion-body">
-
-<a href="mockups/guardian-crosssell-v2.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-shield-fill-check fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Guardian Alliance — Cross-Sell v2 (Partner Funnel) <span class="badge-new">NEW</span></div>
-              <div class="meta">Repositioned as a Guardian partner channel offer. Guardian Partner Free Plan, built-from-real-campaigns section, workflow, services upsell, pain-based Pro framing, referral tracking, UTM params.</div>
-            </div>
-          </a>
-
-          <a href="mockups/chiefs-crosssell.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-award fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Police Chiefs' Associations — Cross-Sell <span class="badge-new">NEW</span></div>
-              <div class="meta">Targets Police Chiefs' Associations. Free tier includes Web Builder, Email, Tagging &amp; LE Job Board. Pro upsell with SMS, Events, Campaigns, AI and more.</div>
-            </div>
-          </a>
-
-          <a href="mockups/launch-package.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-rocket-takeoff-fill fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Pro Add-On — Launch Package <span class="badge-new">NEW</span></div>
-              <div class="meta">Done-for-you onboarding add-on for Pro agencies. Covers recruiting website build, drip campaigns, workflow automation, pre-screen setup, Guardian integration, and CALEA-ready reporting.</div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Job Board — CRM (Recruiter Facing) ────────────────────── -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button"
-                data-bs-toggle="collapse" data-bs-target="#cat-jb-crm" aria-expanded="true">
-          <i class="bi bi-briefcase me-2" style="font-size:.9rem;"></i>
-          Job Board — CRM (Recruiter Facing)
-          <span class="count-badge">3</span>
-        </button>
-      </h2>
-      <div id="cat-jb-crm" class="accordion-collapse collapse show">
-        <div class="accordion-body">
-
-          <a href="mockups/jobs-manage.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-briefcase fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Job Postings — Management List <span class="badge-new">NEW</span></div>
-              <div class="meta">CRM jobs dashboard. Stat cards, filter/search, table of active/draft/closed postings with candidate counts.</div>
-            </div>
-          </a>
-
-          <a href="mockups/jobs-post.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-plus-square fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Post a Job — Create / Edit Form <span class="badge-new">NEW</span></div>
-              <div class="meta">Full job posting form. Details, location, compensation, rich-text description, publishing sidebar with listing page selector.</div>
-            </div>
-          </a>
-
-          <a href="mockups/agency-settings.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-gear fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Agency Settings — Profile &amp; Page Link <span class="badge-new">NEW</span></div>
-              <div class="meta">CRM settings page. Agency logo, abbreviation, avatar color, about description, web builder or external URL link.</div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Tag Views ─────────────────────────────────────────────────── -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button"
-                data-bs-toggle="collapse" data-bs-target="#cat-tags" aria-expanded="true">
-          <i class="bi bi-tags me-2" style="font-size:.9rem;"></i>
-          Tag Views
-          <span class="count-badge">1</span>
-        </button>
-      </h2>
-      <div id="cat-tags" class="accordion-collapse collapse show">
-        <div class="accordion-body">
-          <a href="mockups/tag-views.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-tags fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Tag Views — Organized, Timeline &amp; Form <span class="badge-new">NEW</span></div>
-              <div class="meta">Three toggleable tag pane layouts on a candidate detail view. Organized (grouped pills + favorites + hidden), Timeline (chronological with dates), Form/CRM (radio + checkbox fields with date editing).</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Events ─────────────────────────────────────────────────── -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button" type="button"
-                data-bs-toggle="collapse" data-bs-target="#cat-events" aria-expanded="true">
-          <i class="bi bi-calendar3 me-2" style="font-size:.9rem;"></i>
-          Events
-          <span class="count-badge">5</span>
-        </button>
-      </h2>
-      <div id="cat-events" class="accordion-collapse collapse show">
-        <div class="accordion-body">
-
-          <a href="mockups/events-list.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-calendar3 fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Events List — Calendar Landing Page <span class="badge-new">NEW</span></div>
-              <div class="meta">Start here. Lists all upcoming &amp; past events. Links to Add Event and Event Detail.</div>
-            </div>
-          </a>
-
-          <a href="mockups/events-add.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-calendar-plus fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Add Event — Templates &amp; Form <span class="badge-new">NEW</span></div>
-              <div class="meta">Template selector pre-fills form fields. Save-as-template flow. Before/After comparison.</div>
-            </div>
-          </a>
-
-          <a href="mockups/events-detail.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-calendar3 fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Event Detail Page — Roster Management <span class="badge-new">NEW</span></div>
-              <div class="meta">Stat cards, filter bar, bulk actions, paginated roster. Designed for 247+ invitees.</div>
-            </div>
-          </a>
-
-          <a href="mockups/event-types.html" class="mockup-link" target="_blank" rel="noopener">
-            <i class="bi bi-tags fs-5" style="color:var(--leftnav-bg);flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2">Event Types — Settings Page <span class="badge-new">NEW</span></div>
-              <div class="meta">Manage custom event types (In-Person, Interview, Virtual…) with colors. Matches current functionality.</div>
-            </div>
-          </a>
-
-          <a href="mockups/events-spec.html" class="mockup-link" target="_blank" rel="noopener" style="border-color:#e4aa35;background:#fffdf0;">
-            <i class="bi bi-file-text fs-5" style="color:#92400e;flex-shrink:0;"></i>
-            <div>
-              <div class="d-flex align-items-center gap-2" style="color:#92400e;">Events Module — Developer Spec <span class="badge-new" style="background:#e4aa35;">SPEC</span></div>
-              <div class="meta">Data model, API endpoints, business rules, and field-by-field notes for all 4 event pages.</div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /accordion -->
-
-  <hr class="mt-4 mb-3">
-  <p class="text-muted" style="font-size:.72rem;">
-    <i class="bi bi-info-circle me-1"></i>
-    Base template: <code>_template.html</code> &mdash;
-    copy it into <code>mockups/</code> to start a new feature.
-    CSS lives in <code>assets/css/site.css</code>.
-  </p>
+  </div>
 </div>
 
+<!-- LOGO SCROLL -->
+<div class="logo-scroll-section">
+  <p class="logo-scroll-label">Trusted by law enforcement agencies nationwide</p>
+  <div class="logo-scroll-track-wrap">
+    <div class="logo-scroll-track">
+      <img src="assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="assets/img/logos/bethany-beach.png" alt="Bethany Beach">
+      <img src="assets/img/logos/blades.png" alt="Blades">
+      <img src="assets/img/logos/bridgeville.png" alt="Bridgeville">
+      <img src="assets/img/logos/camden.png" alt="Camden">
+      <img src="assets/img/logos/capitol.png" alt="Capitol">
+      <img src="assets/img/logos/cheswold.png" alt="Cheswold">
+      <img src="assets/img/logos/clayton.png" alt="Clayton">
+      <img src="assets/img/logos/dagsboro.png" alt="Dagsboro">
+      <img src="assets/img/logos/date.png" alt="DATE">
+      <img src="assets/img/logos/de-city.png" alt="DE City">
+      <img src="assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="assets/img/logos/delaware-state-university.png" alt="Delaware State University">
+      <img src="assets/img/logos/delmar.png" alt="Delmar">
+      <img src="assets/img/logos/dover.png" alt="Dover">
+      <img src="assets/img/logos/ellendale.png" alt="Ellendale">
+      <img src="assets/img/logos/elsmere.png" alt="Elsmere">
+      <img src="assets/img/logos/fenwick-island.png" alt="Fenwick Island">
+      <img src="assets/img/logos/fire-marshal.png" alt="Fire Marshal">
+      <img src="assets/img/logos/frankford.png" alt="Frankford">
+      <img src="assets/img/logos/greenwood.png" alt="Greenwood">
+      <img src="assets/img/logos/harrington-2.png" alt="Harrington">
+      <img src="assets/img/logos/harrington.png" alt="Harrington">
+      <img src="assets/img/logos/kenton.png" alt="Kenton">
+      <img src="assets/img/logos/milford.png" alt="Milford">
+      <img src="assets/img/logos/milton.png" alt="Milton">
+      <img src="assets/img/logos/natural-resources.png" alt="Natural Resources">
+      <img src="assets/img/logos/new-castle-city-2.png" alt="New Castle City">
+      <img src="assets/img/logos/new-castle-city.png" alt="New Castle City">
+      <img src="assets/img/logos/new-castle-county.png" alt="New Castle County">
+      <img src="assets/img/logos/newark.png" alt="Newark">
+      <img src="assets/img/logos/newport.png" alt="Newport">
+      <img src="assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach">
+      <img src="assets/img/logos/river-and-bay.png" alt="River and Bay">
+      <img src="assets/img/logos/selbyville.png" alt="Selbyville">
+      <img src="assets/img/logos/south-bethany.png" alt="South Bethany">
+      <img src="assets/img/logos/springfield.png" alt="Springfield">
+      <img src="assets/img/logos/symra.png" alt="SYMRA">
+      <img src="assets/img/logos/university-of-delaware-2.png" alt="University of Delaware">
+      <img src="assets/img/logos/university-of-delaware.png" alt="University of Delaware">
+      <img src="assets/img/logos/viola.png" alt="Viola">
+      <img src="assets/img/logos/wilmington-2.png" alt="Wilmington">
+      <img src="assets/img/logos/wilmington.png" alt="Wilmington">
+      <!-- duplicate set for seamless loop -->
+      <img src="assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="assets/img/logos/bethany-beach.png" alt="Bethany Beach">
+      <img src="assets/img/logos/blades.png" alt="Blades">
+      <img src="assets/img/logos/bridgeville.png" alt="Bridgeville">
+      <img src="assets/img/logos/camden.png" alt="Camden">
+      <img src="assets/img/logos/capitol.png" alt="Capitol">
+      <img src="assets/img/logos/cheswold.png" alt="Cheswold">
+      <img src="assets/img/logos/clayton.png" alt="Clayton">
+      <img src="assets/img/logos/dagsboro.png" alt="Dagsboro">
+      <img src="assets/img/logos/date.png" alt="DATE">
+      <img src="assets/img/logos/de-city.png" alt="DE City">
+      <img src="assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="assets/img/logos/delaware-state-university.png" alt="Delaware State University">
+      <img src="assets/img/logos/delmar.png" alt="Delmar">
+      <img src="assets/img/logos/dover.png" alt="Dover">
+      <img src="assets/img/logos/ellendale.png" alt="Ellendale">
+      <img src="assets/img/logos/elsmere.png" alt="Elsmere">
+      <img src="assets/img/logos/fenwick-island.png" alt="Fenwick Island">
+      <img src="assets/img/logos/fire-marshal.png" alt="Fire Marshal">
+      <img src="assets/img/logos/frankford.png" alt="Frankford">
+      <img src="assets/img/logos/greenwood.png" alt="Greenwood">
+      <img src="assets/img/logos/harrington-2.png" alt="Harrington">
+      <img src="assets/img/logos/harrington.png" alt="Harrington">
+      <img src="assets/img/logos/kenton.png" alt="Kenton">
+      <img src="assets/img/logos/milford.png" alt="Milford">
+      <img src="assets/img/logos/milton.png" alt="Milton">
+      <img src="assets/img/logos/natural-resources.png" alt="Natural Resources">
+      <img src="assets/img/logos/new-castle-city-2.png" alt="New Castle City">
+      <img src="assets/img/logos/new-castle-city.png" alt="New Castle City">
+      <img src="assets/img/logos/new-castle-county.png" alt="New Castle County">
+      <img src="assets/img/logos/newark.png" alt="Newark">
+      <img src="assets/img/logos/newport.png" alt="Newport">
+      <img src="assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach">
+      <img src="assets/img/logos/river-and-bay.png" alt="River and Bay">
+      <img src="assets/img/logos/selbyville.png" alt="Selbyville">
+      <img src="assets/img/logos/south-bethany.png" alt="South Bethany">
+      <img src="assets/img/logos/springfield.png" alt="Springfield">
+      <img src="assets/img/logos/symra.png" alt="SYMRA">
+      <img src="assets/img/logos/university-of-delaware-2.png" alt="University of Delaware">
+      <img src="assets/img/logos/university-of-delaware.png" alt="University of Delaware">
+      <img src="assets/img/logos/viola.png" alt="Viola">
+      <img src="assets/img/logos/wilmington-2.png" alt="Wilmington">
+      <img src="assets/img/logos/wilmington.png" alt="Wilmington">
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO -->
+<section style="background:#0f172a;padding:5rem 0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(228,170,53,.8);margin-bottom:.5rem;">Who We Are</div>
+        <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:.75rem;">From the campaigns<br><span style="color:var(--gold);">to the platform.</span></h2>
+        <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;max-width:520px;margin:0 auto;">All-Star Talent has been running law enforcement recruiting campaigns for major agencies across the country. All-Star Recruiter is the platform we built to support that work.</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div style="padding:56.25% 0 0 0;position:relative;border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);">
+          <iframe src="https://player.vimeo.com/video/1154471246?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="AST Sizzle Reel"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">The Platform</div>
+        <div class="section-title">Everything your team needs<br><span>to run a modern recruiting operation.</span></div>
+        <p class="section-sub mx-auto text-center">
+          One platform, purpose-built for law enforcement. No generic HR software, no workarounds, no spreadsheets.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-window-fullscreen"></i></div>
+          <h3>Custom Recruiting Website</h3>
+          <p>Build a professional recruiting website for your department in minutes — photos, mission, benefits, open positions, and a simple apply form under your name. Then promote it wherever candidates are: social media, paid ads, your city website, a QR code on a flyer. Every application routes straight into your pipeline.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-briefcase-fill"></i></div>
+          <h3>Law Enforcement Job Board</h3>
+          <p>As agencies across your state join All-Star Recruiter, their openings appear on a shared law enforcement job board — giving candidates a single destination to find public safety careers in your area. The more agencies that participate, the more valuable it becomes for everyone.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-person-lines-fill"></i></div>
+          <h3>Candidate CRM &amp; Pipeline</h3>
+          <p>Every applicant tracked from first contact through hiring. Customizable stages, tags, and filters give recruiters a clear view of the full pipeline — no inbox archaeology required.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-chat-fill"></i></div>
+          <h3>2-Way Email &amp; SMS</h3>
+          <p>Send and receive messages directly inside All-Star Recruiter. Every email and text is logged to the candidate record automatically. Reach candidates faster than email alone.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-calendar3-event-fill"></i></div>
+          <h3>Hiring Event Management</h3>
+          <p>Schedule test days, oral boards, physical fitness assessments, and open houses. Manage RSVPs, send reminders, and track attendance — all in the same platform your recruiters already use.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-megaphone-fill"></i></div>
+          <h3>Multi-Step Campaigns</h3>
+          <p>Build automated email and SMS drip sequences that keep candidates engaged across a full recruiting cycle. Trigger follow-ups based on candidate actions, stage changes, or time delays.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-stars"></i></div>
+          <h3>AI Tools</h3>
+          <p>Candidate summaries, response drafting, and smart screening that cut the administrative load. Recruiters spend more time with candidates and less time on email.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-bar-chart-fill"></i></div>
+          <h3>Analytics &amp; Reporting</h3>
+          <p>Pipeline dashboards, source tracking, campaign performance, and hiring velocity — so you know what's working and where candidates are falling off.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feat-card">
+          <div class="feat-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-lightning-charge-fill"></i></div>
+          <h3>Automated Workflows</h3>
+          <p>Trigger communications, stage changes, and task reminders automatically based on candidate behavior. Your recruiting process runs consistently even when your team is short-staffed.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section class="platform-section" id="platform-preview">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow">The Platform, Up Close</div>
+        <div class="section-title">Built for recruiters.<br><span>Designed to be used every day.</span></div>
+        <p class="section-sub mx-auto text-center">
+          Every screen in All-Star Recruiter is purpose-built for public safety hiring — from the candidate pipeline to automated campaigns and recruiting reports.
+        </p>
+      </div>
+    </div>
+
+    <!-- CRM full-width -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/candidates</span>
+          </div>
+          <img src="assets/img/crm-candidates.png" alt="All-Star Recruiter Candidate CRM">
+        </div>
+      </div>
+    </div>
+
+    <!-- Web builder + SMS side by side -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-7">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/website-builder</span>
+          </div>
+          <img src="assets/img/web-builder.png" alt="All-Star Recruiter Web Builder">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/messaging</span>
+          </div>
+          <img src="assets/img/sms-messaging.png" alt="All-Star Recruiter SMS &amp; Email Messaging">
+        </div>
+      </div>
+    </div>
+
+    <!-- Workflow + Campaign + Reports -->
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/workflows</span>
+          </div>
+          <img src="assets/img/workflow-builder.png" alt="All-Star Recruiter Workflow Builder">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/campaigns</span>
+          </div>
+          <img src="assets/img/campaign-builder.png" alt="All-Star Recruiter Campaign Builder">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f56;"></span>
+            <span class="browser-dot" style="background:#ffbd2e;"></span>
+            <span class="browser-dot" style="background:#27c93f;"></span>
+            <span class="browser-url">app.allstarrecruiter.com/reports</span>
+          </div>
+          <img src="assets/img/reports-dashboard.png" alt="All-Star Recruiter Reports Dashboard">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-section" id="how-it-works">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <div class="section-eyebrow">How It Works</div>
+        <div class="section-title">From open position<br><span>to hired officer.</span></div>
+        <p class="section-sub">
+          All-Star Recruiter connects every step of your recruiting process. Jobs go out, candidates come in, communication happens automatically, and your team always knows exactly where things stand.
+        </p>
+        <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-primary-lg mt-4" style="font-size:.92rem;padding:.7rem 1.6rem;">
+          <i class="bi bi-calendar-check"></i>Book a Live Demo
+        </a>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
+        <div class="hiw-step">
+          <div class="hiw-num">1</div>
+          <div>
+            <h3>Build your recruiting website</h3>
+            <p>Create a branded recruiting page for your department in minutes — department photos, mission statement, benefits, and open positions. Then promote it wherever candidates are: social media posts, paid ads, your city website, a QR code on a recruitment flyer. You drive the traffic; the platform handles what happens next.</p>
+          </div>
+        </div>
+        <div class="hiw-connector"></div>
+        <div class="hiw-step">
+          <div class="hiw-num">2</div>
+          <div>
+            <h3>Candidates apply — and land in your CRM</h3>
+            <p>Every application routes directly to your recruiter dashboard. No email forwarding, no manual entry. Each applicant gets a record, a stage, and a conversation thread from the moment they submit.</p>
+          </div>
+        </div>
+        <div class="hiw-connector"></div>
+        <div class="hiw-step">
+          <div class="hiw-num">3</div>
+          <div>
+            <h3>Communicate and track every step</h3>
+            <p>Email and text candidates directly from the platform. Every message is logged. Move candidates through stages, schedule events, set reminders, and keep the pipeline clean — without switching between five different tools.</p>
+          </div>
+        </div>
+        <div class="hiw-connector"></div>
+        <div class="hiw-step">
+          <div class="hiw-num">4</div>
+          <div>
+            <h3>Run campaigns. Measure what works.</h3>
+            <p>Launch automated outreach sequences to warm candidates, promote upcoming hiring events, and re-engage applicants who went quiet. Analytics show you which sources, messages, and timing produce the best results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results-section" id="results">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div class="section-eyebrow" style="color:rgba(228,170,53,.75);">Built from real campaigns</div>
+        <div class="section-title" style="color:#fff;">Proven in the field.</div>
+        <p class="section-sub mx-auto text-center" style="color:rgba(255,255,255,.5);">
+          All-Star Recruiter is built by the same team behind All-Star Talent's recruiting campaigns. These aren't projections — they're outcomes from agencies we've worked with.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="result-card">
+          <div class="result-agency">City of Columbus — Dept. of Public Safety</div>
+          <div class="result-stat">
+            <div class="big">7,296</div>
+            <div class="desc">Police candidates delivered</div>
+          </div>
+          <div class="result-stat">
+            <div class="big">7,397</div>
+            <div class="desc">Fire candidates delivered</div>
+          </div>
+          <div class="result-stat">
+            <div class="big">19,312</div>
+            <div class="desc">911 dispatcher candidates</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="result-card">
+          <div class="result-agency">Nevada Department of Corrections</div>
+          <div class="result-stat">
+            <div class="big">13,742</div>
+            <div class="desc">Candidates expressed interest</div>
+          </div>
+          <div class="result-stat">
+            <div class="big">2,133</div>
+            <div class="desc">Total applications received</div>
+          </div>
+          <div class="result-stat">
+            <div class="big">17%</div>
+            <div class="desc">Decrease in vacancy rates</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="result-card">
+          <div class="result-agency">Los Angeles Metro Department of Public Safety</div>
+          <div class="result-stat">
+            <div class="big">1,187</div>
+            <div class="desc">Candidates generated in the first week</div>
+          </div>
+          <div class="result-stat">
+            <div class="big">472</div>
+            <div class="desc">Applications received in the first week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo row -->
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div style="border-radius:12px;overflow:hidden;height:200px;">
+          <img src="assets/images/applicant-recruiting.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="border-radius:12px;overflow:hidden;height:200px;">
+          <img src="assets/images/newark-pd-1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div style="border-radius:12px;overflow:hidden;height:200px;">
+          <img src="assets/images/cadets-training.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">What Agencies Say</div>
+        <div class="section-title">Heard from the people<br><span>doing the hiring.</span></div>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I've never seen such a large candidate pipeline!"</p>
+          <div class="testi-attr">Chris Mayfield <span>· ECC Manager, Columbus Division of Support Services</span></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Everyone has been easy to work with and the staff has been wonderful."</p>
+          <div class="testi-attr">Sgt. Rosie Jung <span>· Berkeley Police Department</span></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"It would be difficult to find a better marketing company than All-Star."</p>
+          <div class="testi-attr">Kansas Department of Corrections</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKED BY EXPERTISE -->
+<section class="expertise-section" id="services">
+  <div class="container">
+    <div class="row align-items-center g-5 mb-5">
+      <div class="col-lg-5">
+        <div class="section-eyebrow">More than software</div>
+        <div class="section-title">The platform is backed by<br><span>a full recruiting team.</span></div>
+        <p class="section-sub">
+          All-Star Recruiter is built by All-Star Talent — a public sector recruiting firm with a track record of running the campaigns that fill the hardest-to-fill roles. When software isn't enough, our team steps in.
+        </p>
+        <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;color:var(--navy-mid);font-weight:700;font-size:.9rem;text-decoration:none;">
+          About All-Star Talent <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
+        <div class="row g-3">
+          <div class="col-12">
+            <div class="exp-card">
+              <div class="exp-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-megaphone-fill"></i></div>
+              <div>
+                <h4>Campaign Strategy &amp; Execution</h4>
+                <p>Paid social, search, and display campaigns built for public safety recruiting — managed by a team that has run them for major agencies nationwide.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="exp-card">
+              <div class="exp-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-palette-fill"></i></div>
+              <div>
+                <h4>Employer Brand Development</h4>
+                <p>Award-winning creative services — web design, ad visuals, and video production — that give your agency a recruiting identity candidates remember.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="exp-card">
+              <div class="exp-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-person-badge-fill"></i></div>
+              <div>
+                <h4>Managed Recruiting</h4>
+                <p>For agencies that need more than a platform. We run the operation — from campaign launch through candidate hand-off — so your team focuses on evaluating the right people.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="demo">
+  <div class="container">
+    <div class="hero-eyebrow d-inline-flex mb-4" style="display:inline-flex !important;">
+      <i class="bi bi-calendar-check me-1"></i> Request a Demo
+    </div>
+    <h2>Ready to see it<br><span>in action?</span></h2>
+    <p class="lede">
+      We'll walk you through the platform, show you examples from agencies like yours, and talk through what a rollout looks like for your department or association.
+    </p>
+    <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-cta-xl">
+      <i class="bi bi-calendar-check"></i>Request a Demo
+    </a>
+    <p class="cta-fine">Opens Calendly — pick a time that works. No commitment required.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">
+          <img src="assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="32">
+        </div>
+        <p class="footer-tagline">Recruiting software built for law enforcement and public safety agencies.</p>
+        <p class="footer-tagline" style="margin-top:.75rem;">A product of <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:none;">All-Star Talent</a> — Public Sector Recruitment Experts.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Platform</div>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">About All-Star</a></li>
+          <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">Case Studies</a></li>
+          <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">Industries</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item"><i class="bi bi-telephone" style="color:var(--gold);"></i><a href="tel:+19162090668">+1 916-209-0668</a></div>
+        <div class="footer-contact-item"><i class="bi bi-envelope" style="color:var(--gold);"></i><a href="mailto:info@allstartalent.us">info@allstartalent.us</a></div>
+        <div style="margin-top:1rem;">
+          <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;font-weight:700;font-size:.85rem;padding:.55rem 1.1rem;border-radius:6px;text-decoration:none;">
+            <i class="bi bi-calendar-check"></i>Request a Demo
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 All-Star Recruiter · A product of All-Star Talent · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+<script>
+(function() {
+  var lbx = document.createElement('div'); lbx.id = 'lbx';
+  lbx.innerHTML = '<button id="lbx-close" title="Close (Esc)">&times;</button><div id="lbx-inner"><img id="lbx-img" src="" alt=""></div>';
+  lbx.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);overflow-y:auto;padding:40px 20px;';
+  document.body.appendChild(lbx);
+  document.getElementById('lbx-close').style.cssText = 'position:fixed;top:14px;right:18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:10000;';
+  document.getElementById('lbx-inner').style.cssText = 'max-width:1300px;margin:0 auto;';
+  document.getElementById('lbx-img').style.cssText = 'width:100%;border-radius:8px;box-shadow:0 32px 80px rgba(0,0,0,.5);display:block;';
+  function lbxOpen(src,alt){document.getElementById('lbx-img').src=src;document.getElementById('lbx-img').alt=alt||'';lbx.style.display='block';document.body.style.overflow='hidden';}
+  function lbxClose(){lbx.style.display='none';document.body.style.overflow='';}
+  document.getElementById('lbx-close').addEventListener('click',lbxClose);
+  lbx.addEventListener('click',function(e){if(e.target===lbx)lbxClose();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lbxClose();});
+  document.querySelectorAll('.browser-frame img').forEach(function(img){
+    img.addEventListener('click',function(){lbxOpen(this.src,this.alt);});
+  });
+  document.querySelectorAll('.browser-chrome').forEach(function(c){
+    var s=document.createElement('span');s.className='browser-expand';s.textContent='⤢ expand';c.appendChild(s);
+  });
+})();
+</script>
 </body>
 </html>
