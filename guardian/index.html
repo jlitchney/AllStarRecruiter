@@ -1359,9 +1359,13 @@
         <input type="hidden" id="field_plan_selected" name="plan_selected" value="free">
 
         <div class="row g-3 mb-3">
-          <div class="col-12">
+          <div class="col-sm-8">
             <label class="form-label">Agency Name <span style="color:#f87171;">*</span></label>
             <input type="text" class="form-control" name="agency_name" placeholder="Austin Police Department">
+          </div>
+          <div class="col-sm-4">
+            <label class="form-label">Abbreviation <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" name="agency_abbr" placeholder="APD" style="text-transform:uppercase;" oninput="this.value=this.value.toUpperCase()">
           </div>
         </div>
 
@@ -1526,8 +1530,9 @@
   function submitCta() {
     var form = document.getElementById('cta-form');
     var required = [
-      {name:'agency_name', label:'Agency Name'},
-      {name:'address',     label:'Agency Address'},
+      {name:'agency_name',  label:'Agency Name'},
+      {name:'agency_abbr',  label:'Abbreviation'},
+      {name:'address',      label:'Agency Address'},
       {name:'city',        label:'City'},
       {name:'state',       label:'State'},
       {name:'zip',         label:'Zip'},
