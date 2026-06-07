@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All-Star Recruiter — Guardian Partner Free Plan</title>
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    :root {
+      --navy: #1a3a6e;
+      --navy-mid: #245194;
+      --gold: #e4aa35;
+      --gold-hover: #c9941f;
+      --gat-blue: #1e4d8c;
+    }
+
+    * { box-sizing: border-box; }
+    body { background: #fff; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+
+    /* ── Navbar ──────────────────────────────────────────────── */
+    .top-nav {
+      background: var(--navy); padding: .75rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .top-nav .brand { text-decoration: none; display: flex; align-items: center; }
+    .btn-nav-cta {
+      background: var(--gold); color: #fff; border: none;
+      font-weight: 700; font-size: .85rem; padding: .4rem 1rem;
+      border-radius: 6px; text-decoration: none; transition: background .15s;
+    }
+    .btn-nav-cta:hover { background: var(--gold-hover); color: #fff; }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, rgba(10,25,60,.96) 0%, rgba(26,58,110,.93) 55%, rgba(20,50,100,.9) 100%),
+                  url('../assets/images/officers-briefing.jpg') center/cover no-repeat;
+      padding: 5rem 0 4.5rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(228,170,53,.07) 0%, transparent 65%);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(228,170,53,.15); border: 1px solid rgba(228,170,53,.3);
+      color: var(--gold); font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: .35rem .85rem; border-radius: 99px; margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1.15;
+      letter-spacing: -.02em; margin-bottom: .75rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero .subhead {
+      font-size: 1.15rem; font-weight: 600; color: rgba(255,255,255,.9);
+      line-height: 1.4; max-width: 520px; margin-bottom: .85rem;
+    }
+    .hero .lede {
+      color: rgba(255,255,255,.7); font-size: .97rem; line-height: 1.65;
+      max-width: 520px; margin-bottom: 2rem;
+    }
+    .hero-rep-note {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.65); font-size: .8rem; line-height: 1.45;
+      padding: .6rem .9rem; border-radius: 8px; max-width: 520px;
+      margin-bottom: 1.75rem;
+    }
+    .hero-rep-note i { color: var(--gold); flex-shrink: 0; }
+    .hero-cta-group { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn-hero-primary {
+      background: var(--gold); color: #fff; border: 2px solid var(--gold);
+      font-weight: 700; font-size: 1rem; padding: .75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s; display: inline-flex; align-items: center;
+    }
+    .btn-hero-primary:hover { background: var(--gold-hover); border-color: var(--gold-hover); color: #fff; }
+    .btn-hero-outline {
+      background: transparent; color: rgba(255,255,255,.85);
+      border: 2px solid rgba(255,255,255,.3);
+      font-weight: 600; font-size: 1rem; padding: .75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; transition: all .15s;
+    }
+    .btn-hero-outline:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+    /* Hero illustration card */
+    .hero-card {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px; padding: 1.25rem; position: relative; z-index: 1;
+    }
+    .hero-card-row {
+      background: rgba(255,255,255,.08); border-radius: 8px; padding: .85rem 1rem;
+      margin-bottom: .6rem;
+    }
+    .hc-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.45); margin-bottom: .3rem; }
+    .hc-val { font-size: .88rem; font-weight: 600; color: #fff; }
+    .sync-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(52,211,153,.15); border: 1px solid rgba(52,211,153,.3);
+      color: #34d399; font-size: .72rem; font-weight: 700;
+      padding: .25rem .65rem; border-radius: 99px;
+    }
+    .sync-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+    /* ── Stats strip ─────────────────────────────────────────── */
+    .stats-strip { background: var(--gold); padding: 1.25rem 0; }
+    .stat-item { text-align: center; }
+    .stat-item .num { font-size: 1.65rem; font-weight: 900; color: #fff; line-height: 1; }
+    .stat-item .lbl { font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.8); margin-top: .2rem; }
+
+    /* ── Section shared ──────────────────────────────────────── */
+    .section-eyebrow {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--navy-mid); margin-bottom: .5rem;
+    }
+    .section-title { font-size: 1.85rem; font-weight: 900; color: #0f172a; letter-spacing: -.01em; line-height: 1.2; }
+    .section-title span { color: var(--navy-mid); }
+    .section-sub { color: #64748b; font-size: 1rem; line-height: 1.65; max-width: 540px; margin: .75rem 0 0; }
+
+    /* ── Built from real campaigns section ────────────────────── */
+    .built-section { background: #0f172a; padding: 5rem 0; }
+    .built-section .section-eyebrow { color: var(--gold); }
+    .built-section .section-title { color: #fff; }
+    .built-section .section-title span { color: var(--gold); }
+    .built-section .section-sub { color: rgba(255,255,255,.6); }
+    .built-bullet {
+      display: flex; align-items: flex-start; gap: .65rem;
+      padding: .55rem 0; border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .9rem; color: rgba(255,255,255,.8); line-height: 1.5;
+    }
+    .built-bullet:last-child { border-bottom: none; }
+    .built-bullet i { color: var(--gold); flex-shrink: 0; margin-top: .15rem; font-size: .85rem; }
+    .built-quote-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-left: 3px solid var(--gold); border-radius: 10px; padding: 1.5rem 1.75rem;
+    }
+    .built-quote-card p { color: rgba(255,255,255,.8); font-size: .97rem; line-height: 1.7; font-style: italic; margin-bottom: .75rem; }
+    .built-quote-card .attr { font-size: .78rem; color: rgba(255,255,255,.4); font-style: normal; }
+
+    /* ── Why Guardian agencies section ───────────────────────── */
+    .why-section { background: #f8fafc; padding: 5rem 0; }
+    .why-bullet {
+      display: flex; align-items: flex-start; gap: .75rem;
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 1rem 1.25rem; height: 100%;
+    }
+    .why-bullet-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: .9rem;
+    }
+    .why-bullet h5 { font-size: .9rem; font-weight: 800; color: #0f172a; margin-bottom: .2rem; }
+    .why-bullet p { font-size: .82rem; color: #64748b; line-height: 1.55; margin: 0; }
+
+    /* ── Workflow section ────────────────────────────────────── */
+    .workflow-section { background: #fff; padding: 5rem 0; }
+    .wf-step {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      padding: 1.5rem 1.75rem; border-radius: 12px;
+      border: 1px solid #e2e8f0; background: #fff; height: 100%;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .wf-step:hover { box-shadow: 0 6px 20px rgba(36,81,148,.08); border-color: #c7d2fe; }
+    .wf-num {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: var(--navy); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900;
+    }
+    .wf-step.step-final .wf-num { background: #16a34a; }
+    .wf-step h4 { font-size: .97rem; font-weight: 800; color: #0f172a; margin-bottom: .3rem; }
+    .wf-step p { font-size: .83rem; color: #64748b; line-height: 1.6; margin: 0; }
+    .wf-connector {
+      text-align: center; padding: .5rem 0;
+      color: #94a3b8; font-size: .75rem; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .wf-connector i { display: block; font-size: 1.15rem; color: #cbd5e1; margin-bottom: .2rem; }
+
+    /* ── Free tier section ──────────────────────────────────── */
+    .free-section { background: #f8fafc; padding: 5rem 0; }
+    .free-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: #dcfce7; color: #166534;
+      font-size: .72rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .07em; padding: .3rem .8rem; border-radius: 99px;
+      margin-bottom: 1.25rem;
+    }
+    .feature-card {
+      background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 1.5rem; height: 100%;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 24px rgba(36,81,148,.1); transform: translateY(-3px); }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; margin-bottom: 1rem; flex-shrink: 0;
+    }
+    .feature-card h3 { font-size: .97rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .feature-card p { font-size: .85rem; color: #64748b; line-height: 1.6; margin: 0; }
+
+    /* ── Integration / Handoff block ───────────────────────── */
+    .integration-callout {
+      background: linear-gradient(135deg, #080f23 0%, #0d1e40 60%, #111f44 100%);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,.07);
+      position: relative; overflow: hidden;
+    }
+    .integration-callout::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, rgba(228,170,53,.2) 45%, rgba(59,130,246,.2) 55%, #3b82f6 100%);
+    }
+    .int-flow { display: grid; grid-template-columns: 1fr 88px 1fr; gap: 1rem; align-items: center; }
+    @media (max-width: 767px) { .int-flow { grid-template-columns: 1fr; } }
+    .int-system-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      border-radius: 12px; padding: 1.4rem 1.25rem;
+    }
+    .int-system-card.asr-card  { border-top: 2px solid var(--gold); }
+    .int-system-card.gat-card  { border-top: 2px solid #3b82f6; }
+    .int-sys-header { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+    .int-sys-dot { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: .7rem; flex-shrink: 0; }
+    .asr-card .int-sys-dot { background: rgba(228,170,53,.2); color: var(--gold); }
+    .gat-card .int-sys-dot { background: rgba(59,130,246,.2); color: #60a5fa; }
+    .int-sys-name { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .asr-card .int-sys-name { color: var(--gold); }
+    .gat-card .int-sys-name { color: #60a5fa; }
+    .int-stage {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .38rem 0; border-bottom: 1px solid rgba(255,255,255,.05);
+      font-size: .83rem; color: rgba(255,255,255,.75);
+    }
+    .int-stage:last-child { border-bottom: none; }
+    .int-stage i { font-size: .75rem; flex-shrink: 0; }
+    .asr-card .int-stage i { color: rgba(228,170,53,.7); }
+    .gat-card .int-stage i { color: rgba(59,130,246,.7); }
+    .int-stage.stage-ready { color: #fff; font-weight: 600; }
+    .int-stage.stage-ready i { color: #4ade80; }
+    .int-connector { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+    @media (max-width: 767px) { .int-connector { flex-direction: row; justify-content: center; gap: 1.5rem; } }
+    .int-conn-row { display: flex; flex-direction: column; align-items: center; gap: .25rem; }
+    .int-conn-label { font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; white-space: nowrap; }
+    .int-conn-label.send   { color: var(--gold); }
+    .int-conn-label.return { color: #60a5fa; }
+    .int-conn-track { width: 44px; height: 3px; border-radius: 99px; position: relative; overflow: visible; }
+    .int-conn-track.send   { background: rgba(228,170,53,.25); }
+    .int-conn-track.return { background: rgba(59,130,246,.25); }
+    @keyframes travel-fwd  { 0%{left:-6px;opacity:0;} 15%{opacity:1;} 85%{opacity:1;} 100%{left:44px;opacity:0;} }
+    @keyframes travel-back { 0%{right:-6px;opacity:0;} 15%{opacity:1;} 85%{opacity:1;} 100%{right:44px;opacity:0;} }
+    .int-conn-track.send::after   { content:'▶'; position:absolute; top:-5px; font-size:7px; color:var(--gold); animation:travel-fwd 2.2s ease-in-out infinite; }
+    .int-conn-track.return::after { content:'◀'; position:absolute; top:-5px; font-size:7px; color:#60a5fa; animation:travel-back 2.2s ease-in-out infinite 1.1s; }
+    .int-auto-badge {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 99px; padding: .28rem .7rem;
+      font-size: .62rem; font-weight: 700; color: rgba(255,255,255,.45); white-space: nowrap;
+    }
+
+    /* ── Services section ───────────────────────────────────── */
+    .services-section { background: #0f172a; padding: 5rem 0; }
+    .services-section .section-eyebrow { color: var(--gold); }
+    .services-section .section-title { color: #fff; }
+    .services-section .section-title span { color: var(--gold); }
+    .services-section .section-sub { color: rgba(255,255,255,.6); }
+    .svc-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 1.5rem; height: 100%;
+      transition: border-color .2s, background .2s;
+    }
+    .svc-card:hover { border-color: rgba(228,170,53,.3); background: rgba(255,255,255,.06); }
+    .svc-icon {
+      width: 42px; height: 42px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-bottom: .85rem; flex-shrink: 0;
+    }
+    .svc-card h4 { font-size: .95rem; font-weight: 800; color: #fff; margin-bottom: .35rem; }
+    .svc-card p { font-size: .83rem; color: rgba(255,255,255,.55); line-height: 1.6; margin-bottom: .85rem; }
+    .svc-flows-back {
+      font-size: .73rem; font-weight: 700; color: var(--gold);
+      display: flex; align-items: center; gap: .35rem; margin-top: auto;
+    }
+    .svc-flows-back i { font-size: .7rem; }
+
+    /* ── Pro / upgrade section ──────────────────────────────── */
+    .upgrade-section { padding: 5rem 0; background: #fff; }
+    .pain-card {
+      border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 1.1rem 1.25rem; display: flex; align-items: flex-start; gap: .85rem; height: 100%;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .pain-card:hover { border-color: var(--navy-mid); box-shadow: 0 4px 14px rgba(36,81,148,.07); }
+    .pain-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: .9rem;
+    }
+    .pain-card .pain-q { font-size: .85rem; font-weight: 700; color: #374151; margin-bottom: .15rem; }
+    .pain-card .pain-a { font-size: .8rem; color: #64748b; line-height: 1.5; margin: 0; }
+    .pro-ribbon {
+      font-size: .6rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+      background: var(--gold); color: #fff; padding: .1rem .45rem; border-radius: 3px;
+      vertical-align: middle; margin-left: .35rem;
+    }
+
+    /* ── Week-one section ───────────────────────────────────── */
+    .weekone-section { background: #f0fdf4; padding: 4rem 0; }
+    .weekone-step {
+      display: flex; align-items: flex-start; gap: .75rem;
+      padding: .7rem 0; border-bottom: 1px solid #dcfce7;
+      font-size: .9rem; color: #166534;
+    }
+    .weekone-step:last-child { border-bottom: none; }
+    .weekone-step i { color: #16a34a; flex-shrink: 0; margin-top: .1rem; }
+
+    /* ── Tier comparison ────────────────────────────────────── */
+    .tier-section { background: #f8fafc; padding: 5rem 0; }
+    .tier-card {
+      background: #fff; border: 2px solid #e2e8f0; border-radius: 14px;
+      padding: 2rem; height: 100%;
+    }
+    .tier-card.highlighted { border-color: var(--navy-mid); box-shadow: 0 8px 32px rgba(36,81,148,.15); }
+    .tier-name { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #64748b; margin-bottom: .5rem; }
+    .tier-price { font-size: 2.2rem; font-weight: 900; color: #0f172a; line-height: 1; margin-bottom: .25rem; }
+    .tier-price sup { font-size: 1rem; font-weight: 700; vertical-align: super; }
+    .tier-price .per { font-size: .85rem; font-weight: 500; color: #64748b; }
+    .tier-tagline { font-size: .85rem; color: #64748b; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; }
+    .tier-features { list-style: none; padding: 0; margin: 0 0 1.75rem; }
+    .tier-features li { display: flex; align-items: flex-start; gap: .6rem; font-size: .87rem; color: #374151; padding: .4rem 0; border-bottom: 1px solid #f8fafc; }
+    .tier-features li i { color: #16a34a; font-size: .9rem; flex-shrink: 0; margin-top: .1rem; }
+    .btn-tier { display: block; width: 100%; text-align: center; font-weight: 700; font-size: .93rem; padding: .7rem 1rem; border-radius: 8px; text-decoration: none; transition: all .15s; }
+    .btn-tier-primary { background: var(--navy-mid); color: #fff; border: 2px solid var(--navy-mid); }
+    .btn-tier-primary:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .btn-tier-outline { background: #fff; color: var(--navy-mid); border: 2px solid var(--navy-mid); }
+    .btn-tier-outline:hover { background: var(--navy-mid); color: #fff; }
+
+    /* ── CTA section ────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, #0f2147 0%, var(--navy) 60%, #1e4d8c 100%);
+      padding: 5rem 0; text-align: center;
+    }
+    .cta-section h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: .75rem; letter-spacing: -.01em; }
+    .cta-section h2 span { color: var(--gold); }
+    .cta-section .lede { color: rgba(255,255,255,.65); font-size: .97rem; max-width: 500px; margin: 0 auto 2.25rem; line-height: 1.6; }
+    .cta-form-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 2rem; max-width: 700px; margin: 0 auto; text-align: left;
+    }
+    .cta-form-card .form-label { font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.8); margin-bottom: .3rem; display: block; }
+    .cta-form-card .form-control,
+    .cta-form-card .form-select {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; color: #fff; font-size: .9rem; padding: .6rem .85rem;
+      width: 100%; outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .cta-form-card .form-control::placeholder { color: rgba(255,255,255,.3); }
+    .cta-form-card .form-control:focus,
+    .cta-form-card .form-select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(228,170,53,.15); background: rgba(255,255,255,.1); }
+    .cta-form-card .form-select option { background: #1a3a6e; color: #fff; }
+    .cta-plan-row { display: flex; gap: .75rem; }
+    .cta-plan-option {
+      flex: 1; border: 2px solid rgba(255,255,255,.15); border-radius: 10px;
+      padding: .85rem 1rem; cursor: pointer; transition: all .15s; position: relative;
+    }
+    .cta-plan-option:hover { border-color: rgba(255,255,255,.35); }
+    .cta-plan-option.selected-free { border-color: #22c55e; background: rgba(34,197,94,.08); }
+    .cta-plan-option.selected-pro  { border-color: var(--gold); background: rgba(228,170,53,.08); }
+    .cta-plan-option input[type=radio] { position: absolute; opacity: 0; }
+    .cta-plan-name { font-size: .88rem; font-weight: 800; color: #fff; margin-bottom: .15rem; }
+    .cta-plan-desc { font-size: .72rem; color: rgba(255,255,255,.5); line-height: 1.4; }
+    .cta-plan-option.selected-free .cta-plan-name { color: #4ade80; }
+    .cta-plan-option.selected-pro  .cta-plan-name { color: var(--gold); }
+    .btn-cta-submit {
+      background: var(--gold); color: #fff; border: none;
+      font-weight: 700; font-size: 1rem; padding: .85rem;
+      border-radius: 8px; cursor: pointer; transition: background .15s; width: 100%;
+    }
+    .btn-cta-submit:hover { background: var(--gold-hover); }
+    .cta-fine { font-size: .73rem; color: rgba(255,255,255,.35); margin-top: 1rem; text-align: center; }
+    .cta-confirm { display: none; text-align: center; padding: 2rem 1rem; }
+    .cta-confirm-icon {
+      width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,.15);
+      color: #4ade80; font-size: 1.75rem; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 1.25rem;
+    }
+    .cta-confirm h3 { color: #fff; font-size: 1.3rem; font-weight: 800; margin-bottom: .5rem; }
+    .cta-confirm p { color: rgba(255,255,255,.6); font-size: .9rem; line-height: 1.65; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer { background: #0a1628; padding: 2rem 0; text-align: center; }
+    footer p { color: rgba(255,255,255,.35); font-size: .8rem; margin: 0; }
+    footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,.7); }
+
+    /* ── Photo strip ─────────────────────────────────────────── */
+    .photo-strip { background: #0d1e40; padding: 3rem 0; }
+    .photo-strip-label { text-align:center; font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.35); margin-bottom:1.5rem; }
+
+    /* ── Pro pricing toggle ──────────────────────────────────── */
+    .btn-toggle-pro {
+      background: none; border: 1px solid #cbd5e1; color: #64748b;
+      font-size: .82rem; font-weight: 600; padding: .45rem 1.4rem;
+      border-radius: 6px; cursor: pointer; transition: all .15s;
+      display: inline-flex; align-items: center; gap: .4rem;
+    }
+    .btn-toggle-pro:hover { border-color: var(--navy-mid); color: var(--navy-mid); }
+    .btn-toggle-pro[aria-expanded="true"] .toggle-arrow { transform: rotate(180deg); }
+    .toggle-arrow { transition: transform .2s; display: inline-block; }
+
+    /* ── Logo scroll ─────────────────────────────────────────── */
+    .logo-scroll-section { padding: 2.5rem 0; background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; overflow: hidden; }
+    .logo-scroll-label { text-align: center; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 1.25rem; margin-top: 0; }
+    .logo-scroll-track-wrap { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-scroll-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: logo-scroll 55s linear infinite; }
+    .logo-scroll-track:hover { animation-play-state: paused; }
+    @keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-scroll-track img { height: 50px; width: auto; max-width: 110px; object-fit: contain; filter: grayscale(100%) opacity(.45); transition: filter .25s; flex-shrink: 0; }
+    .logo-scroll-track img:hover { filter: grayscale(0%) opacity(1); }
+
+    /* ── Browser frame ───────────────────────────────────────── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-expand { margin-left: 8px; font-size: 11px; color: #aaa; flex-shrink: 0; letter-spacing: .2px; }
+    .browser-frame img { width: 100%; display: block; height: 300px; object-fit: cover; object-position: top; transition: transform .25s ease; }
+    .browser-frame:hover img { transform: scale(1.02); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="top-nav">
+  <a href="#" class="brand">
+    <img src="../assets/images/asr-logo-white.svg" alt="AllStar Recruiter" height="36">
+  </a>
+  <a href="#claim" class="btn-nav-cta">Claim Your Free Partner Account</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-eyebrow">
+          <i class="bi bi-shield-check"></i>
+          Guardian Alliance Partner Platform
+        </div>
+        <h1>All-Star Recruiter<br><span>for Guardian Alliance Agencies</span></h1>
+        <p class="subhead">A partner recruiting platform that helps agencies manage candidates before they enter Guardian.</p>
+        <p class="lede">
+          Start free, keep your background process in Guardian, and move qualified candidates over when they're ready. No disruption. No duplicate entry. No cost.
+        </p>
+        <div class="hero-rep-note">
+          <i class="bi bi-info-circle"></i>
+          Built from real campaigns with some of the largest agencies in the country — and purpose-built to support a statewide hiring initiative in Delaware. Free because the cost of running it is low and safer communities are worth it.
+        </div>
+        <div class="hero-cta-group">
+          <a href="#claim" class="btn-hero-primary">
+            <i class="bi bi-rocket-takeoff me-2"></i>Claim Your Free Partner Account
+          </a>
+          <a href="#workflow" class="btn-hero-outline">See How It Works</a>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="hero-card">
+          <div class="hero-card-row">
+            <div class="hc-label">Marcus Thompson — Police Officer Applicant</div>
+            <div style="display:flex;flex-direction:column;gap:.4rem;margin-top:.25rem;">
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <div style="width:20px;height:20px;border-radius:50%;background:#34d399;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-check" style="color:#fff;font-size:.65rem;"></i></div>
+                <span style="font-size:.8rem;color:rgba(255,255,255,.75);">Applied via department recruiting page</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <div style="width:20px;height:20px;border-radius:50%;background:#34d399;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-check" style="color:#fff;font-size:.65rem;"></i></div>
+                <span style="font-size:.8rem;color:rgba(255,255,255,.75);">Physical Agility Test — passed</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <div style="width:20px;height:20px;border-radius:50%;background:#34d399;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-check" style="color:#fff;font-size:.65rem;"></i></div>
+                <span style="font-size:.8rem;color:rgba(255,255,255,.75);">Written Exam — passed</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:.5rem;">
+                <div style="width:20px;height:20px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-arrow-right" style="color:#fff;font-size:.65rem;"></i></div>
+                <span style="font-size:.8rem;color:var(--gold);font-weight:700;">Referred to Guardian Alliance →</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-card-row">
+            <div class="hc-label">All-Star Recruiter → Guardian Alliance</div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="hc-val" style="font-size:.82rem;">Background investigation initiated for Marcus T.</div>
+              <span class="sync-badge"><span class="dot"></span>Sent</span>
+            </div>
+          </div>
+          <div class="hero-card-row" style="margin-bottom:0;">
+            <div class="hc-label">Guardian Alliance → All-Star Recruiter</div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="hc-val" style="font-size:.82rem;">
+                Marcus T. — background complete
+                <span style="display:inline-block;font-size:.68rem;font-weight:700;padding:.12rem .5rem;border-radius:4px;margin-left:.35rem;background:rgba(52,211,153,.15);color:#34d399;">Clear</span>
+              </div>
+              <span class="sync-badge"><span class="dot"></span>Returned</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-3 justify-content-center text-center">
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">1,400+</div><div class="lbl">Guardian Alliance agencies</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">$0</div><div class="lbl">Cost for the partner plan</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">5 min</div><div class="lbl">Setup once verified</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item"><div class="num">100%</div><div class="lbl">Built for law enforcement</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO SCROLL -->
+<section class="logo-scroll-section">
+  <p class="logo-scroll-label">Agencies already using All-Star Recruiter</p>
+  <div class="logo-scroll-track-wrap">
+    <div class="logo-scroll-track">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach PD">
+      <img src="../assets/img/logos/blades.png" alt="Blades PD">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville PD">
+      <img src="../assets/img/logos/camden.png" alt="Camden PD">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol Police">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold PD">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton PD">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro PD">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="Delaware City PD">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University PD">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar PD">
+      <img src="../assets/img/logos/dover.png" alt="Dover PD">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale PD">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere PD">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island PD">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Delaware State Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford PD">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood PD">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington PD">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington PD">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton PD">
+      <img src="../assets/img/logos/milford.png" alt="Milford PD">
+      <img src="../assets/img/logos/milton.png" alt="Milton PD">
+      <img src="../assets/img/logos/natural-resources.png" alt="DNREC">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County PD">
+      <img src="../assets/img/logos/newark.png" alt="Newark PD">
+      <img src="../assets/img/logos/newport.png" alt="Newport PD">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach PD">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River &amp; Bay Authority">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville PD">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany PD">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield PD">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/viola.png" alt="Viola PD">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach PD">
+      <img src="../assets/img/logos/blades.png" alt="Blades PD">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville PD">
+      <img src="../assets/img/logos/camden.png" alt="Camden PD">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol Police">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold PD">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton PD">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro PD">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="Delaware City PD">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University PD">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar PD">
+      <img src="../assets/img/logos/dover.png" alt="Dover PD">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale PD">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere PD">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island PD">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Delaware State Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford PD">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood PD">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington PD">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington PD">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton PD">
+      <img src="../assets/img/logos/milford.png" alt="Milford PD">
+      <img src="../assets/img/logos/milton.png" alt="Milton PD">
+      <img src="../assets/img/logos/natural-resources.png" alt="DNREC">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City PD">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County PD">
+      <img src="../assets/img/logos/newark.png" alt="Newark PD">
+      <img src="../assets/img/logos/newport.png" alt="Newport PD">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach PD">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River &amp; Bay Authority">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville PD">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany PD">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield PD">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware PD">
+      <img src="../assets/img/logos/viola.png" alt="Viola PD">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington PD">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington PD">
+    </div>
+  </div>
+</section>
+
+<!-- TRANSPARENCY / WHY FREE -->
+<section style="background:#fff;padding:5rem 0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div style="display:inline-flex;align-items:center;gap:.75rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:1rem;">
+          <span style="width:24px;height:2px;background:#cbd5e1;display:inline-block;"></span>
+          Plain Talk
+          <span style="width:24px;height:2px;background:#cbd5e1;display:inline-block;"></span>
+        </div>
+        <h2 style="font-size:1.9rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.2;margin-bottom:.85rem;">
+          You're a cop. You're skeptical of "free."<br>That's fair. Here's the honest answer.
+        </h2>
+        <p style="color:#64748b;font-size:1rem;line-height:1.7;max-width:600px;margin:0 auto;">
+          We've heard it. "Nothing is free — what's the catch?" The catch is there isn't one. But we're not going to just say that and expect you to believe us. Here's exactly how this works.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid var(--navy);padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.6rem;">The cost reality</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">The infrastructure cost is genuinely low</h3>
+          <p style="font-size:.88rem;color:#374151;line-height:1.75;margin:0;">
+            Running email, candidate records, tagging, a recruiting web page, and Guardian integration for a law enforcement agency costs a few dollars a month — maybe less. We built this system already. Adding your account doesn't cost us much to operate. We're not absorbing a significant loss. We're offering something that costs us very little but is genuinely useful to you.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid var(--gold);padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#92400e;margin-bottom:.6rem;">Where this came from</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">Built from real campaigns, not a pitch deck</h3>
+          <p style="font-size:.88rem;color:#374151;line-height:1.75;margin:0;">
+            Before there was software, we ran law enforcement recruitment campaigns for some of the largest agencies in the country. We built this platform to support a statewide hiring initiative for the State of Delaware. The software didn't come first — the real work did. We learned what agencies actually needed by doing it, then built the tools that solved it.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid #7c3aed;padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#7c3aed;margin-bottom:.6rem;">Our business model</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">About 15% of free agencies upgrade. That's enough.</h3>
+          <p style="font-size:.88rem;color:#374151;line-height:1.75;margin:0;">
+            We expect about 15% of agencies on the free plan will eventually upgrade to Pro — for SMS, events, automation, or analytics. That pays for everything. The other 85% can use the free plan forever. If you never upgrade, we still want your agency using this. Safer communities are the point. Revenue comes when we've earned it.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="max-width:680px;margin:2.5rem auto 0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem 2rem;text-align:center;">
+      <p style="font-size:.97rem;font-weight:700;color:#0f172a;margin-bottom:.4rem;">Use the free version forever. Upgrade when it makes sense — or don't.</p>
+      <p style="font-size:.85rem;color:#64748b;line-height:1.65;margin:0;">No sales calls every 30 days. No trial period that flips to paid. No feature that disappears next quarter. The free plan stays free. If Pro ever becomes worth it to your agency, you'll know.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT FROM REAL CAMPAIGNS -->
+<section class="built-section">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <div class="section-eyebrow">Our background</div>
+        <div class="section-title">Built from real law enforcement<br><span>recruiting campaigns</span></div>
+        <p class="section-sub">
+          All-Star Recruiter was built from the problems we saw while running real recruitment campaigns for law enforcement agencies. We needed a better way to capture leads, follow up quickly, track candidates, manage events, organize content, measure campaign performance, and move qualified applicants toward background. So we built the system agencies can now use directly.
+        </p>
+        <div class="built-quote-card mt-4">
+          <p>"We went from spreadsheets to a full recruiting pipeline — and it didn't cost us a dime to get started."</p>
+          <div class="attr">— Lieutenant Gregory D'Elia, Newark Police Department</div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Capture leads from recruitment campaigns before they go cold</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Follow up with candidates through email and SMS immediately</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Track applicants through every pre-background recruiting stage</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Manage hiring events and keep candidates showing up</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Organize content, forms, and documents in one place</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Measure which campaigns are actually generating candidates</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Prepare stronger candidates before background — improving readiness before Guardian submission</div>
+        <div class="built-bullet"><i class="bi bi-arrow-right-circle-fill"></i>Move ready candidates into Guardian without duplicate data entry</div>
+        <div style="margin-top:2rem;padding:1.25rem 1.5rem;background:rgba(228,170,53,.08);border:1px solid rgba(228,170,53,.2);border-radius:10px;">
+          <p style="font-size:.9rem;font-weight:700;color:var(--gold);margin-bottom:.35rem;">The platform gives your agency the system.</p>
+          <p style="font-size:.85rem;color:rgba(255,255,255,.6);margin:0;line-height:1.6;">All-Star services can help you generate demand, create content, run campaigns, and keep candidates moving — when your agency needs extra horsepower.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section style="background:#0f172a;padding:5rem 0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(228,170,53,.8);margin-bottom:.5rem;">Who We Are</div>
+        <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:.75rem;">From the campaigns<br><span style="color:var(--gold);">to the platform.</span></h2>
+        <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;max-width:520px;margin:0 auto;">All-Star Talent has been running law enforcement recruiting campaigns for major agencies across the country. All-Star Recruiter is the platform we built to support that work.</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div style="padding:56.25% 0 0 0;position:relative;border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);">
+          <iframe src="https://player.vimeo.com/video/1154471246?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="AST Sizzle Reel"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY GUARDIAN AGENCIES USE ALL-STAR -->
+<section class="why-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">The case for All-Star</div>
+        <div class="section-title">Why Guardian agencies use All-Star<br><span>before background checks</span></div>
+        <p class="section-sub mx-auto text-center">
+          Guardian is your background-investigation platform. All-Star Recruiter handles everything before that.
+        </p>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-4">
+        <div class="why-bullet">
+          <div class="why-bullet-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-funnel-fill"></i></div>
+          <div>
+            <h5>Capture leads from recruiting campaigns</h5>
+            <p>Every candidate who sees your ad, social post, or event has a place to go — and a record in All-Star the moment they express interest.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="why-bullet">
+          <div class="why-bullet-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-chat-dots-fill"></i></div>
+          <div>
+            <h5>Communicate by email and SMS</h5>
+            <p>Reach candidates where they are. Two-way email is free. SMS is available on Pro. Both keep conversations tied to the candidate record.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="why-bullet">
+          <div class="why-bullet-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-diagram-3-fill"></i></div>
+          <div>
+            <h5>Track candidates through pre-background stages</h5>
+            <p>Physical agility, written exam, oral board, medical — All-Star tracks every stage so nothing falls through the cracks before Guardian.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="why-bullet">
+          <div class="why-bullet-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-shield-fill-check"></i></div>
+          <div>
+            <h5>Submit qualified candidates into Guardian without duplicate entry</h5>
+            <p>One click sends a ready candidate to Guardian. The record travels with them. No re-entering the same data in two systems.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="why-bullet">
+          <div class="why-bullet-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-layers-fill"></i></div>
+          <div>
+            <h5>Keep recruiting separate from background investigations</h5>
+            <p>Guardian does background investigations. All-Star does recruiting. The division is clean, the handoff is automatic, and each system stays focused.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="why-bullet">
+          <div class="why-bullet-icon" style="background:#e0f2fe;color:#0369a1;"><i class="bi bi-bar-chart-fill"></i></div>
+          <div>
+            <h5>Give command staff visibility before candidates reach background</h5>
+            <p>Dashboards, candidate counts, stage tracking, and event attendance — all visible before a single background investigation is opened.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW SECTION -->
+<section class="workflow-section" id="workflow">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">How it works</div>
+        <div class="section-title">You already use Guardian for backgrounds.<br><span>Use All-Star for everything before Guardian.</span></div>
+        <p class="section-sub mx-auto text-center">
+          The workflow is simple. All-Star handles the recruiting stages. Guardian handles the background. The handoff between them is automatic.
+        </p>
+      </div>
+    </div>
+    <div class="row g-3 justify-content-center">
+      <div class="col-md-6 col-lg" style="min-width:0;">
+        <div class="wf-step">
+          <div class="wf-num">1</div>
+          <div>
+            <h4>Attract candidates</h4>
+            <p>Use campaigns, landing pages, content, events, and referral sources to generate interest in your agency.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg" style="min-width:0;">
+        <div class="wf-step">
+          <div class="wf-num">2</div>
+          <div>
+            <h4>Capture leads in All-Star</h4>
+            <p>Every prospect and applicant lands in one recruiting CRM — tagged, tracked, and ready to contact immediately.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg" style="min-width:0;">
+        <div class="wf-step">
+          <div class="wf-num">3</div>
+          <div>
+            <h4>Nurture and qualify</h4>
+            <p>Use email, SMS, tags, stages, forms, and workflows to keep candidates moving through pre-background stages.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg" style="min-width:0;">
+        <div class="wf-step">
+          <div class="wf-num">4</div>
+          <div>
+            <h4>Prepare for background</h4>
+            <p>Track readiness before candidates are submitted. Know exactly who is ready and who still needs a step completed.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg" style="min-width:0;">
+        <div class="wf-step step-final">
+          <div class="wf-num">5</div>
+          <div>
+            <h4>Send ready candidates into Guardian</h4>
+            <p>One click. Guardian handles the background investigation. Results return to All-Star automatically. No double work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section style="background:#f8fafc;padding:5rem 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">The Platform</div>
+        <div class="section-title" style="font-size:clamp(1.4rem,3vw,2rem);margin-bottom:.75rem;">This is what your recruiting team sees.</div>
+        <p class="section-sub mx-auto text-center">Every candidate, every tag, every conversation — in one place. No spreadsheets. No chasing emails. Real data from a live department.</p>
+      </div>
+    </div>
+    <div class="row g-4 mb-4">
+      <div class="col-lg-7">
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">Recruiting CRM</p>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Candidates</span>
+          </div>
+          <img src="../assets/img/crm-candidates.png" alt="All-Star Recruiter — Candidates CRM">
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">Recruiting Website Builder</p>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Web Builder</span>
+          </div>
+          <img src="../assets/img/web-builder.png" alt="All-Star Recruiter — Web Builder">
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">SMS & Email — Built-In Messaging</p>
+      <div class="browser-frame">
+        <div class="browser-chrome">
+          <span class="browser-dot" style="background:#ff5f57;"></span>
+          <span class="browser-dot" style="background:#febc2e;"></span>
+          <span class="browser-dot" style="background:#28c840;"></span>
+          <span class="browser-url">app.allstarrecruiter.com · Candidates · Conversation</span>
+        </div>
+        <img src="../assets/img/sms-messaging.png" alt="All-Star Recruiter — SMS & Email Messaging">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE TIER — WHAT'S INCLUDED -->
+<section class="free-section" id="whats-included">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="free-badge"><i class="bi bi-gift me-1"></i>Guardian Partner Free Plan</div>
+        <div class="section-title">Own the top of<br><span>your hiring funnel</span></div>
+        <p class="section-sub mx-auto text-center">
+          Most agencies lose candidates before they ever reach Guardian — through slow follow-up, no central tracking, and nothing to point people to. These four tools fix that. Free, permanently, for Guardian Alliance agencies.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-window-fullscreen"></i></div>
+          <h3>Web Page Builder</h3>
+          <p>Build a branded recruiting page for your department in minutes — your first point of contact with every candidate. Share it on social media, your city website, or job boards.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#eff6ff;color:#1d4ed8;"><i class="bi bi-envelope-arrow-up"></i></div>
+          <h3>2-Way Email</h3>
+          <p>Send and receive candidate emails directly in All-Star Recruiter. Every reply is logged to the candidate record automatically — no BCC hacks, no copy-paste.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-tags"></i></div>
+          <h3>Candidate Tagging</h3>
+          <p>Organize candidates with flexible tags and groups. Tag by position, hiring stage, location, or anything your agency needs. Filter and act on any group instantly.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card" style="border-color:#bfdbfe;">
+          <div class="feature-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-plug"></i></div>
+          <h3>Guardian Integration</h3>
+          <p>When a candidate passes your early stages, send them directly to Guardian Alliance for background investigation with one click. Results flow back automatically — no double entry.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Integration callout -->
+    <div class="integration-callout">
+      <div class="text-center mb-4">
+        <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.5rem;">Seamless integration</div>
+        <h3 style="color:#fff;font-size:1.3rem;font-weight:800;margin-bottom:.5rem;">The handoff happens automatically</h3>
+        <p style="color:rgba(255,255,255,.5);font-size:.88rem;max-width:540px;margin:0 auto;">No re-entering data, no chasing status updates. One action sends the candidate to Guardian — and when they're done, results land back in the record.</p>
+      </div>
+      <div class="int-flow">
+        <div class="int-system-card asr-card">
+          <div class="int-sys-header">
+            <div class="int-sys-dot"><i class="bi bi-star-fill"></i></div>
+            <div class="int-sys-name">All-Star Recruiter</div>
+          </div>
+          <div class="int-stage"><i class="bi bi-check-circle-fill"></i> Web page &amp; attract candidates</div>
+          <div class="int-stage"><i class="bi bi-check-circle-fill"></i> Application received</div>
+          <div class="int-stage"><i class="bi bi-check-circle-fill"></i> Physical Agility Test</div>
+          <div class="int-stage stage-ready"><i class="bi bi-check-circle-fill"></i> Written Exam passed — ready to send</div>
+        </div>
+        <div class="int-connector">
+          <div class="int-conn-row">
+            <div class="int-conn-label send">Send →</div>
+            <div class="int-conn-track send"></div>
+          </div>
+          <div class="int-auto-badge">Auto sync</div>
+          <div class="int-conn-row">
+            <div class="int-conn-track return"></div>
+            <div class="int-conn-label return">← Results</div>
+          </div>
+        </div>
+        <div class="int-system-card gat-card">
+          <div class="int-sys-header">
+            <div class="int-sys-dot"><i class="bi bi-shield-check"></i></div>
+            <div class="int-sys-name">Guardian Alliance</div>
+          </div>
+          <div class="int-stage"><i class="bi bi-check-circle-fill"></i> Background investigation</div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="#claim" class="btn-hero-primary" style="font-size:.9rem;padding:.65rem 1.5rem;">Claim Your Free Partner Account →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHOTO BANNER -->
+<div style="position:relative;height:260px;overflow:hidden;">
+  <img src="../assets/images/newark-pd-1.jpg" alt="Newark Police Department" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,25,60,.88) 0%,rgba(10,25,60,.6) 50%,rgba(10,25,60,.4) 100%);display:flex;align-items:center;">
+    <div class="container">
+      <div style="max-width:540px;">
+        <p style="font-size:1.35rem;font-weight:800;color:#fff;line-height:1.4;margin-bottom:.5rem;">"We went from spreadsheets to a full recruiting pipeline — and it didn't cost us a dime to get started."</p>
+        <p style="font-size:.8rem;color:rgba(255,255,255,.55);margin:0;">— Lieutenant Gregory D'Elia, Newark Police Department</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES SECTION -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">More than software</div>
+        <div class="section-title">Need more than software?<br><span>All-Star can run the playbook.</span></div>
+        <p class="section-sub mx-auto text-center">
+          The platform gives your agency the system. All-Star services can help you generate demand, create content, run campaigns, and keep candidates moving — when your agency needs extra horsepower. These are the same services and campaign playbooks that shaped the platform.
+        </p>
+      </div>
+    </div>
+    <div class="row g-3">
+
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(228,170,53,.15);color:var(--gold);"><i class="bi bi-map"></i></div>
+          <h4>Recruitment Campaign Strategy</h4>
+          <p>Build a recruiting campaign from scratch or audit what you're already doing. We map out the audience, channels, messaging, and funnel — then put it in motion.</p>
+          <div class="svc-flows-back"><i class="bi bi-arrow-return-left"></i>All leads flow into All-Star Recruiter</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(99,102,241,.15);color:#818cf8;"><i class="bi bi-camera-video"></i></div>
+          <h4>Content Creation</h4>
+          <p>Recruitment videos, officer spotlights, social graphics, email and SMS copy, landing page copy, and department brand assets — built to attract the right candidates.</p>
+          <div class="svc-flows-back"><i class="bi bi-arrow-return-left"></i>Content drives traffic to your recruiting page</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(59,130,246,.15);color:#60a5fa;"><i class="bi bi-megaphone"></i></div>
+          <h4>Advertising Management</h4>
+          <p>Meta, Google, YouTube, TikTok, retargeting, geofencing, and job-board campaigns — managed by All-Star so your agency shows up where candidates are looking.</p>
+          <div class="svc-flows-back"><i class="bi bi-arrow-return-left"></i>Ad results and source tracking flow into All-Star</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(52,211,153,.12);color:#34d399;"><i class="bi bi-chat-dots"></i></div>
+          <h4>Candidate Follow-Up Support</h4>
+          <p>We build and manage the email and SMS sequences that keep candidates moving — so no one falls off between application and Guardian submission.</p>
+          <div class="svc-flows-back"><i class="bi bi-arrow-return-left"></i>Messages, replies, and stages tracked in All-Star</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(251,191,36,.12);color:#fbbf24;"><i class="bi bi-calendar-event"></i></div>
+          <h4>Hiring Event Promotion</h4>
+          <p>Drive attendance to test days, open houses, and oral boards with targeted outreach — and manage the entire RSVP and reminder flow inside All-Star Events.</p>
+          <div class="svc-flows-back"><i class="bi bi-arrow-return-left"></i>Event attendance tracked per candidate</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 d-flex">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(239,68,68,.12);color:#f87171;"><i class="bi bi-person-lines-fill"></i></div>
+          <h4>Managed Recruiting Support</h4>
+          <p>For agencies that want All-Star to provide hands-on recruiting support and campaign execution — from first ad impression to Guardian-ready candidate.</p>
+          <div class="svc-flows-back"><i class="bi bi-arrow-return-left"></i>All activity visible in your All-Star account</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRO UPGRADE — PAIN-BASED FRAMING -->
+<section class="upgrade-section" id="upgrade">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">Start free. Add power when you need it.</div>
+        <div class="section-title">Pro unlocks the tools your<br><span>agency grows into</span></div>
+        <p class="section-sub mx-auto text-center">
+          The Guardian Partner Free Plan gets your agency activated. Pro becomes the natural next step once you have real candidates in the system and need more speed, automation, and visibility.
+        </p>
+      </div>
+    </div>
+    <div class="row g-3">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-chat-dots"></i></div>
+          <div>
+            <div class="pain-q">Need faster candidate response? <span class="pro-ribbon">PRO</span></div>
+            <div class="pain-a">Add SMS. Reach candidates faster than email alone with two-way text messaging. Automated reminders included.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-calendar3"></i></div>
+          <div>
+            <div class="pain-q">Running test days, oral boards, or hiring events? <span class="pro-ribbon">PRO</span></div>
+            <div class="pain-a">Add Events. Schedule, manage RSVPs, track attendance, and send automated reminders — all in one place.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-lightning-charge"></i></div>
+          <div>
+            <div class="pain-q">Too much manual follow-up? <span class="pro-ribbon">PRO</span></div>
+            <div class="pain-a">Add Workflows. Trigger emails, tags, and tasks automatically based on what candidates do — or don't do.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:#fef3c7;color:#92400e;"><i class="bi bi-bar-chart"></i></div>
+          <div>
+            <div class="pain-q">Need leadership reporting? <span class="pro-ribbon">PRO</span></div>
+            <div class="pain-a">Add Analytics. Dashboards for candidate pipeline, stage conversion, source tracking, and campaign ROI.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-megaphone"></i></div>
+          <div>
+            <div class="pain-q">Running a recruiting drive? <span class="pro-ribbon">PRO</span></div>
+            <div class="pain-a">Add Campaigns. Multi-step email and SMS sequences over days or weeks, with open and click tracking per message.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="pain-card">
+          <div class="pain-icon" style="background:#faf5ff;color:#7c3aed;"><i class="bi bi-stars"></i></div>
+          <div>
+            <div class="pain-q">Need to scale without more staff? <span class="pro-ribbon">PRO</span></div>
+            <div class="pain-a">Add AI. Candidate summaries, response drafting, smart screening — so your team spends time with the best candidates.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e4d8c 100%);border-radius:12px;padding:2rem;margin-top:2rem;display:flex;flex-direction:column;gap:.5rem;align-items:center;text-align:center;">
+      <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--gold);">Everything unlocked. One plan.</div>
+      <h4 style="color:#fff;font-size:1.2rem;font-weight:800;margin:0;">Pro gives you every feature in a single upgrade.</h4>
+      <p style="color:rgba(255,255,255,.65);font-size:.88rem;line-height:1.6;max-width:600px;margin:0;">No picking and choosing. Run your entire hiring funnel from first contact to Guardian referral in one place. Start with the free Guardian Partner Plan. Upgrade only when your agency needs more automation, reporting, or campaign support.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- WEEK ONE SECTION -->
+<section class="weekone-section">
+  <div class="container">
+    <div class="row g-5 align-items-center justify-content-center">
+      <div class="col-lg-5 text-center text-lg-start">
+        <div class="free-badge" style="margin-bottom:1rem;"><i class="bi bi-calendar-check me-1"></i>Activation</div>
+        <div class="section-title" style="color:#166534;">What you can do<br>in 5 minutes</div>
+        <p style="color:#4ade80;margin-top:.75rem;font-size:.95rem;line-height:1.6;font-weight:500;">The free plan is not theoretical. Here is what agencies do on day one.</p>
+      </div>
+      <div class="col-lg-5">
+        <div class="weekone-step"><i class="bi bi-check-circle-fill"></i>Set up your agency recruiting page and share the link</div>
+        <div class="weekone-step"><i class="bi bi-check-circle-fill"></i>Add current prospects and applicants to the system</div>
+        <div class="weekone-step"><i class="bi bi-check-circle-fill"></i>Organize candidates by stage — who's in progress, who's ready</div>
+        <div class="weekone-step"><i class="bi bi-check-circle-fill"></i>Send your first follow-up email to candidates who went quiet</div>
+        <div class="weekone-step"><i class="bi bi-check-circle-fill"></i>Connect your Guardian account and identify candidates ready for background</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER COMPARISON -->
+<section class="tier-section" id="pricing">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">Simple, transparent pricing</div>
+        <div class="section-title">Start free.<br><span>Upgrade when it makes sense.</span></div>
+        <p class="section-sub mx-auto text-center">Pro pricing is based on your sworn officer count — not the number of logins. Unlimited users at every tier.</p>
+      </div>
+    </div>
+
+    <!-- Free tier -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-6 col-lg-5">
+        <div class="tier-card" style="border-color:#16a34a;background:#f0fdf4;">
+          <div class="tier-name" style="color:#166534;">Guardian Partner Free Plan</div>
+          <div class="tier-price" style="color:#166534;">$0 <span class="per">/ forever</span></div>
+          <div class="tier-tagline">Everything you need to own the top of your hiring funnel. Free for all Guardian Alliance agencies.</div>
+          <ul class="tier-features">
+            <li><i class="bi bi-check-circle-fill"></i>2-way email communication</li>
+            <li><i class="bi bi-check-circle-fill"></i>Candidate tagging &amp; groups</li>
+            <li><i class="bi bi-check-circle-fill"></i>Guardian Alliance integration</li>
+            <li><i class="bi bi-check-circle-fill"></i>Web page builder</li>
+            <li><i class="bi bi-check-circle-fill"></i>Unlimited candidates</li>
+            <li><i class="bi bi-check-circle-fill"></i>Unlimited users</li>
+          </ul>
+          <a href="#claim" class="btn-tier" style="background:#16a34a;color:#fff;border:2px solid #16a34a;">Claim Free Partner Account</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pro pricing toggle -->
+    <div class="text-center mb-4">
+      <p style="font-size:.88rem;color:#64748b;margin-bottom:.75rem;">Start with the free Guardian Partner Plan. Upgrade only when your agency needs more automation, reporting, users, or campaign support.</p>
+      <button class="btn-toggle-pro" type="button" data-bs-toggle="collapse" data-bs-target="#pro-pricing-details" aria-expanded="false">
+        View Pro Pricing <span class="toggle-arrow">↓</span>
+      </button>
+    </div>
+
+    <!-- Pro pricing grid (collapsed by default) -->
+    <div class="collapse" id="pro-pricing-details">
+    <div class="row justify-content-center mb-4">
+      <div class="col-12">
+        <div style="text-align:center;margin-bottom:1.25rem;">
+          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);">Pro — Full Platform · Priced by sworn officer count</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;max-width:860px;margin:0 auto;">
+
+          <div class="tier-card" style="padding:1.25rem 1rem;">
+            <div class="tier-name">1–49 Sworn</div>
+            <div class="tier-price" style="font-size:1.65rem;">$200</div>
+            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
+            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$2,400 / year</div>
+            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">2,500 texts/mo</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
+            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
+          </div>
+
+          <div class="tier-card" style="padding:1.25rem 1rem;">
+            <div class="tier-name">50–99 Sworn</div>
+            <div class="tier-price" style="font-size:1.65rem;">$300</div>
+            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
+            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$3,600 / year</div>
+            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">3,500 texts/mo</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
+            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
+          </div>
+
+          <div class="tier-card highlighted" style="padding:1.25rem 1rem;border-top:3px solid #7c3aed;border-color:#7c3aed;background:linear-gradient(180deg,#f5f0ff 0%,#fffbf0 60%);">
+            <div style="font-size:.65rem;font-weight:800;color:#7c3aed;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.35rem;">Most Common</div>
+            <div class="tier-name">100–199 Sworn</div>
+            <div class="tier-price" style="font-size:1.65rem;color:var(--navy-mid);">$400</div>
+            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
+            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$4,800 / year</div>
+            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">5,000 texts/mo</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
+            <a href="#claim" class="btn-tier btn-tier-primary" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
+          </div>
+
+          <div class="tier-card" style="padding:1.25rem 1rem;">
+            <div class="tier-name">200–399 Sworn</div>
+            <div class="tier-price" style="font-size:1.65rem;">$500</div>
+            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
+            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$6,000 / year</div>
+            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">7,500 texts/mo</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
+            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
+          </div>
+
+          <div class="tier-card" style="padding:1.25rem 1rem;">
+            <div class="tier-name">400+ Sworn</div>
+            <div class="tier-price" style="font-size:1.65rem;">$600</div>
+            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
+            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$7,200 / year</div>
+            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">10,000 texts/mo</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
+            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
+            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Everything included box -->
+    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 55%,#7c3aed 100%);border-radius:14px;padding:2rem 2.5rem;max-width:860px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:1.25rem;">
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:800;margin:0 0 .35rem;">Everything included at every Pro tier</h3>
+        <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin:0;">No feature gating. The same full platform, scaled by size.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Full website platform</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>SMS &amp; email channels</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>SMS &amp; email templates</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Automated communication</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Events management</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>QR code generator</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Document requests</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Screening &amp; surveys</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Tagging &amp; advanced filtering</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Recruiter assignment tools</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Unlimited users</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>AI capabilities</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Analytics dashboard</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Virtual training academy</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Dedicated support team</div>
+      </div>
+    </div>
+
+    </div><!-- /pro-pricing-details collapse -->
+  </div>
+</section>
+
+<!-- CTA / CLAIM FORM -->
+<section class="cta-section" id="claim">
+  <div class="container">
+    <div class="hero-eyebrow d-inline-flex mb-4">
+      <i class="bi bi-shield-check me-1"></i> Guardian Partner Free Plan
+    </div>
+    <h2>Stop losing candidates<br><span>before they reach Guardian.</span></h2>
+    <p class="lede">Tell us about your agency. Account verification within 1 business day. Once verified, you'll be up and running in about 5 minutes.</p>
+
+    <div class="cta-form-card">
+      <form id="cta-form" novalidate>
+
+        <!-- Hidden tracking fields (populated by JS from URL params) -->
+        <input type="hidden" id="field_ref" name="ref" value="">
+        <input type="hidden" id="field_guardian_ref" name="guardian_ref" value="">
+        <input type="hidden" id="field_variant" name="variant" value="guardian-v2">
+        <input type="hidden" id="field_utm_source" name="utm_source" value="">
+        <input type="hidden" id="field_utm_medium" name="utm_medium" value="">
+        <input type="hidden" id="field_utm_campaign" name="utm_campaign" value="">
+        <input type="hidden" id="field_plan_selected" name="plan_selected" value="free">
+
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label class="form-label">Agency Name <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" name="agency_name" placeholder="Austin Police Department">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <label class="form-label">First Name <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" name="first_name" placeholder="Jane">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label">Last Name <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" name="last_name" placeholder="Smith">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-8">
+            <label class="form-label">Work Email <span style="color:#f87171;">*</span></label>
+            <input type="email" class="form-control" name="email" placeholder="jane@austinpd.gov">
+          </div>
+          <div class="col-sm-4">
+            <label class="form-label">Phone <span style="color:#f87171;">*</span></label>
+            <input type="tel" class="form-control" name="phone" placeholder="(512) 555-0100">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Recruiting Sergeant">
+          </div>
+          <div class="col-sm-6">
+            <label class="form-label">State <span style="color:#f87171;">*</span></label>
+            <input type="text" class="form-control" name="state" placeholder="TX">
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-7">
+            <label class="form-label">Agency Size (Sworn Officers) <span style="color:#f87171;">*</span></label>
+            <select class="form-select" name="agency_size">
+              <option value="" disabled selected>Select your agency size…</option>
+              <option value="1-49">1 – 49 Sworn Officers</option>
+              <option value="50-99">50 – 99 Sworn Officers</option>
+              <option value="100-199">100 – 199 Sworn Officers</option>
+              <option value="200-399">200 – 399 Sworn Officers</option>
+              <option value="400+">400+ Sworn Officers</option>
+            </select>
+          </div>
+          <div class="col-sm-5">
+            <label class="form-label">Current Guardian Alliance customer? <span style="color:#f87171;">*</span></label>
+            <select class="form-select" id="field_guardian_customer" name="guardian_customer">
+              <option value="" disabled selected>Select one…</option>
+              <option value="yes">Yes</option>
+              <option value="no">No — not yet</option>
+              <option value="not-sure">Not sure</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label class="form-label">What is your biggest recruiting challenge right now?</label>
+            <select class="form-select" name="challenge">
+              <option value="" disabled selected>Select your biggest challenge…</option>
+              <option value="not-enough-applicants">Not enough applicants</option>
+              <option value="slow-followup">Slow candidate follow-up</option>
+              <option value="manual-tracking">Too much manual tracking</option>
+              <option value="need-content">Need better recruiting content</option>
+              <option value="need-ads">Need help running ads</option>
+              <option value="events">Need hiring event support</option>
+              <option value="reporting">Need better reporting</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-12">
+            <label class="form-label">Referred by a Guardian representative or referral code <span style="color:rgba(255,255,255,.4);">(optional)</span></label>
+            <input type="text" id="field_ref_visible" name="referral" class="form-control" placeholder="Rep name or referral code">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label mb-2">Select a Plan <span style="color:#f87171;">*</span></label>
+          <div class="cta-plan-row">
+            <label class="cta-plan-option selected-free" onclick="selectPlan(this,'free')">
+              <input type="radio" name="plan" value="free" checked>
+              <div class="cta-plan-name"><i class="bi bi-check-circle-fill me-1"></i>Guardian Partner Free Plan</div>
+              <div class="cta-plan-desc">Web Builder, Email, Tagging &amp; Guardian Integration — $0 forever</div>
+            </label>
+            <label class="cta-plan-option" onclick="selectPlan(this,'pro')">
+              <input type="radio" name="plan" value="pro">
+              <div class="cta-plan-name"><i class="bi bi-stars me-1"></i>Pro</div>
+              <div class="cta-plan-desc">Full platform — SMS, Events, Campaigns, AI &amp; more. Pricing by agency size.</div>
+            </label>
+          </div>
+        </div>
+
+        <button type="button" class="btn-cta-submit" onclick="submitCta()">
+          <i class="bi bi-rocket-takeoff me-2"></i>Claim My Free Partner Account
+        </button>
+        <p class="cta-fine">No credit card required. Free tier never expires. We verify Guardian Alliance membership before activation.</p>
+      </form>
+
+      <div class="cta-confirm" id="cta-confirm">
+        <div class="cta-confirm-icon"><i class="bi bi-check-lg"></i></div>
+        <h3>You're on the list!</h3>
+        <p>Thanks! We'll verify your Guardian Alliance membership and have your account ready within 1 business day. Check your work email for next steps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 All-Star Recruiter · <a href="#">Privacy Policy</a> · <a href="#">Terms</a><br style="display:none;">
+    <span style="display:block;margin-top:.4rem;color:rgba(255,255,255,.25);">All-Star Talent is a Guardian Alliance partner offering recruiting software for agencies that use Guardian. Guardian remains your background-investigation platform; All-Star Recruiter supports the recruiting stages before background submission.</span></p>
+  </div>
+</footer>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* Prefill hidden fields from URL params */
+  (function() {
+    const p = new URLSearchParams(window.location.search);
+    const map = { ref: 'field_ref', guardian_ref: 'field_guardian_ref', utm_source: 'field_utm_source', utm_medium: 'field_utm_medium', utm_campaign: 'field_utm_campaign' };
+    Object.entries(map).forEach(([param, id]) => {
+      const v = p.get(param); if (v) document.getElementById(id).value = v;
+    });
+    /* Also prefill visible referral field if ref param present */
+    const ref = p.get('ref') || p.get('guardian_ref');
+    if (ref) document.getElementById('field_ref_visible').value = ref;
+  })();
+
+  function selectPlan(el, plan) {
+    document.querySelectorAll('.cta-plan-option').forEach(o => o.classList.remove('selected-free','selected-pro'));
+    el.classList.add(plan === 'free' ? 'selected-free' : 'selected-pro');
+    document.getElementById('field_plan_selected').value = plan;
+  }
+
+  function submitCta() {
+    var form = document.getElementById('cta-form');
+    var required = [
+      {name:'agency_name', label:'Agency Name'},
+      {name:'first_name',  label:'First Name'},
+      {name:'last_name',   label:'Last Name'},
+      {name:'email',       label:'Work Email'},
+      {name:'phone',       label:'Phone'},
+      {name:'state',       label:'State'},
+      {name:'agency_size', label:'Agency Size'},
+      {name:'guardian_customer', label:'Guardian Alliance customer'}
+    ];
+    for (var i = 0; i < required.length; i++) {
+      var el = form.querySelector('[name="' + required[i].name + '"]');
+      if (!el || !el.value.trim()) {
+        el && el.focus();
+        el && (el.style.borderColor = '#f87171');
+        setTimeout(function(e){ e.style.borderColor = ''; }.bind(null, el), 2000);
+        return;
+      }
+    }
+    var btn = form.querySelector('.btn-cta-submit');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting…';
+    fetch('https://formspree.io/f/mlgkgygj', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r) {
+      if (r.ok) {
+        form.style.display = 'none';
+        document.getElementById('cta-confirm').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-rocket-takeoff me-2"></i>Claim My Free Partner Account';
+        alert('Something went wrong. Please try again.');
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-rocket-takeoff me-2"></i>Claim My Free Partner Account';
+      alert('Something went wrong. Please check your connection and try again.');
+    });
+  }
+
+  /* Lightbox */
+  (function() {
+    var lbx = document.createElement('div');
+    lbx.id = 'lbx';
+    lbx.innerHTML = '<button id="lbx-close" title="Close (Esc)">&times;</button><div id="lbx-inner"><img id="lbx-img" src="" alt=""></div>';
+    lbx.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);overflow-y:auto;padding:40px 20px;';
+    document.getElementById('lbx-close', lbx);
+    document.body.appendChild(lbx);
+    document.getElementById('lbx-close').style.cssText = 'position:fixed;top:14px;right:18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:10000;';
+    document.getElementById('lbx-inner').style.cssText = 'max-width:1300px;margin:0 auto;';
+    document.getElementById('lbx-img').style.cssText = 'width:100%;border-radius:8px;box-shadow:0 32px 80px rgba(0,0,0,.5);display:block;';
+    function lbxOpen(src,alt){document.getElementById('lbx-img').src=src;document.getElementById('lbx-img').alt=alt||'';lbx.style.display='block';document.body.style.overflow='hidden';}
+    function lbxClose(){lbx.style.display='none';document.body.style.overflow='';}
+    document.getElementById('lbx-close').addEventListener('click',lbxClose);
+    lbx.addEventListener('click',function(e){if(e.target===lbx)lbxClose();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')lbxClose();});
+    document.querySelectorAll('.browser-frame img').forEach(function(img){
+      img.addEventListener('click',function(){lbxOpen(this.src,this.alt);});
+    });
+    /* Add expand hint to each chrome bar */
+    document.querySelectorAll('.browser-chrome').forEach(function(c){
+      var s=document.createElement('span');s.className='browser-expand';s.textContent='⤢ expand';c.appendChild(s);
+    });
+  })();
+</script>
+</body>
+</html>
