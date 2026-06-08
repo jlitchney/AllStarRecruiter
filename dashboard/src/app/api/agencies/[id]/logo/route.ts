@@ -32,11 +32,18 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
 
   const ext = file.type === "image/png" ? "png" : "jpg";
-  const blob = await put(`agency-logos/${id}.${ext}`, file, {
-    access: "public",
-    contentType: file.type,
-    addRandomSuffix: false,
-  });
+  let blob;
+  try {
+    blob = await put(`agency-logos/${id}.${ext}`, file, {
+      access: "public",
+      contentType: file.type,
+      addRandomSuffix: false,
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[logo upload]", message);
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 
   const updated = await updateAgency(id, { logo_url: blob.url });
   return NextResponse.json({ url: blob.url, agency: updated });
