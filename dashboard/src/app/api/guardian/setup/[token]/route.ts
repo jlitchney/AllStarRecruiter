@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAgencyByGuardianToken, updateAgency } from "@/lib/kv";
+import { getAgencyByGuardianToken, updateAgency, getAgency } from "@/lib/kv";
+import { sendGuardianSetupCompleteNotification } from "@/lib/email";
 import type { GuardianStatus } from "@/types";
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
@@ -43,5 +44,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ tok
   }
 
   await updateAgency(agency.id, patch);
+
+  const updated = await getAgency(agency.id);
+  if (updated) await sendGuardianSetupCompleteNotification(updated);
+
   return NextResponse.json({ ok: true });
 }

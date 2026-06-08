@@ -43,6 +43,48 @@ export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
   if (result.error) throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
 }
 
+export async function sendGuardianSetupCompleteNotification(agency: Agency): Promise<void> {
+  if (!process.env.RESEND_API_KEY) return;
+
+  const { Resend } = await import("resend");
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const settings = await getSettings();
+  const to = settings.notificationEmails.length > 0
+    ? settings.notificationEmails
+    : [process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us"];
+
+  const isNotCustomer = agency.guardian_status === "not-a-customer";
+
+  const result = await resend.emails.send({
+    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    to,
+    subject: isNotCustomer
+      ? `Guardian Setup: ${agency.agency_name} is NOT a Guardian customer`
+      : `Guardian Setup Complete: ${agency.agency_name} (${agency.agency_abbr})`,
+    html: `
+      <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;padding:24px;">
+        <h2 style="margin:0 0 4px;color:#0f172a;">Guardian Setup ${isNotCustomer ? "Update" : "Complete"}</h2>
+        <p style="margin:0 0 24px;color:#64748b;font-size:14px;">
+          ${isNotCustomer
+            ? `Guardian Alliance has marked <strong>${agency.agency_name}</strong> as not yet a Guardian customer.`
+            : `Guardian Alliance has entered credentials for <strong>${agency.agency_name}</strong>.`}
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;">
+          <tr><td style="padding:8px 0;color:#64748b;width:40%;">Agency</td><td style="padding:8px 0;font-weight:600;">${agency.agency_name} (${agency.agency_abbr})</td></tr>
+          <tr style="background:#f8fafc;"><td style="padding:8px 4px;color:#64748b;">Location</td><td style="padding:8px 4px;">${agency.city}, ${agency.state}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b;">Status</td><td style="padding:8px 0;">${isNotCustomer ? "Not a Guardian customer" : "Active"}</td></tr>
+          ${!isNotCustomer && agency.guardian_api_key ? `<tr style="background:#f8fafc;"><td style="padding:8px 4px;color:#64748b;">API Key</td><td style="padding:8px 4px;font-family:monospace;">${agency.guardian_api_key}</td></tr>` : ""}
+          ${!isNotCustomer && agency.guardian_link ? `<tr><td style="padding:8px 0;color:#64748b;">Login Link</td><td style="padding:8px 0;"><a href="${agency.guardian_link}">${agency.guardian_link}</a></td></tr>` : ""}
+        </table>
+
+        <a href="${APP_URL}/dashboard/${agency.id}" style="background:#1a3a6e;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;">View in Dashboard →</a>
+      </div>
+    `,
+  });
+  if (result.error) throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
+}
+
 export async function sendGuardianSetupEmail(agency: Agency): Promise<void> {
   if (!process.env.RESEND_API_KEY || !agency.guardian_setup_token) return;
 
