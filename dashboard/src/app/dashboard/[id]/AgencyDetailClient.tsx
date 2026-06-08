@@ -154,6 +154,123 @@ function SearchableSelect({
   );
 }
 
+function LogoUpload({ agencyId, logoUrl, onUpdate }: { agencyId: string; logoUrl?: string; onUpdate: (url: string | undefined) => void }) {
+  const [uploading, setUploading] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!["image/jpeg", "image/png"].includes(file.type)) {
+      setError("Only JPG and PNG files are allowed.");
+      return;
+    }
+    setError(null);
+    const reader = new FileReader();
+    reader.onload = () => setPreview(reader.result as string);
+    reader.readAsDataURL(file);
+  }
+
+  async function handleUpload() {
+    const file = fileRef.current?.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setError(null);
+    const fd = new FormData();
+    fd.append("file", file);
+    const res = await fetch(`/api/agencies/${agencyId}/logo`, { method: "POST", body: fd });
+    if (res.ok) {
+      const data = await res.json();
+      onUpdate(data.url);
+      setPreview(null);
+      if (fileRef.current) fileRef.current.value = "";
+    } else {
+      const data = await res.json().catch(() => ({}));
+      setError(data.error ?? "Upload failed. Please try again.");
+    }
+    setUploading(false);
+  }
+
+  async function handleRemove() {
+    if (!confirm("Remove this logo?")) return;
+    setRemoving(true);
+    const res = await fetch(`/api/agencies/${agencyId}/logo`, { method: "DELETE" });
+    if (res.ok) {
+      onUpdate(undefined);
+      setPreview(null);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+    setRemoving(false);
+  }
+
+  const displaySrc = preview ?? logoUrl;
+
+  return (
+    <div className="pt-2 border-t border-gray-100">
+      <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Department Logo</div>
+
+      {displaySrc && (
+        <div className="mb-3 flex items-start gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={displaySrc}
+            alt="Department logo"
+            className="w-20 h-20 object-contain rounded-lg border border-gray-200 bg-gray-50"
+          />
+          <div className="flex flex-col gap-1.5">
+            {preview && (
+              <span className="text-xs text-amber-600 font-medium">Preview — not saved yet</span>
+            )}
+            {logoUrl && !preview && (
+              <button
+                onClick={handleRemove}
+                disabled={removing}
+                className="text-xs text-red-500 hover:text-red-700 border border-red-200 hover:border-red-300 rounded px-2 py-1 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {removing ? "Removing…" : "Remove"}
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div
+        className="border-2 border-dashed border-gray-200 rounded-lg px-4 py-5 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition-colors"
+        onClick={() => fileRef.current?.click()}
+      >
+        <p className="text-sm text-gray-500">
+          {displaySrc ? "Replace logo" : "Upload logo"}
+          <span className="text-gray-400"> — JPG or PNG, 1080×1080px recommended</span>
+        </p>
+        <p className="text-xs text-gray-400 mt-0.5">Click to browse</p>
+      </div>
+
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/jpeg,image/png"
+        className="hidden"
+        onChange={handleFileChange}
+      />
+
+      {error && <p className="text-xs text-red-500 mt-1.5">{error}</p>}
+
+      {preview && (
+        <button
+          onClick={handleUpload}
+          disabled={uploading}
+          className="mt-2 w-full px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+        >
+          {uploading ? "Uploading…" : "Save Logo"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 export function AgencyDetailClient({
   agency: initial,
   tenants,
@@ -256,6 +373,11 @@ export function AgencyDetailClient({
             <Field label="Zip" value={agency.zip} />
             <Field label="Agency Size" value={agency.agency_size} />
             <Field label="Plan" value={agency.plan_selected ?? "free"} />
+            <LogoUpload
+              agencyId={agency.id}
+              logoUrl={agency.logo_url}
+              onUpdate={(url) => setAgency((a) => ({ ...a, logo_url: url }))}
+            />
           </div>
 
           {/* Contact info */}
