@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All-Star Recruiter Pro — For Past All-Star Talent Clients</title>
+  <meta name="description" content="You worked with All-Star Talent. We built the software. All-Star Recruiter Pro gives past clients the full platform — SMS, events, automation, analytics — from a team you already know.">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
+  <style>
+    :root {
+      --navy: #1a3a6e;
+      --navy-mid: #245194;
+      --gold: #e4aa35;
+      --gold-hover: #c9941f;
+    }
+    * { box-sizing: border-box; }
+    body { background: #fff; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+
+    /* ── Nav ── */
+    .top-nav { background: var(--navy); padding: .75rem 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .btn-nav { background: var(--gold); color: #fff; font-weight: 700; font-size: .88rem; padding: .45rem 1.1rem; border-radius: 6px; text-decoration: none; transition: background .15s; white-space: nowrap; }
+    .btn-nav:hover { background: var(--gold-hover); color: #fff; }
+
+    /* ── Hero ── */
+    .hero { background: linear-gradient(135deg, rgba(8,18,45,.97) 0%, rgba(20,48,100,.95) 60%, rgba(18,44,90,.93) 100%); padding: 5rem 0 4.5rem; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: .5rem; background: rgba(228,170,53,.15); border: 1px solid rgba(228,170,53,.3); color: var(--gold); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; padding: .3rem .8rem; border-radius: 99px; margin-bottom: 1.25rem; }
+    .hero h1 { font-size: 2.75rem; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -.025em; margin-bottom: 1rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero .lede { color: rgba(255,255,255,.72); font-size: 1.05rem; line-height: 1.7; max-width: 520px; margin-bottom: 0; }
+    .badge-pro { display: inline-flex; align-items: center; gap: .4rem; background: rgba(228,170,53,.15); border: 1px solid rgba(228,170,53,.35); color: var(--gold); font-size: .75rem; font-weight: 700; padding: .3rem .75rem; border-radius: 99px; margin-top: 1.25rem; }
+
+    /* ── Stats box ── */
+    .stat-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1.5rem; }
+
+    /* ── Value props ── */
+    .props-section { background: #f8fafc; padding: 4.5rem 0; border-bottom: 1px solid #e2e8f0; }
+    .prop-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; height: 100%; }
+    .prop-icon { width: 46px; height: 46px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
+    .prop-card h3 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
+    .prop-card p { font-size: .95rem; color: #64748b; line-height: 1.65; margin: 0; }
+    .pro-ribbon { display: inline-flex; align-items: center; gap: .3rem; background: linear-gradient(135deg, var(--gold), #d4930a); color: #fff; font-size: .55rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; padding: 2px 7px; border-radius: 99px; vertical-align: middle; margin-left: .3rem; }
+
+    /* ── Logo scroll ── */
+    .logo-scroll-section { padding: 2.5rem 0; background: #fff; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; overflow: hidden; }
+    .logo-scroll-label { text-align: center; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 1.25rem; }
+    .logo-scroll-track-wrap { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-scroll-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: logo-scroll 55s linear infinite; }
+    .logo-scroll-track:hover { animation-play-state: paused; }
+    @keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo-scroll-track img { height: 58px; width: auto; max-width: 132px; object-fit: contain; filter: grayscale(100%) opacity(.4); transition: filter .25s; flex-shrink: 0; }
+    .logo-scroll-track img:hover { filter: grayscale(0%) opacity(1); }
+
+    /* ── Included / Pro features ── */
+    .included-section { background: #fff; padding: 4.5rem 0; }
+    .included-card { background: #f8fafc; border: 2px solid var(--navy); border-radius: 16px; padding: 2.25rem; position: relative; overflow: hidden; }
+    .included-card::before { content: "PRO"; position: absolute; top: 18px; right: -30px; background: linear-gradient(135deg, var(--gold), #c9941f); color: #fff; font-size: .6rem; font-weight: 900; letter-spacing: .1em; padding: 5px 40px; transform: rotate(45deg); transform-origin: center; }
+    .incl-item { display: flex; align-items: flex-start; gap: .75rem; padding: .65rem 0; border-bottom: 1px solid #e2e8f0; }
+    .incl-item:last-child { border-bottom: none; }
+    .incl-check { width: 22px; height: 22px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+    .incl-check.gold { background: rgba(228,170,53,.15); }
+    .incl-check i { font-size: .65rem; color: #166534; }
+    .incl-check.gold i { color: var(--gold-hover); }
+    .incl-text { font-size: .9rem; color: #1e293b; font-weight: 600; line-height: 1.4; }
+    .incl-sub { font-size: .82rem; color: #64748b; font-weight: 400; margin-top: .15rem; }
+    .pro-badge { display: inline-block; background: linear-gradient(135deg, var(--gold), #d4930a); color: #fff; font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; padding: 2px 8px; border-radius: 99px; }
+
+    /* ── Pricing tiers ── */
+    .tier-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.5rem; text-align: center; }
+    .tier-card.featured { border-color: var(--navy-mid); border-width: 2px; background: #f0f5ff; }
+    .tier-price { font-size: 2rem; font-weight: 900; color: #0f172a; line-height: 1; }
+    .tier-price sup { font-size: 1rem; font-weight: 700; vertical-align: super; }
+    .tier-price .per { font-size: .8rem; font-weight: 500; color: #64748b; }
+
+    /* ── Pain/Pro section ── */
+    .pain-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .pain-q { font-size: .92rem; font-weight: 700; color: #0f172a; margin-bottom: .4rem; }
+    .pain-a { font-size: .88rem; color: #64748b; line-height: 1.6; }
+
+    /* ── CTA / Form ── */
+    .cta-section { background: linear-gradient(135deg, #0a1628 0%, #0f2147 55%, #162d5e 100%); padding: 5rem 0; }
+    .form-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 2.5rem; }
+    .form-label { font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.8); margin-bottom: .3rem; display: block; }
+    .form-control, .form-select { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); color: #fff !important; border-radius: 7px; padding: .6rem .85rem; font-size: .9rem; width: 100%; }
+    .form-control::placeholder { color: rgba(255,255,255,.3) !important; }
+    .form-control:focus, .form-select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(228,170,53,.15); background: rgba(255,255,255,.1); }
+    .form-select option { background: #0f2147; color: #fff; }
+    .btn-submit { background: var(--gold); color: #fff; border: none; font-weight: 700; font-size: 1rem; padding: .85rem; border-radius: 8px; width: 100%; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .25rem; }
+    .btn-submit:hover { background: var(--gold-hover); }
+    .form-fine { font-size: .72rem; color: rgba(255,255,255,.3); text-align: center; margin-top: .75rem; }
+    .cta-confirm { display: none; text-align: center; padding: 3rem 1rem; }
+    .cta-confirm-icon { width: 64px; height: 64px; background: rgba(228,170,53,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--gold); margin: 0 auto 1.25rem; }
+    .cta-confirm h3 { color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: .5rem; }
+    .cta-confirm p { color: rgba(255,255,255,.55); font-size: .95rem; }
+
+    /* ── Browser frame ── */
+    .browser-frame { border-radius: 10px; overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.08); cursor: zoom-in; }
+    .browser-chrome { background: #e8e8e8; padding: 9px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #d0d0d0; }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .browser-url { margin-left: 8px; background: #fff; border-radius: 4px; height: 20px; font-size: 10.5px; color: #888; display: flex; align-items: center; padding: 0 8px; flex: 1; }
+    .browser-expand { margin-left: 8px; font-size: 11px; color: #aaa; flex-shrink: 0; letter-spacing: .2px; }
+    .browser-frame img { width: 100%; display: block; height: 300px; object-fit: cover; object-position: top; transition: transform .25s ease; }
+    .browser-frame:hover img { transform: scale(1.02); }
+
+    /* ── Footer ── */
+    footer { background: #060e1f; padding: 2rem 0; }
+    footer p { color: rgba(255,255,255,.25); font-size: .78rem; margin: 0; text-align: center; }
+    footer a { color: rgba(255,255,255,.3); text-decoration: none; }
+    footer a:hover { color: rgba(255,255,255,.6); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a href="/" class="nav-logo">
+    <img src="../assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="32">
+  </a>
+  <a href="#request" class="btn-nav">Get Started with Pro</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-eyebrow"><i class="bi bi-stars"></i> For Past All-Star Talent Clients</div>
+        <h1>We built something new.<br><span>The full platform. Everything unlocked.</span></h1>
+        <p class="lede">You worked with All-Star Talent on your recruiting campaigns. Since then, we built the software to go with it — a professional recruiting website, candidate CRM, SMS, email, events, automation, and analytics. This is the Pro platform, from a team you already know.</p>
+        <div class="badge-pro"><i class="bi bi-award-fill"></i> Full Pro access · Unlimited users</div>
+      </div>
+      <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
+        <div class="stat-box">
+          <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:rgba(228,170,53,.7);margin-bottom:1rem;">Built from real campaigns</div>
+          <div class="row g-3">
+            <div class="col-6">
+              <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;text-align:center;">
+                <div style="font-size:1.5rem;font-weight:900;color:var(--gold);">7,296</div>
+                <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.2rem;line-height:1.4;">candidates delivered<br>City of Columbus</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;text-align:center;">
+                <div style="font-size:1.5rem;font-weight:900;color:var(--gold);">17%</div>
+                <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.2rem;line-height:1.4;">vacancy reduction<br>Nevada DOC</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;text-align:center;">
+                <div style="font-size:1.5rem;font-weight:900;color:var(--gold);">∞</div>
+                <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.2rem;">users per agency</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;text-align:center;">
+                <div style="font-size:1.5rem;font-weight:900;color:var(--gold);">1 day</div>
+                <div style="font-size:.72rem;color:rgba(255,255,255,.45);margin-top:.2rem;">to go live</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROPS -->
+<section class="props-section">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-7 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.4rem;">What you get</div>
+        <h2 style="font-size:1.85rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;">Every tool you need to run recruiting.<br><span style="color:var(--navy-mid);">All in one platform.</span></h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="prop-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-window-fullscreen"></i></div>
+          <h3>Recruiting Website Builder</h3>
+          <p>A branded recruiting page — photos, mission, open positions, and an apply form — built for your agency and promoted wherever candidates are looking.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="prop-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-person-lines-fill"></i></div>
+          <h3>Candidate CRM &amp; Pipeline</h3>
+          <p>Every applicant tracked from first contact through hire. Stages, tags, notes, and full message history — nothing falls through the cracks, no matter how many open positions you're running.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="prop-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-chat-dots-fill"></i></div>
+          <h3>SMS &amp; Email — Two-Way <span class="pro-ribbon">PRO</span></h3>
+          <p>Reach candidates where they actually respond. Two-way SMS and email, both tied to the candidate record automatically. No BCC hacks, no lost threads.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="prop-icon" style="background:#fef9c3;color:#92400e;"><i class="bi bi-calendar-event-fill"></i></div>
+          <h3>Hiring Event Management <span class="pro-ribbon">PRO</span></h3>
+          <p>Create and promote test days, oral boards, and hiring events from the platform. Candidates register, get reminders, and show up — all tracked in your pipeline.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="prop-icon" style="background:#fce7f3;color:#9d174d;"><i class="bi bi-lightning-charge-fill"></i></div>
+          <h3>Automation &amp; Drip Campaigns <span class="pro-ribbon">PRO</span></h3>
+          <p>Stop manual follow-up. Set automated sequences that reach the right candidates at the right time — from initial interest through background-ready status.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="prop-icon" style="background:#e0f2fe;color:#0369a1;"><i class="bi bi-bar-chart-fill"></i></div>
+          <h3>Analytics &amp; Leadership Reporting <span class="pro-ribbon">PRO</span></h3>
+          <p>Dashboards your chief will actually want to see. Pipeline volume, source attribution, conversion rates, and time-to-hire — all in one report.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO SCROLL -->
+<div class="logo-scroll-section">
+  <p class="logo-scroll-label">Agencies already using All-Star Recruiter</p>
+  <div class="logo-scroll-track-wrap">
+    <div class="logo-scroll-track">
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach">
+      <img src="../assets/img/logos/blades.png" alt="Blades">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville">
+      <img src="../assets/img/logos/camden.png" alt="Camden">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="DE City">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar">
+      <img src="../assets/img/logos/dover.png" alt="Dover">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton">
+      <img src="../assets/img/logos/milford.png" alt="Milford">
+      <img src="../assets/img/logos/milton.png" alt="Milton">
+      <img src="../assets/img/logos/natural-resources.png" alt="Natural Resources">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County">
+      <img src="../assets/img/logos/newark.png" alt="Newark">
+      <img src="../assets/img/logos/newport.png" alt="Newport">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River and Bay">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware">
+      <img src="../assets/img/logos/viola.png" alt="Viola">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington">
+      <!-- duplicate for seamless loop -->
+      <img src="../assets/img/logos/alameda-county-sheriff.png" alt="Alameda County Sheriff">
+      <img src="../assets/img/logos/bethany-beach.png" alt="Bethany Beach">
+      <img src="../assets/img/logos/blades.png" alt="Blades">
+      <img src="../assets/img/logos/bridgeville.png" alt="Bridgeville">
+      <img src="../assets/img/logos/camden.png" alt="Camden">
+      <img src="../assets/img/logos/capitol.png" alt="Capitol">
+      <img src="../assets/img/logos/cheswold.png" alt="Cheswold">
+      <img src="../assets/img/logos/clayton.png" alt="Clayton">
+      <img src="../assets/img/logos/dagsboro.png" alt="Dagsboro">
+      <img src="../assets/img/logos/date.png" alt="DATE">
+      <img src="../assets/img/logos/de-city.png" alt="DE City">
+      <img src="../assets/img/logos/delaware-state-police.png" alt="Delaware State Police">
+      <img src="../assets/img/logos/delaware-state-university.png" alt="Delaware State University">
+      <img src="../assets/img/logos/delmar.png" alt="Delmar">
+      <img src="../assets/img/logos/dover.png" alt="Dover">
+      <img src="../assets/img/logos/ellendale.png" alt="Ellendale">
+      <img src="../assets/img/logos/elsmere.png" alt="Elsmere">
+      <img src="../assets/img/logos/fenwick-island.png" alt="Fenwick Island">
+      <img src="../assets/img/logos/fire-marshal.png" alt="Fire Marshal">
+      <img src="../assets/img/logos/frankford.png" alt="Frankford">
+      <img src="../assets/img/logos/greenwood.png" alt="Greenwood">
+      <img src="../assets/img/logos/harrington-2.png" alt="Harrington">
+      <img src="../assets/img/logos/harrington.png" alt="Harrington">
+      <img src="../assets/img/logos/kenton.png" alt="Kenton">
+      <img src="../assets/img/logos/milford.png" alt="Milford">
+      <img src="../assets/img/logos/milton.png" alt="Milton">
+      <img src="../assets/img/logos/natural-resources.png" alt="Natural Resources">
+      <img src="../assets/img/logos/new-castle-city-2.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-city.png" alt="New Castle City">
+      <img src="../assets/img/logos/new-castle-county.png" alt="New Castle County">
+      <img src="../assets/img/logos/newark.png" alt="Newark">
+      <img src="../assets/img/logos/newport.png" alt="Newport">
+      <img src="../assets/img/logos/rehoboth-beach.png" alt="Rehoboth Beach">
+      <img src="../assets/img/logos/river-and-bay.png" alt="River and Bay">
+      <img src="../assets/img/logos/selbyville.png" alt="Selbyville">
+      <img src="../assets/img/logos/south-bethany.png" alt="South Bethany">
+      <img src="../assets/img/logos/springfield.png" alt="Springfield">
+      <img src="../assets/img/logos/symra.png" alt="SYMRA">
+      <img src="../assets/img/logos/university-of-delaware-2.png" alt="University of Delaware">
+      <img src="../assets/img/logos/university-of-delaware.png" alt="University of Delaware">
+      <img src="../assets/img/logos/viola.png" alt="Viola">
+      <img src="../assets/img/logos/wilmington-2.png" alt="Wilmington">
+      <img src="../assets/img/logos/wilmington.png" alt="Wilmington">
+    </div>
+  </div>
+</div>
+
+<!-- WHY COME BACK -->
+<section style="background:#fff;padding:5rem 0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <div style="display:inline-flex;align-items:center;gap:.75rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:1rem;">
+          <span style="width:24px;height:2px;background:#cbd5e1;display:inline-block;"></span>
+          Plain Talk
+          <span style="width:24px;height:2px;background:#cbd5e1;display:inline-block;"></span>
+        </div>
+        <h2 style="font-size:1.9rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.2;margin-bottom:.85rem;">
+          We know you moved on.<br>Here's what's different now.
+        </h2>
+        <p style="color:#64748b;font-size:1rem;line-height:1.7;max-width:600px;margin:0 auto;">
+          We're not asking you to take our word for it. Here's exactly what changed — and why the Pro platform is worth a second look.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div style="border-left:3px solid var(--navy);padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.6rem;">What's new</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">The software didn't exist when you worked with us</h3>
+          <p style="font-size:.95rem;color:#374151;line-height:1.75;margin:0;">
+            When you worked with All-Star Talent, we were running campaigns — ads, creative, strategy. Since then, we built the platform to go with it. All-Star Recruiter Pro is the full software layer we always wished existed: recruiting website, CRM, SMS, email, events, automation, and analytics purpose-built for law enforcement.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid var(--gold);padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#92400e;margin-bottom:.6rem;">You already know us</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">You've seen what we deliver firsthand</h3>
+          <p style="font-size:.95rem;color:#374151;line-height:1.75;margin:0;">
+            You're not evaluating a company you've never worked with. You know our quality, our team, and how seriously we take public safety recruiting. This software comes from the same place — built by the same people who ran your campaigns, using everything we learned from doing the real work with real agencies.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div style="border-left:3px solid #7c3aed;padding:.25rem 0 .25rem 1.5rem;height:100%;">
+          <div style="font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#7c3aed;margin-bottom:.6rem;">The Pro difference</div>
+          <h3 style="font-size:1rem;font-weight:800;color:#0f172a;margin-bottom:.65rem;">This is the platform for agencies running active campaigns</h3>
+          <p style="font-size:.95rem;color:#374151;line-height:1.75;margin:0;">
+            The free plan covers the basics. Pro is for agencies that need to move fast — two-way SMS, automated follow-up, event management, and analytics you can put in front of leadership. If you're serious about closing vacancies in the next 90 days, Pro is the right starting point.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:680px;margin:2.5rem auto 0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem 2rem;text-align:center;">
+      <p style="font-size:.97rem;font-weight:700;color:#0f172a;margin-bottom:.4rem;">You don't have to restart a relationship. You're already in it.</p>
+      <p style="font-size:.85rem;color:#64748b;line-height:1.65;margin:0;">Setup takes less than a day. No sales marathon. No discovery call just to see pricing. The same team that ran your campaigns will have your Pro platform ready to go — and you'll already know everyone you're working with.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included-section" id="included">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="text-center mb-4">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.4rem;">What's Included</div>
+          <h2 style="font-size:1.85rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem;">Everything in the Pro plan.</h2>
+          <p style="color:#64748b;font-size:.95rem;">Unlimited users. Priced by sworn officer count, not seats.</p>
+        </div>
+        <div class="included-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+            <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#64748b;">Alumni Pro Plan</span>
+            <span class="pro-badge">Full Access</span>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Recruiting Website Builder</div>
+              <div class="incl-sub">Branded agency page — photos, mission, open positions, apply form</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Candidate CRM &amp; Pipeline</div>
+              <div class="incl-sub">Track applicants from first contact through hire — stages, tags, notes</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Built-In Email Communication</div>
+              <div class="incl-sub">Email candidates directly — every message logged to their record</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check gold"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Two-Way SMS Messaging <span class="pro-badge" style="font-size:.55rem;padding:1px 6px;">PRO</span></div>
+              <div class="incl-sub">Text candidates from the platform — responses land back in their record</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check gold"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Hiring Event Management <span class="pro-badge" style="font-size:.55rem;padding:1px 6px;">PRO</span></div>
+              <div class="incl-sub">Test days, oral boards, and open recruitment events — registration, reminders, tracking</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check gold"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Automation &amp; Drip Campaigns <span class="pro-badge" style="font-size:.55rem;padding:1px 6px;">PRO</span></div>
+              <div class="incl-sub">Set-and-forget follow-up sequences that keep candidates warm automatically</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check gold"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Analytics &amp; Leadership Reports <span class="pro-badge" style="font-size:.55rem;padding:1px 6px;">PRO</span></div>
+              <div class="incl-sub">Pipeline volume, source attribution, conversion rates, time-to-hire</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Law Enforcement Job Board <span style="display:inline-block;background:#fef9c3;color:#854d0e;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:99px;vertical-align:middle;margin-left:.35rem;">Coming Soon</span></div>
+              <div class="incl-sub">Your openings listed on a shared statewide LE job board</div>
+            </div>
+          </div>
+          <div class="incl-item">
+            <div class="incl-check"><i class="bi bi-check-lg"></i></div>
+            <div>
+              <div class="incl-text">Unlimited Users</div>
+              <div class="incl-sub">Every recruiter on your team — no per-seat pricing</div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a href="#request" class="btn btn-lg" style="background:var(--gold);color:#fff;font-weight:700;border-radius:8px;padding:.8rem 2rem;">
+            <i class="bi bi-rocket-takeoff me-2"></i>Get Started with Pro
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background:#f8fafc;padding:5rem 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-7 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.4rem;">Pro Pricing</div>
+        <h2 style="font-size:1.85rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem;">Priced by sworn officer count.</h2>
+        <p style="color:#64748b;font-size:.95rem;max-width:480px;margin:0 auto;">Not by seat. Your whole team gets access — no hidden add-ons.</p>
+      </div>
+    </div>
+    <div class="row g-3 justify-content-center">
+      <div class="col-sm-6 col-lg-2-4" style="max-width:200px;">
+        <div class="tier-card text-center">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.75rem;">1 – 49 Officers</div>
+          <div class="tier-price"><sup>$</sup>200 <span class="per">/ mo</span></div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-2-4" style="max-width:200px;">
+        <div class="tier-card text-center">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.75rem;">50 – 99 Officers</div>
+          <div class="tier-price"><sup>$</sup>300 <span class="per">/ mo</span></div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-2-4" style="max-width:200px;">
+        <div class="tier-card featured text-center">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--navy-mid);margin-bottom:.75rem;">100 – 199 Officers</div>
+          <div class="tier-price" style="color:var(--navy-mid);"><sup>$</sup>400 <span class="per">/ mo</span></div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-2-4" style="max-width:200px;">
+        <div class="tier-card text-center">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.75rem;">200 – 399 Officers</div>
+          <div class="tier-price"><sup>$</sup>500 <span class="per">/ mo</span></div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-2-4" style="max-width:200px;">
+        <div class="tier-card text-center">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.75rem;">400+ Officers</div>
+          <div class="tier-price"><sup>$</sup>600 <span class="per">/ mo</span></div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.82rem;color:#94a3b8;margin-top:1.25rem;">All plans include unlimited users · Annual billing available · No setup fees</p>
+  </div>
+</section>
+
+<!-- PLATFORM PREVIEW -->
+<section style="background:#fff;padding:5rem 0;border-bottom:1px solid #e2e8f0;">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-7 text-center">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);margin-bottom:.5rem;">The Platform</div>
+        <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.2;margin-bottom:.75rem;">This is what your recruiting team sees.</h2>
+        <p style="color:#64748b;font-size:.95rem;line-height:1.65;max-width:520px;margin:0 auto;">Every candidate, every tag, every conversation — in one place. No spreadsheets. No chasing emails.</p>
+      </div>
+    </div>
+    <div class="row g-4 mb-4">
+      <div class="col-lg-7">
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">Recruiting CRM</p>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Candidates</span>
+          </div>
+          <img src="../assets/img/crm-candidates.png" alt="All-Star Recruiter — Candidates CRM">
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">Recruiting Website Builder</p>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <span class="browser-dot" style="background:#ff5f57;"></span>
+            <span class="browser-dot" style="background:#febc2e;"></span>
+            <span class="browser-dot" style="background:#28c840;"></span>
+            <span class="browser-url">app.allstarrecruiter.com · Web Builder</span>
+          </div>
+          <img src="../assets/img/web-builder.png" alt="All-Star Recruiter — Web Builder">
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:.6rem;">SMS &amp; Email — Built-In Messaging</p>
+      <div class="browser-frame">
+        <div class="browser-chrome">
+          <span class="browser-dot" style="background:#ff5f57;"></span>
+          <span class="browser-dot" style="background:#febc2e;"></span>
+          <span class="browser-dot" style="background:#28c840;"></span>
+          <span class="browser-url">app.allstarrecruiter.com · Candidates · Conversation</span>
+        </div>
+        <img src="../assets/img/sms-messaging.png" alt="All-Star Recruiter — SMS &amp; Email Messaging">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / FORM -->
+<section class="cta-section" id="request">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="text-center mb-4">
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(228,170,53,.8);margin-bottom:.4rem;">Get Started</div>
+          <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:.6rem;">Request your Pro setup.</h2>
+          <p style="color:rgba(255,255,255,.5);font-size:.92rem;">We'll reach out within 1 business day to get you set up.</p>
+        </div>
+        <div class="form-card">
+          <form id="cta-form" novalidate>
+            <input type="hidden" name="variant" value="alumni">
+            <input type="hidden" name="plan_selected" value="pro">
+            <input type="hidden" id="field_utm_source" name="utm_source" value="">
+            <input type="hidden" id="field_utm_medium" name="utm_medium" value="">
+            <input type="hidden" id="field_utm_campaign" name="utm_campaign" value="">
+            <input type="hidden" id="field_ref" name="ref" value="">
+
+            <div class="row g-3 mb-3">
+              <div class="col-sm-8">
+                <label class="form-label">Agency Name <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="agency_name" placeholder="Austin Police Department">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label">Abbreviation <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="agency_abbr" placeholder="APD" oninput="this.value=this.value.toUpperCase()">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-12">
+                <label class="form-label">Agency Address <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="address" placeholder="123 Main Street">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-sm-5">
+                <label class="form-label">City <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="city" placeholder="Austin">
+              </div>
+              <div class="col-sm-3">
+                <label class="form-label">State <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="state" placeholder="TX">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label">Zip <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="zip" placeholder="78701">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6">
+                <label class="form-label">First Name <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="first_name" placeholder="Jane">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label">Last Name <span style="color:#f87171;">*</span></label>
+                <input type="text" class="form-control" name="last_name" placeholder="Smith">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-sm-8">
+                <label class="form-label">Work Email <span style="color:#f87171;">*</span></label>
+                <input type="email" class="form-control" name="email" placeholder="jane@austinpd.gov">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label">Phone <span style="color:#f87171;">*</span></label>
+                <input type="tel" class="form-control" name="phone" placeholder="(512) 555-0100">
+              </div>
+            </div>
+            <div class="row g-3 mb-3">
+              <div class="col-12">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Recruiting Sergeant">
+              </div>
+            </div>
+            <div class="row g-3 mb-4">
+              <div class="col-12">
+                <label class="form-label">Agency Size (Sworn Officers) <span style="color:#f87171;">*</span></label>
+                <select class="form-select" name="agency_size">
+                  <option value="" disabled selected>Select your agency size…</option>
+                  <option value="1-49">1 – 49 Sworn Officers</option>
+                  <option value="50-99">50 – 99 Sworn Officers</option>
+                  <option value="100-199">100 – 199 Sworn Officers</option>
+                  <option value="200-399">200 – 399 Sworn Officers</option>
+                  <option value="400+">400+ Sworn Officers</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="submitForm()">
+              <i class="bi bi-rocket-takeoff"></i>Request Pro Setup
+            </button>
+            <p class="form-fine">We'll reach out within 1 business day · No commitment required</p>
+          </form>
+
+          <div class="cta-confirm" id="cta-confirm">
+            <div class="cta-confirm-icon"><i class="bi bi-check-lg"></i></div>
+            <h3>Welcome back!</h3>
+            <p>We'll be in touch within 1 business day to get your Pro platform set up. Check your work email for next steps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 All-Star Recruiter · A product of <a href="https://www.allstartalent.us" target="_blank" rel="noopener">All-Star Talent</a> · <a href="/">Home</a> · <a href="mailto:info@allstartalent.us">info@allstartalent.us</a></p>
+  </div>
+</footer>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script>
+  (function() {
+    var p = new URLSearchParams(window.location.search);
+    if (p.get('utm_source')) document.getElementById('field_utm_source').value = p.get('utm_source');
+    if (p.get('utm_medium')) document.getElementById('field_utm_medium').value = p.get('utm_medium');
+    if (p.get('utm_campaign')) document.getElementById('field_utm_campaign').value = p.get('utm_campaign');
+    var ref = p.get('ref') || p.get('alumni_ref');
+    if (ref) document.getElementById('field_ref').value = ref;
+  })();
+
+  function submitForm() {
+    var form = document.getElementById('cta-form');
+    var required = [
+      {name:'agency_name',  label:'Agency Name'},
+      {name:'agency_abbr',  label:'Abbreviation'},
+      {name:'address',      label:'Agency Address'},
+      {name:'city',         label:'City'},
+      {name:'state',        label:'State'},
+      {name:'zip',          label:'Zip'},
+      {name:'first_name',   label:'First Name'},
+      {name:'last_name',    label:'Last Name'},
+      {name:'email',        label:'Work Email'},
+      {name:'phone',        label:'Phone'},
+      {name:'agency_size',  label:'Agency Size'}
+    ];
+    for (var i = 0; i < required.length; i++) {
+      var el = form.querySelector('[name="' + required[i].name + '"]');
+      if (!el || !el.value.trim()) {
+        el && el.focus();
+        if (el) { el.style.borderColor = '#f87171'; setTimeout(function(e){ e.style.borderColor = ''; }.bind(null, el), 2000); }
+        return;
+      }
+    }
+    var btn = form.querySelector('.btn-submit');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting…';
+    var data = {};
+    new FormData(form).forEach(function(v, k) { data[k] = v; });
+    fetch('https://app.lawenforcementrecruiter.com/api/submit', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    }).then(function(r) {
+      if (r.ok) {
+        form.style.display = 'none';
+        document.getElementById('cta-confirm').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-rocket-takeoff"></i>Request Pro Setup';
+        alert('Something went wrong. Please try again.');
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-rocket-takeoff"></i>Request Pro Setup';
+      alert('Something went wrong. Please check your connection and try again.');
+    });
+  }
+</script>
+<script>
+  (function() {
+    var lbx = document.createElement('div');
+    lbx.id = 'lbx';
+    lbx.innerHTML = '<button id="lbx-close" title="Close (Esc)">&times;</button><div id="lbx-inner"><img id="lbx-img" src="" alt=""></div>';
+    lbx.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);overflow-y:auto;padding:40px 20px;';
+    document.body.appendChild(lbx);
+    document.getElementById('lbx-close').style.cssText = 'position:fixed;top:14px;right:18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:22px;width:38px;height:38px;border-radius:50%;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;z-index:10000;';
+    document.getElementById('lbx-inner').style.cssText = 'max-width:1300px;margin:0 auto;';
+    document.getElementById('lbx-img').style.cssText = 'width:100%;border-radius:8px;box-shadow:0 32px 80px rgba(0,0,0,.5);display:block;';
+    function lbxOpen(src,alt){document.getElementById('lbx-img').src=src;document.getElementById('lbx-img').alt=alt||'';lbx.style.display='block';document.body.style.overflow='hidden';}
+    function lbxClose(){lbx.style.display='none';document.body.style.overflow='';}
+    document.getElementById('lbx-close').addEventListener('click',lbxClose);
+    lbx.addEventListener('click',function(e){if(e.target===lbx)lbxClose();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')lbxClose();});
+    document.querySelectorAll('.browser-frame img').forEach(function(img){
+      img.addEventListener('click',function(){lbxOpen(this.src,this.alt);});
+    });
+    document.querySelectorAll('.browser-chrome').forEach(function(c){
+      var s=document.createElement('span');s.className='browser-expand';s.textContent='⤢ expand';c.appendChild(s);
+    });
+  })();
+</script>
+</body>
+</html>
