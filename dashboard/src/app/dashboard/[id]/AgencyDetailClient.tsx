@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Agency, AgencyStatus } from "@/types";
 import { STATUS_LABELS, STATUS_COLORS } from "@/types";
 
 const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
-  pending:          { label: "Pending Setup",       cls: "bg-amber-100 text-amber-800" },
-  active:           { label: "Active",               cls: "bg-green-100 text-green-800" },
-  "not-a-customer": { label: "Not a Customer",       cls: "bg-gray-100 text-gray-600" },
+  pending:          { label: "Pending Setup",  cls: "bg-amber-100 text-amber-800" },
+  active:           { label: "Active",          cls: "bg-green-100 text-green-800" },
+  "not-a-customer": { label: "Not a Customer", cls: "bg-gray-100 text-gray-600" },
 };
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
@@ -19,6 +19,127 @@ function Field({ label, value }: { label: string; value?: string | null }) {
     <div>
       <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-0.5">{label}</div>
       <div className="text-sm text-gray-800">{value}</div>
+    </div>
+  );
+}
+
+function SearchableSelect({
+  label,
+  value,
+  options,
+  onChange,
+  disabled,
+  emptyHint,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+  disabled?: boolean;
+  emptyHint?: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const filtered = query.trim()
+    ? options.filter((o) => o.toLowerCase().includes(query.toLowerCase()))
+    : options;
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        setQuery("");
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  function select(val: string) {
+    onChange(val);
+    setOpen(false);
+    setQuery("");
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setQuery(e.target.value);
+    if (!open) setOpen(true);
+  }
+
+  function handleFocus() {
+    setOpen(true);
+  }
+
+  const displayValue = open ? query : (value || "");
+
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">{label}</label>
+      <div ref={containerRef} className="relative">
+        <div
+          className={`flex items-center border rounded-lg bg-white transition-all ${
+            open ? "border-blue-500 ring-2 ring-blue-500/20" : "border-gray-200"
+          } ${disabled ? "opacity-50" : ""}`}
+        >
+          <input
+            ref={inputRef}
+            type="text"
+            value={displayValue}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            disabled={disabled}
+            placeholder={value || "— Not assigned —"}
+            className="flex-1 px-3 py-2 text-sm bg-transparent outline-none rounded-lg placeholder:text-gray-400"
+          />
+          {value && !disabled && (
+            <button
+              type="button"
+              onClick={() => { select(""); setQuery(""); }}
+              className="px-2 text-gray-300 hover:text-gray-500 cursor-pointer"
+              tabIndex={-1}
+            >✕</button>
+          )}
+          <button
+            type="button"
+            onClick={() => { setOpen((o) => !o); inputRef.current?.focus(); }}
+            disabled={disabled}
+            className="px-2 text-gray-400 cursor-pointer"
+            tabIndex={-1}
+          >▾</button>
+        </div>
+
+        {open && (
+          <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+            <div
+              className="px-3 py-2 text-sm text-gray-400 hover:bg-gray-50 cursor-pointer border-b border-gray-100"
+              onMouseDown={() => select("")}
+            >
+              — Not assigned —
+            </div>
+            {filtered.length === 0 ? (
+              <div className="px-3 py-2 text-sm text-gray-400">No matches</div>
+            ) : (
+              filtered.map((o) => (
+                <div
+                  key={o}
+                  onMouseDown={() => select(o)}
+                  className={`px-3 py-2 text-sm cursor-pointer hover:bg-blue-50 ${
+                    o === value ? "bg-blue-50 font-semibold text-blue-900" : "text-gray-800"
+                  }`}
+                >
+                  {o}
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
+      {options.length === 0 && emptyHint && (
+        <p className="text-xs text-gray-400 mt-1">{emptyHint}</p>
+      )}
     </div>
   );
 }
@@ -169,10 +290,7 @@ export function AgencyDetailClient({
                 <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">API Key</div>
                 <div className="flex items-center gap-2">
                   <code className="text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded px-2 py-1 flex-1 break-all">{agency.guardian_api_key}</code>
-                  <button
-                    onClick={() => navigator.clipboard.writeText(agency.guardian_api_key!)}
-                    className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer"
-                  >Copy</button>
+                  <button onClick={() => navigator.clipboard.writeText(agency.guardian_api_key!)} className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer">Copy</button>
                 </div>
               </div>
             )}
@@ -182,10 +300,7 @@ export function AgencyDetailClient({
                 <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Login Link</div>
                 <div className="flex items-center gap-2">
                   <a href={agency.guardian_link} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline flex-1 break-all">{agency.guardian_link}</a>
-                  <button
-                    onClick={() => navigator.clipboard.writeText(agency.guardian_link!)}
-                    className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer"
-                  >Copy</button>
+                  <button onClick={() => navigator.clipboard.writeText(agency.guardian_link!)} className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer">Copy</button>
                 </div>
               </div>
             )}
@@ -212,40 +327,22 @@ export function AgencyDetailClient({
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Configuration</h2>
           <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Tenant</label>
-              <select
-                value={agency.tenant ?? ""}
-                onChange={(e) => save({ tenant: e.target.value || undefined })}
-                disabled={saving}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 cursor-pointer"
-              >
-                <option value="">— Not assigned —</option>
-                {tenants.map((t) => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
-              </select>
-              {tenants.length === 0 && (
-                <p className="text-xs text-gray-400 mt-1">Add tenants in <button onClick={() => window.location.href = "/dashboard/settings"} className="underline cursor-pointer">Settings</button>.</p>
-              )}
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Department Template</label>
-              <select
-                value={agency.department_template ?? ""}
-                onChange={(e) => save({ department_template: e.target.value || undefined })}
-                disabled={saving}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 cursor-pointer"
-              >
-                <option value="">— Not assigned —</option>
-                {departmentTemplates.map((t) => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
-              </select>
-              {departmentTemplates.length === 0 && (
-                <p className="text-xs text-gray-400 mt-1">Add templates in <button onClick={() => window.location.href = "/dashboard/settings"} className="underline cursor-pointer">Settings</button>.</p>
-              )}
-            </div>
+            <SearchableSelect
+              label="Tenant"
+              value={agency.tenant ?? ""}
+              options={tenants}
+              onChange={(v) => save({ tenant: v || undefined })}
+              disabled={saving}
+              emptyHint={<>Add tenants in <a href="/dashboard/settings" className="underline">Settings</a>.</>}
+            />
+            <SearchableSelect
+              label="Department Template"
+              value={agency.department_template ?? ""}
+              options={departmentTemplates}
+              onChange={(v) => save({ department_template: v || undefined })}
+              disabled={saving}
+              emptyHint={<>Add templates in <a href="/dashboard/settings" className="underline">Settings</a>.</>}
+            />
           </div>
           {saved && <p className="text-xs text-green-600 font-medium mt-3">Saved ✓</p>}
         </div>

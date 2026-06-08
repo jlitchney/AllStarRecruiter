@@ -52,12 +52,14 @@ export function SettingsClient({ settings }: { settings: AppSettings }) {
     const tenantList = tenants
       .split(/[\n,]+/)
       .map((t) => t.trim())
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
 
     const templateList = templates
       .split(/[\n,]+/)
       .map((t) => t.trim())
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
 
     await fetch("/api/settings", {
       method: "POST",
