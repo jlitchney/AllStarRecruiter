@@ -8,6 +8,14 @@ import { STATUS_LABELS, STATUS_COLORS } from "@/types";
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
 
+const GUARDIAN_VARIANTS = ["guardian", "guardian-free"];
+
+const GUARDIAN_BADGE: Record<string, { label: string; cls: string }> = {
+  pending:          { label: "Pending",         cls: "bg-amber-100 text-amber-700" },
+  active:           { label: "Active",           cls: "bg-green-100 text-green-700" },
+  "not-a-customer": { label: "Non-Customer",     cls: "bg-gray-100 text-gray-500" },
+};
+
 const CSV_COLUMNS: { key: keyof Agency; label: string }[] = [
   { key: "agency_name",   label: "Agency Name" },
   { key: "agency_abbr",   label: "Abbreviation" },
@@ -185,6 +193,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden lg:table-cell">Contact</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Size</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
+                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden md:table-cell">Guardian</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Submitted</th>
                   </tr>
                 </thead>
@@ -209,6 +218,20 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                       <td className="px-4 py-3 hidden sm:table-cell text-gray-600 text-xs">{agency.agency_size}</td>
                       <td className="px-4 py-3">
                         <StatusBadge status={agency.status} />
+                      </td>
+                      <td className="px-4 py-3 hidden md:table-cell">
+                        {GUARDIAN_VARIANTS.includes(agency.variant) ? (
+                          (() => {
+                            const badge = GUARDIAN_BADGE[agency.guardian_status ?? "pending"];
+                            return (
+                              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${badge.cls}`}>
+                                {badge.label}
+                              </span>
+                            );
+                          })()
+                        ) : (
+                          <span className="text-xs text-gray-300">—</span>
+                        )}
                       </td>
                       <td className="px-4 py-3 hidden sm:table-cell text-xs text-gray-400">
                         {new Date(agency.created_at).toLocaleDateString()}
