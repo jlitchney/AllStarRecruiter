@@ -4,6 +4,8 @@ export type AgencyStatus =
   | "setup-pro"
   | "need-to-onboard";
 
+export type GuardianStatus = "pending" | "active" | "not-a-customer";
+
 export interface Agency {
   id: string;
   created_at: string;
@@ -33,6 +35,12 @@ export interface Agency {
   ref?: string;
 
   notes?: string;
+
+  guardian_setup_token?: string;
+  guardian_api_key?: string;
+  guardian_link?: string;
+  guardian_status?: GuardianStatus;
+  guardian_setup_completed_at?: string;
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {

@@ -1,6 +1,9 @@
 import type { Agency } from "@/types";
 import { getSettings } from "@/lib/kv";
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.lawenforcementrecruiter.com";
+const GUARDIAN_CONTACTS = ["kim@guardianalliancetechnologies.com", "steve@guardianalliancetechnologies.com"];
+
 export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
   if (!process.env.RESEND_API_KEY) return;
 
@@ -34,6 +37,54 @@ export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
         <div style="margin-top:24px;">
           <a href="https://app.lawenforcementrecruiter.com/dashboard/${agency.id}" style="background:#1a3a6e;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;">View in Dashboard →</a>
         </div>
+      </div>
+    `,
+  });
+  if (result.error) throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
+}
+
+export async function sendGuardianSetupEmail(agency: Agency): Promise<void> {
+  if (!process.env.RESEND_API_KEY || !agency.guardian_setup_token) return;
+
+  const { Resend } = await import("resend");
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const setupUrl = `${APP_URL}/guardian/setup/${agency.guardian_setup_token}`;
+
+  const result = await resend.emails.send({
+    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    to: GUARDIAN_CONTACTS,
+    subject: `Guardian Setup Needed: ${agency.agency_name} (${agency.agency_abbr}) — ${agency.state}`,
+    html: `
+      <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;padding:24px;">
+        <h2 style="margin:0 0 4px;color:#0f172a;">New Agency — Guardian Setup Required</h2>
+        <p style="margin:0 0 24px;color:#64748b;font-size:14px;">
+          A new agency has signed up via All-Star Recruiter and needs their Guardian API Key and Login Link configured.
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;">
+          <tr><td style="padding:8px 0;color:#64748b;width:40%;">Agency</td><td style="padding:8px 0;font-weight:600;">${agency.agency_name} (${agency.agency_abbr})</td></tr>
+          <tr style="background:#f8fafc;"><td style="padding:8px 4px;color:#64748b;">Location</td><td style="padding:8px 4px;">${agency.city}, ${agency.state}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b;">Contact</td><td style="padding:8px 0;">${agency.first_name} ${agency.last_name}${agency.title ? ` — ${agency.title}` : ""}</td></tr>
+          <tr style="background:#f8fafc;"><td style="padding:8px 4px;color:#64748b;">Email</td><td style="padding:8px 4px;"><a href="mailto:${agency.email}">${agency.email}</a></td></tr>
+          <tr><td style="padding:8px 0;color:#64748b;">Phone</td><td style="padding:8px 0;">${agency.phone}</td></tr>
+          <tr style="background:#f8fafc;"><td style="padding:8px 4px;color:#64748b;">Agency Size</td><td style="padding:8px 4px;">${agency.agency_size}</td></tr>
+          <tr><td style="padding:8px 0;color:#64748b;">Plan</td><td style="padding:8px 0;">${agency.plan_selected ?? "free"}</td></tr>
+        </table>
+
+        <p style="font-size:14px;color:#374151;margin-bottom:16px;">
+          Please use the link below to enter the Guardian API Key and Login Link for this department, or indicate that they are not yet a Guardian customer.
+        </p>
+
+        <div style="margin-bottom:24px;">
+          <a href="${setupUrl}" style="background:#1a3a6e;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;display:inline-block;">
+            Set Up Guardian Credentials →
+          </a>
+        </div>
+
+        <p style="font-size:12px;color:#94a3b8;">
+          This link is unique to this agency and can be used to update credentials at any time.<br>
+          ${setupUrl}
+        </p>
       </div>
     `,
   });

@@ -3,7 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Agency, AgencyStatus } from "@/types";
-import { STATUS_LABELS, STATUS_COLORS, } from "@/types";
+import { STATUS_LABELS, STATUS_COLORS } from "@/types";
+
+const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
+  pending:          { label: "Pending Setup",       cls: "bg-amber-100 text-amber-800" },
+  active:           { label: "Active",               cls: "bg-green-100 text-green-800" },
+  "not-a-customer": { label: "Not a Customer",       cls: "bg-gray-100 text-gray-600" },
+};
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
 
@@ -133,6 +139,66 @@ export function AgencyDetailClient({ agency: initial }: { agency: Agency }) {
             </div>
           </div>
         </div>
+
+        {/* Guardian */}
+        {agency.guardian_setup_token && (
+          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Guardian Alliance</h2>
+              {agency.guardian_status && (
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${GUARDIAN_STATUS_LABELS[agency.guardian_status]?.cls ?? "bg-gray-100 text-gray-600"}`}>
+                  {GUARDIAN_STATUS_LABELS[agency.guardian_status]?.label ?? agency.guardian_status}
+                </span>
+              )}
+            </div>
+
+            {agency.guardian_status === "not-a-customer" && (
+              <p className="text-sm text-gray-500">This department is not yet a Guardian customer.</p>
+            )}
+
+            {agency.guardian_api_key && (
+              <div>
+                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">API Key</div>
+                <div className="flex items-center gap-2">
+                  <code className="text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded px-2 py-1 flex-1 break-all">{agency.guardian_api_key}</code>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(agency.guardian_api_key!)}
+                    className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer"
+                  >Copy</button>
+                </div>
+              </div>
+            )}
+
+            {agency.guardian_link && (
+              <div>
+                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Login Link</div>
+                <div className="flex items-center gap-2">
+                  <a href={agency.guardian_link} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline flex-1 break-all">{agency.guardian_link}</a>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(agency.guardian_link!)}
+                    className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer"
+                  >Copy</button>
+                </div>
+              </div>
+            )}
+
+            {agency.guardian_setup_completed_at && (
+              <div className="text-xs text-gray-400 pt-1 border-t border-gray-100">
+                Setup completed {new Date(agency.guardian_setup_completed_at).toLocaleString()}
+              </div>
+            )}
+
+            {(!agency.guardian_setup_completed_at || agency.guardian_status === "pending") && (
+              <div className="text-xs text-gray-400 pt-1 border-t border-gray-100 flex items-center justify-between">
+                <span>Awaiting setup from Guardian Alliance</span>
+                <button
+                  onClick={() => navigator.clipboard.writeText(`${window.location.origin}/guardian/setup/${agency.guardian_setup_token}`)}
+                  className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
+                >Copy setup link</button>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Notes */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">

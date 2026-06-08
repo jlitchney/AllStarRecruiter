@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
-import type { Agency, AgencyStatus } from "@/types";
+import type { Agency, AgencyStatus, GuardianStatus } from "@/types";
 
 const AGENCIES_INDEX_KEY = "asr:agencies:index";
 const agencyKey = (id: string) => `asr:agency:${id}`;
+const guardianTokenKey = (token: string) => `asr:guardian-token:${token}`;
 
 const hasKV = () =>
   !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
@@ -37,14 +38,18 @@ export async function getAgency(id: string): Promise<Agency | null> {
   return db.get<Agency>(agencyKey(id));
 }
 
+const GUARDIAN_VARIANTS = ["guardian", "guardian-free"];
+
 export async function createAgency(data: Omit<Agency, "id" | "created_at" | "updated_at" | "status">): Promise<Agency> {
   const now = new Date().toISOString();
+  const guardianToken = GUARDIAN_VARIANTS.includes(data.variant) ? uuidv4() : undefined;
   const agency: Agency = {
     ...data,
     id: uuidv4(),
     created_at: now,
     updated_at: now,
     status: "need-to-setup",
+    ...(guardianToken ? { guardian_setup_token: guardianToken, guardian_status: "pending" } : {}),
   };
 
   if (!hasKV()) {
@@ -55,14 +60,24 @@ export async function createAgency(data: Omit<Agency, "id" | "created_at" | "upd
 
   const db = await kv();
   const ids = (await db.get<string[]>(AGENCIES_INDEX_KEY)) ?? [];
-  await Promise.all([
+  const writes: Promise<unknown>[] = [
     db.set(agencyKey(agency.id), agency),
     db.set(AGENCIES_INDEX_KEY, [agency.id, ...ids]),
-  ]);
+  ];
+  if (guardianToken) writes.push(db.set(guardianTokenKey(guardianToken), agency.id));
+  await Promise.all(writes);
   return agency;
 }
 
-export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes">>): Promise<Agency | null> {
+export async function getAgencyByGuardianToken(token: string): Promise<Agency | null> {
+  if (!hasKV()) return null;
+  const db = await kv();
+  const id = await db.get<string>(guardianTokenKey(token));
+  if (!id) return null;
+  return getAgency(id);
+}
+
+export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at">>): Promise<Agency | null> {
   if (!hasKV()) {
     if (!memAgencies[id]) return null;
     memAgencies[id] = { ...memAgencies[id], ...patch, updated_at: new Date().toISOString() };
