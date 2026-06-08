@@ -44,6 +44,7 @@ export interface Agency {
 
   tenant?: string;
   department_template?: string;
+  timezone?: string;
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {

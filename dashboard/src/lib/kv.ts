@@ -77,7 +77,7 @@ export async function getAgencyByGuardianToken(token: string): Promise<Agency | 
   return getAgency(id);
 }
 
-export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template">>): Promise<Agency | null> {
+export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone">>): Promise<Agency | null> {
   if (!hasKV()) {
     if (!memAgencies[id]) return null;
     memAgencies[id] = { ...memAgencies[id], ...patch, updated_at: new Date().toISOString() };

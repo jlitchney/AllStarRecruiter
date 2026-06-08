@@ -13,6 +13,16 @@ const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
 
+const TIMEZONES = [
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Phoenix",
+  "America/Los_Angeles",
+  "America/Anchorage",
+  "America/Honolulu",
+];
+
 function Field({ label, value }: { label: string; value?: string | null }) {
   if (!value) return null;
   return (
@@ -167,7 +177,7 @@ export function AgencyDetailClient({
     router.push("/dashboard");
   }
 
-  async function save(patch: Partial<Pick<Agency, "status" | "notes" | "tenant" | "department_template">>) {
+  async function save(patch: Partial<Pick<Agency, "status" | "notes" | "tenant" | "department_template" | "timezone">>) {
     setSaving(true);
     setSaved(false);
     const res = await fetch(`/api/agencies/${agency.id}`, {
@@ -342,6 +352,13 @@ export function AgencyDetailClient({
               onChange={(v) => save({ department_template: v || undefined })}
               disabled={saving}
               emptyHint={<>Add templates in <a href="/dashboard/settings" className="underline">Settings</a>.</>}
+            />
+            <SearchableSelect
+              label="Time Zone"
+              value={agency.timezone ?? ""}
+              options={TIMEZONES}
+              onChange={(v) => save({ timezone: v || undefined })}
+              disabled={saving}
             />
           </div>
           {saved && <p className="text-xs text-green-600 font-medium mt-3">Saved ✓</p>}

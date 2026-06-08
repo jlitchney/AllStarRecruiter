@@ -30,6 +30,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     notes: body.notes,
     tenant: body.tenant,
     department_template: body.department_template,
+    timezone: body.timezone,
   });
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updated);
