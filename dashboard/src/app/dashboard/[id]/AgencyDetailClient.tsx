@@ -23,7 +23,15 @@ function Field({ label, value }: { label: string; value?: string | null }) {
   );
 }
 
-export function AgencyDetailClient({ agency: initial }: { agency: Agency }) {
+export function AgencyDetailClient({
+  agency: initial,
+  tenants,
+  departmentTemplates,
+}: {
+  agency: Agency;
+  tenants: string[];
+  departmentTemplates: string[];
+}) {
   const router = useRouter();
   const [agency, setAgency] = useState(initial);
   const [notes, setNotes] = useState(initial.notes ?? "");
@@ -199,6 +207,48 @@ export function AgencyDetailClient({ agency: initial }: { agency: Agency }) {
             )}
           </div>
         )}
+
+        {/* Configuration */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Configuration</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Tenant</label>
+              <select
+                value={agency.tenant ?? ""}
+                onChange={(e) => save({ tenant: e.target.value || undefined })}
+                disabled={saving}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 cursor-pointer"
+              >
+                <option value="">— Not assigned —</option>
+                {tenants.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+              {tenants.length === 0 && (
+                <p className="text-xs text-gray-400 mt-1">Add tenants in <button onClick={() => window.location.href = "/dashboard/settings"} className="underline cursor-pointer">Settings</button>.</p>
+              )}
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Department Template</label>
+              <select
+                value={agency.department_template ?? ""}
+                onChange={(e) => save({ department_template: e.target.value || undefined })}
+                disabled={saving}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 cursor-pointer"
+              >
+                <option value="">— Not assigned —</option>
+                {departmentTemplates.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+              {departmentTemplates.length === 0 && (
+                <p className="text-xs text-gray-400 mt-1">Add templates in <button onClick={() => window.location.href = "/dashboard/settings"} className="underline cursor-pointer">Settings</button>.</p>
+              )}
+            </div>
+          </div>
+          {saved && <p className="text-xs text-green-600 font-medium mt-3">Saved ✓</p>}
+        </div>
 
         {/* Notes */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">

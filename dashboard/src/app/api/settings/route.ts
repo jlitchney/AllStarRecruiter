@@ -16,6 +16,10 @@ export async function POST(req: NextRequest) {
   const emails: string[] = (body.notificationEmails ?? [])
     .map((e: string) => e.trim().toLowerCase())
     .filter((e: string) => e.includes("@"));
-  await saveSettings({ notificationEmails: emails });
+  const tenants: string[] = (body.tenants ?? [])
+    .map((t: string) => t.trim()).filter(Boolean);
+  const departmentTemplates: string[] = (body.departmentTemplates ?? [])
+    .map((t: string) => t.trim()).filter(Boolean);
+  await saveSettings({ notificationEmails: emails, tenants, departmentTemplates });
   return NextResponse.json({ ok: true });
 }

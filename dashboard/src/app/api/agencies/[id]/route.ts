@@ -25,7 +25,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   const body = await req.json();
-  const updated = await updateAgency(id, { status: body.status, notes: body.notes });
+  const updated = await updateAgency(id, {
+    status: body.status,
+    notes: body.notes,
+    tenant: body.tenant,
+    department_template: body.department_template,
+  });
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updated);
 }

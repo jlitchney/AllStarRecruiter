@@ -41,6 +41,9 @@ export interface Agency {
   guardian_link?: string;
   guardian_status?: GuardianStatus;
   guardian_setup_completed_at?: string;
+
+  tenant?: string;
+  department_template?: string;
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {
