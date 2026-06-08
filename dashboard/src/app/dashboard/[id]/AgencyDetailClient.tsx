@@ -46,7 +46,7 @@ export function AgencyDetailClient({
     router.push("/dashboard");
   }
 
-  async function save(patch: Partial<Pick<Agency, "status" | "notes">>) {
+  async function save(patch: Partial<Pick<Agency, "status" | "notes" | "tenant" | "department_template">>) {
     setSaving(true);
     setSaved(false);
     const res = await fetch(`/api/agencies/${agency.id}`, {
