@@ -19,6 +19,7 @@ export default async function AgencyDetailPage({ params }: { params: Promise<{ i
       agency={agency}
       tenants={settings.tenants ?? []}
       departmentTemplates={settings.departmentTemplates ?? []}
+      webhookUrl={settings.webhookUrl}
     />
   );
 }

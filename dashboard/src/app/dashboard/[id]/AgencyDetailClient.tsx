@@ -275,10 +275,12 @@ export function AgencyDetailClient({
   agency: initial,
   tenants,
   departmentTemplates,
+  webhookUrl,
 }: {
   agency: Agency;
   tenants: string[];
   departmentTemplates: string[];
+  webhookUrl?: string;
 }) {
   const router = useRouter();
   const [agency, setAgency] = useState(initial);
@@ -286,6 +288,24 @@ export function AgencyDetailClient({
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendResult, setSendResult] = useState<{ ok: boolean; message: string } | null>(null);
+
+  async function sendToApp() {
+    setSending(true);
+    setSendResult(null);
+    const res = await fetch(`/api/agencies/${agency.id}/webhook`, { method: "POST" });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) {
+      setAgency((a) => ({ ...a, webhook_last_sent_at: new Date().toISOString(), webhook_last_status: "success" }));
+      setSendResult({ ok: true, message: "Sent successfully." });
+    } else {
+      setAgency((a) => ({ ...a, webhook_last_sent_at: new Date().toISOString(), webhook_last_status: "error" }));
+      setSendResult({ ok: false, message: data.error ?? "Send failed." });
+    }
+    setSending(false);
+    setTimeout(() => setSendResult(null), 6000);
+  }
 
   async function handleDelete() {
     if (!confirm(`Delete ${agency.agency_name}? This cannot be undone.`)) return;
@@ -484,6 +504,54 @@ export function AgencyDetailClient({
             />
           </div>
           {saved && <p className="text-xs text-green-600 font-medium mt-3">Saved ✓</p>}
+        </div>
+
+        {/* Send to App */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">App Integration</h2>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-gray-600 mb-1">
+                Post all department data to All-Star Recruiter to create or update this account.
+              </p>
+              {webhookUrl && (
+                <p className="text-xs text-gray-400 font-mono truncate">{webhookUrl}</p>
+              )}
+              {!webhookUrl && (
+                <p className="text-xs text-amber-600">Webhook URL not configured — <a href="/dashboard/settings" className="underline">add it in Settings</a>.</p>
+              )}
+            </div>
+            <button
+              onClick={sendToApp}
+              disabled={sending || !webhookUrl}
+              className="shrink-0 px-5 py-2.5 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {sending ? "Sending…" : "Send to App"}
+            </button>
+          </div>
+
+          {(agency.webhook_last_sent_at || sendResult) && (
+            <div className="mt-4 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-3">
+              {sendResult ? (
+                <span className={`text-sm font-medium ${sendResult.ok ? "text-green-600" : "text-red-600"}`}>
+                  {sendResult.ok ? "✓ " : "✕ "}{sendResult.message}
+                </span>
+              ) : agency.webhook_last_sent_at ? (
+                <>
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${
+                    agency.webhook_last_status === "success"
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-700"
+                  }`}>
+                    {agency.webhook_last_status === "success" ? "Success" : "Failed"}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    Last sent {new Date(agency.webhook_last_sent_at).toLocaleString()}
+                  </span>
+                </>
+              ) : null}
+            </div>
+          )}
         </div>
 
         {/* Notes */}

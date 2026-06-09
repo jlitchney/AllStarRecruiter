@@ -47,6 +47,9 @@ export interface Agency {
   timezone?: string;
 
   logo_url?: string;
+
+  webhook_last_sent_at?: string;
+  webhook_last_status?: "success" | "error";
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {

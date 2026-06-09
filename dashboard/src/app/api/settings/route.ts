@@ -20,6 +20,8 @@ export async function POST(req: NextRequest) {
     .map((t: string) => t.trim()).filter(Boolean);
   const departmentTemplates: string[] = (body.departmentTemplates ?? [])
     .map((t: string) => t.trim()).filter(Boolean);
-  await saveSettings({ notificationEmails: emails, tenants, departmentTemplates });
+  const webhookUrl = (body.webhookUrl ?? "").trim();
+  const webhookEmbedKey = (body.webhookEmbedKey ?? "").trim();
+  await saveSettings({ notificationEmails: emails, tenants, departmentTemplates, webhookUrl, webhookEmbedKey });
   return NextResponse.json({ ok: true });
 }

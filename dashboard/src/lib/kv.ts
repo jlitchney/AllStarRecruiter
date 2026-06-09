@@ -77,7 +77,7 @@ export async function getAgencyByGuardianToken(token: string): Promise<Agency | 
   return getAgency(id);
 }
 
-export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url">>): Promise<Agency | null> {
+export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status">>): Promise<Agency | null> {
   if (!hasKV()) {
     if (!memAgencies[id]) return null;
     memAgencies[id] = { ...memAgencies[id], ...patch, updated_at: new Date().toISOString() };
@@ -97,12 +97,16 @@ export interface AppSettings {
   notificationEmails: string[];
   tenants: string[];
   departmentTemplates: string[];
+  webhookUrl?: string;
+  webhookEmbedKey?: string;
 }
 
 const DEFAULT_SETTINGS: AppSettings = {
   notificationEmails: [process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us"],
   tenants: [],
   departmentTemplates: [],
+  webhookUrl: "https://app.allstarrecruiter.com/department/create/astcreateform",
+  webhookEmbedKey: "",
 };
 
 export async function getSettings(): Promise<AppSettings> {

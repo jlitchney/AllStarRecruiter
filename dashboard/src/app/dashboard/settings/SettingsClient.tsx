@@ -37,6 +37,8 @@ export function SettingsClient({ settings }: { settings: AppSettings }) {
   const [emails, setEmails] = useState(settings.notificationEmails.join("\n"));
   const [tenants, setTenants] = useState((settings.tenants ?? []).join("\n"));
   const [templates, setTemplates] = useState((settings.departmentTemplates ?? []).join("\n"));
+  const [webhookUrl, setWebhookUrl] = useState(settings.webhookUrl ?? "https://app.allstarrecruiter.com/department/create/astcreateform");
+  const [webhookEmbedKey, setWebhookEmbedKey] = useState(settings.webhookEmbedKey ?? "");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -68,6 +70,8 @@ export function SettingsClient({ settings }: { settings: AppSettings }) {
         notificationEmails,
         tenants: tenantList,
         departmentTemplates: templateList,
+        webhookUrl: webhookUrl.trim(),
+        webhookEmbedKey: webhookEmbedKey.trim(),
       }),
     });
 
@@ -119,6 +123,43 @@ export function SettingsClient({ settings }: { settings: AppSettings }) {
           onChange={setTemplates}
           placeholder="Default Template&#10;Law Enforcement Standard"
         />
+
+        {/* Webhook / App Integration */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <div>
+            <h2 className="text-sm font-semibold text-gray-900 mb-1">Webhook — App Integration</h2>
+            <p className="text-xs text-gray-500">
+              Used by the &ldquo;Send to App&rdquo; button on each department record. Posts all department data to the configured URL to create or update an account in All-Star Recruiter.
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+              POST URL
+            </label>
+            <input
+              type="url"
+              value={webhookUrl}
+              onChange={(e) => setWebhookUrl(e.target.value)}
+              placeholder="https://app.allstarrecruiter.com/department/create/astcreateform"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
+              Embed Key
+            </label>
+            <input
+              type="text"
+              value={webhookEmbedKey}
+              onChange={(e) => setWebhookEmbedKey(e.target.value)}
+              placeholder="your-embed-key"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <p className="text-xs text-gray-400 mt-1">Sent as <code className="bg-gray-100 px-1 rounded">embedkey</code> in every webhook payload.</p>
+          </div>
+        </div>
 
         <div className="flex items-center gap-3">
           <button
