@@ -53,6 +53,17 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     guardian_link: agency.guardian_link ?? "",
     guardian_status: agency.guardian_status ?? "",
 
+    // Twilio
+    twilio_account_sid: agency.twilio_account_sid ?? "",
+    twilio_auth_token: agency.twilio_auth_token ?? "",
+
+    // Billing
+    billing_status: agency.billing_status ?? "",
+    renewal_date: agency.renewal_date ?? "",
+
+    // Notes
+    notes: agency.notes ?? "",
+
     // Attribution
     utm_source: agency.utm_source ?? "",
     utm_medium: agency.utm_medium ?? "",
