@@ -490,10 +490,10 @@ export function AgencyDetailClient({
           {/* Agency info */}
           <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-3">
             <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Agency</h2>
-            {(["agency_name", "agency_abbr", "address", "city", "state", "zip", "agency_size", "plan_selected"] as const).map((field) => (
+            {(["agency_name", "agency_abbr", "address", "city", "state", "zip"] as const).map((field) => (
               <div key={field}>
                 <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
-                  {field === "agency_name" ? "Name" : field === "agency_abbr" ? "Abbreviation" : field === "agency_size" ? "Agency Size" : field === "plan_selected" ? "Plan" : field.charAt(0).toUpperCase() + field.slice(1)}
+                  {field === "agency_name" ? "Name" : field === "agency_abbr" ? "Abbreviation" : field.charAt(0).toUpperCase() + field.slice(1)}
                 </label>
                 <input
                   type="text"
@@ -503,6 +503,32 @@ export function AgencyDetailClient({
                 />
               </div>
             ))}
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Agency Size</label>
+              <select
+                value={infoFields.agency_size}
+                onChange={(e) => setInfoFields((f) => ({ ...f, agency_size: e.target.value }))}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+              >
+                <option value="">Select agency size…</option>
+                <option value="1-49">1 – 49 Sworn Officers</option>
+                <option value="50-99">50 – 99 Sworn Officers</option>
+                <option value="100-199">100 – 199 Sworn Officers</option>
+                <option value="200-399">200 – 399 Sworn Officers</option>
+                <option value="400+">400+ Sworn Officers</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Plan</label>
+              <select
+                value={infoFields.plan_selected}
+                onChange={(e) => setInfoFields((f) => ({ ...f, plan_selected: e.target.value }))}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+              >
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+              </select>
+            </div>
             <div className="flex items-center gap-3 pt-1">
               <button
                 onClick={saveInfo}
