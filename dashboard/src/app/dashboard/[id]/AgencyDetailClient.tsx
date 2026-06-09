@@ -12,7 +12,7 @@ const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
   "not-a-customer": { label: "Not a Customer", cls: "bg-gray-100 text-gray-600" },
 };
 
-const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
+const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "need-to-onboard", "live"];
 const ALL_BILLING_STATUSES: BillingStatus[] = ["need-to-invoice", "invoice-sent", "paid"];
 
 const TIMEZONES = [
@@ -298,6 +298,9 @@ export function AgencyDetailClient({
   const [twilioSaved, setTwilioSaved] = useState(false);
   const [showToken, setShowToken] = useState(false);
 
+  const [accountType, setAccountType] = useState<"free" | "pro">(initial.plan_selected === "pro" ? "pro" : "free");
+  const [accountTypeSaving, setAccountTypeSaving] = useState(false);
+
   const [infoFields, setInfoFields] = useState({
     agency_name: initial.agency_name,
     agency_abbr: initial.agency_abbr,
@@ -306,7 +309,6 @@ export function AgencyDetailClient({
     state: initial.state,
     zip: initial.zip,
     agency_size: initial.agency_size,
-    plan_selected: initial.plan_selected ?? "",
   });
   const [infoSaving, setInfoSaving] = useState(false);
   const [infoSaved, setInfoSaved] = useState(false);
@@ -356,6 +358,18 @@ export function AgencyDetailClient({
       setTimeout(() => setTwilioSaved(false), 2000);
     }
     setTwilioSaving(false);
+  }
+
+  async function saveAccountType(type: "free" | "pro") {
+    setAccountType(type);
+    setAccountTypeSaving(true);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ plan_selected: type }),
+    });
+    if (res.ok) setAgency(await res.json());
+    setAccountTypeSaving(false);
   }
 
   async function saveInfo() {
@@ -529,7 +543,37 @@ export function AgencyDetailClient({
           </div>
         </div>
 
-        {/* Billing */}
+        {/* Account Type */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Account Type</h2>
+          <div className="flex gap-3">
+            <button
+              onClick={() => saveAccountType("free")}
+              disabled={accountTypeSaving}
+              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all cursor-pointer border-2 disabled:opacity-50 ${
+                accountType === "free"
+                  ? "bg-blue-100 text-blue-800 border-transparent shadow-sm"
+                  : "bg-white border-gray-200 text-gray-500 hover:border-gray-300"
+              }`}
+            >
+              Free
+            </button>
+            <button
+              onClick={() => saveAccountType("pro")}
+              disabled={accountTypeSaving}
+              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all cursor-pointer border-2 disabled:opacity-50 ${
+                accountType === "pro"
+                  ? "bg-purple-100 text-purple-800 border-transparent shadow-sm"
+                  : "bg-white border-gray-200 text-gray-500 hover:border-gray-300"
+              }`}
+            >
+              Pro
+            </button>
+          </div>
+        </div>
+
+        {/* Billing — Pro only */}
+        {accountType === "pro" && (
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Billing</h2>
           <div className="flex flex-wrap gap-2 mb-4">
@@ -569,6 +613,7 @@ export function AgencyDetailClient({
             </div>
           </div>
         </div>
+        )}
 
         <div className="grid sm:grid-cols-2 gap-6">
           {/* Agency info */}
@@ -600,17 +645,6 @@ export function AgencyDetailClient({
                 <option value="100-199">100 – 199 Sworn Officers</option>
                 <option value="200-399">200 – 399 Sworn Officers</option>
                 <option value="400+">400+ Sworn Officers</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Plan</label>
-              <select
-                value={infoFields.plan_selected}
-                onChange={(e) => setInfoFields((f) => ({ ...f, plan_selected: e.target.value }))}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
-              >
-                <option value="free">Free</option>
-                <option value="pro">Pro</option>
               </select>
             </div>
             <div className="flex items-center gap-3 pt-1">

@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import type { Agency, AgencyStatus, BillingStatus } from "@/types";
 import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
 
-const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
+const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "need-to-onboard", "live"];
 
 const GUARDIAN_VARIANTS = ["guardian", "guardian-free", "guardian-v2"];
 
@@ -290,7 +290,12 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                       </td>
                       <td className="px-4 py-3 hidden sm:table-cell text-gray-600 text-xs">{agency.agency_size}</td>
                       <td className="px-4 py-3">
-                        <StatusBadge status={agency.status} />
+                        <div className="flex flex-col gap-1">
+                          <StatusBadge status={agency.status} />
+                          {agency.plan_selected === "pro" && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 w-fit">Pro</span>
+                          )}
+                        </div>
                       </td>
                       <td className="px-4 py-3 hidden md:table-cell">
                         {GUARDIAN_VARIANTS.includes(agency.variant) ? (

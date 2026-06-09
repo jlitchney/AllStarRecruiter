@@ -1,8 +1,7 @@
 export type AgencyStatus =
   | "need-to-setup"
-  | "setup-free"
-  | "setup-pro"
-  | "need-to-onboard";
+  | "need-to-onboard"
+  | "live";
 
 export type GuardianStatus = "pending" | "active" | "not-a-customer";
 
@@ -61,17 +60,15 @@ export interface Agency {
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {
-  "need-to-setup": "Need to Setup",
-  "setup-free": "Setup — Free",
-  "setup-pro": "Setup — Pro",
-  "need-to-onboard": "Need to Onboard",
+  "need-to-setup":    "Need to Setup",
+  "need-to-onboard":  "Need to Onboard",
+  "live":             "Live",
 };
 
 export const STATUS_COLORS: Record<AgencyStatus, string> = {
-  "need-to-setup": "bg-amber-100 text-amber-800",
-  "setup-free": "bg-blue-100 text-blue-800",
-  "setup-pro": "bg-purple-100 text-purple-800",
-  "need-to-onboard": "bg-green-100 text-green-800",
+  "need-to-setup":    "bg-amber-100 text-amber-800",
+  "need-to-onboard":  "bg-blue-100 text-blue-800",
+  "live":             "bg-green-100 text-green-800",
 };
 
 export const BILLING_STATUS_LABELS: Record<BillingStatus, string> = {
