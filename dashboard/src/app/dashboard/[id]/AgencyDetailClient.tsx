@@ -297,6 +297,37 @@ export function AgencyDetailClient({
   const [twilioSaved, setTwilioSaved] = useState(false);
   const [showToken, setShowToken] = useState(false);
 
+  const [infoFields, setInfoFields] = useState({
+    agency_name: initial.agency_name,
+    agency_abbr: initial.agency_abbr,
+    address: initial.address,
+    city: initial.city,
+    state: initial.state,
+    zip: initial.zip,
+    agency_size: initial.agency_size,
+    plan_selected: initial.plan_selected ?? "",
+  });
+  const [infoSaving, setInfoSaving] = useState(false);
+  const [infoSaved, setInfoSaved] = useState(false);
+
+  const [contactFields, setContactFields] = useState({
+    first_name: initial.first_name,
+    last_name: initial.last_name,
+    title: initial.title ?? "",
+    email: initial.email,
+    phone: initial.phone,
+  });
+  const [contactSaving, setContactSaving] = useState(false);
+  const [contactSaved, setContactSaved] = useState(false);
+
+  const [guardianFields, setGuardianFields] = useState({
+    guardian_api_key: initial.guardian_api_key ?? "",
+    guardian_link: initial.guardian_link ?? "",
+    guardian_status: initial.guardian_status ?? "",
+  });
+  const [guardianSaving, setGuardianSaving] = useState(false);
+  const [guardianSaved, setGuardianSaved] = useState(false);
+
   async function saveTwilio() {
     setTwilioSaving(true);
     setTwilioSaved(false);
@@ -312,6 +343,57 @@ export function AgencyDetailClient({
       setTimeout(() => setTwilioSaved(false), 2000);
     }
     setTwilioSaving(false);
+  }
+
+  async function saveInfo() {
+    setInfoSaving(true);
+    setInfoSaved(false);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(infoFields),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setAgency(updated);
+      setInfoSaved(true);
+      setTimeout(() => setInfoSaved(false), 2000);
+    }
+    setInfoSaving(false);
+  }
+
+  async function saveContact() {
+    setContactSaving(true);
+    setContactSaved(false);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(contactFields),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setAgency(updated);
+      setContactSaved(true);
+      setTimeout(() => setContactSaved(false), 2000);
+    }
+    setContactSaving(false);
+  }
+
+  async function saveGuardian() {
+    setGuardianSaving(true);
+    setGuardianSaved(false);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(guardianFields),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setAgency(updated);
+      setGuardianSaved(true);
+      setTimeout(() => setGuardianSaved(false), 2000);
+    }
+    setGuardianSaving(false);
   }
 
   async function sendToApp() {
@@ -406,16 +488,31 @@ export function AgencyDetailClient({
 
         <div className="grid sm:grid-cols-2 gap-6">
           {/* Agency info */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-3">
             <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Agency</h2>
-            <Field label="Name" value={agency.agency_name} />
-            <Field label="Abbreviation" value={agency.agency_abbr} />
-            <Field label="Address" value={agency.address} />
-            <Field label="City" value={agency.city} />
-            <Field label="State" value={agency.state} />
-            <Field label="Zip" value={agency.zip} />
-            <Field label="Agency Size" value={agency.agency_size} />
-            <Field label="Plan" value={agency.plan_selected ?? "free"} />
+            {(["agency_name", "agency_abbr", "address", "city", "state", "zip", "agency_size", "plan_selected"] as const).map((field) => (
+              <div key={field}>
+                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                  {field === "agency_name" ? "Name" : field === "agency_abbr" ? "Abbreviation" : field === "agency_size" ? "Agency Size" : field === "plan_selected" ? "Plan" : field.charAt(0).toUpperCase() + field.slice(1)}
+                </label>
+                <input
+                  type="text"
+                  value={infoFields[field]}
+                  onChange={(e) => setInfoFields((f) => ({ ...f, [field]: e.target.value }))}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            ))}
+            <div className="flex items-center gap-3 pt-1">
+              <button
+                onClick={saveInfo}
+                disabled={infoSaving}
+                className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {infoSaving ? "Saving…" : "Save"}
+              </button>
+              {infoSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
+            </div>
             <LogoUpload
               agencyId={agency.id}
               logoUrl={agency.logo_url}
@@ -424,14 +521,33 @@ export function AgencyDetailClient({
           </div>
 
           {/* Contact info */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-3">
             <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Contact</h2>
-            <Field label="Name" value={`${agency.first_name} ${agency.last_name}`} />
-            <Field label="Title" value={agency.title} />
-            <Field label="Email" value={agency.email} />
-            <Field label="Phone" value={agency.phone} />
+            {(["first_name", "last_name", "title", "email", "phone"] as const).map((field) => (
+              <div key={field}>
+                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                  {field === "first_name" ? "First Name" : field === "last_name" ? "Last Name" : field.charAt(0).toUpperCase() + field.slice(1)}
+                </label>
+                <input
+                  type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+                  value={contactFields[field]}
+                  onChange={(e) => setContactFields((f) => ({ ...f, [field]: e.target.value }))}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            ))}
+            <div className="flex items-center gap-3 pt-1">
+              <button
+                onClick={saveContact}
+                disabled={contactSaving}
+                className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {contactSaving ? "Saving…" : "Save"}
+              </button>
+              {contactSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
+            </div>
 
-            <div className="pt-2 border-t border-gray-100 space-y-4">
+            <div className="pt-2 border-t border-gray-100 space-y-3">
               <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Submission</h2>
               <Field label="Variant" value={agency.variant} />
               <Field label="Submitted" value={new Date(agency.created_at).toLocaleString()} />
@@ -445,58 +561,88 @@ export function AgencyDetailClient({
         </div>
 
         {/* Guardian */}
-        {agency.guardian_setup_token && (
-          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Guardian Alliance</h2>
-              {agency.guardian_status && (
-                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${GUARDIAN_STATUS_LABELS[agency.guardian_status]?.cls ?? "bg-gray-100 text-gray-600"}`}>
-                  {GUARDIAN_STATUS_LABELS[agency.guardian_status]?.label ?? agency.guardian_status}
-                </span>
-              )}
-            </div>
-
-            {agency.guardian_status === "not-a-customer" && (
-              <p className="text-sm text-gray-500">This department is not yet a Guardian customer.</p>
-            )}
-
-            {agency.guardian_api_key && (
-              <div>
-                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">API Key</div>
-                <div className="flex items-center gap-2">
-                  <code className="text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded px-2 py-1 flex-1 break-all">{agency.guardian_api_key}</code>
-                  <button onClick={() => navigator.clipboard.writeText(agency.guardian_api_key!)} className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer">Copy</button>
-                </div>
-              </div>
-            )}
-
-            {agency.guardian_link && (
-              <div>
-                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Login Link</div>
-                <div className="flex items-center gap-2">
-                  <a href={agency.guardian_link} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline flex-1 break-all">{agency.guardian_link}</a>
-                  <button onClick={() => navigator.clipboard.writeText(agency.guardian_link!)} className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer">Copy</button>
-                </div>
-              </div>
-            )}
-
-            {agency.guardian_setup_completed_at && (
-              <div className="text-xs text-gray-400 pt-1 border-t border-gray-100">
-                Setup completed {new Date(agency.guardian_setup_completed_at).toLocaleString()}
-              </div>
-            )}
-
-            {(!agency.guardian_setup_completed_at || agency.guardian_status === "pending") && (
-              <div className="text-xs text-gray-400 pt-1 border-t border-gray-100 flex items-center justify-between">
-                <span>Awaiting setup from Guardian Alliance</span>
-                <button
-                  onClick={() => navigator.clipboard.writeText(`${window.location.origin}/guardian/setup/${agency.guardian_setup_token}`)}
-                  className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
-                >Copy setup link</button>
-              </div>
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Guardian Alliance</h2>
+            {agency.guardian_status && (
+              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${GUARDIAN_STATUS_LABELS[agency.guardian_status]?.cls ?? "bg-gray-100 text-gray-600"}`}>
+                {GUARDIAN_STATUS_LABELS[agency.guardian_status]?.label ?? agency.guardian_status}
+              </span>
             )}
           </div>
-        )}
+
+          <div className="space-y-3">
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Status</label>
+              <select
+                value={guardianFields.guardian_status}
+                onChange={(e) => setGuardianFields((f) => ({ ...f, guardian_status: e.target.value }))}
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+              >
+                <option value="">— Not set —</option>
+                <option value="pending">Pending Setup</option>
+                <option value="active">Active</option>
+                <option value="not-a-customer">Not a Customer</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">API Key</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={guardianFields.guardian_api_key}
+                  onChange={(e) => setGuardianFields((f) => ({ ...f, guardian_api_key: e.target.value }))}
+                  placeholder="Enter API key"
+                  className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {guardianFields.guardian_api_key && (
+                  <button onClick={() => navigator.clipboard.writeText(guardianFields.guardian_api_key)} className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer">Copy</button>
+                )}
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Login Link</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={guardianFields.guardian_link}
+                  onChange={(e) => setGuardianFields((f) => ({ ...f, guardian_link: e.target.value }))}
+                  placeholder="https://…"
+                  className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {guardianFields.guardian_link && (
+                  <button onClick={() => navigator.clipboard.writeText(guardianFields.guardian_link)} className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer">Copy</button>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center gap-3 pt-1">
+              <button
+                onClick={saveGuardian}
+                disabled={guardianSaving}
+                className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {guardianSaving ? "Saving…" : "Save"}
+              </button>
+              {guardianSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
+            </div>
+          </div>
+
+          {agency.guardian_setup_completed_at && (
+            <div className="text-xs text-gray-400 pt-1 border-t border-gray-100">
+              Setup completed {new Date(agency.guardian_setup_completed_at).toLocaleString()}
+            </div>
+          )}
+
+          {agency.guardian_setup_token && (!agency.guardian_setup_completed_at || agency.guardian_status === "pending") && (
+            <div className="text-xs text-gray-400 pt-1 border-t border-gray-100 flex items-center justify-between">
+              <span>Awaiting setup from Guardian Alliance</span>
+              <button
+                onClick={() => navigator.clipboard.writeText(`${window.location.origin}/guardian/setup/${agency.guardian_setup_token}`)}
+                className="text-xs text-blue-600 hover:text-blue-800 cursor-pointer"
+              >Copy setup link</button>
+            </div>
+          )}
+        </div>
 
         {/* Configuration */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">

@@ -78,7 +78,7 @@ export async function getAgencyByGuardianToken(token: string): Promise<Agency | 
   return getAgency(id);
 }
 
-export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token">>): Promise<Agency | null> {
+export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token" | "agency_name" | "agency_abbr" | "address" | "city" | "state" | "zip" | "agency_size" | "plan_selected" | "first_name" | "last_name" | "title" | "email" | "phone">>): Promise<Agency | null> {
   if (!hasKV()) {
     if (!memAgencies[id]) return null;
     memAgencies[id] = { ...memAgencies[id], ...patch, updated_at: new Date().toISOString() };
