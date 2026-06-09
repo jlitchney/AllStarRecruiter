@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Agency, AgencyStatus } from "@/types";
 import { STATUS_LABELS, STATUS_COLORS } from "@/types";
+import { generateSlug } from "@/lib/slug";
 
 const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
   pending:          { label: "Pending Setup",  cls: "bg-amber-100 text-amber-800" },
@@ -505,6 +506,39 @@ export function AgencyDetailClient({
           </div>
           {saved && <p className="text-xs text-green-600 font-medium mt-3">Saved ✓</p>}
         </div>
+
+        {/* Department Pages */}
+        {(() => {
+          const slug = generateSlug(agency);
+          const base = typeof window !== "undefined" ? window.location.origin : "https://app.lawenforcementrecruiter.com";
+          const pages = [
+            { label: "Terms & Conditions", path: `/terms-and-conditions/${slug}` },
+            { label: "Privacy Policy",     path: `/privacy-policy/${slug}` },
+            { label: "10DLC Submission",   path: `/10dlc-submission/${slug}` },
+          ];
+          return (
+            <div className="bg-white rounded-xl border border-gray-200 p-6">
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Department Pages</h2>
+              <div className="space-y-3">
+                {pages.map(({ label, path }) => {
+                  const url = `${base}${path}`;
+                  return (
+                    <div key={path} className="flex items-center gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-semibold text-gray-500 mb-0.5">{label}</div>
+                        <a href={url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline font-mono truncate block">{url}</a>
+                      </div>
+                      <button
+                        onClick={() => navigator.clipboard.writeText(url)}
+                        className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer shrink-0"
+                      >Copy</button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Send to App */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">

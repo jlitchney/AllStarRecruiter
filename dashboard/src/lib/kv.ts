@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import type { Agency, AgencyStatus, GuardianStatus } from "@/types";
+import { generateSlug } from "@/lib/slug";
 
 const AGENCIES_INDEX_KEY = "asr:agencies:index";
 const agencyKey = (id: string) => `asr:agency:${id}`;
@@ -140,4 +141,9 @@ export async function deleteAgency(id: string): Promise<void> {
 export async function getAgenciesByStatus(status: AgencyStatus): Promise<Agency[]> {
   const all = await getAgencies();
   return all.filter((a) => a.status === status);
+}
+
+export async function getAgencyBySlug(slug: string): Promise<Agency | null> {
+  const all = await getAgencies();
+  return all.find((a) => generateSlug(a) === slug) ?? null;
 }
