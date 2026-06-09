@@ -6,6 +6,8 @@ export type AgencyStatus =
 
 export type GuardianStatus = "pending" | "active" | "not-a-customer";
 
+export type BillingStatus = "need-to-invoice" | "invoice-sent" | "paid";
+
 export interface Agency {
   id: string;
   created_at: string;
@@ -53,6 +55,9 @@ export interface Agency {
 
   twilio_account_sid?: string;
   twilio_auth_token?: string;
+
+  billing_status?: BillingStatus;
+  renewal_date?: string;
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {
@@ -67,4 +72,16 @@ export const STATUS_COLORS: Record<AgencyStatus, string> = {
   "setup-free": "bg-blue-100 text-blue-800",
   "setup-pro": "bg-purple-100 text-purple-800",
   "need-to-onboard": "bg-green-100 text-green-800",
+};
+
+export const BILLING_STATUS_LABELS: Record<BillingStatus, string> = {
+  "need-to-invoice": "Need to Invoice",
+  "invoice-sent":    "Invoice Sent",
+  "paid":            "Paid",
+};
+
+export const BILLING_STATUS_COLORS: Record<BillingStatus, string> = {
+  "need-to-invoice": "bg-red-100 text-red-800",
+  "invoice-sent":    "bg-amber-100 text-amber-800",
+  "paid":            "bg-green-100 text-green-800",
 };

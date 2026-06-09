@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import type { Agency, AgencyStatus } from "@/types";
-import { STATUS_LABELS, STATUS_COLORS } from "@/types";
+import type { Agency, AgencyStatus, BillingStatus } from "@/types";
+import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
 import { generateSlug } from "@/lib/slug";
 
 const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
@@ -13,6 +13,7 @@ const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
 };
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
+const ALL_BILLING_STATUSES: BillingStatus[] = ["need-to-invoice", "invoice-sent", "paid"];
 
 const TIMEZONES = [
   "America/New_York",
@@ -330,6 +331,16 @@ export function AgencyDetailClient({
   const [guardianEmailSending, setGuardianEmailSending] = useState(false);
   const [guardianEmailSent, setGuardianEmailSent] = useState(false);
 
+  const defaultRenewal = (() => {
+    const d = new Date(initial.created_at);
+    d.setFullYear(d.getFullYear() + 1);
+    return d.toISOString().slice(0, 10);
+  })();
+  const [billingStatus, setBillingStatus] = useState<BillingStatus | "">(initial.billing_status ?? "");
+  const [renewalDate, setRenewalDate] = useState(initial.renewal_date ?? defaultRenewal);
+  const [billingSaving, setBillingSaving] = useState(false);
+  const [billingSaved, setBillingSaved] = useState(false);
+
   async function saveTwilio() {
     setTwilioSaving(true);
     setTwilioSaved(false);
@@ -396,6 +407,23 @@ export function AgencyDetailClient({
       setTimeout(() => setGuardianSaved(false), 2000);
     }
     setGuardianSaving(false);
+  }
+
+  async function saveBilling() {
+    setBillingSaving(true);
+    setBillingSaved(false);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ billing_status: billingStatus || undefined, renewal_date: renewalDate || undefined }),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setAgency(updated);
+      setBillingSaved(true);
+      setTimeout(() => setBillingSaved(false), 2000);
+    }
+    setBillingSaving(false);
   }
 
   async function sendGuardianEmail() {
@@ -498,6 +526,47 @@ export function AgencyDetailClient({
                 {STATUS_LABELS[s]}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Billing */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Billing</h2>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {ALL_BILLING_STATUSES.map((s) => (
+              <button
+                key={s}
+                onClick={() => setBillingStatus(s)}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer border-2 ${
+                  billingStatus === s
+                    ? `${BILLING_STATUS_COLORS[s]} border-transparent shadow-sm`
+                    : "bg-white border-gray-200 text-gray-500 hover:border-gray-300"
+                }`}
+              >
+                {BILLING_STATUS_LABELS[s]}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-end gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Renewal Date</label>
+              <input
+                type="date"
+                value={renewalDate}
+                onChange={(e) => setRenewalDate(e.target.value)}
+                className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={saveBilling}
+                disabled={billingSaving}
+                className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {billingSaving ? "Saving…" : "Save"}
+              </button>
+              {billingSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
+            </div>
           </div>
         </div>
 

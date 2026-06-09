@@ -3,14 +3,15 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
-import type { Agency, AgencyStatus } from "@/types";
-import { STATUS_LABELS, STATUS_COLORS } from "@/types";
+import type { Agency, AgencyStatus, BillingStatus } from "@/types";
+import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
 
 const GUARDIAN_VARIANTS = ["guardian", "guardian-free", "guardian-v2"];
 
 const AGENCY_SIZES = ["1-49", "50-99", "100-199", "200-399", "400+"];
+const ALL_BILLING_STATUSES: BillingStatus[] = ["need-to-invoice", "invoice-sent", "paid"];
 
 const EMPTY_ADD_FORM = {
   agency_name: "", agency_abbr: "", address: "", city: "", state: "", zip: "",
@@ -86,6 +87,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<AgencyStatus | "all">("all");
+  const [filterBilling, setFilterBilling] = useState<BillingStatus | "all">("all");
   const [showAdd, setShowAdd] = useState(false);
   const [addFields, setAddFields] = useState({ ...EMPTY_ADD_FORM });
   const [addSaving, setAddSaving] = useState(false);
@@ -119,6 +121,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
   const filtered = useMemo(() => {
     return agencies
       .filter((a) => filterStatus === "all" || a.status === filterStatus)
+      .filter((a) => filterBilling === "all" || a.billing_status === filterBilling)
       .filter((a) => {
         if (!search.trim()) return true;
         const q = search.toLowerCase();
@@ -127,15 +130,22 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
           a.agency_abbr.toLowerCase().includes(q) ||
           a.state.toLowerCase().includes(q) ||
           a.city.toLowerCase().includes(q) ||
-          a.email.toLowerCase().includes(q)
+          a.email.toLowerCase().includes(q) ||
+          (a.billing_status ? BILLING_STATUS_LABELS[a.billing_status].toLowerCase().includes(q) : false)
         );
       })
       .sort((a, b) => b.created_at.localeCompare(a.created_at));
-  }, [agencies, search, filterStatus]);
+  }, [agencies, search, filterStatus, filterBilling]);
 
   const counts = useMemo(() => {
     const c: Record<string, number> = { all: agencies.length };
     for (const s of ALL_STATUSES) c[s] = agencies.filter((a) => a.status === s).length;
+    return c;
+  }, [agencies]);
+
+  const billingCounts = useMemo(() => {
+    const c: Record<string, number> = { all: agencies.length };
+    for (const s of ALL_BILLING_STATUSES) c[s] = agencies.filter((a) => a.billing_status === s).length;
     return c;
   }, [agencies]);
 
@@ -181,15 +191,16 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
         </div>
 
         {/* Filter + search bar */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-5">
-          <input
-            type="text"
-            placeholder="Search agency, abbreviation, city, state, email…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          <div className="flex gap-2 flex-wrap items-start">
+        <div className="flex flex-col gap-3 mb-5">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="Search agency, abbreviation, city, state, email…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <div className="flex gap-2 flex-wrap items-start">
             <button
               onClick={() => setShowAdd(true)}
               className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-900 text-white hover:bg-blue-800 transition-colors cursor-pointer whitespace-nowrap"
@@ -217,6 +228,24 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                 <span className="ml-1.5 opacity-60">{counts[s]}</span>
               </button>
             ))}
+            </div>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            <span className="text-xs text-gray-400 font-semibold uppercase tracking-wide self-center pr-1">Billing:</span>
+            {(["all", ...ALL_BILLING_STATUSES] as const).map((s) => (
+              <button
+                key={s}
+                onClick={() => setFilterBilling(s)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                  filterBilling === s
+                    ? s === "all" ? "bg-blue-900 text-white" : `${BILLING_STATUS_COLORS[s]} border-transparent`
+                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                }`}
+              >
+                {s === "all" ? "All" : BILLING_STATUS_LABELS[s]}
+                <span className="ml-1.5 opacity-60">{billingCounts[s]}</span>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -237,6 +266,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Size</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden md:table-cell">Guardian</th>
+                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden lg:table-cell">Billing</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Submitted</th>
                   </tr>
                 </thead>
@@ -272,6 +302,20 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                               </span>
                             );
                           })()
+                        ) : (
+                          <span className="text-xs text-gray-300">—</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 hidden lg:table-cell">
+                        {agency.billing_status ? (
+                          <div>
+                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${BILLING_STATUS_COLORS[agency.billing_status]}`}>
+                              {BILLING_STATUS_LABELS[agency.billing_status]}
+                            </span>
+                            {agency.renewal_date && (
+                              <div className="text-xs text-gray-400 mt-0.5">Renews {new Date(agency.renewal_date + "T00:00:00").toLocaleDateString()}</div>
+                            )}
+                          </div>
                         ) : (
                           <span className="text-xs text-gray-300">—</span>
                         )}

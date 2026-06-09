@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import type { Agency, AgencyStatus, GuardianStatus } from "@/types";
+import type { Agency, AgencyStatus, GuardianStatus, BillingStatus } from "@/types";
 import { generateSlug } from "@/lib/slug";
 
 const AGENCIES_INDEX_KEY = "asr:agencies:index";
@@ -44,12 +44,15 @@ const GUARDIAN_VARIANTS = ["guardian", "guardian-free", "guardian-v2"];
 export async function createAgency(data: Omit<Agency, "id" | "created_at" | "updated_at" | "status">): Promise<Agency> {
   const now = new Date().toISOString();
   const guardianToken = GUARDIAN_VARIANTS.includes(data.variant) ? uuidv4() : undefined;
+  const renewalDate = new Date(now);
+  renewalDate.setFullYear(renewalDate.getFullYear() + 1);
   const agency: Agency = {
     ...data,
     id: uuidv4(),
     created_at: now,
     updated_at: now,
     status: "need-to-setup",
+    renewal_date: renewalDate.toISOString().slice(0, 10),
     ...(guardianToken ? { guardian_setup_token: guardianToken, guardian_status: "pending" } : {}),
   };
 
@@ -96,7 +99,7 @@ export async function ensureGuardianToken(id: string): Promise<Agency | null> {
   return updated;
 }
 
-export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token" | "agency_name" | "agency_abbr" | "address" | "city" | "state" | "zip" | "agency_size" | "plan_selected" | "first_name" | "last_name" | "title" | "email" | "phone">>): Promise<Agency | null> {
+export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token" | "agency_name" | "agency_abbr" | "address" | "city" | "state" | "zip" | "agency_size" | "plan_selected" | "first_name" | "last_name" | "title" | "email" | "phone" | "billing_status" | "renewal_date">>): Promise<Agency | null> {
   if (!hasKV()) {
     if (!memAgencies[id]) return null;
     memAgencies[id] = { ...memAgencies[id], ...patch, updated_at: new Date().toISOString() };

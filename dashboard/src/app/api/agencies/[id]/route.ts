@@ -49,6 +49,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if ("guardian_api_key" in body) patch.guardian_api_key = body.guardian_api_key || undefined;
   if ("guardian_link" in body) patch.guardian_link = body.guardian_link || undefined;
   if ("guardian_status" in body) patch.guardian_status = body.guardian_status || undefined;
+  if ("billing_status" in body) patch.billing_status = body.billing_status || undefined;
+  if ("renewal_date" in body) patch.renewal_date = body.renewal_date || undefined;
   const updated = await updateAgency(id, patch);
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updated);
