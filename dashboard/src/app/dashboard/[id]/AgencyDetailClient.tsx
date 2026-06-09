@@ -463,7 +463,7 @@ export function AgencyDetailClient({
               label="Tenant"
               value={agency.tenant ?? ""}
               options={tenants}
-              onChange={(v) => save({ tenant: v || undefined })}
+              onChange={(v) => save({ tenant: v })}
               disabled={saving}
               emptyHint={<>Add tenants in <a href="/dashboard/settings" className="underline">Settings</a>.</>}
             />
@@ -471,7 +471,7 @@ export function AgencyDetailClient({
               label="Department Template"
               value={agency.department_template ?? ""}
               options={departmentTemplates}
-              onChange={(v) => save({ department_template: v || undefined })}
+              onChange={(v) => save({ department_template: v })}
               disabled={saving}
               emptyHint={<>Add templates in <a href="/dashboard/settings" className="underline">Settings</a>.</>}
             />
@@ -479,7 +479,7 @@ export function AgencyDetailClient({
               label="Time Zone"
               value={agency.timezone ?? ""}
               options={TIMEZONES}
-              onChange={(v) => save({ timezone: v || undefined })}
+              onChange={(v) => save({ timezone: v })}
               disabled={saving}
             />
           </div>
