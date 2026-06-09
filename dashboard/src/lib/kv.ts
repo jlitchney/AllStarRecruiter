@@ -39,7 +39,7 @@ export async function getAgency(id: string): Promise<Agency | null> {
   return db.get<Agency>(agencyKey(id));
 }
 
-const GUARDIAN_VARIANTS = ["guardian", "guardian-free"];
+const GUARDIAN_VARIANTS = ["guardian", "guardian-free", "guardian-v2"];
 
 export async function createAgency(data: Omit<Agency, "id" | "created_at" | "updated_at" | "status">): Promise<Agency> {
   const now = new Date().toISOString();
@@ -76,6 +76,24 @@ export async function getAgencyByGuardianToken(token: string): Promise<Agency | 
   const id = await db.get<string>(guardianTokenKey(token));
   if (!id) return null;
   return getAgency(id);
+}
+
+export async function ensureGuardianToken(id: string): Promise<Agency | null> {
+  const existing = await getAgency(id);
+  if (!existing) return null;
+  if (existing.guardian_setup_token) return existing;
+  const token = uuidv4();
+  const updated = { ...existing, guardian_setup_token: token, guardian_status: (existing.guardian_status ?? "pending") as Agency["guardian_status"], updated_at: new Date().toISOString() };
+  if (!hasKV()) {
+    memAgencies[id] = updated;
+    return updated;
+  }
+  const db = await kv();
+  await Promise.all([
+    db.set(agencyKey(id), updated),
+    db.set(guardianTokenKey(token), id),
+  ]);
+  return updated;
 }
 
 export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token" | "agency_name" | "agency_abbr" | "address" | "city" | "state" | "zip" | "agency_size" | "plan_selected" | "first_name" | "last_name" | "title" | "email" | "phone">>): Promise<Agency | null> {

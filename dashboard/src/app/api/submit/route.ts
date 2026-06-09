@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     });
 
     await sendNewAgencyNotification(agency);
-    if (["guardian", "guardian-free"].includes(agency.variant)) {
+    if (["guardian", "guardian-free", "guardian-v2"].includes(agency.variant)) {
       await sendGuardianSetupEmail(agency);
     }
 

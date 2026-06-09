@@ -327,6 +327,8 @@ export function AgencyDetailClient({
   });
   const [guardianSaving, setGuardianSaving] = useState(false);
   const [guardianSaved, setGuardianSaved] = useState(false);
+  const [guardianEmailSending, setGuardianEmailSending] = useState(false);
+  const [guardianEmailSent, setGuardianEmailSent] = useState(false);
 
   async function saveTwilio() {
     setTwilioSaving(true);
@@ -394,6 +396,19 @@ export function AgencyDetailClient({
       setTimeout(() => setGuardianSaved(false), 2000);
     }
     setGuardianSaving(false);
+  }
+
+  async function sendGuardianEmail() {
+    setGuardianEmailSending(true);
+    setGuardianEmailSent(false);
+    const res = await fetch(`/api/agencies/${agency.id}/guardian-email`, { method: "POST" });
+    if (res.ok) {
+      const updated = await fetch(`/api/agencies/${agency.id}`).then((r) => r.json());
+      setAgency(updated);
+      setGuardianEmailSent(true);
+      setTimeout(() => setGuardianEmailSent(false), 4000);
+    }
+    setGuardianEmailSending(false);
   }
 
   async function sendToApp() {
@@ -668,6 +683,17 @@ export function AgencyDetailClient({
               >Copy setup link</button>
             </div>
           )}
+
+          <div className="pt-3 border-t border-gray-100 flex items-center gap-3">
+            <button
+              onClick={sendGuardianEmail}
+              disabled={guardianEmailSending}
+              className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {guardianEmailSending ? "Sending…" : "Send Guardian Setup Email"}
+            </button>
+            {guardianEmailSent && <span className="text-sm text-green-600 font-medium">Sent ✓</span>}
+          </div>
         </div>
 
         {/* Configuration */}
