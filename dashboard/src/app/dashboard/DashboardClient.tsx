@@ -8,7 +8,15 @@ import { STATUS_LABELS, STATUS_COLORS } from "@/types";
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "setup-free", "setup-pro", "need-to-onboard"];
 
-const GUARDIAN_VARIANTS = ["guardian", "guardian-free"];
+const GUARDIAN_VARIANTS = ["guardian", "guardian-free", "guardian-v2"];
+
+const AGENCY_SIZES = ["1-49", "50-99", "100-199", "200-399", "400+"];
+
+const EMPTY_ADD_FORM = {
+  agency_name: "", agency_abbr: "", address: "", city: "", state: "", zip: "",
+  first_name: "", last_name: "", title: "", email: "", phone: "",
+  agency_size: "", plan_selected: "free", variant: "manual",
+};
 
 const GUARDIAN_BADGE: Record<string, { label: string; cls: string }> = {
   pending:          { label: "Pending",         cls: "bg-amber-100 text-amber-700" },
@@ -78,6 +86,35 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<AgencyStatus | "all">("all");
+  const [showAdd, setShowAdd] = useState(false);
+  const [addFields, setAddFields] = useState({ ...EMPTY_ADD_FORM });
+  const [addSaving, setAddSaving] = useState(false);
+  const [addError, setAddError] = useState<string | null>(null);
+
+  function setField(key: keyof typeof EMPTY_ADD_FORM, value: string) {
+    setAddFields((f) => ({ ...f, [key]: value }));
+  }
+
+  async function handleAddSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setAddSaving(true);
+    setAddError(null);
+    try {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(addFields),
+      });
+      const data = await res.json();
+      if (!res.ok) { setAddError(data.error ?? "Failed to create department."); setAddSaving(false); return; }
+      setShowAdd(false);
+      setAddFields({ ...EMPTY_ADD_FORM });
+      router.push(`/dashboard/${data.id}`);
+    } catch {
+      setAddError("Network error. Please try again.");
+      setAddSaving(false);
+    }
+  }
 
   const filtered = useMemo(() => {
     return agencies
@@ -153,6 +190,12 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
             className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <div className="flex gap-2 flex-wrap items-start">
+            <button
+              onClick={() => setShowAdd(true)}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-900 text-white hover:bg-blue-800 transition-colors cursor-pointer whitespace-nowrap"
+            >
+              + Add Department
+            </button>
             <button
               onClick={() => downloadCSV(agencies)}
               className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-gray-200 text-gray-600 hover:border-gray-300 transition-colors cursor-pointer whitespace-nowrap"
@@ -244,6 +287,143 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
           </div>
         )}
       </main>
+
+      {/* Add Department Modal */}
+      {showAdd && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <h2 className="text-base font-bold text-gray-900">Add Department</h2>
+              <button onClick={() => setShowAdd(false)} className="text-gray-400 hover:text-gray-700 text-xl leading-none cursor-pointer">✕</button>
+            </div>
+
+            <form onSubmit={handleAddSubmit} className="px-6 py-5 space-y-4">
+              {/* Agency */}
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Agency</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Agency Name <span className="text-red-500">*</span></label>
+                  <input required type="text" value={addFields.agency_name} onChange={(e) => setField("agency_name", e.target.value)}
+                    placeholder="Springfield Police Department"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Abbreviation <span className="text-red-500">*</span></label>
+                  <input required type="text" value={addFields.agency_abbr} onChange={(e) => setField("agency_abbr", e.target.value)}
+                    placeholder="SPD"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Agency Size <span className="text-red-500">*</span></label>
+                  <select required value={addFields.agency_size} onChange={(e) => setField("agency_size", e.target.value)}
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                    <option value="">Select size…</option>
+                    {AGENCY_SIZES.map((s) => <option key={s} value={s}>{s} Sworn Officers</option>)}
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Address <span className="text-red-500">*</span></label>
+                  <input required type="text" value={addFields.address} onChange={(e) => setField("address", e.target.value)}
+                    placeholder="123 Main St"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">City <span className="text-red-500">*</span></label>
+                  <input required type="text" value={addFields.city} onChange={(e) => setField("city", e.target.value)}
+                    placeholder="Springfield"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">State <span className="text-red-500">*</span></label>
+                    <input required type="text" value={addFields.state} onChange={(e) => setField("state", e.target.value)}
+                      placeholder="MO" maxLength={2}
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">Zip <span className="text-red-500">*</span></label>
+                    <input required type="text" value={addFields.zip} onChange={(e) => setField("zip", e.target.value)}
+                      placeholder="65801"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact */}
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide pt-1">Contact</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">First Name <span className="text-red-500">*</span></label>
+                  <input required type="text" value={addFields.first_name} onChange={(e) => setField("first_name", e.target.value)}
+                    placeholder="Jane"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Last Name <span className="text-red-500">*</span></label>
+                  <input required type="text" value={addFields.last_name} onChange={(e) => setField("last_name", e.target.value)}
+                    placeholder="Smith"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Title</label>
+                  <input type="text" value={addFields.title} onChange={(e) => setField("title", e.target.value)}
+                    placeholder="Chief of Police"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Email <span className="text-red-500">*</span></label>
+                  <input required type="email" value={addFields.email} onChange={(e) => setField("email", e.target.value)}
+                    placeholder="jane@springfieldpd.gov"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Phone <span className="text-red-500">*</span></label>
+                  <input required type="tel" value={addFields.phone} onChange={(e) => setField("phone", e.target.value)}
+                    placeholder="(555) 555-0100"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+              </div>
+
+              {/* Plan & Variant */}
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide pt-1">Setup</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Plan</label>
+                  <select value={addFields.plan_selected} onChange={(e) => setField("plan_selected", e.target.value)}
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                    <option value="free">Free</option>
+                    <option value="pro">Pro</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Variant</label>
+                  <select value={addFields.variant} onChange={(e) => setField("variant", e.target.value)}
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                    <option value="manual">Manual</option>
+                    <option value="guardian">Guardian</option>
+                    <option value="guardian-free">Guardian Free</option>
+                    <option value="guardian-v2">Guardian V2</option>
+                    <option value="alumni">Alumni</option>
+                  </select>
+                </div>
+              </div>
+
+              {addError && <p className="text-sm text-red-600">{addError}</p>}
+
+              <div className="flex items-center gap-3 pt-2">
+                <button type="submit" disabled={addSaving}
+                  className="flex-1 py-2.5 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer">
+                  {addSaving ? "Creating…" : "Create Department"}
+                </button>
+                <button type="button" onClick={() => setShowAdd(false)}
+                  className="px-4 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-600 hover:border-gray-300 transition-colors cursor-pointer">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
