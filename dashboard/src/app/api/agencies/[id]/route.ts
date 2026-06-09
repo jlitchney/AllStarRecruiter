@@ -31,6 +31,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if ("tenant" in body) patch.tenant = body.tenant || undefined;
   if ("department_template" in body) patch.department_template = body.department_template || undefined;
   if ("timezone" in body) patch.timezone = body.timezone || undefined;
+  if ("twilio_account_sid" in body) patch.twilio_account_sid = body.twilio_account_sid || undefined;
+  if ("twilio_auth_token" in body) patch.twilio_auth_token = body.twilio_auth_token || undefined;
   const updated = await updateAgency(id, patch);
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updated);

@@ -291,6 +291,28 @@ export function AgencyDetailClient({
   const [deleting, setDeleting] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState<{ ok: boolean; message: string } | null>(null);
+  const [twilioSid, setTwilioSid] = useState(initial.twilio_account_sid ?? "");
+  const [twilioToken, setTwilioToken] = useState(initial.twilio_auth_token ?? "");
+  const [twilioSaving, setTwilioSaving] = useState(false);
+  const [twilioSaved, setTwilioSaved] = useState(false);
+  const [showToken, setShowToken] = useState(false);
+
+  async function saveTwilio() {
+    setTwilioSaving(true);
+    setTwilioSaved(false);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ twilio_account_sid: twilioSid, twilio_auth_token: twilioToken }),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setAgency(updated);
+      setTwilioSaved(true);
+      setTimeout(() => setTwilioSaved(false), 2000);
+    }
+    setTwilioSaving(false);
+  }
 
   async function sendToApp() {
     setSending(true);
@@ -505,6 +527,52 @@ export function AgencyDetailClient({
             />
           </div>
           {saved && <p className="text-xs text-green-600 font-medium mt-3">Saved ✓</p>}
+        </div>
+
+        {/* Twilio */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Twilio</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Account SID</label>
+              <input
+                type="text"
+                value={twilioSid}
+                onChange={(e) => setTwilioSid(e.target.value)}
+                placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Auth Token</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type={showToken ? "text" : "password"}
+                  value={twilioToken}
+                  onChange={(e) => setTwilioToken(e.target.value)}
+                  placeholder="••••••••••••••••••••••••••••••••"
+                  className="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowToken((s) => !s)}
+                  className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded-lg px-3 py-2 whitespace-nowrap cursor-pointer"
+                >
+                  {showToken ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={saveTwilio}
+                disabled={twilioSaving}
+                className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {twilioSaving ? "Saving…" : "Save"}
+              </button>
+              {twilioSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
+            </div>
+          </div>
         </div>
 
         {/* Department Pages */}

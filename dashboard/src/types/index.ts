@@ -50,6 +50,9 @@ export interface Agency {
 
   webhook_last_sent_at?: string;
   webhook_last_status?: "success" | "error";
+
+  twilio_account_sid?: string;
+  twilio_auth_token?: string;
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {
