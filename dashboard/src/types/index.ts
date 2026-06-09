@@ -5,7 +5,7 @@ export type AgencyStatus =
 
 export type GuardianStatus = "pending" | "active" | "not-a-customer";
 
-export type BillingStatus = "need-to-invoice" | "invoice-sent" | "paid";
+export type BillingStatus = "need-to-invoice" | "invoice-sent" | "paid" | "expires-60" | "expires-30" | "expired";
 
 export interface Agency {
   id: string;
@@ -75,10 +75,16 @@ export const BILLING_STATUS_LABELS: Record<BillingStatus, string> = {
   "need-to-invoice": "Need to Invoice",
   "invoice-sent":    "Invoice Sent",
   "paid":            "Paid",
+  "expires-60":      "Expires — 60 Days",
+  "expires-30":      "Expires — 30 Days",
+  "expired":         "Expired",
 };
 
 export const BILLING_STATUS_COLORS: Record<BillingStatus, string> = {
   "need-to-invoice": "bg-red-100 text-red-800",
   "invoice-sent":    "bg-amber-100 text-amber-800",
   "paid":            "bg-green-100 text-green-800",
+  "expires-60":      "bg-amber-100 text-amber-800",
+  "expires-30":      "bg-orange-100 text-orange-800",
+  "expired":         "bg-red-100 text-red-800",
 };

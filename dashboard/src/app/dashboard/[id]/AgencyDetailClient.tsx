@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Agency, AgencyStatus, BillingStatus } from "@/types";
 import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
+import { effectiveBillingStatus } from "@/lib/billing";
 import { generateSlug } from "@/lib/slug";
 
 const GUARDIAN_STATUS_LABELS: Record<string, { label: string; cls: string }> = {
@@ -612,6 +613,15 @@ export function AgencyDetailClient({
               {billingSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
             </div>
           </div>
+          {(() => {
+            const eff = effectiveBillingStatus(agency);
+            if (!eff || eff === "paid" || eff === billingStatus) return null;
+            return (
+              <div className={`mt-3 px-3 py-2 rounded-lg text-sm font-semibold ${BILLING_STATUS_COLORS[eff]}`}>
+                ⚠ {BILLING_STATUS_LABELS[eff]}
+              </div>
+            );
+          })()}
         </div>
         )}
 

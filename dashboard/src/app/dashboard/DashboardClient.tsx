@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import type { Agency, AgencyStatus, BillingStatus } from "@/types";
 import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
+import { effectiveBillingStatus } from "@/lib/billing";
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "need-to-onboard", "live"];
 
 const GUARDIAN_VARIANTS = ["guardian", "guardian-free", "guardian-v2"];
 
 const AGENCY_SIZES = ["1-49", "50-99", "100-199", "200-399", "400+"];
-const ALL_BILLING_STATUSES: BillingStatus[] = ["need-to-invoice", "invoice-sent", "paid"];
+const ALL_BILLING_STATUSES: BillingStatus[] = ["need-to-invoice", "invoice-sent", "paid", "expires-60", "expires-30", "expired"];
 
 const EMPTY_ADD_FORM = {
   agency_name: "", agency_abbr: "", address: "", city: "", state: "", zip: "",
@@ -121,7 +122,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
   const filtered = useMemo(() => {
     return agencies
       .filter((a) => filterStatus === "all" || a.status === filterStatus)
-      .filter((a) => filterBilling === "all" || a.billing_status === filterBilling)
+      .filter((a) => filterBilling === "all" || effectiveBillingStatus(a) === filterBilling)
       .filter((a) => {
         if (!search.trim()) return true;
         const q = search.toLowerCase();
@@ -145,7 +146,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
 
   const billingCounts = useMemo(() => {
     const c: Record<string, number> = { all: agencies.length };
-    for (const s of ALL_BILLING_STATUSES) c[s] = agencies.filter((a) => a.billing_status === s).length;
+    for (const s of ALL_BILLING_STATUSES) c[s] = agencies.filter((a) => effectiveBillingStatus(a) === s).length;
     return c;
   }, [agencies]);
 
@@ -312,18 +313,21 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                         )}
                       </td>
                       <td className="px-4 py-3 hidden lg:table-cell">
-                        {agency.billing_status ? (
-                          <div>
-                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${BILLING_STATUS_COLORS[agency.billing_status]}`}>
-                              {BILLING_STATUS_LABELS[agency.billing_status]}
-                            </span>
-                            {agency.renewal_date && (
-                              <div className="text-xs text-gray-400 mt-0.5">Renews {new Date(agency.renewal_date + "T00:00:00").toLocaleDateString()}</div>
-                            )}
-                          </div>
-                        ) : (
-                          <span className="text-xs text-gray-300">—</span>
-                        )}
+                        {(() => {
+                          const bs = effectiveBillingStatus(agency);
+                          return bs ? (
+                            <div>
+                              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${BILLING_STATUS_COLORS[bs]}`}>
+                                {BILLING_STATUS_LABELS[bs]}
+                              </span>
+                              {agency.renewal_date && (
+                                <div className="text-xs text-gray-400 mt-0.5">Renews {new Date(agency.renewal_date + "T00:00:00").toLocaleDateString()}</div>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-xs text-gray-300">—</span>
+                          );
+                        })()}
                       </td>
                       <td className="px-4 py-3 hidden sm:table-cell text-xs text-gray-400">
                         {new Date(agency.created_at).toLocaleDateString()}
