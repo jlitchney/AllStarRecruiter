@@ -84,14 +84,6 @@
     .form-control:focus, .form-select:focus { outline: none; border-color: var(--tx-gold); box-shadow: 0 0 0 3px rgba(228,170,53,.15); background: rgba(255,255,255,.1); }
     .form-select option { background: #0d2d5e; color: #fff; }
 
-    .guardian-radio-wrap { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: .4rem; }
-    .guardian-radio-label { display: flex; align-items: center; gap: .5rem; cursor: pointer; font-size: .88rem; color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: .6rem 1rem; transition: all .15s; flex: 1; min-width: 160px; }
-    .guardian-radio-label input { accent-color: var(--tx-gold); width: 16px; height: 16px; flex-shrink: 0; }
-    .guardian-radio-label:has(input:checked) { background: rgba(228,170,53,.12); border-color: rgba(228,170,53,.45); color: #fff; }
-
-    .guardian-note { display: none; margin-top: .75rem; padding: .85rem 1rem; background: rgba(228,170,53,.1); border: 1px solid rgba(228,170,53,.3); border-radius: 8px; font-size: .82rem; color: rgba(255,255,255,.75); line-height: 1.55; }
-    .guardian-note i { color: var(--tx-gold); margin-right: .35rem; }
-
     .btn-submit { background: var(--tx-red); color: #fff; border: none; font-weight: 700; font-size: 1rem; padding: .85rem; border-radius: 8px; width: 100%; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .25rem; }
     .btn-submit:hover { background: var(--tx-red-hover); }
     .form-fine { font-size: .72rem; color: rgba(255,255,255,.3); text-align: center; margin-top: .75rem; }
@@ -208,13 +200,6 @@
       </div>
       <div class="col-md-4">
         <div class="prop-card">
-          <div class="prop-icon" style="background:#fff1f2;color:#be123c;"><i class="bi bi-shield-check"></i></div>
-          <h3>Guardian Alliance Integration</h3>
-          <p>Native integration with Guardian Alliance Technologies for background investigations. Candidates move into Guardian directly from the platform when they're ready.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="prop-card">
           <div class="prop-icon" style="background:#f0fdf4;color:#15803d;"><i class="bi bi-bar-chart-line-fill"></i></div>
           <h3>Analytics &amp; Reporting</h3>
           <p>An admin analytics dashboard tracking active agencies, job listings by region, applicant registrations, pool growth, time-to-fill, and web traffic — with quarterly reporting.</p>
@@ -279,13 +264,6 @@
             <div>
               <div class="incl-text">Shared Statewide Candidate Pool</div>
               <div class="incl-sub">Searchable centralized candidate database — filter by certifications, geographic preference, and qualifications. Applicant-controlled visibility settings.</div>
-            </div>
-          </div>
-          <div class="incl-item">
-            <div class="incl-check"><i class="bi bi-check-lg"></i></div>
-            <div>
-              <div class="incl-text">Guardian Alliance Background Integration</div>
-              <div class="incl-sub">Native integration with Guardian Alliance Technologies — candidates move into background investigations directly from the platform</div>
             </div>
           </div>
           <div class="incl-item">
@@ -372,7 +350,7 @@
         </div>
         <div class="form-card">
           <form id="cta-form" novalidate>
-            <input type="hidden" name="variant" id="field_variant" value="texas-free">
+            <input type="hidden" name="variant" value="texas-free">
             <input type="hidden" name="plan_selected" value="free">
             <input type="hidden" id="field_utm_source" name="utm_source" value="">
             <input type="hidden" id="field_utm_medium" name="utm_medium" value="">
@@ -456,27 +434,6 @@
               </div>
             </div>
 
-            <!-- Guardian question -->
-            <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.08);">Background Investigations</div>
-
-            <div class="mb-4">
-              <label class="form-label">Is your department currently a Guardian Alliance customer? <span style="color:#f87171;">*</span></label>
-              <div class="guardian-radio-wrap">
-                <label class="guardian-radio-label" onclick="setGuardianStatus('yes')">
-                  <input type="radio" name="is_guardian" value="yes" id="guardian_yes"> Yes — we use Guardian Alliance
-                </label>
-                <label class="guardian-radio-label" onclick="setGuardianStatus('no')">
-                  <input type="radio" name="is_guardian" value="no" id="guardian_no"> No — not currently
-                </label>
-              </div>
-              <div class="guardian-note" id="guardian-yes-note">
-                <i class="bi bi-shield-check"></i> <strong style="color:#fff;">Guardian integration will be connected automatically.</strong> We'll notify Guardian Alliance to set up your background integration. They'll contact you within 1 business day to provide your API credentials.
-              </div>
-              <div class="guardian-note" id="guardian-no-note" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);">
-                <i class="bi bi-info-circle" style="color:rgba(255,255,255,.5);"></i> <span style="color:rgba(255,255,255,.6);">No problem — your agency will be listed on DiscoverTexasPolicing.org without background integration. You can connect Guardian Alliance at any time.</span>
-              </div>
-            </div>
-
             <button type="button" class="btn-submit" onclick="submitForm()">
               <i class="bi bi-star-fill"></i> Get My Agency Listed
             </button>
@@ -512,12 +469,6 @@
     if (ref) document.getElementById('field_ref').value = ref;
   })();
 
-  function setGuardianStatus(val) {
-    document.getElementById('field_variant').value = val === 'yes' ? 'guardian-v2' : 'texas-free';
-    document.getElementById('guardian-yes-note').style.display = val === 'yes' ? 'block' : 'none';
-    document.getElementById('guardian-no-note').style.display  = val === 'no'  ? 'block' : 'none';
-  }
-
   function submitForm() {
     var form = document.getElementById('cta-form');
     var required = [
@@ -542,23 +493,12 @@
       }
     }
 
-    // Require guardian question
-    if (!form.querySelector('[name="is_guardian"]:checked')) {
-      var wrap = document.querySelector('.guardian-radio-wrap');
-      wrap.style.outline = '2px solid #f87171';
-      wrap.style.borderRadius = '8px';
-      setTimeout(function(){ wrap.style.outline = ''; }, 2500);
-      return;
-    }
-
     var btn = form.querySelector('.btn-submit');
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting…';
 
     var data = {};
     new FormData(form).forEach(function(v, k) { data[k] = v; });
-    // Remove the UI-only field
-    delete data.is_guardian;
 
     fetch('https://app.lawenforcementrecruiter.com/api/submit', {
       method: 'POST',
@@ -566,10 +506,6 @@
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     }).then(function(r) {
       if (r.ok) {
-        var isGuardian = document.getElementById('guardian_yes').checked;
-        if (isGuardian) {
-          document.getElementById('confirm-msg').textContent = "We'll verify your TCOLE eligibility and have your DiscoverTexasPolicing.org account ready within 1 business day. Because you're a Guardian Alliance customer, Guardian will also reach out to connect your background integration. Check your work email for next steps.";
-        }
         form.style.display = 'none';
         document.getElementById('cta-confirm').style.display = 'block';
       } else {
