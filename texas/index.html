@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DiscoverTexasPolicing.org — Free Platform for Texas Law Enforcement</title>
-  <meta name="description" content="Get your agency listed on DiscoverTexasPolicing.org — the statewide recruitment platform connecting Texas officers to Texas agencies. Free for all TCOLE-eligible agencies.">
+  <title>DiscoverTexasPolicing.org — Launching September 2026</title>
+  <meta name="description" content="John Guilfoil Public Relations is spearheading a statewide law enforcement recruitment initiative in Texas with the Texas Police Chief's Association. Launching September 2026 — reserve your agency's spot now.">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
   <style>
@@ -26,54 +26,76 @@
     .nav-wordmark { display: flex; flex-direction: column; }
     .nav-wordmark-top { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.5); line-height: 1; }
     .nav-wordmark-main { font-size: 1rem; font-weight: 900; color: #fff; letter-spacing: -.01em; line-height: 1.15; }
-    .btn-nav { background: var(--tx-red); color: #fff; font-weight: 700; font-size: .88rem; padding: .45rem 1.1rem; border-radius: 6px; text-decoration: none; transition: background .15s; white-space: nowrap; }
-    .btn-nav:hover { background: var(--tx-red-hover); color: #fff; }
+    .btn-nav { background: var(--tx-gold); color: #0d2d5e; font-weight: 800; font-size: .88rem; padding: .45rem 1.1rem; border-radius: 6px; text-decoration: none; transition: background .15s; white-space: nowrap; }
+    .btn-nav:hover { background: var(--tx-gold-hover); color: #0d2d5e; }
+
+    /* ── Launch banner ── */
+    .launch-banner { background: var(--tx-gold); padding: .55rem 1rem; text-align: center; }
+    .launch-banner span { font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #0d2d5e; }
 
     /* ── Hero ── */
     .hero { background: linear-gradient(150deg, #060e20 0%, #0d2d5e 50%, #142257 100%); padding: 5rem 0 4.5rem; position: relative; overflow: hidden; }
     .hero::after { content: '★'; position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: 420px; color: rgba(255,255,255,.025); line-height: 1; pointer-events: none; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: .5rem; background: rgba(181,0,30,.2); border: 1px solid rgba(181,0,30,.4); color: #ff6b7a; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; padding: .3rem .8rem; border-radius: 99px; margin-bottom: 1.25rem; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: .5rem; background: rgba(228,170,53,.2); border: 1px solid rgba(228,170,53,.45); color: var(--tx-gold); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; padding: .3rem .8rem; border-radius: 99px; margin-bottom: 1.25rem; }
     .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; color: #fff; line-height: 1.08; letter-spacing: -.03em; margin-bottom: 1rem; }
     .hero h1 span { color: var(--tx-gold); }
     .hero .lede { color: rgba(255,255,255,.7); font-size: 1.05rem; line-height: 1.75; max-width: 520px; margin-bottom: 0; }
-    .badge-free { display: inline-flex; align-items: center; gap: .4rem; background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.35); color: #34d399; font-size: .75rem; font-weight: 700; padding: .3rem .75rem; border-radius: 99px; margin-top: 1.25rem; }
 
-    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 2rem; }
-    .stat-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 1rem; text-align: center; }
-    .stat-box .num { font-size: 1.6rem; font-weight: 900; color: var(--tx-gold); line-height: 1; }
-    .stat-box .lbl { font-size: .7rem; color: rgba(255,255,255,.45); margin-top: .25rem; line-height: 1.3; }
+    .launch-date-box { display: inline-flex; align-items: center; gap: .7rem; background: rgba(228,170,53,.12); border: 1px solid rgba(228,170,53,.3); border-radius: 10px; padding: .75rem 1.25rem; margin-top: 1.5rem; }
+    .launch-date-box .icon { font-size: 1.25rem; color: var(--tx-gold); }
+    .launch-date-box .text { }
+    .launch-date-box .text-top { font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(228,170,53,.6); line-height: 1; }
+    .launch-date-box .text-main { font-size: 1rem; font-weight: 900; color: var(--tx-gold); line-height: 1.2; margin-top: .15rem; }
 
-    .initiative-badge { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1.5rem; }
-    .initiative-badge h3 { font-size: .95rem; font-weight: 800; color: #fff; margin: 0 0 .4rem; }
-    .initiative-badge p { font-size: .82rem; color: rgba(255,255,255,.55); margin: 0; line-height: 1.55; }
-    .initiative-badge .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .85rem; }
-    .initiative-badge .tag { font-size: .68rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.12); }
+    /* ── JGPR panel ── */
+    .jgpr-panel { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 2rem; }
+    .jgpr-logo-wrap { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 1.1rem 1.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
+    .jgpr-logo-wrap img { max-width: 160px; height: auto; }
+    .jgpr-panel-label { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-bottom: .65rem; }
+    .jgpr-panel h3 { font-size: .95rem; font-weight: 800; color: #fff; margin: 0 0 .45rem; line-height: 1.3; }
+    .jgpr-panel p { font-size: .82rem; color: rgba(255,255,255,.55); margin: 0; line-height: 1.6; }
+    .partner-chips { display: flex; flex-direction: column; gap: .45rem; margin-top: 1rem; }
+    .partner-chip { display: flex; align-items: center; gap: .55rem; font-size: .78rem; color: rgba(255,255,255,.65); }
+    .partner-chip i { color: var(--tx-gold); font-size: .85rem; flex-shrink: 0; }
 
-    /* ── Value props ── */
-    .props-section { background: #f8fafc; padding: 5rem 0; border-bottom: 1px solid #e2e8f0; }
+    /* ── Story section ── */
+    .story-section { background: #f8fafc; padding: 5.5rem 0; border-bottom: 1px solid #e2e8f0; }
+    .story-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--tx-navy-mid); margin-bottom: .4rem; }
+    .story-section h2 { font-size: clamp(1.65rem, 3.5vw, 2.2rem); font-weight: 900; color: #0f172a; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 1rem; }
+    .story-section p { color: #475569; font-size: .97rem; line-height: 1.75; }
+    .story-jgpr-logo { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 2rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .story-jgpr-logo img { max-width: 200px; height: auto; }
+    .quote-block { background: var(--tx-navy); border-left: 4px solid var(--tx-gold); border-radius: 10px; padding: 1.5rem 1.75rem; margin-top: 2rem; }
+    .quote-block p { color: rgba(255,255,255,.75); font-size: .95rem; line-height: 1.7; font-style: italic; margin: 0 0 .75rem; }
+    .quote-block .attr { font-size: .78rem; font-weight: 700; color: var(--tx-gold); }
+
+    /* ── Partner strip ── */
+    .partner-strip { background: #fff; padding: 3rem 0; border-bottom: 1px solid #e2e8f0; }
+    .partner-strip .label { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #94a3b8; text-align: center; margin-bottom: 1.75rem; }
+    .partner-cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .partner-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.1rem 1.75rem; display: flex; align-items: center; gap: .75rem; }
+    .partner-card i { font-size: 1.25rem; color: var(--tx-navy); }
+    .partner-card-text { font-size: .85rem; font-weight: 700; color: #1e293b; line-height: 1.2; }
+    .partner-card-sub { font-size: .72rem; color: #64748b; font-weight: 400; }
+
+    /* ── What's coming ── */
+    .coming-section { background: #fff; padding: 5rem 0; }
     .prop-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.75rem; height: 100%; }
     .prop-icon { width: 46px; height: 46px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
     .prop-card h3 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: .4rem; }
     .prop-card p { font-size: .95rem; color: #64748b; line-height: 1.65; margin: 0; }
+    .coming-badge { display: inline-block; background: #fef9c3; color: #713f12; font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; padding: 2px 8px; border-radius: 99px; margin-bottom: .5rem; }
 
     /* ── Included section ── */
-    .included-section { background: #fff; padding: 5rem 0; }
-    .included-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.25rem; }
-    .incl-item { display: flex; align-items: flex-start; gap: .75rem; padding: .7rem 0; border-bottom: 1px solid #e2e8f0; }
+    .included-section { background: #f8fafc; padding: 5rem 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+    .included-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.25rem; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .incl-item { display: flex; align-items: flex-start; gap: .75rem; padding: .7rem 0; border-bottom: 1px solid #f1f5f9; }
     .incl-item:last-child { border-bottom: none; }
     .incl-check { width: 22px; height: 22px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
     .incl-check i { font-size: .65rem; color: #166534; }
     .incl-text { font-size: .9rem; color: #1e293b; font-weight: 600; line-height: 1.4; }
     .incl-sub { font-size: .82rem; color: #64748b; font-weight: 400; margin-top: .15rem; }
     .free-badge { display: inline-block; background: #dcfce7; color: #166534; font-size: .62rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; padding: 2px 8px; border-radius: 99px; }
-
-    /* ── How it works ── */
-    .how-section { background: #f8fafc; padding: 5rem 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
-    .step { display: flex; gap: 1.25rem; align-items: flex-start; }
-    .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--tx-navy); color: #fff; font-size: .9rem; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .step-body h4 { font-size: .98rem; font-weight: 800; color: #0f172a; margin: 0 0 .25rem; }
-    .step-body p { font-size: .88rem; color: #64748b; margin: 0; line-height: 1.6; }
-    .step-connector { width: 2px; height: 28px; background: #e2e8f0; margin-left: 19px; }
 
     /* ── CTA / Form ── */
     .cta-section { background: linear-gradient(150deg, #060e20 0%, #0d2d5e 55%, #14234a 100%); padding: 5.5rem 0; }
@@ -84,13 +106,18 @@
     .form-control:focus, .form-select:focus { outline: none; border-color: var(--tx-gold); box-shadow: 0 0 0 3px rgba(228,170,53,.15); background: rgba(255,255,255,.1); }
     .form-select option { background: #0d2d5e; color: #fff; }
 
-    .btn-submit { background: var(--tx-red); color: #fff; border: none; font-weight: 700; font-size: 1rem; padding: .85rem; border-radius: 8px; width: 100%; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .25rem; }
-    .btn-submit:hover { background: var(--tx-red-hover); }
+    .btn-submit { background: var(--tx-gold); color: #0d2d5e; border: none; font-weight: 800; font-size: 1rem; padding: .85rem; border-radius: 8px; width: 100%; cursor: pointer; transition: background .15s; display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .25rem; }
+    .btn-submit:hover { background: var(--tx-gold-hover); }
     .form-fine { font-size: .72rem; color: rgba(255,255,255,.3); text-align: center; margin-top: .75rem; }
     .cta-confirm { display: none; text-align: center; padding: 3rem 1rem; }
-    .cta-confirm-icon { width: 64px; height: 64px; background: rgba(16,185,129,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #34d399; margin: 0 auto 1.25rem; }
+    .cta-confirm-icon { width: 64px; height: 64px; background: rgba(228,170,53,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--tx-gold); margin: 0 auto 1.25rem; }
     .cta-confirm h3 { color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: .5rem; }
     .cta-confirm p { color: rgba(255,255,255,.55); font-size: .95rem; line-height: 1.65; }
+
+    .reserved-indicator { display: flex; align-items: center; gap: .6rem; background: rgba(228,170,53,.12); border: 1px solid rgba(228,170,53,.25); border-radius: 8px; padding: .65rem 1rem; margin-bottom: 1.25rem; }
+    .reserved-indicator i { color: var(--tx-gold); }
+    .reserved-indicator span { font-size: .8rem; color: rgba(255,255,255,.65); }
+    .reserved-indicator strong { color: rgba(255,255,255,.9); }
 
     /* ── Footer ── */
     footer { background: #040a16; padding: 2rem 0; border-top: 3px solid var(--tx-red); }
@@ -105,6 +132,11 @@
 </head>
 <body>
 
+<!-- LAUNCH BANNER -->
+<div class="launch-banner">
+  <span>★ &nbsp; Platform in Development — Go-Live Targeted for September 2026 &nbsp; · &nbsp; Reserve Your Agency's Spot Now &nbsp; ★</span>
+</div>
+
 <!-- NAV -->
 <nav class="top-nav">
   <a href="#" class="nav-logo">
@@ -114,7 +146,7 @@
       <span class="nav-wordmark-main">DiscoverTexasPolicing.org</span>
     </div>
   </a>
-  <a href="#join" class="btn-nav">Get Your Agency Listed</a>
+  <a href="#reserve" class="btn-nav">Reserve Your Spot</a>
 </nav>
 
 <!-- HERO -->
@@ -122,36 +154,33 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-6">
-        <div class="hero-eyebrow"><i class="bi bi-star-fill"></i> Statewide Law Enforcement Recruitment Platform</div>
-        <h1>Connect Texas agencies<br>with <span>Texas officers.</span></h1>
-        <p class="lede">DiscoverTexasPolicing.org is the official statewide platform connecting TCOLE-licensed candidates with law enforcement agencies across Texas — free for every eligible agency.</p>
-        <div class="badge-free"><i class="bi bi-check-circle-fill"></i> No cost for any TCOLE-eligible agency — no credit card required</div>
-      </div>
-      <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
-        <div class="initiative-badge">
-          <h3>What is DiscoverTexasPolicing.org?</h3>
-          <p>A statewide initiative to modernize law enforcement recruitment in Texas. Every eligible agency — municipal, county, and any entity with TCOLE-licensed staff — gets a free posting dashboard, access to a shared statewide candidate pool, and tools to manage the full hiring pipeline before background investigation.</p>
-          <div class="tags">
-            <span class="tag">TCOLE Eligible</span>
-            <span class="tag">Municipal</span>
-            <span class="tag">County</span>
-            <span class="tag">Peace Officers</span>
-            <span class="tag">Jailers</span>
-            <span class="tag">Telecommunicators</span>
+        <div class="hero-eyebrow"><i class="bi bi-rocket-takeoff-fill"></i> Statewide Initiative — In Development</div>
+        <h1>A new era for<br>Texas law enforcement<br><span>recruitment.</span></h1>
+        <p class="lede">John Guilfoil Public Relations is spearheading a historic statewide initiative — in partnership with the State of Texas and the Texas Police Chief's Association — to modernize law enforcement recruitment across all 2,800+ TCOLE-eligible agencies.</p>
+        <div class="launch-date-box">
+          <div class="icon"><i class="bi bi-calendar2-check-fill"></i></div>
+          <div class="text">
+            <div class="text-top">Targeted Go-Live</div>
+            <div class="text-main">September 2026</div>
           </div>
         </div>
-        <div class="stat-grid">
-          <div class="stat-box">
-            <div class="num">2,800+</div>
-            <div class="lbl">TCOLE-certified agencies in Texas</div>
+      </div>
+      <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
+        <div class="jgpr-panel">
+          <div class="jgpr-logo-wrap">
+            <img src="https://jgpr.net/wp-content/uploads/2025/01/JGPR-Rebrand-Gold-300x200.png" alt="John Guilfoil Public Relations" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;align-items:center;gap:.5rem;">
+              <i class="bi bi-building" style="font-size:1.5rem;color:var(--tx-gold);"></i>
+              <span style="font-size:1rem;font-weight:800;color:#fff;">JGPR</span>
+            </div>
           </div>
-          <div class="stat-box">
-            <div class="num">$0</div>
-            <div class="lbl">cost to list your openings</div>
-          </div>
-          <div class="stat-box">
-            <div class="num">1 day</div>
-            <div class="lbl">to go live on the platform</div>
+          <div class="jgpr-panel-label">Spearheaded By</div>
+          <h3>John Guilfoil Public Relations</h3>
+          <p>America's foremost public safety communications firm, JGPR is leading this statewide effort to build a modern, centralized recruitment platform for every law enforcement agency in Texas.</p>
+          <div class="partner-chips">
+            <div class="partner-chip"><i class="bi bi-star-fill"></i> State of Texas</div>
+            <div class="partner-chip"><i class="bi bi-shield-fill-check"></i> Texas Police Chief's Association</div>
+            <div class="partner-chip"><i class="bi bi-person-badge-fill"></i> All TCOLE-Eligible Agencies</div>
           </div>
         </div>
       </div>
@@ -159,19 +188,56 @@
   </div>
 </section>
 
-<!-- VALUE PROPS -->
-<section class="props-section">
+<!-- STORY SECTION -->
+<section class="story-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="story-jgpr-logo">
+          <img src="https://jgpr.net/wp-content/uploads/2025/01/JGPR-Rebrand-Gold-300x200.png" alt="John Guilfoil Public Relations" style="max-width:220px;height:auto;" onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;gap:1rem;\'><i class=\'bi bi-building\' style=\'font-size:3rem;color:var(--tx-navy);\'></i><div><div style=\'font-size:1.2rem;font-weight:900;color:#0f172a;\'>JGPR</div><div style=\'font-size:.85rem;color:#64748b;\'>John Guilfoil Public Relations</div></div></div>'">
+        </div>
+        <div class="partner-card" style="width:100%;margin-bottom:.75rem;">
+          <i class="bi bi-star-fill"></i>
+          <div class="partner-card-text">State of Texas
+            <div class="partner-card-sub">State partnership &amp; agency coordination</div>
+          </div>
+        </div>
+        <div class="partner-card" style="width:100%;">
+          <i class="bi bi-shield-fill-check"></i>
+          <div class="partner-card-text">Texas Police Chief's Association
+            <div class="partner-card-sub">Endorsing &amp; supporting partner</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="story-label">The Initiative</div>
+        <h2>JGPR is building something<br>Texas law enforcement has never had.</h2>
+        <p>Texas is home to more than 2,800 TCOLE-eligible law enforcement agencies — and until now, there has been no unified platform for recruitment. Every agency manages hiring in isolation, with no shared candidate pool, no standardized tools, and no statewide visibility.</p>
+        <p>John Guilfoil Public Relations — working in partnership with the State of Texas and the Texas Police Chief's Association — is changing that. <strong>DiscoverTexasPolicing.org</strong> will be the definitive statewide platform connecting TCOLE-licensed candidates to every eligible department in Texas: municipal, county, and beyond.</p>
+        <p>As we complete development ahead of a September 2026 go-live, we're building the founding agency list. Departments that reserve their spot now will be first to activate when the platform launches — and will help shape the platform that serves all of Texas law enforcement.</p>
+        <div class="quote-block">
+          <p>"This is the most significant coordinated investment in Texas law enforcement recruitment infrastructure in a generation. We're proud to lead it."</p>
+          <div class="attr">— John Guilfoil Public Relations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S COMING -->
+<section class="coming-section">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-7 text-center">
-        <div class="section-label">Why Join</div>
-        <h2 style="font-size:1.9rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;">Built for Texas law enforcement.<br><span style="color:var(--tx-navy-mid);">Funded for every agency.</span></h2>
-        <p style="color:#64748b;font-size:.97rem;line-height:1.7;margin-top:.75rem;">DiscoverTexasPolicing.org was designed to address the statewide law enforcement staffing crisis — not to sell software. Every feature in the platform is available to every eligible agency at no charge.</p>
+        <div class="section-label">Platform Features</div>
+        <h2 style="font-size:1.9rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;">What's coming to your agency<br><span style="color:var(--tx-navy-mid);">at no cost.</span></h2>
+        <p style="color:#64748b;font-size:.97rem;line-height:1.7;margin-top:.75rem;">Every feature in the platform will be free for every eligible agency. DiscoverTexasPolicing.org was built to solve the statewide staffing crisis.</p>
       </div>
     </div>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="prop-card">
+          <div class="coming-badge">Coming Sept 2026</div>
           <div class="prop-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-map"></i></div>
           <h3>Regional Job Map</h3>
           <p>An interactive map of Texas divided by TCOLE regions. Candidates browse openings by region, department type, job role, and license type — your agency is visible statewide.</p>
@@ -179,13 +245,15 @@
       </div>
       <div class="col-md-4">
         <div class="prop-card">
+          <div class="coming-badge">Coming Sept 2026</div>
           <div class="prop-icon" style="background:#fef9c3;color:#854d0e;"><i class="bi bi-people-fill"></i></div>
           <h3>Shared Candidate Pool</h3>
-          <p>Access a centralized, searchable database of TCOLE-eligible candidates who want to be found. Filter by certifications, geographic preference, and qualifications.</p>
+          <p>A centralized, searchable database of TCOLE-eligible candidates who want to be found. Filter by certifications, geographic preference, and qualifications.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="prop-card">
+          <div class="coming-badge">Coming Sept 2026</div>
           <div class="prop-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-funnel-fill"></i></div>
           <h3>Automated Pre-Screening</h3>
           <p>Automatic disqualifier flagging for felony convictions, dishonorable discharge, and drug-use criteria — so you only review candidates who meet baseline TPCA/TCOLE standards.</p>
@@ -193,16 +261,26 @@
       </div>
       <div class="col-md-4">
         <div class="prop-card">
+          <div class="coming-badge">Coming Sept 2026</div>
           <div class="prop-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="bi bi-layout-text-window-reverse"></i></div>
           <h3>Agency Dashboard</h3>
-          <p>A secure login portal with a user-friendly dashboard for posting jobs, uploading requirements, salary, benefits, and deadlines using standardized templates.</p>
+          <p>A secure login portal for posting jobs, uploading requirements, salary, benefits, and deadlines using standardized templates built to Texas standards.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="prop-card">
+          <div class="coming-badge">Coming Sept 2026</div>
           <div class="prop-icon" style="background:#f0fdf4;color:#15803d;"><i class="bi bi-bar-chart-line-fill"></i></div>
           <h3>Analytics &amp; Reporting</h3>
-          <p>An admin analytics dashboard tracking active agencies, job listings by region, applicant registrations, pool growth, time-to-fill, and web traffic — with quarterly reporting.</p>
+          <p>Track active agencies, job listings by region, applicant registrations, pool growth, time-to-fill, and web traffic — with quarterly reporting for state leadership.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="prop-card">
+          <div class="coming-badge">Coming Sept 2026</div>
+          <div class="prop-icon" style="background:#fce7f3;color:#9d174d;"><i class="bi bi-envelope-check-fill"></i></div>
+          <h3>Direct Applications</h3>
+          <p>Candidates apply directly to your agency. Recruitment Ambassadors accessible by TCOLE region. Request supplemental documents with one click.</p>
         </div>
       </div>
     </div>
@@ -215,13 +293,13 @@
     <div class="row justify-content-center">
       <div class="col-lg-7">
         <div class="text-center mb-4">
-          <div class="section-label">What's Included</div>
-          <h2 style="font-size:1.85rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem;">Everything your agency gets.<br>At no cost.</h2>
+          <div class="section-label">At Launch</div>
+          <h2 style="font-size:1.85rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.15;margin-bottom:.5rem;">Everything in the platform.<br>Free for every agency.</h2>
           <p style="color:#64748b;font-size:.95rem;line-height:1.65;">Open to any municipal, county, or entity with TCOLE-licensed staff — peace officers, jailers, and telecommunicators.</p>
         </div>
         <div class="included-card">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-            <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#64748b;">DiscoverTexasPolicing.org — Included Platform</span>
+            <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#64748b;">DiscoverTexasPolicing.org — Included at Launch</span>
             <span class="free-badge">Free for All Agencies</span>
           </div>
           <div class="incl-item">
@@ -282,8 +360,8 @@
           </div>
         </div>
         <div class="text-center mt-4">
-          <a href="#join" class="btn btn-lg" style="background:var(--tx-red);color:#fff;font-weight:700;border-radius:8px;padding:.8rem 2rem;">
-            <i class="bi bi-arrow-down-circle me-2"></i>Get Your Agency Listed
+          <a href="#reserve" class="btn btn-lg" style="background:var(--tx-red);color:#fff;font-weight:700;border-radius:8px;padding:.8rem 2rem;">
+            <i class="bi bi-arrow-down-circle me-2"></i>Reserve Your Agency's Spot
           </a>
         </div>
       </div>
@@ -291,64 +369,21 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how-section">
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-6 text-center">
-        <div class="section-label">How It Works</div>
-        <h2 style="font-size:1.85rem;font-weight:900;color:#0f172a;letter-spacing:-.02em;line-height:1.2;">Your agency is live in one day.</h2>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-lg-6">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <h4>Submit your information</h4>
-            <p>Fill out the form below with your agency details and contact. Takes about 2 minutes.</p>
-          </div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <h4>We verify and activate your account</h4>
-            <p>We confirm TCOLE eligibility and have your agency dashboard ready within 1 business day.</p>
-          </div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-body">
-            <h4>Post your first opening</h4>
-            <p>Log in, post your openings using our standardized templates, and your agency appears on the regional job map immediately.</p>
-          </div>
-        </div>
-        <div class="step-connector"></div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <h4>Receive and manage applicants</h4>
-            <p>Candidates apply directly to your agency. Pre-screening runs automatically. When a candidate is ready, send them to background with one click.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA / FORM -->
-<section class="cta-section" id="join">
+<section class="cta-section" id="reserve">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-7">
         <div class="text-center mb-4">
-          <div class="section-label section-label-light">Get Listed</div>
-          <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:.6rem;">Add your agency to<br>DiscoverTexasPolicing.org.</h2>
-          <p style="color:rgba(255,255,255,.5);font-size:.92rem;line-height:1.65;">Free for all TCOLE-eligible agencies. We'll have your account ready within 1 business day.</p>
+          <div class="section-label section-label-light">Pre-Launch List</div>
+          <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:.6rem;">Reserve your agency's spot<br>before September 2026.</h2>
+          <p style="color:rgba(255,255,255,.5);font-size:.92rem;line-height:1.65;">We're building the founding department list now. Agencies that register before go-live will be first to activate — and help shape what Texas law enforcement recruitment looks like for the next decade.</p>
         </div>
         <div class="form-card">
+          <div class="reserved-indicator">
+            <i class="bi bi-lock-fill"></i>
+            <span>Your information is securely collected and used only to activate your agency when the platform goes live. <strong>No commitment required.</strong></span>
+          </div>
           <form id="cta-form" novalidate>
             <input type="hidden" name="variant" value="texas-free">
             <input type="hidden" name="plan_selected" value="free">
@@ -435,15 +470,15 @@
             </div>
 
             <button type="button" class="btn-submit" onclick="submitForm()">
-              <i class="bi bi-star-fill"></i> Get My Agency Listed
+              <i class="bi bi-star-fill"></i> Reserve My Agency's Spot
             </button>
-            <p class="form-fine">Free for all TCOLE-eligible agencies · No credit card required · Account ready within 1 business day</p>
+            <p class="form-fine">Free for all TCOLE-eligible agencies · No commitment required · We'll contact you before go-live</p>
           </form>
 
           <div class="cta-confirm" id="cta-confirm">
-            <div class="cta-confirm-icon"><i class="bi bi-check-lg"></i></div>
+            <div class="cta-confirm-icon"><i class="bi bi-star-fill"></i></div>
             <h3>You're on the list!</h3>
-            <p id="confirm-msg">We'll verify your TCOLE eligibility and have your DiscoverTexasPolicing.org account ready within 1 business day. Check your work email for next steps.</p>
+            <p id="confirm-msg">Your agency has been added to the DiscoverTexasPolicing.org founding list. We'll be in touch before the September 2026 go-live to get your account activated and ready for launch.</p>
           </div>
         </div>
       </div>
@@ -454,7 +489,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>★ DiscoverTexasPolicing.org — Statewide Law Enforcement Recruitment Initiative · <a href="mailto:support@lawenforcementrecruiter.com">Contact Us</a></p>
+    <p>★ DiscoverTexasPolicing.org — A JGPR Statewide Initiative in partnership with the Texas Police Chief's Association &nbsp;·&nbsp; <a href="mailto:support@lawenforcementrecruiter.com">Contact Us</a> &nbsp;·&nbsp; <a href="https://jgpr.net" target="_blank" rel="noopener">jgpr.net</a></p>
   </div>
 </footer>
 
@@ -510,12 +545,12 @@
         document.getElementById('cta-confirm').style.display = 'block';
       } else {
         btn.disabled = false;
-        btn.innerHTML = '<i class="bi bi-star-fill"></i> Get My Agency Listed';
+        btn.innerHTML = '<i class="bi bi-star-fill"></i> Reserve My Agency\'s Spot';
         alert('Something went wrong. Please try again.');
       }
     }).catch(function() {
       btn.disabled = false;
-      btn.innerHTML = '<i class="bi bi-star-fill"></i> Get My Agency Listed';
+      btn.innerHTML = '<i class="bi bi-star-fill"></i> Reserve My Agency\'s Spot';
       alert('Something went wrong. Please check your connection and try again.');
     });
   }
