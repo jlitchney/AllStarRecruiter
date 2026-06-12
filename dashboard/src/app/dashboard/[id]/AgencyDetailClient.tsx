@@ -1023,8 +1023,19 @@ export function AgencyDetailClient({
               {agency.survey_responses.logo_url && (
                 <div>
                   <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Submitted Logo</div>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={agency.survey_responses.logo_url} alt="Submitted logo" className="w-20 h-20 object-contain rounded-lg border border-gray-200 bg-gray-50" />
+                  <div className="flex items-center gap-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={agency.survey_responses.logo_url} alt="Submitted logo" className="w-20 h-20 object-contain rounded-lg border border-gray-200 bg-gray-50" />
+                    <a
+                      href={agency.survey_responses.logo_url}
+                      download={`${agency.agency_abbr}-logo`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-blue-600 hover:text-blue-800 border border-blue-200 hover:border-blue-300 rounded px-2 py-1 whitespace-nowrap transition-colors"
+                    >
+                      Download
+                    </a>
+                  </div>
                 </div>
               )}
               {agency.survey_responses.submitted_at && (
