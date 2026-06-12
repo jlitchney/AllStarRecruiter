@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAgency } from "@/lib/kv";
-import { sendNewAgencyNotification, sendGuardianSetupEmail } from "@/lib/email";
+import { sendNewAgencyNotification, sendGuardianSetupEmail, sendOnboardingSurveyEmail } from "@/lib/email";
+import { updateAgency } from "@/lib/kv";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "https://lawenforcementrecruiter.com",
@@ -48,6 +49,8 @@ export async function POST(req: NextRequest) {
     await sendNewAgencyNotification(agency);
     if (["guardian", "guardian-free", "guardian-v2"].includes(agency.variant)) {
       await sendGuardianSetupEmail(agency);
+      await sendOnboardingSurveyEmail(agency);
+      await updateAgency(agency.id, { survey_sent_at: new Date().toISOString() });
     }
 
     return NextResponse.json({ ok: true, id: agency.id }, { status: 201, headers: CORS_HEADERS });

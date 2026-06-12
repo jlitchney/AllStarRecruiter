@@ -334,6 +334,9 @@ export function AgencyDetailClient({
   const [guardianEmailSending, setGuardianEmailSending] = useState(false);
   const [guardianEmailSent, setGuardianEmailSent] = useState(false);
 
+  const [surveyEmailSending, setSurveyEmailSending] = useState(false);
+  const [surveyEmailSent, setSurveyEmailSent] = useState(false);
+
   const defaultRenewal = (() => {
     const d = new Date(initial.created_at);
     d.setFullYear(d.getFullYear() + 1);
@@ -439,6 +442,19 @@ export function AgencyDetailClient({
       setTimeout(() => setBillingSaved(false), 2000);
     }
     setBillingSaving(false);
+  }
+
+  async function sendSurveyEmail() {
+    setSurveyEmailSending(true);
+    setSurveyEmailSent(false);
+    const res = await fetch(`/api/agencies/${agency.id}/survey-email`, { method: "POST" });
+    if (res.ok) {
+      const updated = await fetch(`/api/agencies/${agency.id}`).then((r) => r.json());
+      setAgency(updated);
+      setSurveyEmailSent(true);
+      setTimeout(() => setSurveyEmailSent(false), 4000);
+    }
+    setSurveyEmailSending(false);
   }
 
   async function sendGuardianEmail() {
@@ -965,6 +981,81 @@ export function AgencyDetailClient({
               ) : null}
             </div>
           )}
+        </div>
+
+        {/* Onboarding Survey */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Onboarding Survey</h2>
+            {agency.survey_completed_at ? (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                Completed
+              </span>
+            ) : agency.survey_sent_at ? (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">
+                Sent — Awaiting Response
+              </span>
+            ) : (
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-500">
+                Not Sent
+              </span>
+            )}
+          </div>
+
+          {agency.survey_responses && (
+            <div className="space-y-4 mb-5">
+              {[
+                { key: "challenges",        label: "Biggest Recruitment Challenges" },
+                { key: "positions",         label: "Positions Currently Recruiting" },
+                { key: "application_links", label: "How Candidates Apply / Job Links" },
+                { key: "hiring_process",    label: "Hiring Process & Key Steps" },
+                { key: "tracking_goals",    label: "Tracking & Reporting Goals" },
+              ].map(({ key, label }) => {
+                const val = agency.survey_responses?.[key as keyof typeof agency.survey_responses];
+                if (!val) return null;
+                return (
+                  <div key={key}>
+                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{label}</div>
+                    <p className="text-sm text-gray-800 whitespace-pre-wrap leading-relaxed bg-gray-50 rounded-lg px-3 py-2.5">{val as string}</p>
+                  </div>
+                );
+              })}
+              {agency.survey_responses.logo_url && (
+                <div>
+                  <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Submitted Logo</div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={agency.survey_responses.logo_url} alt="Submitted logo" className="w-20 h-20 object-contain rounded-lg border border-gray-200 bg-gray-50" />
+                </div>
+              )}
+              {agency.survey_responses.submitted_at && (
+                <div className="text-xs text-gray-400">
+                  Submitted {new Date(agency.survey_responses.submitted_at).toLocaleString()}
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-gray-100">
+            <button
+              onClick={sendSurveyEmail}
+              disabled={surveyEmailSending}
+              className="px-4 py-2 bg-blue-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-800 transition-colors disabled:opacity-50 cursor-pointer"
+            >
+              {surveyEmailSending ? "Sending…" : agency.survey_sent_at ? "Resend Survey Email" : "Send Survey Email"}
+            </button>
+            {surveyEmailSent && <span className="text-sm text-green-600 font-medium">Sent ✓</span>}
+            {agency.survey_token && (
+              <button
+                onClick={() => navigator.clipboard.writeText(`${window.location.origin}/survey/${agency.survey_token}`)}
+                className="text-xs text-gray-400 hover:text-gray-700 border border-gray-200 rounded px-2 py-1 whitespace-nowrap cursor-pointer"
+              >
+                Copy survey link
+              </button>
+            )}
+            {agency.survey_sent_at && !agency.survey_completed_at && (
+              <span className="text-xs text-gray-400">Sent {new Date(agency.survey_sent_at).toLocaleString()}</span>
+            )}
+          </div>
         </div>
 
         {/* Notes */}

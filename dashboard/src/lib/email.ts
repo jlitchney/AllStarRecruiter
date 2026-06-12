@@ -85,6 +85,54 @@ export async function sendGuardianSetupCompleteNotification(agency: Agency): Pro
   if (result.error) throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
 }
 
+export async function sendOnboardingSurveyEmail(agency: Agency): Promise<void> {
+  if (!process.env.RESEND_API_KEY || !agency.survey_token) return;
+
+  const { Resend } = await import("resend");
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const surveyUrl = `${APP_URL}/survey/${agency.survey_token}`;
+
+  const result = await resend.emails.send({
+    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    to: agency.email,
+    subject: `${agency.agency_name} — Help us build your recruiting system`,
+    html: `
+      <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;padding:24px;">
+        <img src="https://app.lawenforcementrecruiter.com/logo-black.svg" alt="All-Star Recruiter" style="height:28px;width:auto;margin-bottom:24px;" />
+
+        <h2 style="margin:0 0 8px;color:#0f172a;">Hi ${agency.first_name},</h2>
+        <p style="margin:0 0 16px;color:#374151;font-size:15px;line-height:1.6;">
+          Thanks for signing up — we're getting ${agency.agency_name}'s account ready. Before we build out your recruiting system, we'd love to learn a bit more about your department.
+        </p>
+        <p style="margin:0 0 24px;color:#374151;font-size:15px;line-height:1.6;">
+          The short questionnaire below helps us understand your current recruiting challenges and what you're looking to track so we can set everything up the right way for you.
+        </p>
+
+        <p style="font-size:14px;color:#64748b;margin:0 0 8px;">It takes about 5 minutes:</p>
+        <ul style="font-size:14px;color:#64748b;margin:0 0 24px;padding-left:20px;line-height:2;">
+          <li>Your biggest recruitment challenges</li>
+          <li>Positions you're currently recruiting for</li>
+          <li>Your hiring process for each role</li>
+          <li>What you'd like to track and report on</li>
+          <li>Upload your department logo</li>
+        </ul>
+
+        <div style="margin-bottom:24px;">
+          <a href="${surveyUrl}" style="background:#1a3a6e;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:700;display:inline-block;">
+            Complete Your Profile →
+          </a>
+        </div>
+
+        <p style="font-size:12px;color:#94a3b8;margin:0;">
+          This link is for ${agency.agency_name} only.<br>
+          ${surveyUrl}
+        </p>
+      </div>
+    `,
+  });
+  if (result.error) throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
+}
+
 export async function sendGuardianSetupEmail(agency: Agency): Promise<void> {
   if (!process.env.RESEND_API_KEY || !agency.guardian_setup_token) return;
 

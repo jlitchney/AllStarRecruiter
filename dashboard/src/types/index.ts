@@ -1,3 +1,13 @@
+export interface SurveyResponses {
+  challenges?: string;
+  positions?: string;
+  application_links?: string;
+  hiring_process?: string;
+  tracking_goals?: string;
+  logo_url?: string;
+  submitted_at?: string;
+}
+
 export type AgencyStatus =
   | "need-to-setup"
   | "need-to-onboard"
@@ -57,6 +67,11 @@ export interface Agency {
 
   billing_status?: BillingStatus;
   renewal_date?: string;
+
+  survey_token?: string;
+  survey_sent_at?: string;
+  survey_completed_at?: string;
+  survey_responses?: SurveyResponses;
 }
 
 export const STATUS_LABELS: Record<AgencyStatus, string> = {
