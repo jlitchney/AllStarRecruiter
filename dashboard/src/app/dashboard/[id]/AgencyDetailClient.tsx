@@ -295,6 +295,7 @@ export function AgencyDetailClient({
   const [sendResult, setSendResult] = useState<{ ok: boolean; message: string } | null>(null);
   const [twilioSid, setTwilioSid] = useState(initial.twilio_account_sid ?? "");
   const [twilioToken, setTwilioToken] = useState(initial.twilio_auth_token ?? "");
+  const [twilioPhone, setTwilioPhone] = useState(initial.twilio_phone_number ?? "");
   const [twilioSaving, setTwilioSaving] = useState(false);
   const [twilioSaved, setTwilioSaved] = useState(false);
   const [showToken, setShowToken] = useState(false);
@@ -353,7 +354,7 @@ export function AgencyDetailClient({
     const res = await fetch(`/api/agencies/${agency.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ twilio_account_sid: twilioSid, twilio_auth_token: twilioToken }),
+      body: JSON.stringify({ twilio_account_sid: twilioSid, twilio_auth_token: twilioToken, twilio_phone_number: twilioPhone }),
     });
     if (res.ok) {
       const updated = await res.json();
@@ -859,6 +860,41 @@ export function AgencyDetailClient({
         {/* Twilio */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Twilio</h2>
+
+          {/* Status */}
+          <div className="mb-5">
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Status</label>
+            <div className="flex flex-wrap gap-2">
+              {(["need-to-submit", "pending", "approved"] as const).map((s) => {
+                const labels = { "need-to-submit": "Need to Submit", pending: "Pending", approved: "Approved" };
+                const colors = {
+                  "need-to-submit": "bg-red-100 text-red-800",
+                  pending:          "bg-amber-100 text-amber-800",
+                  approved:         "bg-green-100 text-green-800",
+                };
+                const isActive = agency.twilio_status === s;
+                return (
+                  <button
+                    key={s}
+                    onClick={async () => {
+                      const res = await fetch(`/api/agencies/${agency.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ twilio_status: s }),
+                      });
+                      if (res.ok) setAgency(await res.json());
+                    }}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer border-2 ${
+                      isActive ? `${colors[s]} border-transparent shadow-sm` : "bg-white border-gray-200 text-gray-500 hover:border-gray-300"
+                    }`}
+                  >
+                    {labels[s]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <div className="space-y-4">
             <div>
               <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Account SID</label>
@@ -888,6 +924,16 @@ export function AgencyDetailClient({
                   {showToken ? "Hide" : "Show"}
                 </button>
               </div>
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Phone Number</label>
+              <input
+                type="text"
+                value={twilioPhone}
+                onChange={(e) => setTwilioPhone(e.target.value)}
+                placeholder="+15550001234"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
             </div>
             <div className="flex items-center gap-3">
               <button

@@ -33,6 +33,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if ("timezone" in body) patch.timezone = body.timezone || undefined;
   if ("twilio_account_sid" in body) patch.twilio_account_sid = body.twilio_account_sid || undefined;
   if ("twilio_auth_token" in body) patch.twilio_auth_token = body.twilio_auth_token || undefined;
+  if ("twilio_phone_number" in body) patch.twilio_phone_number = body.twilio_phone_number || undefined;
+  if ("twilio_status" in body) patch.twilio_status = body.twilio_status || undefined;
   if ("agency_name" in body) patch.agency_name = body.agency_name;
   if ("agency_abbr" in body) patch.agency_abbr = body.agency_abbr;
   if ("address" in body) patch.address = body.address;

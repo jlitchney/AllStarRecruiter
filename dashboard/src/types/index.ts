@@ -64,6 +64,8 @@ export interface Agency {
 
   twilio_account_sid?: string;
   twilio_auth_token?: string;
+  twilio_phone_number?: string;
+  twilio_status?: "need-to-submit" | "pending" | "approved";
 
   billing_status?: BillingStatus;
   renewal_date?: string;
