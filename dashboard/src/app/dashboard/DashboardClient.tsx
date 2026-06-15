@@ -26,6 +26,14 @@ const GUARDIAN_BADGE: Record<string, { label: string; cls: string }> = {
   "not-a-customer": { label: "Non-Customer",     cls: "bg-gray-100 text-gray-500" },
 };
 
+const TWILIO_STATUS_BADGE: Record<string, { label: string; cls: string }> = {
+  "need-to-submit": { label: "Need to Submit", cls: "bg-red-100 text-red-700" },
+  pending:          { label: "Pending",         cls: "bg-amber-100 text-amber-700" },
+  approved:         { label: "Approved",        cls: "bg-green-100 text-green-700" },
+};
+
+const ALL_TWILIO_STATUSES = ["need-to-submit", "pending", "approved"] as const;
+
 const CSV_COLUMNS: { key: keyof Agency; label: string }[] = [
   { key: "agency_name",   label: "Agency Name" },
   { key: "agency_abbr",   label: "Abbreviation" },
@@ -89,6 +97,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<AgencyStatus | "all">("all");
   const [filterBilling, setFilterBilling] = useState<BillingStatus | "all">("all");
+  const [filterTwilio, setFilterTwilio] = useState<string>("all");
   const [showAdd, setShowAdd] = useState(false);
   const [addFields, setAddFields] = useState({ ...EMPTY_ADD_FORM });
   const [addSaving, setAddSaving] = useState(false);
@@ -123,6 +132,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
     return agencies
       .filter((a) => filterStatus === "all" || a.status === filterStatus)
       .filter((a) => filterBilling === "all" || effectiveBillingStatus(a) === filterBilling)
+      .filter((a) => filterTwilio === "all" || a.twilio_status === filterTwilio)
       .filter((a) => {
         if (!search.trim()) return true;
         const q = search.toLowerCase();
@@ -147,6 +157,12 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
   const billingCounts = useMemo(() => {
     const c: Record<string, number> = { all: agencies.length };
     for (const s of ALL_BILLING_STATUSES) c[s] = agencies.filter((a) => effectiveBillingStatus(a) === s).length;
+    return c;
+  }, [agencies]);
+
+  const twilioCounts = useMemo(() => {
+    const c: Record<string, number> = { all: agencies.length };
+    for (const s of ALL_TWILIO_STATUSES) c[s] = agencies.filter((a) => a.twilio_status === s).length;
     return c;
   }, [agencies]);
 
@@ -248,6 +264,31 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
               </button>
             ))}
           </div>
+          <div className="flex gap-2 flex-wrap">
+            <span className="text-xs text-gray-400 font-semibold uppercase tracking-wide self-center pr-1">Twilio:</span>
+            <button
+              onClick={() => setFilterTwilio("all")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                filterTwilio === "all" ? "bg-blue-900 text-white" : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+              }`}
+            >
+              All <span className="ml-1.5 opacity-60">{twilioCounts.all}</span>
+            </button>
+            {ALL_TWILIO_STATUSES.map((s) => (
+              <button
+                key={s}
+                onClick={() => setFilterTwilio(s)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                  filterTwilio === s
+                    ? `${TWILIO_STATUS_BADGE[s].cls} border-transparent`
+                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                }`}
+              >
+                {TWILIO_STATUS_BADGE[s].label}
+                <span className="ml-1.5 opacity-60">{twilioCounts[s]}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Table */}
@@ -267,6 +308,7 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Size</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden md:table-cell">Guardian</th>
+                    <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden lg:table-cell">Twilio</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden lg:table-cell">Billing</th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Submitted</th>
                   </tr>
@@ -308,6 +350,15 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                               </span>
                             );
                           })()
+                        ) : (
+                          <span className="text-xs text-gray-300">—</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 hidden lg:table-cell">
+                        {agency.twilio_status ? (
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${TWILIO_STATUS_BADGE[agency.twilio_status]?.cls}`}>
+                            {TWILIO_STATUS_BADGE[agency.twilio_status]?.label}
+                          </span>
                         ) : (
                           <span className="text-xs text-gray-300">—</span>
                         )}
