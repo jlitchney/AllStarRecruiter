@@ -1206,113 +1206,78 @@
     <div class="row justify-content-center mb-5">
       <div class="col-lg-7 text-center">
         <div class="section-eyebrow">Simple, transparent pricing</div>
-        <div class="section-title">Start free.<br><span>Upgrade when it makes sense.</span></div>
-        <p class="section-sub mx-auto text-center">Pro pricing is based on your sworn officer count — not the number of logins. Unlimited users at every tier.</p>
+        <div class="section-title">Two packages.<br><span>One platform.</span></div>
+        <p class="section-sub mx-auto text-center">The full All-Star Recruiter platform is $200/month. Add a texting plan if your agency wants SMS — pick the volume that fits.</p>
       </div>
     </div>
 
-    <!-- Free tier -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-md-6 col-lg-5">
-        <div class="tier-card" style="border-color:#16a34a;background:#f0fdf4;">
-          <div class="tier-name" style="color:#166534;">Guardian Partner Free Plan</div>
-          <div class="tier-price" style="color:#166534;">$0 <span class="per">/ forever</span></div>
-          <div class="tier-tagline">Everything you need to own the top of your hiring funnel. Free for all Guardian Alliance agencies.</div>
-          <ul class="tier-features">
+    <!-- Two package cards -->
+    <div class="row g-4 justify-content-center mb-5">
+
+      <!-- Package 1: Platform Only -->
+      <div class="col-md-5">
+        <div class="tier-card" style="height:100%;display:flex;flex-direction:column;">
+          <div class="tier-name">Platform Only</div>
+          <div class="tier-price">$200 <span class="per">/ month</span></div>
+          <div class="tier-tagline">The full recruiting platform. Email, CRM, automation, events, and more. No texting credits included.</div>
+          <ul class="tier-features" style="flex:1;">
+            <li><i class="bi bi-check-circle-fill"></i>Full CRM &amp; pipeline management</li>
             <li><i class="bi bi-check-circle-fill"></i>2-way email communication</li>
-            <li><i class="bi bi-check-circle-fill"></i>Candidate tagging &amp; groups</li>
-            <li><i class="bi bi-check-circle-fill"></i>Guardian Alliance integration</li>
+            <li><i class="bi bi-check-circle-fill"></i>Automated communication workflows</li>
+            <li><i class="bi bi-check-circle-fill"></i>Events management</li>
+            <li><i class="bi bi-check-circle-fill"></i>Screening &amp; surveys</li>
             <li><i class="bi bi-check-circle-fill"></i>Web page builder</li>
-            <li><i class="bi bi-check-circle-fill"></i>Unlimited candidates</li>
-            <li><i class="bi bi-check-circle-fill"></i>Unlimited users</li>
+            <li><i class="bi bi-check-circle-fill"></i>Analytics dashboard</li>
+            <li><i class="bi bi-check-circle-fill"></i>Guardian Alliance integration</li>
+            <li><i class="bi bi-check-circle-fill"></i>Unlimited candidates &amp; users</li>
           </ul>
-          <a href="#claim" class="btn-tier" style="background:#16a34a;color:#fff;border:2px solid #16a34a;">Claim Free Partner Account</a>
+          <a href="#claim" class="btn-tier btn-tier-outline mt-2">Get Started — $200/mo</a>
         </div>
       </div>
-    </div>
 
-    <!-- Pro pricing toggle -->
-    <div class="text-center mb-4">
-      <p style="font-size:.95rem;color:#64748b;margin-bottom:.75rem;">Start with the free Guardian Partner Plan. Upgrade only when your agency needs more automation, reporting, users, or campaign support.</p>
-      <button class="btn-toggle-pro" type="button" data-bs-toggle="collapse" data-bs-target="#pro-pricing-details" aria-expanded="false">
-        View Pro Pricing <span class="toggle-arrow">↓</span>
-      </button>
-    </div>
+      <!-- Package 2: Platform + Texting -->
+      <div class="col-md-7">
+        <div class="tier-card highlighted" style="height:100%;display:flex;flex-direction:column;border-color:var(--navy-mid);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;">
+            <div class="tier-name" style="margin:0;">Platform + Texting</div>
+            <span style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;background:var(--navy-mid);color:#fff;padding:3px 9px;border-radius:99px;">Most Popular</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.25rem;">
+            <div class="tier-price" style="margin:0;" id="pkg2-total">$249</div>
+            <span class="per" style="font-size:.85rem;">/ month</span>
+          </div>
+          <div style="font-size:.78rem;color:#64748b;margin-bottom:1rem;" id="pkg2-breakdown">$200 platform + $49 texting (1,000 texts/mo)</div>
 
-    <!-- Pro pricing grid (collapsed by default) -->
-    <div class="collapse" id="pro-pricing-details">
-    <div class="row justify-content-center mb-4">
-      <div class="col-12">
-        <div style="text-align:center;margin-bottom:1.25rem;">
-          <span style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--navy-mid);">Pro — Full Platform · Priced by sworn officer count</span>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;max-width:860px;margin:0 auto;">
-
-          <div class="tier-card" style="padding:1.25rem 1rem;">
-            <div class="tier-name">1–49 Sworn</div>
-            <div class="tier-price" style="font-size:1.65rem;">$200</div>
-            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
-            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$2,400 / year</div>
-            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">2,500 texts/mo</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
-            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
+          <!-- Texting tier table -->
+          <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#64748b;margin-bottom:.5rem;">Select your texting plan:</div>
+          <div style="flex:1;overflow-y:auto;max-height:280px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:1rem;">
+            <table style="width:100%;border-collapse:collapse;font-size:.82rem;" id="text-tier-table">
+              <thead>
+                <tr style="background:#f8fafc;position:sticky;top:0;">
+                  <th style="padding:.5rem .75rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Texts / mo</th>
+                  <th style="padding:.5rem .75rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Overage / text</th>
+                  <th style="padding:.5rem .75rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Plan cost</th>
+                  <th style="padding:.5rem .75rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Total / mo</th>
+                </tr>
+              </thead>
+              <tbody id="text-tier-body">
+                <!-- Rows injected by JS -->
+              </tbody>
+            </table>
           </div>
 
-          <div class="tier-card" style="padding:1.25rem 1rem;">
-            <div class="tier-name">50–99 Sworn</div>
-            <div class="tier-price" style="font-size:1.65rem;">$300</div>
-            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
-            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$3,600 / year</div>
-            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">3,500 texts/mo</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
-            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
-          </div>
-
-          <div class="tier-card highlighted" style="padding:1.25rem 1rem;border-top:3px solid #7c3aed;border-color:#7c3aed;background:linear-gradient(180deg,#f5f0ff 0%,#fffbf0 60%);">
-            <div style="font-size:.65rem;font-weight:800;color:#7c3aed;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.35rem;">Most Common</div>
-            <div class="tier-name">100–199 Sworn</div>
-            <div class="tier-price" style="font-size:1.65rem;color:var(--navy-mid);">$400</div>
-            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
-            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$4,800 / year</div>
-            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">5,000 texts/mo</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
-            <a href="#claim" class="btn-tier btn-tier-primary" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
-          </div>
-
-          <div class="tier-card" style="padding:1.25rem 1rem;">
-            <div class="tier-name">200–399 Sworn</div>
-            <div class="tier-price" style="font-size:1.65rem;">$500</div>
-            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
-            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$6,000 / year</div>
-            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">7,500 texts/mo</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
-            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
-          </div>
-
-          <div class="tier-card" style="padding:1.25rem 1rem;">
-            <div class="tier-name">400+ Sworn</div>
-            <div class="tier-price" style="font-size:1.65rem;">$600</div>
-            <div style="font-size:.78rem;color:#64748b;margin-bottom:.35rem;">per month</div>
-            <div style="font-size:.73rem;color:#94a3b8;margin-bottom:1rem;">$7,200 / year</div>
-            <div style="font-size:.8rem;font-weight:600;color:#374151;margin-bottom:.2rem;">10,000 texts/mo</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:.2rem;">$0 one-time setup</div>
-            <div style="font-size:.72rem;color:#94a3b8;margin-bottom:1rem;">$0.02 / extra text</div>
-            <a href="#claim" class="btn-tier btn-tier-outline" style="padding:.45rem .5rem;font-size:.8rem;">Get Started</a>
-          </div>
-
+          <a href="#claim" class="btn-tier btn-tier-primary" id="pkg2-cta">Get Started — $249/mo</a>
+          <p style="font-size:.72rem;color:#94a3b8;text-align:center;margin:.6rem 0 0;">Platform plan ($200) billed separately from texting plan.</p>
         </div>
       </div>
+
     </div>
 
     <!-- Everything included box -->
-    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 55%,#7c3aed 100%);border-radius:14px;padding:2rem 2.5rem;max-width:860px;margin:0 auto;">
+    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 55%,#7c3aed 100%);border-radius:14px;padding:2rem 2.5rem;max-width:900px;margin:0 auto;">
       <div style="text-align:center;margin-bottom:1.25rem;">
-        <h3 style="color:#fff;font-size:1.1rem;font-weight:800;margin:0 0 .35rem;">Everything included at every Pro tier</h3>
-        <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin:0;">No feature gating. The same full platform, scaled by size.</p>
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:800;margin:0 0 .35rem;">Everything included in both packages</h3>
+        <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin:0;">No feature gating. Every agency gets the full platform.</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1.5rem;">
         <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Full website platform</div>
@@ -1333,9 +1298,71 @@
       </div>
     </div>
 
-    </div><!-- /pro-pricing-details collapse -->
   </div>
 </section>
+
+<script>
+(function() {
+  var TIERS = [
+    { texts: "1,000",   overage: "$0.049",  cost: 49,   label: "1,000" },
+    { texts: "2,000",   overage: "$0.0345", cost: 69,   label: "2,000" },
+    { texts: "5,000",   overage: "$0.0258", cost: 129,  label: "5,000" },
+    { texts: "10,000",  overage: "$0.0235", cost: 235,  label: "10,000" },
+    { texts: "20,000",  overage: "$0.0225", cost: 450,  label: "20,000" },
+    { texts: "50,000",  overage: "$0.020",  cost: 1000, label: "50,000" },
+    { texts: "100,000", overage: "$0.015",  cost: 1500, label: "100,000" },
+    { texts: "200,000", overage: "$0.010",  cost: 2000, label: "200,000" },
+    { texts: "500,000", overage: "$0.0085", cost: 4250, label: "500,000" },
+    { texts: "750,000", overage: "$0.0075", cost: 5625, label: "750,000" },
+    { texts: "1,000,000", overage: "$0.0065", cost: 6500, label: "1 Million" },
+  ];
+
+  var selectedIdx = 0;
+
+  function fmt(n) { return "$" + n.toLocaleString(); }
+
+  function render() {
+    var tbody = document.getElementById("text-tier-body");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    TIERS.forEach(function(t, i) {
+      var total = 200 + t.cost;
+      var active = i === selectedIdx;
+      var tr = document.createElement("tr");
+      tr.style.cursor = "pointer";
+      tr.style.background = active ? "#eff6ff" : (i % 2 === 0 ? "#fff" : "#fafafa");
+      tr.style.transition = "background .1s";
+      tr.innerHTML =
+        '<td style="padding:.55rem .75rem;font-weight:' + (active ? "700" : "500") + ';color:' + (active ? "var(--navy-mid)" : "#374151") + ';border-bottom:1px solid #f1f5f9;">' +
+          (active ? '<i class="bi bi-check-circle-fill" style="color:var(--navy-mid);margin-right:.4rem;font-size:.8rem;"></i>' : '<span style="display:inline-block;width:1.2rem;"></span>') +
+          t.label + " texts" +
+        '</td>' +
+        '<td style="padding:.55rem .75rem;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + t.overage + '</td>' +
+        '<td style="padding:.55rem .75rem;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + fmt(t.cost) + '/mo</td>' +
+        '<td style="padding:.55rem .75rem;text-align:right;font-weight:700;color:' + (active ? "var(--navy-mid)" : "#374151") + ';border-bottom:1px solid #f1f5f9;">' + fmt(total) + '/mo</td>';
+      tr.addEventListener("click", function() { selectedIdx = i; updateUI(); });
+      tbody.appendChild(tr);
+    });
+  }
+
+  function updateUI() {
+    var t = TIERS[selectedIdx];
+    var total = 200 + t.cost;
+    var totalEl = document.getElementById("pkg2-total");
+    var breakEl = document.getElementById("pkg2-breakdown");
+    var ctaEl   = document.getElementById("pkg2-cta");
+    if (totalEl) totalEl.textContent = fmt(total);
+    if (breakEl) breakEl.textContent = "$200 platform + " + fmt(t.cost) + " texting (" + t.label + " texts/mo)";
+    if (ctaEl)   ctaEl.textContent   = "Get Started — " + fmt(total) + "/mo";
+    render();
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    render();
+    updateUI();
+  });
+})();
+</script>
 
 <!-- CTA / CLAIM FORM -->
 <section class="cta-section" id="claim">
