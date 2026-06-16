@@ -195,6 +195,27 @@
     .exp-card h4 { font-size: .95rem; font-weight: 800; color: #0f172a; margin-bottom: .3rem; }
     .exp-card p { font-size: .83rem; color: #64748b; line-height: 1.6; margin: 0; }
 
+    /* ── Tier / pricing ──────────────────────────────────────── */
+    .tier-section { background: #f8fafc; padding: 5rem 0; }
+    .tier-card {
+      background: #fff; border: 2px solid #e2e8f0; border-radius: 14px;
+      padding: 2rem; height: 100%;
+    }
+    .tier-card.highlighted { border-color: var(--navy-mid); box-shadow: 0 8px 32px rgba(36,81,148,.15); }
+    .tier-name { font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #64748b; margin-bottom: .5rem; }
+    .tier-price { font-size: 2.2rem; font-weight: 900; color: #0f172a; line-height: 1; margin-bottom: .25rem; }
+    .tier-price sup { font-size: 1rem; font-weight: 700; vertical-align: super; }
+    .tier-price .per { font-size: .85rem; font-weight: 500; color: #64748b; }
+    .tier-tagline { font-size: .85rem; color: #64748b; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; }
+    .tier-features { list-style: none; padding: 0; margin: 0 0 1.75rem; }
+    .tier-features li { display: flex; align-items: flex-start; gap: .6rem; font-size: .87rem; color: #374151; padding: .4rem 0; border-bottom: 1px solid #f8fafc; }
+    .tier-features li i { color: #16a34a; font-size: .9rem; flex-shrink: 0; margin-top: .1rem; }
+    .btn-tier { display: block; width: 100%; text-align: center; font-weight: 700; font-size: .93rem; padding: .7rem 1rem; border-radius: 8px; text-decoration: none; transition: all .15s; }
+    .btn-tier-primary { background: var(--navy-mid); color: #fff; border: 2px solid var(--navy-mid); }
+    .btn-tier-primary:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .btn-tier-outline { background: #fff; color: var(--navy-mid); border: 2px solid var(--navy-mid); }
+    .btn-tier-outline:hover { background: var(--navy-mid); color: #fff; }
+
     /* ── CTA section ─────────────────────────────────────────── */
     .cta-section {
       background: linear-gradient(135deg, #0f2147 0%, var(--navy) 55%, #1e4d8c 100%);
@@ -264,6 +285,7 @@
     <li><a href="#features">Platform</a></li>
     <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#results">Results</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">About</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:.6rem;">
@@ -924,6 +946,171 @@
     </div>
   </div>
 </section>
+
+<!-- PRICING -->
+<section class="tier-section" id="pricing">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-eyebrow">Simple, transparent pricing</div>
+        <div class="section-title">Platform only,<br><span>or add texting.</span></div>
+        <p class="section-sub mx-auto text-center">Start with a 90-day free trial — no credit card required. After your trial, the full platform is $200/month. Add a texting plan if your agency wants SMS.</p>
+      </div>
+    </div>
+
+    <!-- Two package cards -->
+    <div class="row g-4 justify-content-center mb-5">
+
+      <!-- Package 1: Platform Only -->
+      <div class="col-md-5">
+        <div class="tier-card" style="height:100%;display:flex;flex-direction:column;">
+          <div class="tier-name">Platform Only</div>
+          <div class="tier-price">$200 <span class="per">/ month</span></div>
+          <div class="tier-tagline">The full recruiting platform. Email, CRM, automation, events, and more. No texting credits included.</div>
+          <ul class="tier-features" style="flex:1;">
+            <li><i class="bi bi-check-circle-fill"></i>Full CRM &amp; pipeline management</li>
+            <li><i class="bi bi-check-circle-fill"></i>2-way email communication</li>
+            <li><i class="bi bi-check-circle-fill"></i>Automated communication workflows</li>
+            <li><i class="bi bi-check-circle-fill"></i>Events management</li>
+            <li><i class="bi bi-check-circle-fill"></i>Screening &amp; surveys</li>
+            <li><i class="bi bi-check-circle-fill"></i>Web page builder</li>
+            <li><i class="bi bi-check-circle-fill"></i>Analytics dashboard</li>
+            <li><i class="bi bi-check-circle-fill"></i>Guardian Alliance integration</li>
+            <li><i class="bi bi-check-circle-fill"></i>Unlimited candidates &amp; users</li>
+          </ul>
+          <a href="#demo" class="btn-tier btn-tier-outline mt-2">Get Started — $200/mo</a>
+        </div>
+      </div>
+
+      <!-- Package 2: Platform + Texting -->
+      <div class="col-md-7">
+        <div class="tier-card highlighted" style="height:100%;display:flex;flex-direction:column;border-color:var(--navy-mid);">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;">
+            <div class="tier-name" style="margin:0;">Platform + Texting</div>
+            <span style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;background:var(--navy-mid);color:#fff;padding:3px 9px;border-radius:99px;">Most Popular</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.25rem;">
+            <div class="tier-price" style="margin:0;" id="pkg2-total">$249</div>
+            <span class="per" style="font-size:.85rem;">/ month</span>
+          </div>
+          <div style="font-size:.78rem;color:#64748b;margin-bottom:1rem;" id="pkg2-breakdown">$200 platform + $49 texting (1,000 texts/mo)</div>
+
+          <!-- Texting tier table -->
+          <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:#64748b;margin-bottom:.5rem;">Select your texting plan:</div>
+          <div style="flex:1;overflow-y:auto;max-height:280px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:1rem;">
+            <table style="width:100%;border-collapse:collapse;font-size:.82rem;" id="text-tier-table">
+              <thead>
+                <tr style="background:#f8fafc;position:sticky;top:0;">
+                  <th style="padding:.5rem .75rem;text-align:left;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Texts / mo</th>
+                  <th style="padding:.5rem .75rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Overage / text</th>
+                  <th style="padding:.5rem .75rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Plan cost</th>
+                  <th style="padding:.5rem .75rem;text-align:right;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94a3b8;border-bottom:1px solid #e2e8f0;">Total / mo</th>
+                </tr>
+              </thead>
+              <tbody id="text-tier-body">
+                <!-- Rows injected by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <a href="#demo" class="btn-tier btn-tier-primary" id="pkg2-cta">Get Started — $249/mo</a>
+          <p style="font-size:.72rem;color:#94a3b8;text-align:center;margin:.6rem 0 0;">Platform plan ($200) billed separately from texting plan.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Everything included box -->
+    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 55%,#7c3aed 100%);border-radius:14px;padding:2rem 2.5rem;max-width:900px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:1.25rem;">
+        <h3 style="color:#fff;font-size:1.1rem;font-weight:800;margin:0 0 .35rem;">Everything included in both packages</h3>
+        <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin:0;">No feature gating. Every agency gets the full platform.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1.5rem;">
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Full website platform</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>SMS &amp; email channels</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>SMS &amp; email templates</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Automated communication</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Events management</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>QR code generator</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Document requests</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Screening &amp; surveys</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Tagging &amp; advanced filtering</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Recruiter assignment tools</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Unlimited users</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>AI capabilities</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Analytics dashboard</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Virtual training academy</div>
+        <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Dedicated support team</div>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:.82rem;color:#94a3b8;margin-top:1.75rem;">90-day free trial. No credit card required. $200/month after trial.</p>
+  </div>
+</section>
+
+<script>
+(function() {
+  var TIERS = [
+    { texts: "1,000",   overage: "$0.049",  cost: 49,   label: "1,000" },
+    { texts: "2,000",   overage: "$0.0345", cost: 69,   label: "2,000" },
+    { texts: "5,000",   overage: "$0.0258", cost: 129,  label: "5,000" },
+    { texts: "10,000",  overage: "$0.0235", cost: 235,  label: "10,000" },
+    { texts: "20,000",  overage: "$0.0225", cost: 450,  label: "20,000" },
+    { texts: "50,000",  overage: "$0.020",  cost: 1000, label: "50,000" },
+    { texts: "100,000", overage: "$0.015",  cost: 1500, label: "100,000" },
+    { texts: "200,000", overage: "$0.010",  cost: 2000, label: "200,000" },
+    { texts: "500,000", overage: "$0.0085", cost: 4250, label: "500,000" },
+    { texts: "750,000", overage: "$0.0075", cost: 5625, label: "750,000" },
+    { texts: "1,000,000", overage: "$0.0065", cost: 6500, label: "1 Million" },
+  ];
+
+  var selectedIdx = 0;
+
+  function fmt(n) { return "$" + n.toLocaleString(); }
+
+  function render() {
+    var tbody = document.getElementById("text-tier-body");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    TIERS.forEach(function(t, i) {
+      var total = 200 + t.cost;
+      var active = i === selectedIdx;
+      var tr = document.createElement("tr");
+      tr.style.cursor = "pointer";
+      tr.style.background = active ? "#eff6ff" : (i % 2 === 0 ? "#fff" : "#fafafa");
+      tr.style.transition = "background .1s";
+      tr.innerHTML =
+        '<td style="padding:.55rem .75rem;font-weight:' + (active ? "700" : "500") + ';color:' + (active ? "var(--navy-mid)" : "#374151") + ';border-bottom:1px solid #f1f5f9;">' +
+          (active ? '<i class="bi bi-check-circle-fill" style="color:var(--navy-mid);margin-right:.4rem;font-size:.8rem;"></i>' : '<span style="display:inline-block;width:1.2rem;"></span>') +
+          t.label + " texts" +
+        '</td>' +
+        '<td style="padding:.55rem .75rem;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + t.overage + '</td>' +
+        '<td style="padding:.55rem .75rem;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + fmt(t.cost) + '/mo</td>' +
+        '<td style="padding:.55rem .75rem;text-align:right;font-weight:700;color:' + (active ? "var(--navy-mid)" : "#374151") + ';border-bottom:1px solid #f1f5f9;">' + fmt(total) + '/mo</td>';
+      tr.addEventListener("click", function() { selectedIdx = i; updateUI(); });
+      tbody.appendChild(tr);
+    });
+  }
+
+  function updateUI() {
+    var t = TIERS[selectedIdx];
+    var total = 200 + t.cost;
+    var totalEl = document.getElementById("pkg2-total");
+    var breakEl = document.getElementById("pkg2-breakdown");
+    var ctaEl   = document.getElementById("pkg2-cta");
+    if (totalEl) totalEl.textContent = fmt(total);
+    if (breakEl) breakEl.textContent = "$200 platform + " + fmt(t.cost) + " texting (" + t.label + " texts/mo)";
+    if (ctaEl)   ctaEl.textContent   = "Get Started — " + fmt(total) + "/mo";
+    render();
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    render();
+    updateUI();
+  });
+})();
+</script>
 
 <!-- CTA -->
 <section class="cta-section" id="demo">
