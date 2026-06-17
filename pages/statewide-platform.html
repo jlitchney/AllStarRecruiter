@@ -173,6 +173,38 @@
       border-radius: 3px;
       color: #374151;
     }
+
+    @media (max-width: 680px) {
+      body { padding: 20px 16px; }
+
+      .col-headers { display: none; }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .category {
+        text-align: left;
+        border-right: none;
+        border-bottom: 2px solid #d1d5db;
+        padding: 0 0 8px 0;
+        font-size: 14px;
+      }
+
+      .cell { font-size: 13px; }
+
+      /* Pricing cards stack */
+      div[style*="grid-template-columns: 1fr 1.4fr"] {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      /* Everything included: 1 column */
+      div[style*="repeat(3, 1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
