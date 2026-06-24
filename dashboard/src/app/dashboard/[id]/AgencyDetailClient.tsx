@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import type { Agency, AgencyStatus, BillingStatus } from "@/types";
-import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
+import type { Agency, AgencyStatus, BillingStatus, AccountType } from "@/types";
+import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS, trialExpiresAt, trialDaysRemaining } from "@/types";
 import { effectiveBillingStatus } from "@/lib/billing";
 import { generateSlug } from "@/lib/slug";
 
@@ -302,6 +302,8 @@ export function AgencyDetailClient({
 
   const [accountType, setAccountType] = useState<"free" | "pro">(initial.plan_selected === "pro" ? "pro" : "free");
   const [accountTypeSaving, setAccountTypeSaving] = useState(false);
+  const [trialType, setTrialType] = useState<AccountType>(initial.account_type ?? "");
+  const [trialTypeSaving, setTrialTypeSaving] = useState(false);
 
   const [infoFields, setInfoFields] = useState({
     agency_name: initial.agency_name,
@@ -375,6 +377,18 @@ export function AgencyDetailClient({
     });
     if (res.ok) setAgency(await res.json());
     setAccountTypeSaving(false);
+  }
+
+  async function saveTrialType(type: AccountType) {
+    setTrialType(type);
+    setTrialTypeSaving(true);
+    const res = await fetch(`/api/agencies/${agency.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ account_type: type || null }),
+    });
+    if (res.ok) setAgency(await res.json());
+    setTrialTypeSaving(false);
   }
 
   async function saveInfo() {
@@ -564,7 +578,7 @@ export function AgencyDetailClient({
         {/* Account Type */}
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Account Type</h2>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap mb-4">
             <button
               onClick={() => saveAccountType("free")}
               disabled={accountTypeSaving}
@@ -587,6 +601,48 @@ export function AgencyDetailClient({
             >
               Pro
             </button>
+          </div>
+          <div className="border-t border-gray-100 pt-4">
+            <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Trial Status</div>
+            <div className="flex gap-2 flex-wrap">
+              <button
+                onClick={() => saveTrialType("90-day-trial")}
+                disabled={trialTypeSaving}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer border-2 disabled:opacity-50 ${
+                  trialType === "90-day-trial"
+                    ? "bg-sky-100 text-sky-800 border-transparent shadow-sm"
+                    : "bg-white border-gray-200 text-gray-500 hover:border-gray-300"
+                }`}
+              >
+                90-Day Trial
+              </button>
+              {trialType === "90-day-trial" && (
+                <button
+                  onClick={() => saveTrialType("")}
+                  disabled={trialTypeSaving}
+                  className="px-4 py-2 rounded-lg text-sm font-semibold transition-all cursor-pointer border-2 bg-white border-gray-200 text-gray-400 hover:border-red-300 hover:text-red-500 disabled:opacity-50"
+                >
+                  Clear Trial
+                </button>
+              )}
+            </div>
+            {trialType === "90-day-trial" && (() => {
+              const tempAgency = { ...agency, account_type: "90-day-trial" as AccountType };
+              const exp = trialExpiresAt(tempAgency)!;
+              const days = trialDaysRemaining(tempAgency)!;
+              const expired = days < 0;
+              const urgent = days >= 0 && days <= 7;
+              return (
+                <div className={`mt-3 rounded-lg px-3 py-2.5 border ${expired ? "bg-red-50 border-red-200" : urgent ? "bg-amber-50 border-amber-200" : "bg-sky-50 border-sky-200"}`}>
+                  <div className={`text-xs font-semibold uppercase tracking-wide mb-0.5 ${expired ? "text-red-500" : urgent ? "text-amber-600" : "text-sky-600"}`}>Trial Expiration</div>
+                  <div className={`font-bold text-sm ${expired ? "text-red-800" : urgent ? "text-amber-800" : "text-sky-800"}`}>{exp.toLocaleDateString()}</div>
+                  <div className={`text-xs mt-0.5 ${expired ? "text-red-600" : urgent ? "text-amber-700" : "text-sky-700"}`}>
+                    {expired ? `Expired ${Math.abs(days)} day${Math.abs(days) !== 1 ? "s" : ""} ago` : `${days} day${days !== 1 ? "s" : ""} remaining`}
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">100 days from account creation ({new Date(agency.created_at).toLocaleDateString()})</div>
+                </div>
+              );
+            })()}
           </div>
         </div>
 

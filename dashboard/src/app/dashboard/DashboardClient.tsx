@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import type { Agency, AgencyStatus, BillingStatus } from "@/types";
-import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS } from "@/types";
+import { STATUS_LABELS, STATUS_COLORS, BILLING_STATUS_LABELS, BILLING_STATUS_COLORS, trialExpiresAt, trialDaysRemaining } from "@/types";
 import { effectiveBillingStatus } from "@/lib/billing";
 
 const ALL_STATUSES: AgencyStatus[] = ["need-to-setup", "need-to-onboard", "live"];
@@ -166,6 +166,14 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
     return c;
   }, [agencies]);
 
+  const trialAlerts = useMemo(() => {
+    return agencies
+      .filter((a) => a.account_type === "90-day-trial")
+      .map((a) => ({ agency: a, days: trialDaysRemaining(a)!, expires: trialExpiresAt(a)! }))
+      .filter(({ days }) => days <= 14)
+      .sort((a, b) => a.days - b.days);
+  }, [agencies]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -206,6 +214,40 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
             </div>
           ))}
         </div>
+
+        {/* Trial alerts */}
+        {trialAlerts.length > 0 && (
+          <div className="mb-6 bg-white rounded-xl border border-amber-200 overflow-hidden">
+            <div className="px-4 py-3 bg-amber-50 border-b border-amber-200 flex items-center gap-2">
+              <svg className="w-4 h-4 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"/></svg>
+              <span className="text-sm font-bold text-amber-800">90-Day Trial — {trialAlerts.length} agenc{trialAlerts.length !== 1 ? "ies" : "y"} need attention</span>
+            </div>
+            <div className="divide-y divide-gray-100">
+              {trialAlerts.map(({ agency, days, expires }) => {
+                const expired = days < 0;
+                const urgent = days >= 0 && days <= 7;
+                return (
+                  <div
+                    key={agency.id}
+                    onClick={() => router.push(`/dashboard/${agency.id}`)}
+                    className="px-4 py-3 flex items-center justify-between gap-4 cursor-pointer hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="min-w-0">
+                      <div className="font-semibold text-gray-900 text-sm truncate">{agency.agency_name}</div>
+                      <div className="text-xs text-gray-500">{agency.first_name} {agency.last_name} · {agency.email}</div>
+                    </div>
+                    <div className="flex-shrink-0 text-right">
+                      <div className={`text-xs font-bold px-2.5 py-1 rounded-full ${expired ? "bg-red-100 text-red-800" : urgent ? "bg-amber-100 text-amber-800" : "bg-sky-100 text-sky-800"}`}>
+                        {expired ? `Expired ${Math.abs(days)}d ago` : `${days}d left`}
+                      </div>
+                      <div className="text-xs text-gray-400 mt-0.5">{expires.toLocaleDateString()}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Filter + search bar */}
         <div className="flex flex-col gap-3 mb-5">
@@ -338,6 +380,16 @@ export function DashboardClient({ agencies, user }: { agencies: Agency[]; user: 
                           {agency.plan_selected === "pro" && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 w-fit">Pro</span>
                           )}
+                          {agency.account_type === "90-day-trial" && (() => {
+                            const days = trialDaysRemaining(agency)!;
+                            const expired = days < 0;
+                            const urgent = days >= 0 && days <= 7;
+                            return (
+                              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold w-fit ${expired ? "bg-red-100 text-red-700" : urgent ? "bg-amber-100 text-amber-700" : "bg-sky-100 text-sky-700"}`}>
+                                Trial{expired ? ` exp.` : ` ${days}d`}
+                              </span>
+                            );
+                          })()}
                         </div>
                       </td>
                       <td className="px-4 py-3 hidden md:table-cell">

@@ -53,6 +53,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if ("guardian_status" in body) patch.guardian_status = body.guardian_status || undefined;
   if ("billing_status" in body) patch.billing_status = body.billing_status || undefined;
   if ("renewal_date" in body) patch.renewal_date = body.renewal_date || undefined;
+  if ("account_type" in body) patch.account_type = body.account_type || undefined;
   const updated = await updateAgency(id, patch);
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updated);

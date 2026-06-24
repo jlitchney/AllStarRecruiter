@@ -13,6 +13,8 @@ export type AgencyStatus =
   | "need-to-onboard"
   | "live";
 
+export type AccountType = "90-day-trial" | "free" | "pro" | "";
+
 export type GuardianStatus = "pending" | "active" | "not-a-customer";
 
 export type BillingStatus = "need-to-invoice" | "invoice-sent" | "paid" | "expires-60" | "expires-30" | "expired";
@@ -39,6 +41,7 @@ export interface Agency {
   agency_size: string;
   variant: string;
   plan_selected?: string;
+  account_type?: AccountType;
 
   utm_source?: string;
   utm_medium?: string;
@@ -87,6 +90,24 @@ export const STATUS_COLORS: Record<AgencyStatus, string> = {
   "need-to-onboard":  "bg-blue-100 text-blue-800",
   "live":             "bg-green-100 text-green-800",
 };
+
+export const ACCOUNT_TYPE_LABELS: Record<AccountType, string> = {
+  "90-day-trial": "90-Day Trial",
+  "free":         "Free",
+  "pro":          "Pro",
+  "":             "—",
+};
+
+export function trialExpiresAt(agency: Agency): Date | null {
+  if (agency.account_type !== "90-day-trial") return null;
+  return new Date(new Date(agency.created_at).getTime() + 100 * 24 * 60 * 60 * 1000);
+}
+
+export function trialDaysRemaining(agency: Agency): number | null {
+  const exp = trialExpiresAt(agency);
+  if (!exp) return null;
+  return Math.ceil((exp.getTime() - Date.now()) / (24 * 60 * 60 * 1000));
+}
 
 export const BILLING_STATUS_LABELS: Record<BillingStatus, string> = {
   "need-to-invoice": "Need to Invoice",
