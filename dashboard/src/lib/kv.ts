@@ -129,7 +129,7 @@ export async function ensureGuardianToken(id: string): Promise<Agency | null> {
   return updated;
 }
 
-export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "account_type" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token" | "twilio_phone_number" | "twilio_status" | "agency_name" | "agency_abbr" | "address" | "city" | "state" | "zip" | "agency_size" | "plan_selected" | "first_name" | "last_name" | "title" | "email" | "phone" | "billing_status" | "renewal_date" | "survey_sent_at" | "survey_completed_at" | "survey_responses">>): Promise<Agency | null> {
+export async function updateAgency(id: string, patch: Partial<Pick<Agency, "status" | "notes" | "account_type" | "guardian_api_key" | "guardian_link" | "guardian_status" | "guardian_setup_completed_at" | "tenant" | "department_template" | "timezone" | "logo_url" | "webhook_last_sent_at" | "webhook_last_status" | "twilio_account_sid" | "twilio_auth_token" | "twilio_phone_number" | "twilio_status" | "agency_name" | "agency_abbr" | "address" | "city" | "state" | "zip" | "agency_size" | "plan_selected" | "first_name" | "last_name" | "title" | "email" | "phone" | "billing_status" | "renewal_date" | "survey_sent_at" | "survey_completed_at" | "survey_responses" | "w9_url">>): Promise<Agency | null> {
   if (!hasKV()) {
     if (!memAgencies[id]) return null;
     memAgencies[id] = { ...memAgencies[id], ...patch, updated_at: new Date().toISOString() };

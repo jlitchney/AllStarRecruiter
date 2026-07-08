@@ -72,6 +72,7 @@ export interface Agency {
 
   billing_status?: BillingStatus;
   renewal_date?: string;
+  w9_url?: string;
 
   survey_token?: string;
   survey_sent_at?: string;

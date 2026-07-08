@@ -274,6 +274,66 @@ function LogoUpload({ agencyId, logoUrl, onUpdate }: { agencyId: string; logoUrl
   );
 }
 
+function W9Upload({ agencyId, w9Url, onUpdate }: { agencyId: string; w9Url?: string; onUpdate: (url: string | undefined) => void }) {
+  const [uploading, setUploading] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.type !== "application/pdf") { setError("Please select a PDF file."); return; }
+    setError(null);
+    setUploading(true);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      const res = await fetch(`/api/agencies/${agencyId}/w9`, { method: "POST", body: form });
+      if (!res.ok) { setError("Upload failed. Please try again."); return; }
+      const data = await res.json();
+      onUpdate(data.w9_url);
+    } catch {
+      setError("Upload failed. Please try again.");
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  }
+
+  async function handleRemove() {
+    setRemoving(true);
+    const res = await fetch(`/api/agencies/${agencyId}/w9`, { method: "DELETE" });
+    if (res.ok) onUpdate(undefined);
+    setRemoving(false);
+  }
+
+  return (
+    <div className="pt-4 border-t border-gray-100">
+      <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">W9 Document</div>
+      {w9Url ? (
+        <div className="flex items-center gap-3">
+          <a href={w9Url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-700 hover:underline font-medium">View W9 PDF ↗</a>
+          <span className="text-gray-200">|</span>
+          <label className={`text-sm text-gray-500 hover:text-gray-800 cursor-pointer ${uploading ? "opacity-50 pointer-events-none" : ""}`}>
+            {uploading ? "Uploading…" : "Replace"}
+            <input type="file" accept="application/pdf" className="hidden" onChange={handleUpload} disabled={uploading} />
+          </label>
+          <span className="text-gray-200">|</span>
+          <button onClick={handleRemove} disabled={removing} className="text-sm text-red-500 hover:text-red-700 cursor-pointer disabled:opacity-50">
+            {removing ? "Removing…" : "Remove"}
+          </button>
+        </div>
+      ) : (
+        <label className={`inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg cursor-pointer transition-colors ${uploading ? "opacity-50 pointer-events-none" : ""}`}>
+          {uploading ? "Uploading…" : "Upload W9 PDF"}
+          <input type="file" accept="application/pdf" className="hidden" onChange={handleUpload} disabled={uploading} />
+        </label>
+      )}
+      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
+    </div>
+  );
+}
+
 export function AgencyDetailClient({
   agency: initial,
   tenants,
@@ -1001,6 +1061,8 @@ export function AgencyDetailClient({
               </button>
               {twilioSaved && <span className="text-sm text-green-600 font-medium">Saved ✓</span>}
             </div>
+
+            <W9Upload agencyId={agency.id} w9Url={agency.w9_url} onUpdate={(url) => setAgency((a) => ({ ...a, w9_url: url }))} />
           </div>
         </div>
 
