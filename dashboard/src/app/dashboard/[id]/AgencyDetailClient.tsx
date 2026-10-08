@@ -1069,7 +1069,7 @@ export function AgencyDetailClient({
         {/* Department Pages */}
         {(() => {
           const slug = generateSlug(agency);
-          const base = typeof window !== "undefined" ? window.location.origin : "https://app.lawenforcementrecruiter.com";
+          const base = typeof window !== "undefined" ? window.location.origin : "https://dept.lawenforcementrecruiter.com";
           const pages = [
             { label: "Terms & Conditions", path: `/terms-and-conditions/${slug}` },
             { label: "Privacy Policy",     path: `/privacy-policy/${slug}` },

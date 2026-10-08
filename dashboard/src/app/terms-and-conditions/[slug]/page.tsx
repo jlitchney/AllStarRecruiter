@@ -4,7 +4,7 @@ import { generateSlug } from "@/lib/slug";
 
 export const dynamic = "force-dynamic";
 
-const APP_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, "") ?? "https://app.lawenforcementrecruiter.com";
+const APP_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, "") ?? "https://dept.lawenforcementrecruiter.com";
 
 export default async function TermsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

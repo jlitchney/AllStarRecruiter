@@ -1,7 +1,8 @@
 import type { Agency } from "@/types";
 import { getSettings } from "@/lib/kv";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.lawenforcementrecruiter.com";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://dept.lawenforcementrecruiter.com";
+const FROM_ADDRESS = "All-Star Recruiter <noreply@setup.lawenforcementrecruiter.com>";
 const GUARDIAN_CONTACTS = ["kim@guardianalliancetechnologies.com", "steve@guardianalliancetechnologies.com"];
 
 export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
@@ -15,7 +16,7 @@ export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
     : [process.env.NOTIFICATION_EMAIL ?? "jason@allstartalent.us"];
 
   const result = await resend.emails.send({
-    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    from: FROM_ADDRESS,
     to,
     subject: `New Agency Signup: ${agency.agency_name} (${agency.agency_abbr}) — ${agency.state}`,
     html: `
@@ -35,7 +36,7 @@ export async function sendNewAgencyNotification(agency: Agency): Promise<void> {
         </table>
 
         <div style="margin-top:24px;">
-          <a href="https://app.lawenforcementrecruiter.com/dashboard/${agency.id}" style="background:#1a3a6e;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;">View in Dashboard →</a>
+          <a href="${APP_URL}/dashboard/${agency.id}" style="background:#1a3a6e;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;">View in Dashboard →</a>
         </div>
       </div>
     `,
@@ -56,7 +57,7 @@ export async function sendGuardianSetupCompleteNotification(agency: Agency): Pro
   const isNotCustomer = agency.guardian_status === "not-a-customer";
 
   const result = await resend.emails.send({
-    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    from: FROM_ADDRESS,
     to,
     subject: isNotCustomer
       ? `Guardian Setup: ${agency.agency_name} is NOT a Guardian customer`
@@ -93,12 +94,12 @@ export async function sendOnboardingSurveyEmail(agency: Agency): Promise<void> {
   const surveyUrl = `${APP_URL}/survey/${agency.survey_token}`;
 
   const result = await resend.emails.send({
-    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    from: FROM_ADDRESS,
     to: agency.email,
     subject: `${agency.agency_name} — Help us build your recruiting system`,
     html: `
       <div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;padding:24px;">
-        <img src="https://app.lawenforcementrecruiter.com/logo-black.svg" alt="All-Star Recruiter" style="height:28px;width:auto;margin-bottom:24px;" />
+        <img src="${APP_URL}/logo-black.svg" alt="All-Star Recruiter" style="height:28px;width:auto;margin-bottom:24px;" />
 
         <h2 style="margin:0 0 8px;color:#0f172a;">Hi ${agency.first_name},</h2>
         <p style="margin:0 0 16px;color:#374151;font-size:15px;line-height:1.6;">
@@ -141,7 +142,7 @@ export async function sendGuardianSetupEmail(agency: Agency): Promise<void> {
   const setupUrl = `${APP_URL}/guardian/setup/${agency.guardian_setup_token}`;
 
   const result = await resend.emails.send({
-    from: "All-Star Recruiter <noreply@lawenforcementrecruiter.com>",
+    from: FROM_ADDRESS,
     to: GUARDIAN_CONTACTS,
     subject: `Guardian Setup Needed: ${agency.agency_name} (${agency.agency_abbr}) — ${agency.state}`,
     html: `

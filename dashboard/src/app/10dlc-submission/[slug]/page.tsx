@@ -5,7 +5,7 @@ import { TenDLCForm } from "./TenDLCForm";
 
 export const dynamic = "force-dynamic";
 
-const APP_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, "") ?? "https://app.lawenforcementrecruiter.com";
+const APP_URL = process.env.NEXTAUTH_URL?.replace(/\/$/, "") ?? "https://dept.lawenforcementrecruiter.com";
 
 export default async function TenDLCPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
