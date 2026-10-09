@@ -1,0 +1,7 @@
+# Only the homepage and /services/ are meant for search engines.
+# Other HTML pages carry a noindex tag (they must stay crawlable for Google to see it).
+User-agent: *
+Disallow: /dashboard/
+Disallow: /README.md
+
+Sitemap: https://lawenforcementrecruiter.com/sitemap.xml
