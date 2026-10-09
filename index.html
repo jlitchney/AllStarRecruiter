@@ -12,7 +12,7 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All-Star Recruiter — Recruiting Software for Law Enforcement</title>
+  <title>Law Enforcement Recruiter — Recruiting Software for Police &amp; Public Safety Agencies</title>
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/css/site.css">
@@ -45,6 +45,16 @@
     }
     .btn-nav-demo:hover { background: var(--gold-hover); color: #fff; }
     @media (max-width: 767px) { .nav-links { display: none; } }
+    @media (max-width: 480px) {
+      .top-nav { padding: .6rem 1rem; }
+      .top-nav .brand img { height: 30px; }
+      .top-nav .nav-login { padding: .4rem .7rem !important; font-size: .82rem !important; }
+      .btn-nav-demo { padding: .45rem .8rem; font-size: .82rem; }
+    }
+    /* Phones: keep wide gutters and the included-features grid inside the screen */
+    @media (max-width: 575px) { .row.g-5 { --bs-gutter-x: 1.5rem; } }
+    @media (max-width: 767px) { .included-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 480px) { .included-box { padding: 1.5rem 1.25rem !important; } }
 
     /* ── Hero ────────────────────────────────────────────────── */
     .hero {
@@ -288,7 +298,7 @@
 <!-- NAVBAR -->
 <nav class="top-nav">
   <a href="#" class="brand">
-    <img src="assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="36">
+    <img src="assets/images/ler-logo.png" alt="Law Enforcement Recruiter" height="42">
   </a>
   <ul class="nav-links">
     <li><a href="#features">Platform</a></li>
@@ -299,7 +309,7 @@
     <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">About</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:.6rem;">
-    <a href="https://app.allstarrecruiter.com" target="_blank" rel="noopener"
+    <a href="https://app.lawenforcementrecruiter.com" target="_blank" rel="noopener" class="nav-login"
        style="color:rgba(255,255,255,.7);font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.2);padding:.45rem 1rem;border-radius:6px;transition:all .15s;white-space:nowrap;"
        onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.5)';"
        onmouseout="this.style.color='rgba(255,255,255,.7)';this.style.borderColor='rgba(255,255,255,.2)';">
@@ -322,7 +332,7 @@
         </div>
         <h1>The Recruiting Platform<br><span>Built for Public Safety.</span></h1>
         <p class="lede">
-          All-Star Recruiter gives law enforcement agencies a professional recruiting website they can promote anywhere — social media, paid ads, flyers, QR codes — backed by a full candidate CRM, automated communications, and campaigns.
+          Law Enforcement Recruiter gives law enforcement agencies a professional recruiting website they can promote anywhere — social media, paid ads, flyers, QR codes — backed by a full candidate CRM, automated communications, and campaigns.
         </p>
         <div class="hero-cta-group">
           <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-primary-lg">
@@ -337,7 +347,7 @@
             <div class="dash-dot" style="background:#ff5f56;"></div>
             <div class="dash-dot" style="background:#ffbd2e;"></div>
             <div class="dash-dot" style="background:#27c93f;"></div>
-            <span class="dash-title">All-Star Recruiter — Candidate Pipeline</span>
+            <span class="dash-title">Law Enforcement Recruiter — Candidate Pipeline</span>
             <span style="margin-left:auto;font-size:.62rem;font-weight:700;color:rgba(255,255,255,.3);"><span class="live-dot"></span>Live</span>
           </div>
           <div class="dash-body">
@@ -427,13 +437,6 @@
         <div class="proof-stat">
           <div class="num"><span>17%</span></div>
           <div class="ctx">Decrease in vacancy rates<br>Nevada Dept. of Corrections</div>
-        </div>
-      </div>
-      <div class="d-none d-md-block col-md-auto"><div class="proof-divider"></div></div>
-      <div class="col-6 col-md-2">
-        <div class="proof-stat">
-          <div class="num"><span>3</span></div>
-          <div class="ctx">Industries. One focus:<br>public sector hiring</div>
         </div>
       </div>
     </div>
@@ -543,7 +546,7 @@
       <div class="col-lg-8 text-center">
         <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(228,170,53,.8);margin-bottom:.5rem;">Who We Are</div>
         <h2 style="font-size:2rem;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:.75rem;">From the campaigns<br><span style="color:var(--gold);">to the platform.</span></h2>
-        <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;max-width:520px;margin:0 auto;">All-Star Talent has been running law enforcement recruiting campaigns for major agencies across the country. All-Star Recruiter is the platform we built to support that work.</p>
+        <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.7;max-width:520px;margin:0 auto;">All-Star Talent has been running law enforcement recruiting campaigns for major agencies across the country. Law Enforcement Recruiter is the platform we built to support that work.</p>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -582,7 +585,7 @@
         <div class="feat-card">
           <div class="feat-icon" style="background:#dcfce7;color:#166534;"><i class="bi bi-briefcase-fill"></i></div>
           <h3>Law Enforcement Job Board</h3>
-          <p>As agencies across your state join All-Star Recruiter, their openings appear on a shared law enforcement job board — giving candidates a single destination to find public safety careers in your area. The more agencies that participate, the more valuable it becomes for everyone.</p>
+          <p>As agencies across your state join Law Enforcement Recruiter, their openings appear on a shared law enforcement job board — giving candidates a single destination to find public safety careers in your area. The more agencies that participate, the more valuable it becomes for everyone.</p>
         </div>
       </div>
 
@@ -598,7 +601,7 @@
         <div class="feat-card">
           <div class="feat-icon" style="background:#ffe4e6;color:#be123c;"><i class="bi bi-chat-fill"></i></div>
           <h3>2-Way Email &amp; SMS</h3>
-          <p>Send and receive messages directly inside All-Star Recruiter. Every email and text is logged to the candidate record automatically. Reach candidates faster than email alone.</p>
+          <p>Send and receive messages directly inside Law Enforcement Recruiter. Every email and text is logged to the candidate record automatically. Reach candidates faster than email alone.</p>
         </div>
       </div>
 
@@ -654,7 +657,7 @@
         <div class="section-eyebrow">The Platform, Up Close</div>
         <div class="section-title">Built for recruiters.<br><span>Designed to be used every day.</span></div>
         <p class="section-sub mx-auto text-center">
-          Every screen in All-Star Recruiter is purpose-built for public safety hiring — from the candidate pipeline to automated campaigns and recruiting reports.
+          Every screen in Law Enforcement Recruiter is purpose-built for public safety hiring — from the candidate pipeline to automated campaigns and recruiting reports.
         </p>
       </div>
     </div>
@@ -669,7 +672,7 @@
             <span class="browser-dot" style="background:#27c93f;"></span>
             <span class="browser-url">app.allstarrecruiter.com/candidates</span>
           </div>
-          <img src="assets/img/crm-candidates.png" alt="All-Star Recruiter Candidate CRM">
+          <img src="assets/img/crm-candidates.png" alt="Law Enforcement Recruiter Candidate CRM">
         </div>
       </div>
     </div>
@@ -684,7 +687,7 @@
             <span class="browser-dot" style="background:#27c93f;"></span>
             <span class="browser-url">app.allstarrecruiter.com/website-builder</span>
           </div>
-          <img src="assets/img/web-builder.png" alt="All-Star Recruiter Web Builder">
+          <img src="assets/img/web-builder.png" alt="Law Enforcement Recruiter Web Builder">
         </div>
       </div>
       <div class="col-md-5">
@@ -695,7 +698,7 @@
             <span class="browser-dot" style="background:#27c93f;"></span>
             <span class="browser-url">app.allstarrecruiter.com/messaging</span>
           </div>
-          <img src="assets/img/sms-messaging.png" alt="All-Star Recruiter SMS &amp; Email Messaging">
+          <img src="assets/img/sms-messaging.png" alt="Law Enforcement Recruiter SMS &amp; Email Messaging">
         </div>
       </div>
     </div>
@@ -710,7 +713,7 @@
             <span class="browser-dot" style="background:#27c93f;"></span>
             <span class="browser-url">app.allstarrecruiter.com/workflows</span>
           </div>
-          <img src="assets/img/workflow-builder.png" alt="All-Star Recruiter Workflow Builder">
+          <img src="assets/img/workflow-builder.png" alt="Law Enforcement Recruiter Workflow Builder">
         </div>
       </div>
       <div class="col-md-4">
@@ -721,7 +724,7 @@
             <span class="browser-dot" style="background:#27c93f;"></span>
             <span class="browser-url">app.allstarrecruiter.com/campaigns</span>
           </div>
-          <img src="assets/img/campaign-builder.png" alt="All-Star Recruiter Campaign Builder">
+          <img src="assets/img/campaign-builder.png" alt="Law Enforcement Recruiter Campaign Builder">
         </div>
       </div>
       <div class="col-md-4">
@@ -732,7 +735,7 @@
             <span class="browser-dot" style="background:#27c93f;"></span>
             <span class="browser-url">app.allstarrecruiter.com/reports</span>
           </div>
-          <img src="assets/img/reports-dashboard.png" alt="All-Star Recruiter Reports Dashboard">
+          <img src="assets/img/reports-dashboard.png" alt="Law Enforcement Recruiter Reports Dashboard">
         </div>
       </div>
     </div>
@@ -747,7 +750,7 @@
         <div class="section-eyebrow">How It Works</div>
         <div class="section-title">From open position<br><span>to hired officer.</span></div>
         <p class="section-sub">
-          All-Star Recruiter connects every step of your recruiting process. Jobs go out, candidates come in, communication happens automatically, and your team always knows exactly where things stand.
+          Law Enforcement Recruiter connects every step of your recruiting process. Jobs go out, candidates come in, communication happens automatically, and your team always knows exactly where things stand.
         </p>
         <a href="https://calendly.com/d/cvnm-8yn-7fw/sales-consultations" target="_blank" rel="noopener" class="btn-primary-lg mt-4" style="font-size:.92rem;padding:.7rem 1.6rem;">
           <i class="bi bi-calendar-check"></i>Book a Live Demo
@@ -798,7 +801,7 @@
         <div class="section-eyebrow" style="color:rgba(228,170,53,.75);">Built from real campaigns</div>
         <div class="section-title" style="color:#fff;">Proven in the field.</div>
         <p class="section-sub mx-auto text-center" style="color:rgba(255,255,255,.5);">
-          All-Star Recruiter is built by the same team behind All-Star Talent's recruiting campaigns. These aren't projections — they're outcomes from agencies we've worked with.
+          Law Enforcement Recruiter is built by the same team behind All-Star Talent's recruiting campaigns. These aren't projections — they're outcomes from agencies we've worked with.
         </p>
       </div>
     </div>
@@ -916,7 +919,7 @@
         <div class="section-eyebrow">More than software</div>
         <div class="section-title">The platform is backed by<br><span>a full recruiting team.</span></div>
         <p class="section-sub">
-          All-Star Recruiter is built by All-Star Talent — a public sector recruiting firm with a track record of running the campaigns that fill the hardest-to-fill roles. When software isn't enough, our team steps in.
+          Law Enforcement Recruiter is built by All-Star Talent — a public sector recruiting firm with a track record of running the campaigns that fill the hardest-to-fill roles. When software isn't enough, our team steps in.
         </p>
         <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;margin-top:1.25rem;color:var(--navy-mid);font-weight:700;font-size:.9rem;text-decoration:none;">
           About All-Star Talent <i class="bi bi-arrow-right"></i>
@@ -1032,12 +1035,12 @@
     </div>
 
     <!-- Everything included box -->
-    <div style="background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 55%,#7c3aed 100%);border-radius:14px;padding:2rem 2.5rem;max-width:900px;margin:0 auto;">
+    <div class="included-box" style="background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 55%,#7c3aed 100%);border-radius:14px;padding:2rem 2.5rem;max-width:900px;margin:0 auto;">
       <div style="text-align:center;margin-bottom:1.25rem;">
         <h3 style="color:#fff;font-size:1.1rem;font-weight:800;margin:0 0 .35rem;">Everything included in both packages</h3>
         <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin:0;">No feature gating. Every agency gets the full platform.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1.5rem;">
+      <div class="included-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1.5rem;">
         <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Full website platform</div>
         <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>2-way email communication</div>
         <div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.83rem;color:rgba(255,255,255,.85);padding:.25rem 0;"><i class="bi bi-check-lg" style="color:var(--gold);flex-shrink:0;margin-top:.1rem;"></i>Guardian Alliance integration</div>
@@ -1146,10 +1149,10 @@
     <div class="row g-5">
       <div class="col-lg-4">
         <div class="footer-brand">
-          <img src="assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="32">
+          <img src="assets/images/ler-logo.png" alt="Law Enforcement Recruiter" height="40">
         </div>
         <p class="footer-tagline">Recruiting software built for law enforcement and public safety agencies.</p>
-        <p class="footer-tagline" style="margin-top:.75rem;">A product of <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:none;">All-Star Talent</a> — Public Sector Recruitment Experts.</p>
+        <p class="footer-tagline" style="margin-top:.75rem;">Law Enforcement Recruiter is a product of <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:none;">All-Star Talent</a> — Public Sector Recruitment Experts.</p>
       </div>
       <div class="col-6 col-lg-2">
         <div class="footer-heading">Platform</div>
@@ -1177,7 +1180,7 @@
              style="display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;font-weight:700;font-size:.85rem;padding:.55rem 1.1rem;border-radius:6px;text-decoration:none;">
             <i class="bi bi-calendar-check"></i>Request a Demo
           </a>
-          <a href="https://app.allstarrecruiter.com" target="_blank" rel="noopener"
+          <a href="https://app.lawenforcementrecruiter.com" target="_blank" rel="noopener"
              style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.6);font-weight:600;font-size:.85rem;padding:.55rem 1.1rem;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,.18);">
             Login
           </a>
@@ -1185,7 +1188,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 All-Star Recruiter · A product of All-Star Talent · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Terms</a></p>
+      <p>© 2026 Law Enforcement Recruiter · A product of All-Star Talent · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Terms</a></p>
     </div>
   </div>
 </footer>

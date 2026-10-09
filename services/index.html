@@ -12,7 +12,7 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services — All-Star Recruiter</title>
+  <title>Services — Law Enforcement Recruiter</title>
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap-icons.css">
   <link rel="stylesheet" href="../assets/css/site.css">
@@ -46,6 +46,14 @@
     }
     .btn-nav-demo:hover { background: var(--gold-hover); color: #fff; }
     @media (max-width: 767px) { .nav-links { display: none; } }
+    @media (max-width: 480px) {
+      .top-nav { padding: .6rem 1rem; }
+      .top-nav .brand img { height: 30px; }
+      .top-nav .nav-login { padding: .4rem .7rem !important; font-size: .82rem !important; }
+      .btn-nav-demo { padding: .45rem .8rem; font-size: .82rem; }
+    }
+    /* Phones: keep wide gutters inside the screen */
+    @media (max-width: 575px) { .row.g-5 { --bs-gutter-x: 1.5rem; } }
 
     /* ── Hero ────────────────────────────────────────────────── */
     .page-hero {
@@ -196,7 +204,7 @@
 <!-- NAVBAR -->
 <nav class="top-nav">
   <a href="../" class="brand">
-    <img src="../assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="36">
+    <img src="../assets/images/ler-logo.png" alt="Law Enforcement Recruiter" height="42">
   </a>
   <ul class="nav-links">
     <li><a href="../#features">Platform</a></li>
@@ -207,7 +215,7 @@
     <li><a href="https://www.allstartalent.us" target="_blank" rel="noopener">About</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:.6rem;">
-    <a href="https://app.allstarrecruiter.com" target="_blank" rel="noopener"
+    <a href="https://app.lawenforcementrecruiter.com" target="_blank" rel="noopener" class="nav-login"
        style="color:rgba(255,255,255,.7);font-size:.88rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.2);padding:.45rem 1rem;border-radius:6px;transition:all .15s;white-space:nowrap;">
       Login
     </a>
@@ -526,10 +534,10 @@
     <div class="row g-5">
       <div class="col-lg-4">
         <div class="footer-brand">
-          <img src="../assets/images/asr-logo-white.svg" alt="All-Star Recruiter" height="32">
+          <img src="../assets/images/ler-logo.png" alt="Law Enforcement Recruiter" height="40">
         </div>
         <p class="footer-tagline">Recruiting software built for law enforcement and public safety agencies.</p>
-        <p class="footer-tagline" style="margin-top:.75rem;">A product of <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:none;">All-Star Talent</a> — Public Sector Recruitment Experts.</p>
+        <p class="footer-tagline" style="margin-top:.75rem;">Law Enforcement Recruiter is a product of <a href="https://www.allstartalent.us" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);text-decoration:none;">All-Star Talent</a> — Public Sector Recruitment Experts.</p>
       </div>
       <div class="col-6 col-lg-2">
         <div class="footer-heading">Platform</div>
@@ -557,7 +565,7 @@
              style="display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;font-weight:700;font-size:.85rem;padding:.55rem 1.1rem;border-radius:6px;text-decoration:none;">
             <i class="bi bi-calendar-check"></i>Request a Demo
           </a>
-          <a href="https://app.allstarrecruiter.com" target="_blank" rel="noopener"
+          <a href="https://app.lawenforcementrecruiter.com" target="_blank" rel="noopener"
              style="display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.6);font-weight:600;font-size:.85rem;padding:.55rem 1.1rem;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,.18);">
             Login
           </a>
@@ -565,7 +573,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 All-Star Recruiter · A product of All-Star Talent · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Terms</a></p>
+      <p>© 2026 Law Enforcement Recruiter · A product of All-Star Talent · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,.3);text-decoration:none;">Terms</a></p>
     </div>
   </div>
 </footer>
