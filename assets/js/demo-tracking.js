@@ -7,7 +7,7 @@
  *     page scrolls down to it.
  *   - Other pages open Calendly links in a popup.
  * - When a meeting is booked, fires the Google Ads "Demo Booked" conversion
- *   and a GA4 "demo_booked" event.
+ *   a GA4 "demo_booked" event, and the OpenAI Pixel "appointment_scheduled" event.
  */
 (function () {
   var ADS_CONVERSION = 'AW-18502172216/rnBXCPThpJcdELj8wvZE';
@@ -186,6 +186,9 @@
   window.addEventListener('message', function (e) {
     if (e.origin !== 'https://calendly.com') return;
     if (!e.data || e.data.event !== 'calendly.event_scheduled') return;
+    if (typeof oaiq === 'function') {
+      oaiq('measure', 'appointment_scheduled', { type: 'customer_action' });
+    }
     if (typeof gtag !== 'function') return;
     gtag('event', 'conversion', { send_to: ADS_CONVERSION });
     gtag('event', 'demo_booked', {
